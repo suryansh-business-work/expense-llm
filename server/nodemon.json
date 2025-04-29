@@ -1,0 +1,14 @@
+{
+  "watch": [
+    "src",
+    "tsconfig.json"
+  ],
+  "ext": "ts",
+  "exec": "ts-node src/server.ts",
+  "ignore": [
+    "node_modules"
+  ],
+  "env": {
+    "NODE_ENV": "development"
+  }
+}
