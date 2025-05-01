@@ -44,7 +44,7 @@ app.post('/parse-expense', async (req: Request, res: Response): Promise<any> => 
     const result = parseExpense(sentence);
 
     if (typeof result.amount !== 'number') {
-      return res.status(400).json({ error: 'Parsing error: Amount must be a valid number' });
+      return res.status(400).json({ errorType: 'parsing-error', error: 'Parsing error: Amount must be a valid number' });
     }
 
     // Create a new expense document with chatId included
@@ -65,7 +65,7 @@ app.post('/parse-expense', async (req: Request, res: Response): Promise<any> => 
     });
   } catch (error) {
     console.error('Parsing error:', error);
-    return res.status(500).json({ error: 'An error occurred during parsing' });
+    return res.status(500).json({  errorType: 'parsing-error', error: 'An error occurred during parsing' });
   }
 });
 
