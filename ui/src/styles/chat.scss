@@ -1,3 +1,5 @@
+@import url('./chat-message-blocks/general-blocks.scss');
+
 .chat-container {
   display: flex;
   .chat-bot-wrapper {
@@ -30,12 +32,10 @@
       }
       .user-message {
         align-self: flex-end;
-        background-color: #007bff;
         color: white;
       }
       .bot-message {
         align-self: flex-start;
-        background-color: #e1e1e1;
         color: #333;
       }
     }
