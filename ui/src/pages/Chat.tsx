@@ -18,7 +18,7 @@ const Chat = () => {
   const { chatId } = useParams();
   const [messages, setMessages] = useState<Message[]>([]);
   const [userInput, setUserInput] = useState<string>('');
-  const [loading, setLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const bottomRef = useRef<HTMLDivElement | null>(null);
 
   const getFormattedTime = () => {
@@ -27,7 +27,7 @@ const Chat = () => {
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages, loading]);
+  }, [messages, isLoading]);
 
   const handleSendMessage = async () => {
     if (!userInput.trim()) return;
@@ -42,7 +42,7 @@ const Chat = () => {
     setMessages((prevMessages) => [...prevMessages, userMessage]);
 
     setUserInput('');
-    setLoading(true);
+    setIsLoading(true);
 
     try {
       const response = await axios.post('http://localhost:3000/parse-expense', {
@@ -77,7 +77,7 @@ const Chat = () => {
       setMessages((prevMessages) => [...prevMessages, errorBotMessage]);
     }
 
-    setLoading(false);
+    setIsLoading(false);
   };
 
   return (
@@ -99,10 +99,11 @@ const Chat = () => {
                   avatarUrl={avatarUrl}
                   timestamp={message.timestamp}
                   content={message.botResponse}
+                  isLoading={isLoading}
                 />
               )
             )}
-            {loading && (
+            {isLoading && (
               <LoaderGeneral avatarUrl={avatarUrl} timestamp={getFormattedTime()} />
             )}
             <div ref={bottomRef} />
