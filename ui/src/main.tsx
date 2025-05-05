@@ -1,7 +1,8 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import { Auth0Provider } from '@auth0/auth0-react';
-import App from './App.tsx'
+import { HelmetProvider, Helmet } from 'react-helmet-async'; // Import HelmetProvider
+import App from './App.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -9,10 +10,16 @@ createRoot(document.getElementById('root')!).render(
       domain="smart-bots.us.auth0.com"
       clientId="lJseCCXyAoV3J20R2VcK61h5BjwA7ZfR"
       authorizationParams={{
-        redirect_uri: window.location.origin
+        redirect_uri: window.location.origin,
       }}
     >
-      <App />
+      <HelmetProvider>
+        <Helmet>
+          <title>Botify your life</title>
+          <link rel="canonical" href="https://www.tacobell.com/" />
+        </Helmet>
+        <App />
+      </HelmetProvider>
     </Auth0Provider>
   </StrictMode>,
-)
+);

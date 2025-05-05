@@ -1,3 +1,9 @@
+// Define the interface for a single Bot
+export interface Bot {
+  name: string;
+  url: string;
+}
+
 // Define the interface for a single Bot Page
 export interface BotPage {
   id: string;
@@ -9,6 +15,7 @@ export interface BotPage {
   botListPage: {
     heading: string;
   };
+  bots: Bot[];
 }
 
 // Define the array of bot pages
@@ -22,7 +29,11 @@ const BotPagesData: BotPage[] = [
     url: 'expense-track',
     botListPage: {
       heading: 'Expense Bot'
-    }
+    },
+    bots: [
+      { name: 'Home expense', url: 'home-expense' },
+      { name: 'Business expense', url: 'business-expense' }
+    ]
   },
   {
     id: '2',
@@ -33,7 +44,11 @@ const BotPagesData: BotPage[] = [
     url: 'income-track',
     botListPage: {
       heading: 'Income Bot'
-    }
+    },
+    bots: [
+      { name: 'Salary', url: 'salary-income' },
+      { name: 'Freelance', url: 'freelance-income' }
+    ]
   },
   {
     id: '3',
@@ -44,7 +59,11 @@ const BotPagesData: BotPage[] = [
     url: 'todos',
     botListPage: {
       heading: 'ToDos Bot'
-    }
+    },
+    bots: [
+      { name: 'Morning Routine', url: 'morning-todos' },
+      { name: 'Work Tasks', url: 'work-todos' }
+    ]
   },
   {
     id: '4',
@@ -55,7 +74,11 @@ const BotPagesData: BotPage[] = [
     url: 'task',
     botListPage: {
       heading: 'Task Bot'
-    }
+    },
+    bots: [
+      { name: 'Project A', url: 'project-a' },
+      { name: 'Project B', url: 'project-b' }
+    ]
   },
   {
     id: '5',
@@ -66,7 +89,11 @@ const BotPagesData: BotPage[] = [
     url: 'wishlist',
     botListPage: {
       heading: 'Wishlist Bot'
-    }
+    },
+    bots: [
+      { name: 'Short-term Wishes', url: 'short-wishlist' },
+      { name: 'Long-term Wishes', url: 'long-wishlist' }
+    ]
   },
   {
     id: '6',
@@ -77,7 +104,11 @@ const BotPagesData: BotPage[] = [
     url: 'reminders',
     botListPage: {
       heading: 'Reminders Bot'
-    }
+    },
+    bots: [
+      { name: 'Doctor Appointment', url: 'doctor-reminder' },
+      { name: 'Meeting Reminder', url: 'meeting-reminder' }
+    ]
   }
 ];
 

@@ -1,128 +1,113 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { getBotPageByUrl } from '../BotPagesData';
-import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
-import React, { useState } from 'react';
+import { useState } from 'react';
+import {
+  Box,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  TextField,
+  Card,
+  CardContent,
+  CardActions,
+  Typography,
+  Grid,
+} from '@mui/material';
+import { Helmet } from 'react-helmet-async';
 
 const BotList = () => {
   const { botId } = useParams<{ botId: string }>();
   const botPage = getBotPageByUrl(botId || '');
   const navigate = useNavigate();
 
-  // States for dialog management
   const [openCreateDialog, setOpenCreateDialog] = useState(false);
   const [openEditDialog, setOpenEditDialog] = useState(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
-
   const [botData, setBotData] = useState({ name: '', description: '', url: '' });
 
-  // Handle opening and closing dialogs
   const handleCreateDialogOpen = () => setOpenCreateDialog(true);
   const handleCreateDialogClose = () => setOpenCreateDialog(false);
-
   const handleEditDialogOpen = (bot: any) => {
     setBotData(bot);
     setOpenEditDialog(true);
   };
   const handleEditDialogClose = () => setOpenEditDialog(false);
-
   const handleDeleteDialogOpen = (bot: any) => {
     setBotData(bot);
     setOpenDeleteDialog(true);
   };
   const handleDeleteDialogClose = () => setOpenDeleteDialog(false);
 
-  // Handle actions for creating, editing, and deleting bots
   const handleCreateBot = () => {
-    console.log('Creating bot:', botData); // Replace with actual create bot logic
+    console.log('Creating bot:', botData);
     handleCreateDialogClose();
   };
-
   const handleEditBot = () => {
-    console.log('Editing bot:', botData); // Replace with actual edit bot logic
+    console.log('Editing bot:', botData);
     handleEditDialogClose();
   };
-
   const handleDeleteBot = () => {
-    console.log('Deleting bot:', botData); // Replace with actual delete bot logic
+    console.log('Deleting bot:', botData);
     handleDeleteDialogClose();
   };
 
-  // If no bot is found, show the 404 page
   if (!botPage) {
     return (
-      <div>
-        <h2>404 - Bot Not Found</h2>
-        <p>The bot you're looking for doesn't exist.</p>
-      </div>
+      <Box sx={{ textAlign: 'center', mt: 5 }}>
+        <Typography variant="h4">404 - Bot Not Found</Typography>
+        <Typography>The bot you're looking for doesn't exist.</Typography>
+      </Box>
     );
   }
 
   return (
-    <div>
-      <h2>{botPage.botListPage.heading}</h2>
-      <p>{botPage.description}</p>
+    <Box sx={{ padding: 4 }}>
+      <Helmet>
+        <title>{botPage.botListPage.heading} - Bot Management</title>
+      </Helmet>
+      <Box sx={{ maxWidth: 1200, margin: '0 auto' }}>
+        {/* Header and Create Button */}
+        <Grid container spacing={2} size={12}  sx={{ marginBottom: 3, alignItems: "center" }}>
+          <Grid size={8}>
+            <Typography variant="h4" gutterBottom>
+              {botPage.botListPage.heading}
+            </Typography>
+            <Typography variant="body1" gutterBottom>
+              {botPage.description}
+            </Typography>
+          </Grid>
+          <Grid size={4}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleCreateDialogOpen}
+            >
+              Create Bot
+            </Button>
+          </Grid>
+        </Grid>
 
-      {/* Button to create a new bot */}
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={handleCreateDialogOpen}
-        style={{ marginBottom: '20px' }}
-      >
-        Create Bot
-      </Button>
-
-      {/* Table for displaying bot list */}
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Bot Name</TableCell>
-              <TableCell>Description</TableCell>
-              <TableCell>Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {/* Mapping through the bots list */}
-            {botPage && (
-              <TableRow key={botPage.id}>
-                <TableCell>{botPage.name}</TableCell>
-                <TableCell>{botPage.description}</TableCell>
-                <TableCell>
-                  {/* Go to Bot button */}
-                  <Button
-                    variant="outlined"
-                    color="primary"
-                    onClick={() => navigate(`/chat/1`)}
-                    style={{ marginRight: '10px' }}
-                  >
-                    Go to Bot
-                  </Button>
-
-                  {/* Edit button */}
-                  <Button
-                    variant="outlined"
-                    color="secondary"
-                    onClick={() => handleEditDialogOpen(botPage)}
-                    style={{ marginRight: '10px' }}
-                  >
-                    Edit
-                  </Button>
-
-                  {/* Delete button */}
-                  <Button
-                    variant="outlined"
-                    color="error"
-                    onClick={() => handleDeleteDialogOpen(botPage)}
-                  >
-                    Delete
-                  </Button>
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </TableContainer>
+        {/* Bot Cards */}
+        <Grid container spacing={3}>
+          {(botPage?.bots || []).map((bot: any, index: number) => (
+            <Grid key={index}>
+              <Card variant="outlined">
+                <CardContent>
+                  <Typography variant="h6">{bot.name}</Typography>
+                  <Typography color="text.secondary">{bot.description}</Typography>
+                </CardContent>
+                <CardActions>
+                  <Button size="small" onClick={() => navigate(`/chat/${bot.url}`)}>Go to Bot</Button>
+                  <Button size="small" color="secondary" onClick={() => handleEditDialogOpen(bot)}>Edit</Button>
+                  <Button size="small" color="error" onClick={() => handleDeleteDialogOpen(bot)}>Delete</Button>
+                </CardActions>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
 
       {/* Create Bot Dialog */}
       <Dialog open={openCreateDialog} onClose={handleCreateDialogClose}>
@@ -145,12 +130,8 @@ const BotList = () => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCreateDialogClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleCreateBot} color="primary">
-            Create
-          </Button>
+          <Button onClick={handleCreateDialogClose}>Cancel</Button>
+          <Button onClick={handleCreateBot} color="primary">Create</Button>
         </DialogActions>
       </Dialog>
 
@@ -175,12 +156,8 @@ const BotList = () => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleEditDialogClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleEditBot} color="primary">
-            Save
-          </Button>
+          <Button onClick={handleEditDialogClose}>Cancel</Button>
+          <Button onClick={handleEditBot} color="primary">Save</Button>
         </DialogActions>
       </Dialog>
 
@@ -188,18 +165,14 @@ const BotList = () => {
       <Dialog open={openDeleteDialog} onClose={handleDeleteDialogClose}>
         <DialogTitle>Delete Bot</DialogTitle>
         <DialogContent>
-          <p>Are you sure you want to delete the bot "{botData.name}"?</p>
+          <Typography>Are you sure you want to delete the bot "{botData.name}"?</Typography>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleDeleteDialogClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleDeleteBot} color="error">
-            Delete
-          </Button>
+          <Button onClick={handleDeleteDialogClose}>Cancel</Button>
+          <Button onClick={handleDeleteBot} color="error">Delete</Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </Box>
   );
 };
 
