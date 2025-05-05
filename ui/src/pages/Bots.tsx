@@ -1,58 +1,16 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Avatar from '@mui/material/Avatar';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
+import CardHeader from '@mui/material/CardHeader';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import { CardHeader, IconButton } from "@mui/material";
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import BotPagesData from "./BotPagesData";
 
 const Bots = () => {
-  const [bots] = useState([
-    {
-      name: 'Expense',
-      description: 'Store all expense here',
-      logo: '',
-      type: 'finance',
-      url: 'expense-track'
-    },
-    {
-      name: 'Income Bot',
-      description: 'Store all income here',
-      logo: '',
-      type: 'finance',
-      url: 'income-track'
-    },
-    {
-      name: 'ToDos',
-      description: 'Daily task track, Reminder etc',
-      logo: '',
-      type: 'traking',
-      url: 'todos'
-    },
-    {
-      name: 'Task',
-      description: 'Long terms task track, Reminder etc',
-      logo: '',
-      type: 'traking',
-      url: 'task'
-    },
-    {
-      name: 'Wishlist',
-      description: 'Manage your short terms and long terms wishlist',
-      logo: '',
-      type: 'traking',
-      url: 'wishlist'
-    },
-    {
-      name: 'Reminders',
-      description: 'Manage all your reminders here',
-      logo: '',
-      type: 'traking',
-      url: 'reminders'
-    }
-  ]);
+  const [bots] = useState(BotPagesData);
+
+  const navigate = useNavigate();
 
   return (
     <div className="container mt-4">
@@ -64,35 +22,25 @@ const Bots = () => {
             <Card sx={{ minWidth: 275 }}>
               <CardHeader
                 avatar={
-                  <Avatar aria-label="recipe">
-                    {bot.logo && (
+                  <Avatar aria-label="bot-avatar">
+                    {bot.logo ? (
                       <img
                         src={bot.logo}
-                        className="card-img-top"
                         alt={`${bot.name} logo`}
+                        style={{ width: "100%", height: "100%" }}
                       />
+                    ) : (
+                      bot.name.slice(0, 1)
                     )}
-                    {bot.name.slice(0, 1)}
                   </Avatar>
-                }
-                action={
-                  <IconButton aria-label="settings">
-                    <MoreVertIcon />
-                  </IconButton>
                 }
                 title={bot.name}
                 subheader={bot.description}
               />
-              {/* <CardContent>
-                <Typography variant="h3" sx={{ fontSize: 25 }}>
-                  {bot.name}
-                </Typography>
-                <Typography component="p">
-                  {bot.description}
-                </Typography>
-              </CardContent> */}
               <CardActions>
-                <Button size="small">Go to bot</Button>
+                <Button size="small" onClick={() => navigate(`/bot/${bot.url}`)}>
+                  Go to bot
+                </Button>
               </CardActions>
             </Card>
           </div>

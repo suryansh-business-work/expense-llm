@@ -1,6 +1,10 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
+import { getBotPageByUrl } from '../pages/BotPagesData';
 
 const Header = () => {
+  const { botId } = useParams<{ botId: string }>();
+  const botPage = getBotPageByUrl(botId || '');
+
   return (
     <header className="main-header">
       <nav>
@@ -8,9 +12,13 @@ const Header = () => {
           to="/bots"
           className={({ isActive }) => (isActive ? 'active' : '')}
         >
-          {/* <i className="fa-solid fa-left-long"></i> */}
           <span>All Bots</span>
         </NavLink>
+        {botPage && (
+          <span style={{ marginLeft: '1rem', fontWeight: 'bold' }}>
+            {botPage.botListPage.heading}
+          </span>
+        )}
         <ul className="nav-list">
           <li>
             <NavLink
