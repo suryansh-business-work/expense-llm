@@ -1,12 +1,12 @@
 @import url('./chat-message-blocks/general-blocks.scss');
 
 .chat-container {
-  display: flex;
+  height: 100%;
   .chat-bot-wrapper {
+    height: 100%;
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 64px);
-    width: calc(100vw);
+    width: 100%;
     background-color: #f4f4f9;
     .chat-box {
       flex: 1;

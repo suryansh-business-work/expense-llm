@@ -96,7 +96,7 @@ const Header = () => {
 
   return (
     <>
-      <AppBar position="static">
+      <AppBar position="sticky" sx={{ backgroundColor: '#0c1b32' }}>
         <Toolbar>
           <Grid container alignItems="center" sx={{ alignItems: "center", width: '100%' }}>
             {isMobile && (
@@ -129,7 +129,7 @@ const Header = () => {
             </Grid>
             <Grid size={{xs: 6, sm: 6, md: 6 }} container alignItems="center">
               {botPage && (
-                <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
+                <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
                   {botPage.botListPage.heading}
                 </Typography>
               )}

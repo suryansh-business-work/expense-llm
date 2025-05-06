@@ -11,6 +11,25 @@
   box-sizing: border-box;
 }
 
+html, body, #root {
+  height: 100%;
+  overflow: hidden;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  header {
+    flex-shrink: 0;
+  }
+
+  main {
+    flex: 1;
+    overflow: auto; // Optional: for scrollable content
+  }
+}
+
 :root {
   font-family: "Roboto", system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -45,7 +64,6 @@ h5,
 h6 {
   font-weight: 600;
   margin: 0;
-  color: #1a1a1a;
 }
 
 h1 {
