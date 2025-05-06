@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap-grid.min.css');
+@import url('./header.scss');
 @import url('./card.scss');
 @import url('./chat.scss');
 @import url('./nav.scss');
@@ -75,7 +76,7 @@ h6 {
 
 p {
   font-size: 1rem;
-  margin-bottom: 1rem;
+  margin: 0;
 }
 
 ul,

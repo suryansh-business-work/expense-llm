@@ -18,8 +18,8 @@ const App = () => {
         <Route path="/" element={<Layout />}>
           <Route path="bots" element={<Bots />} />
           <Route path="bot/:botId" element={<BotList />} />
-          <Route path="chat/:chatId" element={<Chat />} />
-          <Route path="dashboard/:dashboardId" element={<Dashboard />} />
+          <Route path="bot/:botId/chat/:chatBot/:chatId" element={<Chat />} />
+          <Route path="bot/:botId/chat/:chatBot/:dashboardId" element={<Dashboard />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

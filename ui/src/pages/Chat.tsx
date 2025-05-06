@@ -19,15 +19,85 @@ const Chat = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [userInput, setUserInput] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [cursor, setCursor] = useState<string | null>(null);
+  const [hasMore, setHasMore] = useState<boolean>(true);
   const bottomRef = useRef<HTMLDivElement | null>(null);
+  const topRef = useRef<HTMLDivElement | null>(null);
 
   const getFormattedTime = () => {
     return dayjs().format('D MMM YYYY h:mm A');
   };
 
+  // Fetch older messages (on scroll-up or initial load)
+  const fetchMessages = async (initial = false) => {
+    if (!chatId || (!initial && !cursor) || isLoading) return;
+
+    setIsLoading(true);
+    try {
+      const response = await axios.get('http://localhost:3000/list-expenses', {
+        params: {
+          chatId,
+          direction: 'older',
+          cursor,
+          limit: 10,
+        },
+      });
+
+      const newExpenses = response.data.expenses;
+
+      if (newExpenses.length === 0) {
+        setHasMore(false);
+        setIsLoading(false);
+        return;
+      }
+
+      const mappedMessages: Message[] = newExpenses.map((exp: any) => ({
+        type: 'bot',
+        timestamp: dayjs(exp._id).format('D MMM YYYY h:mm A'),
+        botResponse: (
+          <>
+            <p><strong>Category:</strong> {exp.expense_category}</p>
+            <p><strong>Amount:</strong> {exp.amount}</p>
+            <p><strong>Expense From:</strong> {exp.expense_from}</p>
+          </>
+        ),
+      }));
+
+      setMessages((prev) => [...mappedMessages.reverse(), ...prev]);
+      setCursor(newExpenses[newExpenses.length - 1]._id); // last (oldest) becomes next cursor
+    } catch (err) {
+      console.error('Failed to load messages', err);
+    }
+    setIsLoading(false);
+  };
+
+  // Load on first mount
+  useEffect(() => {
+    fetchMessages(true);
+  }, [chatId]);
+
+  // Scroll to bottom when user sends message
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, isLoading]);
+
+  // Detect scroll to top (for older messages)
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasMore && !isLoading) {
+          fetchMessages();
+        }
+      },
+      { threshold: 1 }
+    );
+
+    if (topRef.current) observer.observe(topRef.current);
+
+    return () => {
+      if (topRef.current) observer.unobserve(topRef.current);
+    };
+  }, [topRef.current, hasMore, isLoading]);
 
   const handleSendMessage = async () => {
     if (!userInput.trim()) return;
@@ -85,6 +155,7 @@ const Chat = () => {
       <div className="chat-bot-wrapper">
         <div className="chat-box">
           <div className="messages">
+            <div ref={topRef} /> {/* Trigger scroll-up load */}
             {messages.map((message, index) =>
               message.type === 'user' ? (
                 <UserGeneral
@@ -99,7 +170,7 @@ const Chat = () => {
                   avatarUrl={avatarUrl}
                   timestamp={message.timestamp}
                   content={message.botResponse}
-                  isLoading={isLoading}
+                  isLoading={false}
                 />
               )
             )}

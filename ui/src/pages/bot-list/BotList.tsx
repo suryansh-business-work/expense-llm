@@ -69,7 +69,7 @@ const BotList = () => {
       </Helmet>
       <Box sx={{ maxWidth: 1200, margin: '0 auto' }}>
         {/* Header and Create Button */}
-        <Grid container spacing={2} size={12}  sx={{ marginBottom: 3, alignItems: "center" }}>
+        <Grid container spacing={2} size={12} sx={{ marginBottom: 3, alignItems: "center" }}>
           <Grid size={8}>
             <Typography variant="h4" gutterBottom>
               {botPage.botListPage.heading}
@@ -93,13 +93,24 @@ const BotList = () => {
         <Grid container spacing={3}>
           {(botPage?.bots || []).map((bot: any, index: number) => (
             <Grid key={index}>
-              <Card variant="outlined">
+              <Card sx={{
+                backgroundColor: '#ffffff',
+                borderRadius: '12px',
+                padding: '1rem',
+                boxShadow: '0 12px 24px rgba(0, 0, 0, 0.05)',
+                maxWidth: '900px',
+                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                '&:hover': {
+                  transform: 'translateY(-4px)',
+                  boxShadow: '0 18px 36px rgba(0, 0, 0, 0.08)',
+                },
+              }}>
                 <CardContent>
                   <Typography variant="h6">{bot.name}</Typography>
                   <Typography color="text.secondary">{bot.description}</Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="small" onClick={() => navigate(`/chat/${bot.url}`)}>Go to Bot</Button>
+                  <Button size="small" onClick={() => navigate(`/bot/${botId}/chat/${bot.url}/${bot.id}`)}>Go to Bot</Button>
                   <Button size="small" color="secondary" onClick={() => handleEditDialogOpen(bot)}>Edit</Button>
                   <Button size="small" color="error" onClick={() => handleDeleteDialogOpen(bot)}>Delete</Button>
                 </CardActions>

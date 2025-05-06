@@ -19,7 +19,17 @@ const Bots = () => {
       <div className="row">
         {bots.map((bot, index) => (
           <div className="col-12 col-sm-6 col-md-4 mb-4" key={index}>
-            <Card sx={{ minWidth: 275 }}>
+            <Card sx={{
+              backgroundColor: '#ffffff',
+              borderRadius: '12px',
+              boxShadow: '0 12px 24px rgba(0, 0, 0, 0.05)',
+              maxWidth: '900px',
+              transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+              '&:hover': {
+                transform: 'translateY(-4px)',
+                boxShadow: '0 18px 36px rgba(0, 0, 0, 0.08)',
+              },
+            }}>
               <CardHeader
                 avatar={
                   <Avatar aria-label="bot-avatar">
