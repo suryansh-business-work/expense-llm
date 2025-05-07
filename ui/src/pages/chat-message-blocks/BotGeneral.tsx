@@ -55,26 +55,6 @@ const BotGeneral: React.FC<BotGeneralProps> = ({ avatarUrl, timestamp, content, 
                   }} />
                 </ListItemButton>
               </ListItem>
-              <ListItem>
-                <ListItemButton>
-                  <ListItemText primary={'Vote Up'} onClick={() => setIsDeleteDialogOpen(true)} />
-                </ListItemButton>
-              </ListItem>
-              <ListItem>
-                <ListItemButton>
-                  <ListItemText primary={'Vote Down'} onClick={() => setIsDeleteDialogOpen(true)} />
-                </ListItemButton>
-              </ListItem>
-              <ListItem>
-                <ListItemButton>
-                  <ListItemText primary={'Approved'} onClick={() => setIsDeleteDialogOpen(true)} />
-                </ListItemButton>
-              </ListItem>
-              <ListItem>
-                <ListItemButton>
-                  <ListItemText primary={'Reject'} onClick={() => setIsDeleteDialogOpen(true)} />
-                </ListItemButton>
-              </ListItem>
             </List>
           </DialogContent>
         </DialogContent>

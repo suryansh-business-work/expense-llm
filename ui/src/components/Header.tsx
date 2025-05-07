@@ -15,6 +15,7 @@ import {
   useTheme,
   useMediaQuery,
   Grid,
+  Button,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { NavLink, useParams, useLocation } from 'react-router-dom';
@@ -22,6 +23,8 @@ import { getBotPageByUrl } from '../pages/BotPagesData';
 
 const Header = () => {
   const { botId } = useParams<{ botId: string }>();
+  const { chatId } = useParams<{ chatId: string }>();
+  const { chatBot } = useParams<{ chatBot: string }>();
   const location = useLocation();
   const botPage = getBotPageByUrl(botId || '');
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -48,16 +51,12 @@ const Header = () => {
 
   const navLinks = [
     { to: '/bots', label: 'All Bots' },
-    { to: `/bot/${botId}/chat/chatbot/1`, label: 'Chat' },
-    { to: `/bot/${botId}/chat/chatbot/2`, label: 'Dashboard' },
+    { to: `/bot/${botId}/chat/${chatBot}/${chatId}`, label: 'Chat' },
+    { to: `/bot/${botId}/dashboard/${chatBot}/${chatId}`, label: 'Dashboard' },
   ];
 
-  // Determine whether to show Chat and Dashboard links
   const pathParts = location.pathname.split('/');
-  const showChatAndDashboard =
-    pathParts.length === 6 &&
-    pathParts[1] === 'bot' &&
-    pathParts[3] === 'chat';
+  const isLinkChatOrDashboard = pathParts.includes('chat') || pathParts.includes('dashboard');
 
   const drawer = (
     <Box onClick={toggleDrawer(false)} sx={{ width: 250 }}>
@@ -75,7 +74,7 @@ const Header = () => {
           <ListItemText primary="All Bots" />
         </ListItem>
 
-        {showChatAndDashboard &&
+        {isLinkChatOrDashboard &&
           navLinks.slice(1).map((link) => (
             <ListItem
               key={link.to}
@@ -100,7 +99,7 @@ const Header = () => {
         <Toolbar>
           <Grid container alignItems="center" sx={{ alignItems: "center", width: '100%' }}>
             {isMobile && (
-              <Grid size={{xs: 1, sm: 1, md: 1  }}>
+              <Grid size={{ xs: 1, sm: 1, md: 1 }}>
                 <IconButton
                   edge="start"
                   color="inherit"
@@ -112,7 +111,7 @@ const Header = () => {
                 </IconButton>
               </Grid>
             )}
-            <Grid size={{xs: 4, sm: 4, md: 4  }}>
+            <Grid size={{ xs: 4, sm: 4, md: 4 }}>
               <div className="logo">
                 <NavLink
                   to="/bots"
@@ -127,29 +126,34 @@ const Header = () => {
                 </NavLink>
               </div>
             </Grid>
-            <Grid size={{xs: 6, sm: 6, md: 6 }} container alignItems="center">
+            <Grid size={{ xs: 6, sm: 6, md: 6 }} container alignItems="center">
               {botPage && (
-                <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+                <Typography variant="h5" sx={{ fontWeight: 'bold', marginRight: '20px' }}>
                   {botPage.botListPage.heading}
                 </Typography>
               )}
-              {!isMobile && showChatAndDashboard &&
+              {!isMobile && isLinkChatOrDashboard &&
                 navLinks.slice(1).map((link) => (
                   <NavLink
                     key={link.to}
                     to={link.to}
-                    style={({ isActive }) => ({
-                      color: 'inherit',
-                      textDecoration: 'none',
-                      marginLeft: '1rem',
-                      fontWeight: isActive ? 'bold' : 'normal',
-                    })}
                   >
-                    <Typography variant="body1">{link.label}</Typography>
+                    {({ isActive }) => (
+                      <Button
+                        sx={{
+                          marginRight: '20px',
+                          fontWeight: isActive ? 'bold' : 'normal',
+                          color: '#fff'
+                        }}
+                        variant={isActive ? 'contained' : 'text'}
+                      >
+                        {link.label}
+                      </Button>
+                    )}
                   </NavLink>
                 ))}
             </Grid>
-            <Grid size={{xs: 1, sm: 1, md: 2  }} sx={{ justifyItems: 'flex-end' }}>
+            <Grid size={{ xs: 1, sm: 1, md: 2 }} sx={{ justifyItems: 'flex-end' }}>
               <Box>
                 <IconButton onClick={handleAvatarClick} sx={{ p: 0 }}>
                   <Avatar alt="User" src="/user-avatar.jpg" />

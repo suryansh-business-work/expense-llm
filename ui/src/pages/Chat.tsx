@@ -2,6 +2,8 @@ import { JSX, useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
 import UserGeneral from './chat-message-blocks/UserGeneral';
 import BotGeneral from './chat-message-blocks/BotGeneral';
 import LoaderGeneral from './chat-message-blocks/LoaderGeneral';
@@ -14,120 +16,117 @@ interface Message {
 
 const avatarUrl = 'https://ik.imagekit.io/esdata1/exyconn/logo/exyconn.svg';
 
+function sortByTimestamp(data: any, userTimezone = 'UTC') {
+  // Sort the data based on timestamp
+  const sorted = data.sort((a: any, b: any) => {
+      const timeA: any = dayjs.utc(a.timestamp, 'DD MMM YYYY hh:mm:ss A').tz(userTimezone);
+      const timeB: any = dayjs.utc(b.timestamp, 'DD MMM YYYY hh:mm:ss A').tz(userTimezone);
+      return timeA - timeB;
+  });
+
+  // Separate user and bot messages
+  const users = sorted.filter((item: any) => item.type === 'user');
+  const bots = sorted.filter((item: any) => item.type === 'bot');
+
+  // Interleave user → bot
+  const result = [];
+  const maxLength = Math.max(users.length, bots.length);
+  for (let i = 0; i < maxLength; i++) {
+      if (users[i]) result.push(users[i]);
+      if (bots[i]) result.push(bots[i]);
+  }
+
+  return result;
+}
+
 const Chat = () => {
   const { chatId } = useParams();
   const [messages, setMessages] = useState<Message[]>([]);
   const [userInput, setUserInput] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [cursor, setCursor] = useState<string | null>(null);
-  const [hasMore, setHasMore] = useState<boolean>(true);
   const bottomRef = useRef<HTMLDivElement | null>(null);
   const topRef = useRef<HTMLDivElement | null>(null);
 
-  const getFormattedTime = () => {
-    return dayjs().format('D MMM YYYY h:mm A');
-  };
+  dayjs.extend(utc);
+  dayjs.extend(timezone);
 
-  // Fetch older messages (on scroll-up or initial load)
-  const fetchMessages = async (initial = false) => {
-    if (!chatId || (!initial && !cursor) || isLoading) return;
+  const userTimezone = 'Asia/Kolkata';
 
+  function formatDateTime(isoString: string): string {
+    console.log(isoString)
+    return dayjs.utc(isoString).tz(userTimezone).format('DD MMM YYYY hh:mm:ss A');
+  }
+
+  const fetchMessages = async () => {
+    if (!chatId) return;
     setIsLoading(true);
     try {
-      const response = await axios.get('http://localhost:3000/list-expenses', {
+      const response = await axios.get('http://localhost:3000/list/expenses', {
         params: {
           chatId,
-          direction: 'older',
-          cursor,
           limit: 10,
         },
       });
-
-      const newExpenses = response.data.expenses;
-
-      if (newExpenses.length === 0) {
-        setHasMore(false);
-        setIsLoading(false);
-        return;
-      }
-
+      setIsLoading(false);
+      const newExpenses = response.data.expenseBotReplyMsgRes;
       const mappedMessages: Message[] = newExpenses.map((exp: any) => ({
         type: 'bot',
-        timestamp: dayjs(exp._id).format('D MMM YYYY h:mm A'),
+        timestamp: formatDateTime(exp?.createdAt),
         botResponse: (
           <>
-            <p><strong>Category:</strong> {exp.expense_category}</p>
+            <p><strong>Category:</strong> {exp.expenseCategory}</p>
             <p><strong>Amount:</strong> {exp.amount}</p>
-            <p><strong>Expense From:</strong> {exp.expense_from}</p>
+            <p><strong>Expense From:</strong> {exp.expenseFrom}</p>
           </>
         ),
       }));
 
-      setMessages((prev) => [...mappedMessages.reverse(), ...prev]);
-      setCursor(newExpenses[newExpenses.length - 1]._id); // last (oldest) becomes next cursor
+      const newUserMsg = response.data.expenseUserMsgRes;
+      const mappedUserMessages: Message[] = newUserMsg.map((exp: any) => ({
+        type: 'user',
+        timestamp: formatDateTime(exp?.createdAt),
+        botResponse: (
+          <>
+            <p>{exp?.userMsg}</p>
+          </>
+        ),
+      }));
+      console.log([...mappedMessages, ...mappedUserMessages])
+      setMessages(sortByTimestamp([...mappedMessages, ...mappedUserMessages]));
     } catch (err) {
       console.error('Failed to load messages', err);
     }
     setIsLoading(false);
   };
 
-  // Load on first mount
   useEffect(() => {
-    fetchMessages(true);
-  }, [chatId]);
-
-  // Scroll to bottom when user sends message
-  useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages, isLoading]);
-
-  // Detect scroll to top (for older messages)
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && hasMore && !isLoading) {
-          fetchMessages();
-        }
-      },
-      { threshold: 1 }
-    );
-
-    if (topRef.current) observer.observe(topRef.current);
-
-    return () => {
-      if (topRef.current) observer.unobserve(topRef.current);
-    };
-  }, [topRef.current, hasMore, isLoading]);
+    fetchMessages();
+  }, []);
 
   const handleSendMessage = async () => {
     if (!userInput.trim()) return;
-
-    const timestamp = getFormattedTime();
-
     const userMessage: Message = {
       type: 'user',
-      timestamp,
+      timestamp: formatDateTime(new Date().toISOString()),
       botResponse: <p>{userInput}</p>,
     };
     setMessages((prevMessages) => [...prevMessages, userMessage]);
-
     setUserInput('');
     setIsLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:3000/parse-expense', {
-        sentence: userInput,
-        chatId,
+      const response = await axios.post('http://localhost:3000/create/expense', {
+        chatId: chatId,
+        userMsg: userInput
       });
-
       const botMessage: Message = {
         type: 'bot',
-        timestamp: getFormattedTime(),
-        botResponse: response.data.expense_category ? (
+        timestamp: formatDateTime(response?.data?.user?.createdAt),
+        botResponse: response.data.bot ? (
           <>
-            <p><strong>Category:</strong> {response.data.expense_category}</p>
-            <p><strong>Amount:</strong> {response.data.amount}</p>
-            <p><strong>Expense From:</strong> {response.data.expense_from}</p>
+            <p><strong>Category:</strong> {response?.data?.bot?.expenseCategory}</p>
+            <p><strong>Amount:</strong> {response?.data?.bot?.amount}</p>
+            <p><strong>Expense From:</strong> {response?.data?.bot?.expenseFrom}</p>
           </>
         ) : (
           <p>Sorry, I could not parse that correctly.</p>
@@ -140,7 +139,7 @@ const Chat = () => {
 
       const errorBotMessage: Message = {
         type: 'bot',
-        timestamp: getFormattedTime(),
+        timestamp: formatDateTime(new Date().toISOString()),
         botResponse: <p>{errorMessage}</p>,
       };
 
@@ -149,6 +148,10 @@ const Chat = () => {
 
     setIsLoading(false);
   };
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages, isLoading]);
 
   return (
     <div className="chat-container">
@@ -175,7 +178,7 @@ const Chat = () => {
               )
             )}
             {isLoading && (
-              <LoaderGeneral avatarUrl={avatarUrl} timestamp={getFormattedTime()} />
+              <LoaderGeneral avatarUrl={avatarUrl} timestamp={''} />
             )}
             <div ref={bottomRef} />
           </div>
