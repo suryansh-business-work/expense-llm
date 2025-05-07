@@ -34,7 +34,7 @@ const Dashboard = () => {
   
   return (
     <Grid container sx={{ width: '100%', maxWidth: '1200px', margin: '0 auto', paddingTop: '20px' }}>
-      <Grid size={{ xs: 12, sm: 12, md: 12 }} sx={{ paddingBottom: '20px' }}>
+      <Grid size={{ xs: 12, sm: 12, md: 12 }} sx={{ padding: '20px' }}>
         <Typography variant="h4" gutterBottom>
           Dashboard
         </Typography>
@@ -42,10 +42,10 @@ const Dashboard = () => {
           Here is your dashboard with key information.
         </Typography>
       </Grid>
-      <Grid size={{ xs: 6, sm: 6, md: 6 }}>
+      <Grid size={{ xs: 12, sm: 6, md: 6 }} sx={{ padding: '20px' }}>
         <Doughnut data={doughnutData} style={{ width: '100%', height: '300px' }} />
       </Grid>
-      <Grid size={{ xs: 6, sm: 6, md: 6 }}>
+      <Grid size={{ xs: 12, sm: 6, md: 6 }} sx={{ padding: '20px' }}>
         <Typography>
           <Doughnut data={doughnutData} style={{ width: '100%', height: '300px' }} />
         </Typography>
