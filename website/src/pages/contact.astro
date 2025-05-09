@@ -1,8 +1,8 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 ---
 
 <!doctype html>
@@ -14,13 +14,158 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 		<Header />
 		<main>
 			<div class="container">
-        <div class="row">
-          <div class="col-12">
-            <h1>Contact</h1>
-          </div>
-        </div>
-      </div>
+				<div class="row">
+					<div class="col-12">
+						<h1>Contact</h1>
+						<p>
+							Got a question, or interested in learning more about botify? Let
+							us know how we can help. Choose your topic of interest, fill in
+							your details, and we'll get back to you as soon as possible. We
+							look forward to connecting
+						</p>
+						<div class="form-wrapper">
+							<form>
+								<div class="contact-for-options">
+									<label>I'm interested in...</label>
+									<ul>
+										<li><a>Request app demo</a></li>
+										<li><a>Product info / Support</a></li>
+										<li><a>Become a Partner</a></li>
+										<li><a>Working with you</a></li>
+										<li><a>General Information</a></li>
+										<li><a>Legal questions</a></li>
+										<li><a>Pricing</a></li>
+										<li><a>Other</a></li>
+									</ul>
+								</div>
+								<div class="input-wrapper">
+									<label>Hello, my name is</label>
+									<input placeholder="Full Name" />
+								</div>
+								<div class="input-wrapper">
+									<label>I'm working as</label>
+									<input placeholder="Job Title" />
+								</div>
+								<div class="input-wrapper">
+									<label>Company name</label>
+									<input placeholder="Company" />
+								</div>
+								<div class="input-wrapper">
+									<label>You can react me at</label>
+									<input placeholder="Email Address" />
+								</div>
+								<div class="input-wrapper">
+									<label>Your Message</label>
+									<textarea></textarea>
+								</div>
+								<div class="action-wrapper">
+									<button class="cta">Send</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
 		</main>
 		<Footer />
 	</body>
 </html>
+
+<style>
+	.container {
+		max-width: 1000px;
+		margin: 0 auto;
+		padding: 2rem;
+		font-family: "Poppins", sans-serif;
+		color: #2a2a2a;
+	}
+
+	h1 {
+		font-size: 3rem;
+		font-weight: 700;
+		margin-bottom: 1rem;
+	}
+
+	p {
+		font-size: 1rem;
+		line-height: 1.6;
+		color: #666;
+		margin-bottom: 0;
+	}
+
+	h3 {
+		font-size: 1.5rem;
+		font-weight: 600;
+		margin-bottom: 1rem;
+	}
+
+	.form-wrapper {
+		border-radius: 12px;
+		padding: 2rem 1rem;
+	}
+
+	.contact-for-options {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem;
+		margin-bottom: 2rem;
+
+		ul {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 1rem;
+			padding: 0;
+			list-style: none;
+			margin: 0;
+			li {
+				a {
+					display: inline-block;
+					padding: 0.6rem 1.2rem;
+					border-radius: 999px;
+					border: 1px solid #ccc;
+					background: #fff;
+					cursor: pointer;
+					font-size: 0.9rem;
+					color: #333;
+					&.active {
+						background: #1f2c3d;
+						color: #fff;
+					}
+				}
+			}
+		}
+	}
+
+	.input-wrapper,
+	.input-wrapper-group {
+		margin-bottom: 1.5rem;
+		display: flex;
+		flex-direction: column;
+
+		label {
+			font-weight: 600;
+			margin-bottom: 0.5rem;
+			color: #333;
+		}
+
+		input,
+		textarea {
+			padding: 0.8rem 1rem;
+			font-size: 1rem;
+			border: none;
+			border-bottom: 2px solid #ccc;
+			background: transparent;
+			outline: none;
+			transition: border-color 0.3s;
+			width: 100%;
+			&:focus {
+				border-color: #1f2c3d;
+			}
+		}
+
+		textarea {
+			resize: vertical;
+			min-height: 100px;
+		}
+	}
+</style>

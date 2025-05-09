@@ -1,6 +1,10 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap-grid.min.css');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
+* {
+	box-sizing: border-box;
+}
+
 :root {
 	--accent: #2337ff;
 	--accent-dark: #000d8a;
@@ -27,6 +31,7 @@ body {
 	font-size: 20px;
 	line-height: 1.7;
 }
+
 h1,
 h2,
 h3,
@@ -37,77 +42,98 @@ h6 {
 	color: rgb(var(--black));
 	line-height: 1.2;
 }
+
 h1 {
 	font-size: 3.052em;
 }
+
 h2 {
 	font-size: 2.441em;
 }
+
 h3 {
 	font-size: 1.953em;
 }
+
 h4 {
 	font-size: 1.563em;
 }
+
 h5 {
 	font-size: 1.25em;
 }
+
 strong,
 b {
 	font-weight: 700;
 }
+
 a {
 	color: var(--accent);
 }
+
 a:not(.cta):hover {
 	color: var(--accent);
 }
+
 p {
 	margin-bottom: 1em;
 }
+
 .prose p {
 	margin-bottom: 2em;
 }
+
 textarea {
 	width: 100%;
 	font-size: 16px;
 }
+
 input {
 	font-size: 16px;
 }
+
 table {
 	width: 100%;
 }
+
 img {
 	max-width: 100%;
 	height: auto;
 	border-radius: 8px;
 }
+
 code {
 	padding: 2px 5px;
 	background-color: rgb(var(--gray-light));
 	border-radius: 2px;
 }
+
 pre {
 	padding: 1.5em;
 	border-radius: 8px;
 }
+
 main {
 	padding-top: 60px;
 }
-pre > code {
+
+pre>code {
 	all: unset;
 }
+
 blockquote {
 	border-left: 4px solid var(--accent);
 	padding: 0 0 0 20px;
 	margin: 0px;
 	font-size: 1.333em;
 }
+
 hr {
 	border: none;
 	border-top: 1px solid rgb(var(--gray-light));
 }
+
 a {
 	color: #333;
 }
@@ -135,7 +161,6 @@ a {
 .cta {
 	background-color: #146ef5;
 	color: #fff;
-	font-variation-settings: "opsz" 50;
 	text-align: center;
 	cursor: pointer;
 	background-image: none;
@@ -145,15 +170,9 @@ a {
 	font-weight: 600;
 	line-height: 1.2;
 	text-decoration: none;
-	transition:
-		background-color 0.3s cubic-bezier(0.165, 0.84, 0.44, 1),
-		box-shadow 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+	border: 0;
+	outline: 0;
 	display: inline-block;
-	box-shadow:
-		0 4px 4px #08080814,
-		0 1px 2px #08080833,
-		inset 0 6px 12px #ffffff1f,
-		inset 0 1px 1px #fff3;
 	&:hover {
 		background-color: #0055d4;
 		box-shadow:

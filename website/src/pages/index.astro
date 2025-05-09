@@ -1,8 +1,8 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 ---
 
 <!doctype html>
@@ -12,15 +12,78 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	</head>
 	<body>
 		<Header />
+		<!-- https://www.storyblok.com/ -->
 		<main>
 			<div class="container">
-        <div class="row">
-          <div class="col-12">
-            <h1>Home</h1>
-          </div>
-        </div>
-      </div>
+				<div class="row">
+					<div class="col-12">
+						<div class="banner-with-text">
+							<h1>
+								<span>Joyful Headless<sup>TM</sup></span> runs circles around your
+								bloated, old-school CMS
+							</h1>
+							<p>
+								<p>Make bigger, faster market impact</p> with the CMS that gets out
+								of your way. Ready to see how it works? Try it now!
+							</p>
+							<div class="mt-4">
+								<img width="100%" src="/banner-image.png" alt="Banner Image" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</main>
 		<Footer />
 	</body>
 </html>
+
+<style>
+	.banner-with-text {
+		background: #d9eeff;
+		margin-top: 50px;
+		margin-bottom: 50px;
+		padding: 30px;
+		text-align: center;
+		border-radius: 30px;
+		border-top-right-radius: 160px;
+		h1 {
+			span {
+				background-attachment: scroll;
+				background-clip: text;
+				background-color: rgba(0, 0, 0, 0);
+				background-image: linear-gradient(
+					90deg,
+					rgb(24, 77, 181) 0%,
+					rgb(89, 181, 255) 33%
+				);
+				background-origin: padding-box;
+				background-position-x: 0%;
+				background-position-y: 0%;
+				background-repeat: repeat;
+				background-size: auto;
+				box-sizing: border-box;
+				color: rgb(31, 31, 31);
+				display: inline;
+				font-family: "Marfa", sans-serif;
+				font-size: 48px;
+				font-weight: 900;
+				height: auto;
+				line-height: 62px;
+				outline-color: rgba(0, 0, 0, 0);
+				outline-offset: 2px;
+				outline-style: solid;
+				outline-width: 2px;
+				overflow-wrap: anywhere;
+				tab-size: 4;
+				text-align: center;
+				text-size-adjust: 100%;
+				width: auto;
+				word-break: normal;
+				-webkit-font-smoothing: antialiased;
+				-webkit-text-fill-color: rgba(0, 0, 0, 0);
+				-webkit-background-clip: text; /* Needed for text gradient */
+			}
+		}
+	}
+</style>

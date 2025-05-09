@@ -1,8 +1,8 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 ---
 
 <!doctype html>
@@ -13,14 +13,130 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	<body>
 		<Header />
 		<main>
-			<div class="container">
-        <div class="row">
-          <div class="col-12">
-            <h1>Pricing</h1>
-          </div>
-        </div>
-      </div>
+			<div class="container pt-4">
+				<div class="row">
+					<div class="col-12">
+						<h1>Botify Pricing</h1>
+						<p>
+							Built for any project. Try Storyblok free for 14 days, then
+							upgrade to a paid plan to add more team members and access premium
+							features.
+						</p>
+					</div>
+				</div>
+				<div class="row mb-3">
+					<div class="col-12 col-md-6 col-lg-6">
+						<input type="checkbox" /> Pay Annually and get one month free
+					</div>
+					<div class="col-12 col-md-6 col-lg-6">
+						<a>Compare All Plans</a>
+					</div>
+				</div>
+				<div class="row mb-4">
+					<div class="col-12 col-md-6 col-lg-3">
+						<div class="price-section">
+							<h3>Free</h3>
+							<p>Experience free for all of your message, We will handle it</p>
+							<h1>0$</h1>
+							<label>Includes</label>
+							<ul>
+								<li>
+									500 Transection/2000 Token size <a
+										title="1 World aprrox equal to 4 token">*</a
+									>
+								</li>
+								<li>Experience any bot</li>
+								<li>You can create one bot</li>
+								<li>Web bot</li>
+								<li>100 Notifier by any channel</li>
+							</ul>
+							<div class="cta-wrapper">
+								<a class="cta">Go for free</a>
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-md-6 col-lg-3">
+						<div class="price-section">
+							<h3>Personal</h3>
+							<p>Experience free for all of your message, We will handle it</p>
+							<h1>2.99$</h1>
+							<label>Includes</label>
+							<ul>
+								<li>
+									500 Transection/2000 Token size <a
+										title="1 World aprrox equal to 4 token">*</a
+									>
+								</li>
+								<li>Experience any bot</li>
+								<li>You can create one bot</li>
+								<li>Web bot</li>
+								<li>100 Notifier by any channel</li>
+							</ul>
+							<div class="cta-wrapper">
+								<a class="cta">Go for free</a>
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-md-6 col-lg-3">
+						<div class="price-section">
+							<h3>Family</h3>
+							<p>Experience free for all of your message, We will handle it</p>
+							<h1>8.99$</h1>
+							<label>Includes</label>
+							<ul>
+								<li>
+									500 Transection/2000 Token size <a
+										title="1 World aprrox equal to 4 token">*</a
+									>
+								</li>
+								<li>Experience any bot</li>
+								<li>You can create one bot</li>
+								<li>Web bot</li>
+								<li>100 Notifier by any channel</li>
+							</ul>
+							<div class="cta-wrapper">
+								<a class="cta">Go for free</a>
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-md-6 col-lg-3">
+						<div class="price-section">
+							<h3>Enterprise</h3>
+							<p>Experience free for all of your message, We will handle it</p>
+							<h1>100$</h1>
+							<label>Includes</label>
+							<ul>
+								<li>
+									500 Transection/2000 Token size <a
+										title="1 World aprrox equal to 4 token">*</a
+									>
+								</li>
+								<li>Experience any bot</li>
+								<li>You can create one bot</li>
+								<li>Web bot</li>
+								<li>100 Notifier by any channel</li>
+							</ul>
+							<div class="cta-wrapper">
+								<a class="cta">Contact Us</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</main>
 		<Footer />
 	</body>
 </html>
+
+<style>
+	.price-section {
+		border: 1px solid #ddd;
+		padding: 15px;
+		border-radius: 15px;
+		background: #fff;
+		.cta {
+			width: 100%;
+			display: block;
+		}
+	}
+</style>
