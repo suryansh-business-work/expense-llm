@@ -1,5 +1,5 @@
 ---
-import HeaderLink from './HeaderLink.astro';
+import HeaderLink from "./HeaderLink.astro";
 let isOpen = false;
 const toggleMenu = () => {
   isOpen = true;
@@ -11,20 +11,24 @@ const toggleMenu = () => {
     <div class="container">
       <div class="row">
         <div class="col-4 logo-container">
-          <a href="/"><img width="100px" src="/logo/botify-logo.png" alt="Botify" /></a>
+          <a href="/"
+            ><img width="100px" src="/logo/botify-logo.png" alt="Botify" /></a
+          >
         </div>
-        <div class="col-8 nav-actions">
-          <button class="hamburger" aria-label="Toggle menu">
-            ☰
-          </button>
-          <div class={`internal-links ${isOpen ? 'open' : ''}`}>
+        <div class="col-4 nav-actions">
+          <div class={`internal-links ${isOpen ? "open" : ""}`}>
             <HeaderLink href="/product">Product</HeaderLink>
             <HeaderLink href="/solutions">Solutions</HeaderLink>
             <HeaderLink href="/blog">Blog</HeaderLink>
-						<HeaderLink href="/contact">Contact</HeaderLink>
+            <HeaderLink href="/contact">Contact</HeaderLink>
             <HeaderLink href="/pricing">Pricing</HeaderLink>
-            <a href="/login" class="cta login">Login</a>
-            <a href="/signup" class="cta signup">Signup</a>
+          </div>
+        </div>
+        <div class="col-4 nav-actions">
+          <div class={`internal-links ${isOpen ? "open" : ""}`}>
+            <HeaderLink href="/login">Login</HeaderLink>
+            <HeaderLink class="cta" href="/signup">Get started — it's free</HeaderLink
+            >
           </div>
         </div>
       </div>
@@ -33,111 +37,86 @@ const toggleMenu = () => {
 </header>
 
 <style>
-header {
-  margin: 0;
-  padding: 0 1em;
-  box-shadow: 0 2px 8px rgba(var(--black), 5%);
-  backdrop-filter: blur(10px);
-  height: 60px;
-  position: fixed;
-  width: 100%;
-  background: white;
-  z-index: 1000;
-	.logo-container {
-		img, a {
-			display: block;
-		}
-	}
-  nav {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    .container {
-      width: 100%;
-      .row {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-        .logo-container {
+  header {
+    margin: 0;
+    padding: 0 1em;
+    box-shadow: 0 2px 8px rgba(var(--black), 5%);
+    backdrop-filter: blur(10px);
+    height: 60px;
+    position: fixed;
+    width: 100%;
+    background: white;
+    z-index: 1000;
+    .logo-container {
+      img,
+      a {
+        display: block;
+      }
+    }
+    nav {
+      height: 100%;
+      display: flex;
+      font-size: 1rem;
+      align-items: center;
+      .container {
+        width: 100%;
+        .row {
           display: flex;
           align-items: center;
-        }
+          justify-content: space-between;
 
-        .nav-actions {
-          display: flex;
-          align-items: center;
-          justify-content: flex-end;
-          position: relative;
-
-          .hamburger {
-            display: none;
-            background: none;
-            font-size: 1.8rem;
-            border: none;
-            cursor: pointer;
-          }
-
-          .internal-links {
+          .logo-container {
             display: flex;
             align-items: center;
-            gap: 1.5rem;
+          }
 
-            a.cta {
-              padding: 0.4rem 0.9rem;
-              border-radius: 5px;
-              text-decoration: none;
-              font-weight: 500;
-            }
-
-            a.login {
-              background: transparent;
-              color: var(--accent);
-              border: 1px solid var(--accent);
-            }
-
-            a.signup {
-              background: var(--accent);
-              color: white;
+          .nav-actions {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            position: relative;
+            .internal-links {
+              display: flex;
+              align-items: center;
+              gap: 1.5rem;
+              a {
+                border: 2px solid transparent;
+                text-decoration: none;
+                &.active {
+                  border-bottom: 2px solid #0055d4;
+                }
+              }
             }
           }
         }
       }
     }
-
-    a.active {
-      text-decoration: none;
-      border-bottom: 2px solid var(--accent);
-    }
   }
-}
 
-/* 📱 Mobile styles */
-@media (max-width: 720px) {
-  header nav .nav-actions {
-    flex-direction: column;
-    align-items: flex-end;
-
-    .hamburger {
-      display: block;
-    }
-
-    .internal-links {
+  /* 📱 Mobile styles */
+  @media (max-width: 720px) {
+    header nav .nav-actions {
       flex-direction: column;
       align-items: flex-end;
-      gap: 1rem;
-      position: absolute;
-      top: 60px;
-      right: 0;
-      background: white;
-      padding: 1rem;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      display: none;
+      .hamburger {
+        display: block;
+      }
+      .internal-links {
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 1rem;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background: white;
+        padding: 1rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        display: none;
 
-      &.open {
-        display: flex;
+        &.open {
+          display: flex;
+        }
       }
     }
   }
-}
 </style>
