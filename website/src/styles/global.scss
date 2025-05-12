@@ -1,5 +1,10 @@
+@forward './typography.scss';
+@forward './gradient.scss';
+@forward './button.scss';
+@forward './blog.scss';
 @import url('https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap-grid.min.css');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
 
 * {
 	box-sizing: border-box;
@@ -30,54 +35,6 @@ body {
 	color: rgb(var(--gray-dark));
 	font-size: 20px;
 	line-height: 1.7;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	margin: 0 0 0.5rem 0;
-	color: rgb(var(--black));
-	line-height: 1.2;
-}
-
-h1 {
-	font-size: 3.052em;
-}
-
-h2 {
-	font-size: 2.441em;
-}
-
-h3 {
-	font-size: 1.953em;
-}
-
-h4 {
-	font-size: 1.563em;
-}
-
-h5 {
-	font-size: 1.25em;
-}
-
-strong,
-b {
-	font-weight: 700;
-}
-
-a {
-	color: var(--accent);
-}
-
-a:not(.cta):hover {
-	color: var(--accent);
-}
-
-p {
-	margin-bottom: 1em;
 }
 
 .prose p {
@@ -136,6 +93,7 @@ hr {
 
 a {
 	color: #333;
+	text-decoration: none;
 }
 
 @media (max-width: 720px) {
@@ -173,6 +131,7 @@ a {
 	border: 0;
 	outline: 0;
 	display: inline-block;
+
 	&:hover {
 		background-color: #0055d4;
 		box-shadow:
@@ -181,4 +140,9 @@ a {
 			inset 0 6px 12px #ffffff1f,
 			inset 0 1px 1px #fff3;
 	}
+}
+
+hr {
+	border-color: #000;
+	margin: 20px 0;
 }

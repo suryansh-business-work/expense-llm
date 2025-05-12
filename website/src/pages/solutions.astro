@@ -1,8 +1,8 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 ---
 
 <!doctype html>
@@ -13,7 +13,75 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	<body>
 		<Header />
 		<main>
-			<h1>Solutions</h1>
+			<section class="pt-3 pb-3">
+				<div class="container">
+					<div class="row">
+						<div class="col-12"><h1>Solutions</h1></div>
+					</div>
+				</div>
+			</section>
+			<section class="pt-3 pb-3">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<h3>Create insanely great <span class="grad-2">customer experiences</span></h3>
+							<p>
+								Storyblok empowers marketers to get new ideas, offers, campaigns
+								and digital experiences to market faster than ever - without
+								having to involve dev at every little step.
+							</p>
+							<hr />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-6">
+							<h4>Get more ideas to market - faster</h4>
+							<ul>
+								<li>
+									<b>Build, test and update content in minutes</b> - without dev
+									support. Iterate faster. Update more often. Respond to market
+									changes.
+								</li>
+								<li>
+									<b>Take control of the customer</b> experience with our pioneering
+									Visual Editor. See changes in real time for faster
+									decision-making.
+								</li>
+								<li>
+									<b>Seize new opportunities</b> - grow into new markets, channels,
+									products, and regions without re-inventing the wheel.
+								</li>
+								<li>
+									<b>Collaborate throughout the content lifecycle</b> - from idea to
+									publishing, using the Ideation Room and in-app collaboration
+									and workflows.
+								</li>
+							</ul>
+						</div>
+						<div class="col-6">
+							<h4>Freedom to own the content lifecycle</h4>
+							<ul>
+								<li>
+									<b>Integrate the tools you love</b> - e-Commerce, CRM, SEO,
+									personalization, automation… anything your business needs.
+								</li>
+								<li>
+									<b>Translate and localize content fast</b> - supporting as many
+									versions as you need
+								</li>
+								<li>
+									<b>Deliver content consistently across channels</b> - web, mobile,
+									kiosks, apps, and social platforms.
+								</li>
+								<li>
+									<b>View, control, and manage workflows across</b> different users and
+									teams for faster collaboration and content approval cycles.
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</section>
 		</main>
 		<Footer />
 	</body>

@@ -1,0 +1,151 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <BaseHead title={`Legal - ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <!-- Legal Section -->
+      <section class="pt-4 pb-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <h1 class="text-center mb-4">Legal Terms & Conditions</h1>
+              <p class="lead text-center">Please read the following terms and conditions carefully.</p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12">
+              <h3>Terms and Conditions</h3>
+              <p>
+                By accessing or using this website, you agree to comply with and be bound by the following terms and conditions:
+              </p>
+              <ul>
+                <li><strong>Eligibility:</strong> You must be at least 18 years old to use our services.</li>
+                <li><strong>License:</strong> We grant you a non-exclusive, non-transferable license to use our services for personal or business purposes.</li>
+                <li><strong>Intellectual Property:</strong> All content, trademarks, and logos on this site are owned by us or our licensors.</li>
+                <li><strong>Prohibited Activities:</strong> You may not misuse our services, including using them for illegal activities or violating others' intellectual property rights.</li>
+                <li><strong>Limitation of Liability:</strong> We are not liable for any indirect, incidental, or consequential damages arising from the use of our services.</li>
+                <li><strong>Changes to Terms:</strong> We may update these terms at any time. Please review this page periodically for changes.</li>
+              </ul>
+
+              <h4>Privacy Policy</h4>
+              <p>For information about how we collect, use, and protect your data, please read our <a href="/privacy-policy">Privacy Policy</a>.</p>
+            </div>
+          </div>
+
+          <!-- Legal Issue Form Section -->
+          <div class="row mt-5">
+            <div class="col-12">
+              <h3>If You Have Any Legal Issue</h3>
+              <p>If you have any legal concerns or disputes, please fill out the form below, and our legal team will get in touch with you as soon as possible.</p>
+
+              <form action="#" method="POST">
+                <div class="form-group">
+                  <label for="fullName">Full Name</label>
+                  <input type="text" id="fullName" name="fullName" required />
+                </div>
+
+                <div class="form-group">
+                  <label for="email">Email Address</label>
+                  <input type="email" id="email" name="email" required />
+                </div>
+
+                <div class="form-group">
+                  <label for="subject">Subject</label>
+                  <input type="text" id="subject" name="subject" required />
+                </div>
+
+                <div class="form-group">
+                  <label for="message">Message</label>
+                  <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+
+                <div class="form-group">
+                  <button type="submit">Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  h1, h3 {
+    font-weight: bold;
+  }
+
+  h4 {
+    margin-top: 1rem;
+  }
+
+  ul {
+    padding-left: 1.5rem;
+  }
+
+  li {
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    font-size: 1rem;
+    color: #333;
+  }
+
+  form {
+    background: #f9f9f9;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  input, textarea {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  button[type="submit"] {
+    background-color: #0070f3;
+    color: white;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  button[type="submit"]:hover {
+    background-color: #005ad3;
+  }
+</style>

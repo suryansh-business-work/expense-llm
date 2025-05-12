@@ -1,4 +1,5 @@
 ---
+import SurveyText from "../pages/SurveyText.astro";
 import HeaderLink from "./HeaderLink.astro";
 let isOpen = false;
 const toggleMenu = () => {
@@ -6,6 +7,7 @@ const toggleMenu = () => {
 };
 ---
 
+<SurveyText />
 <header>
   <nav>
     <div class="container">
@@ -22,6 +24,7 @@ const toggleMenu = () => {
             <HeaderLink href="/blog">Blog</HeaderLink>
             <HeaderLink href="/contact">Contact</HeaderLink>
             <HeaderLink href="/pricing">Pricing</HeaderLink>
+            <HeaderLink href="/docs">Docs</HeaderLink>
           </div>
         </div>
         <div class="col-4 nav-actions">
@@ -43,7 +46,7 @@ const toggleMenu = () => {
     box-shadow: 0 2px 8px rgba(var(--black), 5%);
     backdrop-filter: blur(10px);
     height: 60px;
-    position: fixed;
+    position: absolute;
     width: 100%;
     background: white;
     z-index: 1000;

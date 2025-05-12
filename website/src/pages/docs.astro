@@ -1,0 +1,159 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <BaseHead title={`API Documentation - ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <section class="pt-4 pb-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <h1 class="text-center mb-4">API Documentation</h1>
+              <p class="lead text-center">Learn how to integrate and interact with our API</p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 col-lg-6">
+              <h3>Getting Started</h3>
+              <p>
+                Welcome to the API documentation! This guide will help you get started with using our API, understanding how to authenticate, and making your first API call.
+              </p>
+
+              <h4>Base URL</h4>
+              <pre><code>https://api.example.com/v1</code></pre>
+
+              <h4>Authentication</h4>
+              <p>
+                All requests require an API Key and access token for authentication. Here’s how to get started:
+              </p>
+              <ul>
+                <li>Generate an API Key by signing up on our platform.</li>
+                <li>Request an access token by authenticating via OAuth2 or via direct login (whichever is applicable to your project).</li>
+              </ul>
+            </div>
+
+            <div class="col-12 col-lg-6">
+              <h3>API Key</h3>
+              <p>
+                To authenticate with our API, you need an API Key. Follow the steps below to generate one:
+              </p>
+              <ul>
+                <li>Log into your account.</li>
+                <li>Go to the <strong>API Settings</strong> page.</li>
+                <li>Click on <strong>Create New API Key</strong>.</li>
+                <li>Copy your newly created key, which will be used in the Authorization header.</li>
+              </ul>
+
+              <h4>Example Request</h4>
+              <pre><code>curl -X GET "https://api.example.com/v1/endpoint" -H "Authorization: Bearer YOUR_API_KEY"</code></pre>
+            </div>
+          </div>
+
+          <div class="row mt-4">
+            <div class="col-12">
+              <h3>Access Tokens</h3>
+              <p>
+                Access tokens are used to authenticate requests after the API key is verified. There are two primary methods to obtain access tokens:
+              </p>
+              <ul>
+                <li>OAuth2 flow: Ideal for third-party applications.</li>
+                <li>Direct login: Provides a simpler approach if you manage the user directly.</li>
+              </ul>
+
+              <h4>Example OAuth2 Authentication Flow</h4>
+              <ol>
+                <li>Send a POST request to our <code>/auth/token</code> endpoint with your client credentials.</li>
+                <li>Get the token in the response, which can be used in the <code>Authorization</code> header.</li>
+              </ol>
+
+              <h4>Example Request</h4>
+              <pre><code>curl -X POST "https://api.example.com/v1/auth/token" -d "grant_type=client_credentials&client_id=YOUR_CLIENT_ID&client_secret=YOUR_CLIENT_SECRET"</code></pre>
+
+              <h4>Example Token Usage</h4>
+              <pre><code>curl -X GET "https://api.example.com/v1/protected-endpoint" -H "Authorization: Bearer YOUR_ACCESS_TOKEN"</code></pre>
+            </div>
+          </div>
+
+          <div class="row mt-4">
+            <div class="col-12">
+              <h3>API Endpoints</h3>
+              <p>
+                Below is a list of available API endpoints for interacting with our platform.
+              </p>
+
+              <h4>1. Get User Information</h4>
+              <pre><code>GET /users/1</code></pre>
+              <p>Retrieves user information by ID.</p>
+              <h5>Example Request</h5>
+              <pre><code>curl -X GET "https://api.example.com/v1/users/123" -H "Authorization: Bearer YOUR_ACCESS_TOKEN"</code></pre>
+
+              <h4>2. Create New Post</h4>
+              <pre><code>POST /posts</code></pre>
+              <p>Creates a new post in the system.</p>
+              <h5>Example Request</h5>
+              <pre><code>curl -X POST "https://api.example.com/v1/posts" -H "Authorization: Bearer YOUR_ACCESS_TOKEN" -d ''</code></pre>
+
+              <h4>3. Update Post</h4>
+              <pre><code>PUT /posts/1</code></pre>
+              <p>Updates an existing post by ID.</p>
+              <h5>Example Request</h5>
+              <pre><code>curl -X PUT "https://api.example.com/v1/posts/123" -H "Authorization: Bearer YOUR_ACCESS_TOKEN" -d ''</code></pre>
+
+              <h4>4. Delete Post</h4>
+              <pre><code>DELETE /posts/1</code></pre>
+              <p>Deletes a post by ID.</p>
+              <h5>Example Request</h5>
+              <pre><code>curl -X DELETE "https://api.example.com/v1/posts/123" -H "Authorization: Bearer YOUR_ACCESS_TOKEN"</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  h1, h3 {
+    font-weight: bold;
+  }
+
+  pre {
+    background-color: #f4f4f4;
+    padding: 1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  code {
+    font-family: monospace;
+    background-color: #f0f0f0;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+  }
+
+  ul {
+    padding-left: 1.5rem;
+  }
+
+  li {
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    font-size: 1rem;
+    color: #333;
+  }
+</style>

@@ -1,26 +1,115 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<div class="container">
-        <div class="row">
-          <div class="col-12">
-            <h1>Products</h1>
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <!-- Existing Product Sections -->
+      <section class="pt-3 pb-3">
+        <div class="container">
+          <div class="row">
+            <div class="col-12"><h1>Products</h1></div>
           </div>
         </div>
-      </div>
-		</main>
-		<Footer />
-	</body>
+      </section>
+
+      <section class="pt-3 pb-3">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <h3>
+                Create insanely great <span class="grad-2">customer experiences</span>
+              </h3>
+              <p>
+                Storyblok empowers marketers to get new ideas, offers, campaigns
+                and digital experiences to market faster than ever - without
+                having to involve dev at every little step.
+              </p>
+              <hr />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <h4>Get more ideas to market - faster</h4>
+              <ul>
+                <li><b>Build, test and update content in minutes</b> - without dev support...</li>
+                <li><b>Take control of the customer</b> experience with our pioneering Visual Editor...</li>
+                <li><b>Seize new opportunities</b> - grow into new markets...</li>
+                <li><b>Collaborate throughout the content lifecycle</b>...</li>
+              </ul>
+            </div>
+            <div class="col-6">
+              <h4>Freedom to own the content lifecycle</h4>
+              <ul>
+                <li><b>Integrate the tools you love</b> - e-Commerce, CRM...</li>
+                <li><b>Translate and localize content fast</b>...</li>
+                <li><b>Deliver content consistently across channels</b>...</li>
+                <li><b>View, control, and manage workflows across</b> teams...</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 💡 Bots Section -->
+      <section class="pt-5 pb-5 bg-light">
+        <div class="container">
+          <div class="row mb-4">
+            <div class="col-12 text-center">
+              <h2 class="mb-0">Bots</h2>
+              <p class="text-muted">Here is your Bots with key information.</p>
+            </div>
+          </div>
+          <div class="row g-4">
+            <div class="col-md-4">
+              <div class="card h-100 p-3 shadow-sm">
+                <h5 class="card-title">Expense</h5>
+                <p class="card-text">Store all expense here</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card h-100 p-3 shadow-sm">
+                <h5 class="card-title">Income Bot</h5>
+                <p class="card-text">Store all income here</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card h-100 p-3 shadow-sm">
+                <h5 class="card-title">ToDos</h5>
+                <p class="card-text">Daily task track, Reminder etc</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card h-100 p-3 shadow-sm">
+                <h5 class="card-title">Task</h5>
+                <p class="card-text">Long terms task track, Reminder etc</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card h-100 p-3 shadow-sm">
+                <h5 class="card-title">Wishlist</h5>
+                <p class="card-text">Manage your short terms and long terms wishlist</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card h-100 p-3 shadow-sm">
+                <h5 class="card-title">Reminders</h5>
+                <p class="card-text">Manage all your reminders here</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <Footer />
+  </body>
 </html>
