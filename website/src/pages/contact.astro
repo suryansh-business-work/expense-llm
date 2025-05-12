@@ -25,38 +25,59 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 						</p>
 						<div class="form-wrapper">
 							<form>
-								<div class="contact-for-options">
-									<label>I'm interested in...</label>
-									<ul>
-										<li><a>Request app demo</a></li>
-										<li><a>Product info / Support</a></li>
-										<li><a>Become a Partner</a></li>
-										<li><a>Working with you</a></li>
-										<li><a>General Information</a></li>
-										<li><a>Legal questions</a></li>
-										<li><a>Pricing</a></li>
-										<li><a>Other</a></li>
-									</ul>
+								<div class="row">
+									<div class="col-12">
+										<div class="contact-for-options">
+											<label>I'm interested in...</label>
+											<ul>
+												<li><a>Request app demo</a></li>
+												<li><a>Product info / Support</a></li>
+												<li><a>Become a Partner</a></li>
+												<li><a>Working with you</a></li>
+												<li><a>General Information</a></li>
+												<li><a>Legal questions</a></li>
+												<li><a>Pricing</a></li>
+												<li><a>Other</a></li>
+											</ul>
+										</div>
+									</div>
 								</div>
-								<div class="input-wrapper">
-									<label>Hello, my name is</label>
-									<input placeholder="Full Name" />
+								<div class="row">
+									<div class="col-6">
+										<div class="input-wrapper">
+											<label>Hello, my name is</label>
+											<input type="text" placeholder="Full Name" />
+										</div>
+									</div>
+									<div class="col-6">
+										<div class="input-wrapper">
+											<label>I'm working as</label>
+											<input type="text" placeholder="Job Title" />
+										</div>
+									</div>
 								</div>
-								<div class="input-wrapper">
-									<label>I'm working as</label>
-									<input placeholder="Job Title" />
+
+								<div class="row">
+									<div class="col-6">
+										<div class="input-wrapper">
+											<label>Company name</label>
+											<input type="text" placeholder="Company" />
+										</div>
+									</div>
+									<div class="col-6">
+										<div class="input-wrapper">
+											<label>You can react me at</label>
+											<input type="text" placeholder="Email Address" />
+										</div>
+									</div>
 								</div>
-								<div class="input-wrapper">
-									<label>Company name</label>
-									<input placeholder="Company" />
-								</div>
-								<div class="input-wrapper">
-									<label>You can react me at</label>
-									<input placeholder="Email Address" />
-								</div>
-								<div class="input-wrapper">
-									<label>Your Message</label>
-									<textarea></textarea>
+								<div class="row">
+									<div class="col-12">
+										<div class="input-wrapper">
+											<label>Your Message</label>
+											<textarea></textarea>
+										</div>
+									</div>
 								</div>
 								<div class="action-wrapper">
 									<button class="cta">Send</button>
@@ -72,29 +93,11 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 </html>
 
 <style>
-	h1 {
-		font-size: 3rem;
-		font-weight: 700;
-		margin-bottom: 1rem;
-	}
-
-	h3 {
-		font-size: 1.5rem;
-		font-weight: 600;
-		margin-bottom: 1rem;
-	}
-
-	.form-wrapper {
-		border-radius: 12px;
-		padding: 2rem 1rem;
-	}
-
 	.contact-for-options {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 1rem;
 		margin-bottom: 2rem;
-
 		ul {
 			display: flex;
 			flex-wrap: wrap;
@@ -118,39 +121,6 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 					}
 				}
 			}
-		}
-	}
-
-	.input-wrapper,
-	.input-wrapper-group {
-		margin-bottom: 1.5rem;
-		display: flex;
-		flex-direction: column;
-
-		label {
-			font-weight: 600;
-			margin-bottom: 0.5rem;
-			color: #333;
-		}
-
-		input,
-		textarea {
-			padding: 0.8rem 1rem;
-			font-size: 1rem;
-			border: none;
-			border-bottom: 2px solid #ccc;
-			background: transparent;
-			outline: none;
-			transition: border-color 0.3s;
-			width: 100%;
-			&:focus {
-				border-color: #1f2c3d;
-			}
-		}
-
-		textarea {
-			resize: vertical;
-			min-height: 100px;
 		}
 	}
 </style>

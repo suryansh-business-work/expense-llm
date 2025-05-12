@@ -1,11 +1,10 @@
-.grad-1 {
+[class^="grad-"] {
   background-attachment: scroll;
   background-clip: text;
-  background-color: rgba(0, 0, 0, 0);
-  background-image: linear-gradient(90deg, rgb(85, 24, 191) 0%, rgb(161, 133, 255) 33%);
+  background-color: transparent;
   background-origin: padding-box;
-  color: rgb(31, 31, 31);
-  margin-block-start: 0px;
+  color: #1f1f1f;
+  margin-block-start: 0;
   overflow-wrap: anywhere;
   tab-size: 4;
   text-size-adjust: 100%;
@@ -13,23 +12,21 @@
   text-wrap-style: balance;
   word-break: normal;
   -webkit-font-smoothing: antialiased;
-  -webkit-text-fill-color: rgba(0, 0, 0, 0);
+  -webkit-text-fill-color: transparent;
+}
+
+.grad-1 {
+  background-image: linear-gradient(90deg, #5518bf 0%, #a185ff 33%);
 }
 
 .grad-2 {
-  background-attachment: scroll;
-  background-clip: text;
-  background-color: rgba(0, 0, 0, 0);
-  background-image: linear-gradient( 90deg, rgb(24, 77, 181) 0%, rgb(89, 181, 255) 33% );
-  background-origin: padding-box;
-  color: rgb(31, 31, 31);
-  margin-block-start: 0px;
-  overflow-wrap: anywhere;
-  tab-size: 4;
-  text-size-adjust: 100%;
-  text-wrap-mode: wrap;
-  text-wrap-style: balance;
-  word-break: normal;
-  -webkit-font-smoothing: antialiased;
-  -webkit-text-fill-color: rgba(0, 0, 0, 0);
+  background-image: linear-gradient(90deg, #184db5 0%, #59b5ff 33%);
+}
+
+.grad-3 {
+  background-image: linear-gradient(90deg, #b518a0 0%, #d64d9d 33%);
+}
+
+.grad-4 {
+  background-image: linear-gradient(90deg, #0dda73 0%, #54b339 33%);
 }

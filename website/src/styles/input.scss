@@ -1,0 +1,23 @@
+label {
+  font-weight: 600;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+select,
+textarea {
+  background-color: #f6f9fc;
+  outline: 0;
+  color: #0a2540;
+  border-radius: 4px;
+  transition: 0.2s all linear;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cccccc;
+  margin-bottom: 10px;
+  &:focus {
+    box-shadow: #4d90fe 0px 0px 0px 2px, #ffffffe6 0px 0px 0px 2px inset;
+  }
+}

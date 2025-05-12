@@ -38,12 +38,16 @@ strong, b {
 }
 
 a {
-	color: var(--accent);
+	color: #333;
+	text-decoration: none;
+	&:not(.cta):not(.button):hover {
+		color: #146ef5;
+	}
+	&:not(.button):hover {
+		color: #146ef5;
+	}
 }
 
-a:not(.cta):hover {
-	color: var(--accent);
-}
 
 p {
   font-size: 1.1rem;
