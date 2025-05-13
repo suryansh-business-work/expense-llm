@@ -1,20 +1,17 @@
-import { JSX, useEffect, useRef, useState } from 'react';
+import { JSX, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
-import UserGeneral from './chat-message-blocks/UserGeneral';
-import BotGeneral from './chat-message-blocks/BotGeneral';
-import LoaderGeneral from './chat-message-blocks/LoaderGeneral';
+import { ChatBoxWrapper } from './ChatBoxWrapper';
+import { API_URL } from '../utils/config';
 
 interface Message {
   type: 'user' | 'bot';
   botResponse: JSX.Element;
   timestamp: string;
 }
-
-const avatarUrl = 'https://ik.imagekit.io/esdata1/exyconn/logo/exyconn.svg';
 
 function sortByTimestamp(data: any, userTimezone = 'UTC') {
   // Sort the data based on timestamp
@@ -44,8 +41,6 @@ const Chat = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [userInput, setUserInput] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const bottomRef = useRef<HTMLDivElement | null>(null);
-  const topRef = useRef<HTMLDivElement | null>(null);
 
   dayjs.extend(utc);
   dayjs.extend(timezone);
@@ -61,7 +56,7 @@ const Chat = () => {
     if (!chatId) return;
     setIsLoading(true);
     try {
-      const response = await axios.get('http://localhost:3000/list/expenses', {
+      const response = await axios.get(`${API_URL}/list/expenses`, {
         params: {
           chatId,
           limit: 10,
@@ -149,40 +144,10 @@ const Chat = () => {
     setIsLoading(false);
   };
 
-  useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages, isLoading]);
-
   return (
     <div className="chat-container">
       <div className="chat-bot-wrapper">
-        <div className="chat-box">
-          <div className="messages">
-            <div ref={topRef} /> {/* Trigger scroll-up load */}
-            {messages.map((message, index) =>
-              message.type === 'user' ? (
-                <UserGeneral
-                  key={index}
-                  avatarUrl={avatarUrl}
-                  timestamp={message.timestamp}
-                  content={message.botResponse}
-                />
-              ) : (
-                <BotGeneral
-                  key={index}
-                  avatarUrl={avatarUrl}
-                  timestamp={message.timestamp}
-                  content={message.botResponse}
-                  isLoading={false}
-                />
-              )
-            )}
-            {isLoading && (
-              <LoaderGeneral avatarUrl={avatarUrl} timestamp={''} />
-            )}
-            <div ref={bottomRef} />
-          </div>
-        </div>
+        <ChatBoxWrapper messages={messages} isLoading={isLoading} />
         <div className="chat-input-container">
           <input
             type="text"
