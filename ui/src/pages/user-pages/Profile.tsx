@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   TextField,
   Button,
@@ -9,12 +9,17 @@ import {
   IconButton,
   Typography,
   Paper,
+  Avatar,
+  Tooltip,
+  Fade,
+  Box,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import Joi from "joi";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import PhotoCamera from "@mui/icons-material/PhotoCamera";
 
 // Profile update schema
 const profileSchema = Joi.object({
@@ -39,42 +44,49 @@ const passwordSchema = Joi.object({
 });
 
 export default function Profile() {
-  // Profile state
-  const [profileLoading, setProfileLoading] = useState(false);
-  const [profileSuccess, setProfileSuccess] = useState("");
-  const [profileError, setProfileError] = useState("");
+  // Unified state for profile fields and feedback
+  const [profileState, setProfileState] = useState({
+    loading: false,
+    success: "",
+    error: "",
+    avatar: null as string | null,
+    uploading: false,
+    user: (() => {
+      try {
+        return JSON.parse(localStorage.getItem("user") || "{}");
+      } catch {
+        return {};
+      }
+    })(),
+  });
 
-  // Password state
-  const [passwordLoading, setPasswordLoading] = useState(false);
-  const [passwordSuccess, setPasswordSuccess] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [showCurrent, setShowCurrent] = useState(false);
-  const [showNew, setShowNew] = useState(false);
-  const [showConfirm, setShowConfirm] = useState(false);
+  // Unified state for password fields and feedback
+  const [passwordState, setPasswordState] = useState({
+    loading: false,
+    success: "",
+    error: "",
+    showCurrent: false,
+    showNew: false,
+    showConfirm: false,
+  });
 
-  // Get user from localStorage
-  const user = (() => {
-    try {
-      return JSON.parse(localStorage.getItem("user") || "{}");
-    } catch {
-      return {};
-    }
-  })();
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Profile form
   const {
     register: registerProfile,
     handleSubmit: handleSubmitProfile,
     formState: { errors: profileErrors },
-    reset: resetProfile
+    reset: resetProfile,
+    watch: watchProfile,
   } = useForm({
     resolver: joiResolver(profileSchema),
     mode: "onTouched",
     defaultValues: {
-      firstName: user.firstName || "",
-      lastName: user.lastName || "",
-      email: user.email || "",
-      phone: user.phone || "",
+      firstName: profileState.user.firstName || "",
+      lastName: profileState.user.lastName || "",
+      email: profileState.user.email || "",
+      phone: profileState.user.phone || "",
     },
   });
 
@@ -89,20 +101,48 @@ export default function Profile() {
     mode: "onTouched",
   });
 
+  // Avatar upload handler
+  const handleAvatarClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setProfileState((prev) => ({ ...prev, uploading: true }));
+      const reader = new FileReader();
+      reader.onload = () => {
+        setProfileState((prev) => ({
+          ...prev,
+          avatar: reader.result as string,
+          uploading: false,
+        }));
+        // Optionally, upload to server here
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   // Update profile handler
   const onSubmitProfile = async (form: any) => {
-    setProfileLoading(true);
-    setProfileError("");
-    setProfileSuccess("");
+    setProfileState((prev) => ({
+      ...prev,
+      loading: true,
+      error: "",
+      success: "",
+    }));
     try {
       // Only send changed fields
       const changedFields: any = {};
       Object.keys(form).forEach((key) => {
-        if (form[key] !== user[key]) changedFields[key] = form[key];
+        if (form[key] !== profileState.user[key]) changedFields[key] = form[key];
       });
       if (Object.keys(changedFields).length === 0) {
-        setProfileError("No changes detected.");
-        setProfileLoading(false);
+        setProfileState((prev) => ({
+          ...prev,
+          error: "No changes detected.",
+          loading: false,
+        }));
         return;
       }
       const token = localStorage.getItem("token");
@@ -116,24 +156,40 @@ export default function Profile() {
       });
       const data = await res.json();
       if (res.ok && data.status === "success") {
-        setProfileSuccess("Profile updated successfully.");
+        setProfileState((prev) => ({
+          ...prev,
+          success: "Profile updated successfully.",
+          user: data.data.user,
+        }));
         // Update localStorage user
         localStorage.setItem("user", JSON.stringify(data.data.user));
         resetProfile(data.data.user);
       } else {
-        setProfileError(data.message || "Failed to update profile.");
+        setProfileState((prev) => ({
+          ...prev,
+          error: data.message || "Failed to update profile.",
+        }));
       }
     } catch {
-      setProfileError("Network error. Please try again.");
+      setProfileState((prev) => ({
+        ...prev,
+        error: "Network error. Please try again.",
+      }));
     }
-    setProfileLoading(false);
+    setProfileState((prev) => ({
+      ...prev,
+      loading: false,
+    }));
   };
 
   // Update password handler
   const onSubmitPassword = async (form: any) => {
-    setPasswordLoading(true);
-    setPasswordError("");
-    setPasswordSuccess("");
+    setPasswordState((prev) => ({
+      ...prev,
+      loading: true,
+      error: "",
+      success: "",
+    }));
     try {
       const token = localStorage.getItem("token");
       const res = await fetch("http://localhost:3000/auth/update-password", {
@@ -146,43 +202,130 @@ export default function Profile() {
       });
       const data = await res.json();
       if (res.ok && data.status === "success") {
-        setPasswordSuccess("Password updated successfully.");
+        setPasswordState((prev) => ({
+          ...prev,
+          success: "Password updated successfully.",
+        }));
         resetPassword();
       } else {
-        setPasswordError(data.message || "Failed to update password.");
+        setPasswordState((prev) => ({
+          ...prev,
+          error: data.message || "Failed to update password.",
+        }));
       }
     } catch {
-      setPasswordError("Network error. Please try again.");
+      setPasswordState((prev) => ({
+        ...prev,
+        error: "Network error. Please try again.",
+      }));
     }
-    setPasswordLoading(false);
+    setPasswordState((prev) => ({
+      ...prev,
+      loading: false,
+    }));
   };
 
   // Sync form with localStorage user if changed
   useEffect(() => {
     resetProfile({
-      firstName: user.firstName || "",
-      lastName: user.lastName || "",
-      email: user.email || "",
-      phone: user.phone || "",
+      firstName: profileState.user.firstName || "",
+      lastName: profileState.user.lastName || "",
+      email: profileState.user.email || "",
+      phone: profileState.user.phone || "",
     });
     // eslint-disable-next-line
-  }, [localStorage.getItem("user")]);
+  }, [profileState.user]);
+
+  // Watch for real-time updates
+  const firstName = watchProfile("firstName");
+  const lastName = watchProfile("lastName");
+  const email = watchProfile("email");
 
   return (
-    <div className="container" style={{ maxWidth: 600, marginTop: 48 }}>
-      <Paper elevation={3} sx={{ p: 4 }}>
-        <Typography variant="h5" gutterBottom>
-          Profile
-        </Typography>
+    <div className="container" style={{ maxWidth: 800, marginTop: 48, marginBottom: 48 }}>
+      <Paper elevation={3} sx={{ p: 4, borderRadius: 4 }}>
+        <Box sx={{ display: "flex", alignItems: "center", mb: 4 }}>
+          <Box sx={{ position: "relative", mr: 3 }}>
+            <Tooltip title="Upload profile photo" arrow>
+              <IconButton
+                onClick={handleAvatarClick}
+                sx={{
+                  width: 80,
+                  height: 80,
+                  border: "3px solid #1976d2",
+                  background: "#f5f7fa",
+                  transition: "box-shadow 0.3s",
+                  boxShadow: "0 4px 16px rgba(25, 118, 210, 0.08)",
+                  "&:hover": { boxShadow: "0 8px 24px rgba(25, 118, 210, 0.18)" },
+                }}
+                aria-label="Upload profile photo"
+              >
+                <Fade in={!profileState.uploading}>
+                  <Avatar
+                    src={profileState.avatar || undefined}
+                    sx={{
+                      width: 72,
+                      height: 72,
+                      fontSize: 32,
+                      bgcolor: "#e3f2fd",
+                      color: "#1976d2",
+                    }}
+                  >
+                    {!profileState.avatar && (firstName?.[0] || "U")}
+                  </Avatar>
+                </Fade>
+                {profileState.uploading && (
+                  <CircularProgress
+                    size={48}
+                    sx={{
+                      position: "absolute",
+                      top: 16,
+                      left: 16,
+                      zIndex: 2,
+                    }}
+                  />
+                )}
+                <PhotoCamera
+                  sx={{
+                    position: "absolute",
+                    bottom: 4,
+                    right: 4,
+                    color: "#1976d2",
+                    background: "#fff",
+                    borderRadius: "50%",
+                    p: 0.5,
+                    fontSize: 24,
+                  }}
+                />
+              </IconButton>
+            </Tooltip>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              style={{ display: "none" }}
+              onChange={handleAvatarChange}
+              aria-label="Choose profile photo"
+            />
+          </Box>
+          <Box>
+            <Typography variant="h5" sx={{ fontWeight: 700 }}>
+              {(firstName || "") + (lastName ? " " + lastName : "") || "Profile"}
+            </Typography>
+            <Typography variant="body2" sx={{ color: "#888" }}>
+              {email || "Update your personal information and password."}
+            </Typography>
+          </Box>
+        </Box>
         <form onSubmit={handleSubmitProfile(onSubmitProfile)} autoComplete="off">
-          {profileError && (
+          {profileState.error && (
             <Alert severity="error" sx={{ mb: 2 }}>
-              {profileError}
+              {profileState.error}
             </Alert>
           )}
-          {profileSuccess && (
+          {profileState.success && (
             <Alert severity="success" sx={{ mb: 2 }}>
-              {profileSuccess}
+              {profileState.success}
             </Alert>
           )}
           <div className="row">
@@ -231,10 +374,10 @@ export default function Profile() {
                 variant="contained"
                 color="primary"
                 fullWidth
-                disabled={profileLoading}
+                disabled={profileState.loading}
                 sx={{ py: 1.5 }}
               >
-                {profileLoading ? <CircularProgress size={24} /> : "Update Profile"}
+                {profileState.loading ? <CircularProgress size={24} /> : "Update Profile"}
               </Button>
             </div>
           </div>
@@ -244,21 +387,21 @@ export default function Profile() {
           Change Password
         </Typography>
         <form onSubmit={handleSubmitPassword(onSubmitPassword)} autoComplete="off">
-          {passwordError && (
+          {passwordState.error && (
             <Alert severity="error" sx={{ mb: 2 }}>
-              {passwordError}
+              {passwordState.error}
             </Alert>
           )}
-          {passwordSuccess && (
+          {passwordState.success && (
             <Alert severity="success" sx={{ mb: 2 }}>
-              {passwordSuccess}
+              {passwordState.success}
             </Alert>
           )}
           <div className="row">
             <div className="col-12 mb-3">
               <TextField
                 label="Current Password"
-                type={showCurrent ? "text" : "password"}
+                type={passwordState.showCurrent ? "text" : "password"}
                 {...registerPassword("currentPassword")}
                 error={!!passwordErrors.currentPassword}
                 helperText={passwordErrors.currentPassword?.message as string}
@@ -267,12 +410,17 @@ export default function Profile() {
                   endAdornment: (
                     <InputAdornment position="end">
                       <IconButton
-                        aria-label={showCurrent ? "Hide password" : "Show password"}
-                        onClick={() => setShowCurrent((show) => !show)}
+                        aria-label={passwordState.showCurrent ? "Hide password" : "Show password"}
+                        onClick={() =>
+                          setPasswordState((prev) => ({
+                            ...prev,
+                            showCurrent: !prev.showCurrent,
+                          }))
+                        }
                         edge="end"
                         tabIndex={-1}
                       >
-                        {showCurrent ? <VisibilityOff /> : <Visibility />}
+                        {passwordState.showCurrent ? <VisibilityOff /> : <Visibility />}
                       </IconButton>
                     </InputAdornment>
                   ),
@@ -282,7 +430,7 @@ export default function Profile() {
             <div className="col-12 mb-3">
               <TextField
                 label="New Password"
-                type={showNew ? "text" : "password"}
+                type={passwordState.showNew ? "text" : "password"}
                 {...registerPassword("newPassword")}
                 error={!!passwordErrors.newPassword}
                 helperText={passwordErrors.newPassword?.message as string}
@@ -291,12 +439,17 @@ export default function Profile() {
                   endAdornment: (
                     <InputAdornment position="end">
                       <IconButton
-                        aria-label={showNew ? "Hide password" : "Show password"}
-                        onClick={() => setShowNew((show) => !show)}
+                        aria-label={passwordState.showNew ? "Hide password" : "Show password"}
+                        onClick={() =>
+                          setPasswordState((prev) => ({
+                            ...prev,
+                            showNew: !prev.showNew,
+                          }))
+                        }
                         edge="end"
                         tabIndex={-1}
                       >
-                        {showNew ? <VisibilityOff /> : <Visibility />}
+                        {passwordState.showNew ? <VisibilityOff /> : <Visibility />}
                       </IconButton>
                     </InputAdornment>
                   ),
@@ -306,7 +459,7 @@ export default function Profile() {
             <div className="col-12 mb-4">
               <TextField
                 label="Confirm New Password"
-                type={showConfirm ? "text" : "password"}
+                type={passwordState.showConfirm ? "text" : "password"}
                 {...registerPassword("confirmNewPassword")}
                 error={!!passwordErrors.confirmNewPassword}
                 helperText={passwordErrors.confirmNewPassword?.message as string}
@@ -315,12 +468,17 @@ export default function Profile() {
                   endAdornment: (
                     <InputAdornment position="end">
                       <IconButton
-                        aria-label={showConfirm ? "Hide password" : "Show password"}
-                        onClick={() => setShowConfirm((show) => !show)}
+                        aria-label={passwordState.showConfirm ? "Hide password" : "Show password"}
+                        onClick={() =>
+                          setPasswordState((prev) => ({
+                            ...prev,
+                            showConfirm: !prev.showConfirm,
+                          }))
+                        }
                         edge="end"
                         tabIndex={-1}
                       >
-                        {showConfirm ? <VisibilityOff /> : <Visibility />}
+                        {passwordState.showConfirm ? <VisibilityOff /> : <Visibility />}
                       </IconButton>
                     </InputAdornment>
                   ),
@@ -333,10 +491,10 @@ export default function Profile() {
                 variant="contained"
                 color="primary"
                 fullWidth
-                disabled={passwordLoading}
+                disabled={passwordState.loading}
                 sx={{ py: 1.5 }}
               >
-                {passwordLoading ? <CircularProgress size={24} /> : "Update Password"}
+                {passwordState.loading ? <CircularProgress size={24} /> : "Update Password"}
               </Button>
             </div>
           </div>
