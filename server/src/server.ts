@@ -9,13 +9,14 @@ import { v4 as uuidv4 } from 'uuid';
 import ExpenseBotReplyMsgModel from '../db/models/expenseBotReplyMsgModel';
 import ExpenseUserMsgModel from '../db/models/ExpenseUserMsgModel';
 import dayjs from 'dayjs';
+import authRoutes from './auth/auth.routes';
 
 const app = express();
 
 // Middleware
 app.use(cors());
 app.use(express.json());
-
+app.use('/auth', authRoutes);
 // Routes
 app.get('/healthcheck', (_req, res) => {
   res.status(200).json({ status: 'ok' });
@@ -150,3 +151,5 @@ const startServer = async () => {
 };
 
 startServer();
+
+export default app;

@@ -18,7 +18,7 @@ import {
   Button,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { NavLink, useParams, useLocation } from 'react-router-dom';
+import { NavLink, useParams, useLocation, useNavigate } from 'react-router-dom';
 import { getBotPageByUrl } from '../pages/BotPagesData';
 
 const Header = () => {
@@ -26,11 +26,21 @@ const Header = () => {
   const { chatId } = useParams<{ chatId: string }>();
   const { chatBot } = useParams<{ chatBot: string }>();
   const location = useLocation();
+  const navigate = useNavigate();
   const botPage = getBotPageByUrl(botId || '');
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
+  // Get user first name from localStorage
+  let firstName = '';
+  try {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    firstName = user?.firstName || '';
+  } catch {
+    firstName = '';
+  }
 
   const toggleDrawer = (open: boolean) => () => {
     setDrawerOpen(open);
@@ -46,7 +56,16 @@ const Header = () => {
 
   const handleLogout = () => {
     handleCloseMenu();
-    console.log('Logging out...');
+    // Remove token and user from localStorage
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    // Redirect to login page
+    navigate("/login", { replace: true });
+  };
+
+  const handleProfile = () => {
+    handleCloseMenu();
+    navigate("/profile");
   };
 
   const navLinks = [
@@ -154,7 +173,13 @@ const Header = () => {
                 ))}
             </Grid>
             <Grid size={{ xs: 1, sm: 1, md: 2 }} sx={{ justifyItems: 'flex-end' }}>
-              <Box>
+              <Box display="flex" alignItems="center">
+                {/* Show first name before avatar */}
+                {firstName && (
+                  <Typography variant="subtitle1" sx={{ color: '#fff', mr: 1 }}>
+                    {firstName}
+                  </Typography>
+                )}
                 <IconButton onClick={handleAvatarClick} sx={{ p: 0 }}>
                   <Avatar alt="User" src="/user-avatar.jpg" />
                 </IconButton>
@@ -171,6 +196,7 @@ const Header = () => {
                     horizontal: 'right',
                   }}
                 >
+                  <MenuItem onClick={handleProfile}>Profile</MenuItem>
                   <MenuItem onClick={handleLogout}>Logout</MenuItem>
                 </Menu>
               </Box>
