@@ -11,7 +11,7 @@ export interface BotPage {
   name: string;
   description: string;
   logo: string;
-  type: string;
+  type: any;
   url: string;
   botListPage: {
     heading: string;
@@ -24,9 +24,14 @@ const BotPagesData: BotPage[] = [
   {
     id: '1',
     name: 'Expense',
-    description: 'Store all expense here',
+    description: 'Track, manage, and analyze all your expenses in one place with the Expense Bot.',
     logo: '',
-    type: 'finance',
+    type: {
+      name: 'Finance',
+      value: 'finance',
+      description: 'Bots for managing financial transactions and records.',
+      icon: ''
+    },
     url: 'expense-bot',
     botListPage: {
       heading: 'Expense Bot'
@@ -39,9 +44,14 @@ const BotPagesData: BotPage[] = [
   {
     id: '2',
     name: 'Income Bot',
-    description: 'Store all income here',
+    description: 'Monitor and record all your income sources efficiently with the Income Bot.',
     logo: '',
-    type: 'finance',
+    type: {
+      name: 'Finance',
+      value: 'finance',
+      description: 'Bots for managing financial transactions and records.',
+      icon: ''
+    },
     url: 'income-bot',
     botListPage: {
       heading: 'Income Bot'
@@ -54,9 +64,14 @@ const BotPagesData: BotPage[] = [
   {
     id: '3',
     name: 'ToDos',
-    description: 'Daily task track, Reminder etc',
+    description: 'Organize your daily tasks, reminders, and routines with the ToDos Bot.',
     logo: '',
-    type: 'tracking',
+    type: {
+      name: 'Daily life',
+      value: 'daily-life',
+      description: 'Bots for daily routines, reminders, and personal management.',
+      icon: ''
+    },
     url: 'todo-bot',
     botListPage: {
       heading: 'ToDos Bot'
@@ -69,9 +84,14 @@ const BotPagesData: BotPage[] = [
   {
     id: '4',
     name: 'Task',
-    description: 'Long terms task track, Reminder etc',
+    description: 'Manage your long-term projects and professional tasks with the Task Bot.',
     logo: '',
-    type: 'task-bot',
+    type: {
+      name: 'Professional',
+      value: 'professional',
+      description: 'Bots for professional and project management.',
+      icon: ''
+    },
     url: 'task',
     botListPage: {
       heading: 'Task Bot'
@@ -84,9 +104,14 @@ const BotPagesData: BotPage[] = [
   {
     id: '5',
     name: 'Wishlist',
-    description: 'Manage your short terms and long terms wishlist',
+    description: 'Create and track your short-term and long-term wishes with the Wishlist Bot.',
     logo: '',
-    type: 'tracking',
+    type: {
+      name: 'Daily life',
+      value: 'daily-life',
+      description: 'Bots for daily routines, reminders, and personal management.',
+      icon: ''
+    },
     url: 'wishlist-bot',
     botListPage: {
       heading: 'Wishlist Bot'
@@ -99,9 +124,14 @@ const BotPagesData: BotPage[] = [
   {
     id: '6',
     name: 'Reminders',
-    description: 'Manage all your reminders here',
+    description: 'Never miss an important event or meeting with the Reminders Bot.',
     logo: '',
-    type: 'tracking',
+    type: {
+      name: 'Professional',
+      value: 'professional',
+      description: 'Bots for professional and project management.',
+      icon: ''
+    },
     url: 'reminder-bot',
     botListPage: {
       heading: 'Reminders Bot'

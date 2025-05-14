@@ -1,52 +1,122 @@
-import { useEffect, useRef } from "react";
-import BotGeneral from "./chat-message-blocks/BotGeneral"
-import LoaderGeneral from "./chat-message-blocks/LoaderGeneral"
-import UserGeneral from "./chat-message-blocks/UserGeneral"
-import { JSX } from "@emotion/react/jsx-runtime";
+import { useEffect, useRef, useState, useCallback } from "react";
+import BotGeneral from "./chat-message-blocks/BotGeneral";
+import LoaderGeneral from "./chat-message-blocks/LoaderGeneral";
+import UserGeneral from "./chat-message-blocks/UserGeneral";
+
 const avatarUrl = 'https://ik.imagekit.io/esdata1/exyconn/logo/exyconn.svg';
 
-interface Message {
-  type: 'user' | 'bot';
-  botResponse: JSX.Element;
-  timestamp: string;
-}
+// interface Messages {
+//   message: any;
+//   type: 'user' | 'bot';
+//   botResponse: JSX.Element;
+//   timestamp: string;
+// }
 
 interface ChatBoxWrapperProps {
-  messages: Message[];
+  messages: any;
   isLoading: boolean;
 }
 
+const VISIBLE_COUNT = 10;
+
 export const ChatBoxWrapper: React.FC<ChatBoxWrapperProps> = ({ messages, isLoading }) => {
-  const bottomRef = useRef<HTMLDivElement | null>(null);
-  
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const measureRef = useRef<HTMLDivElement | null>(null);
+  const [itemHeight, setItemHeight] = useState<number>(100);
+  const [scrollTop, setScrollTop] = useState<number>(0);
+  const [shouldStickToBottom, setShouldStickToBottom] = useState<boolean>(true);
+
+  // Measure one message height
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (measureRef.current) {
+      const height = measureRef.current.getBoundingClientRect().height;
+      if (height > 0) setItemHeight(height);
+    }
+  }, [messages.length > 0]);
+
+  // Scroll listener
+  const handleScroll = useCallback(() => {
+    if (!containerRef.current) return;
+    const { scrollTop, scrollHeight, clientHeight } = containerRef.current;
+    setScrollTop(scrollTop);
+    setShouldStickToBottom(scrollTop + clientHeight >= scrollHeight - 20); // 20px buffer
+  }, []);
+
+  // Auto scroll to bottom when messages update
+  useEffect(() => {
+    if (shouldStickToBottom && containerRef.current) {
+      requestAnimationFrame(() => {
+        containerRef.current?.scrollTo({
+          top: containerRef.current.scrollHeight,
+          behavior: 'smooth',
+        });
+      });
+    }
   }, [messages, isLoading]);
 
-  return <div className="chat-box">
-      <div className="messages">
-        {messages.map((message: any, index: number) =>
-          message.type === 'user' ? (
+  // Calculate visible range
+  const totalItems = messages.length;
+  const startIndex = Math.floor(scrollTop / itemHeight);
+  const endIndex = Math.min(totalItems, startIndex + VISIBLE_COUNT);
+  const visibleMessages = messages.slice(startIndex, endIndex);
+
+  const paddingTop = startIndex * itemHeight;
+  const paddingBottom = Math.max(0, (totalItems - endIndex) * itemHeight);
+
+  return (
+    <div
+      className="chat-box"
+      ref={containerRef}
+      onScroll={handleScroll}
+      style={{ overflowY: 'auto', height: '500px' }} 
+    >
+      <div className="messages" style={{ paddingTop, paddingBottom }}>
+        {/* Measure one message invisibly */}
+        {messages.length > 0 && (
+          <div style={{ visibility: 'hidden', position: 'absolute', pointerEvents: 'none' }} ref={measureRef}>
+            {messages[0].type === 'user' ? (
+              <UserGeneral
+                avatarUrl={avatarUrl}
+                timestamp={messages[0].timestamp}
+                content={messages[0].botResponse}
+              />
+            ) : (
+              <BotGeneral
+                message={messages[0].message}
+                avatarUrl={avatarUrl}
+                timestamp={messages[0].timestamp}
+                content={messages[0].botResponse}
+                isLoading={false}
+              />
+            )}
+          </div>
+        )}
+
+        {/* Render only the visible messages */}
+        {visibleMessages.map((message: any, index: number) => {
+          const realIndex = startIndex + index;
+          return message.type === 'user' ? (
             <UserGeneral
-              key={index}
+              key={realIndex}
               avatarUrl={avatarUrl}
               timestamp={message.timestamp}
               content={message.botResponse}
             />
           ) : (
             <BotGeneral
-              key={index}
+              message={message.message}
+              key={realIndex}
               avatarUrl={avatarUrl}
               timestamp={message.timestamp}
               content={message.botResponse}
               isLoading={false}
             />
-          )
-        )}
-        {isLoading && (
-          <LoaderGeneral avatarUrl={avatarUrl} timestamp={''} />
-        )}
-        <div ref={bottomRef} />
+          );
+        })}
+
+        {/* Loader */}
+        {isLoading && <LoaderGeneral avatarUrl={avatarUrl} timestamp={''} />}
       </div>
     </div>
-}
+  );
+};

@@ -13,6 +13,18 @@ interface Message {
   timestamp: string;
 }
 
+export interface ExpenseMessage {
+  _id: string;
+  chatId: string;
+  msgId: string;
+  amount: number;
+  expenseCategory: string;
+  expenseFrom: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
+
 function sortByTimestamp(data: any, userTimezone = 'UTC') {
   // Sort the data based on timestamp
   const sorted = data.sort((a: any, b: any) => {
@@ -48,7 +60,6 @@ const Chat = () => {
   const userTimezone = 'Asia/Kolkata';
 
   function formatDateTime(isoString: string): string {
-    console.log(isoString)
     return dayjs.utc(isoString).tz(userTimezone).format('DD MMM YYYY hh:mm:ss A');
   }
 
@@ -64,8 +75,10 @@ const Chat = () => {
       });
       setIsLoading(false);
       const newExpenses = response.data.expenseBotReplyMsgRes;
+      console.log('newExpenses', newExpenses);
       const mappedMessages: Message[] = newExpenses.map((exp: any) => ({
         type: 'bot',
+        message: exp,
         timestamp: formatDateTime(exp?.createdAt),
         botResponse: (
           <>
