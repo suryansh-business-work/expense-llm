@@ -4,10 +4,10 @@ import Avatar from '@mui/material/Avatar';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardHeader from '@mui/material/CardHeader';
-import Button from '@mui/material/Button';
-import BotPagesData from "./BotPagesData";
+import BotPagesData from "../data/BotPagesData";
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
+import SearchIcon from '@mui/icons-material/Search';
 
 // Map type value to icon class (Font Awesome 5+ CSS classes)
 const typeIconMap: Record<string, string> = {
@@ -89,19 +89,13 @@ const Bots = () => {
               onBlur={handleSearchBlur}
               aria-label="Search bots"
               aria-describedby="bots-desc"
+              sx={{ width: 300, backgroundColor: "#fff" }}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <i className="fas fa-search" aria-hidden="true" />
+                    <SearchIcon color="action" />
                   </InputAdornment>
                 ),
-                style: { verticalAlign: 'middle' }
-              }}
-              sx={{ width: 300 }}
-              inputProps={{
-                tabIndex: 0,
-                role: "searchbox",
-                "aria-label": "Search bots"
               }}
             />
           </div>
@@ -113,8 +107,7 @@ const Bots = () => {
         </div>
         <div className="row">
           <nav className="col-3" aria-label="Bot Category">
-            <h3 id="bot-category-heading">Bot Category</h3>
-            <ul className="bot-categories mt-3" role="listbox" aria-labelledby="bot-category-heading">
+            <ul className="bot-categories" role="listbox" aria-labelledby="bot-category-heading">
               {BOT_CATEGORIES.map((cat) => (
                 <li key={cat.value} className="mb-2" role="option" aria-selected={category === cat.value}>
                   <a
@@ -149,26 +142,6 @@ const Bots = () => {
                 </li>
               ))}
             </ul>
-            <style>
-              {`
-                .bot-categories {
-                  list-style: none;
-                  padding: 0;
-                  margin: 0;
-                }
-                .bot-categories a {
-                  border-radius: 6px;
-                  padding: 6px 10px;
-                  list-style: none;
-                }
-                .bot-categories .active {
-                  background: #0c1b32;
-                  border-radius: 6px;
-                  padding: 6px 10px;
-                  color: #ffffff;
-                }
-              `}
-            </style>
           </nav>
           <main className="col-9" aria-labelledby="bots-heading">
             <div className="row">
@@ -186,12 +159,16 @@ const Bots = () => {
                         boxShadow: '0 18px 36px rgba(0, 0, 0, 0.08)',
                       },
                     }}
+                    className="bot-card"
                     tabIndex={0}
                     aria-label={`${bot.name}: ${bot.description}`}
                   >
                     <CardHeader
                       avatar={
-                        <Avatar aria-label={`${bot.name} logo`}>
+                        <Avatar
+                          aria-label={`${bot.name} logo`}
+                          sx={{ alignSelf: "flex-start" }} // Top align the avatar
+                        >
                           {bot.logo ? (
                             <img
                               src={bot.logo}
@@ -207,14 +184,9 @@ const Bots = () => {
                       subheader={bot.description}
                     />
                     <CardActions sx={{ justifyContent: "flex-end" }}>
-                      <Button
-                        size="small"
-                        onClick={() => navigate(`/bot/${bot.url}`)}
-                        aria-label={`Go to ${bot.name}`}
-                        endIcon={<i className="fas fa-arrow-right" aria-hidden="true" />}
-                        style={{ display: "flex", alignItems: "center", gap: 6 }}
-                      >
-                      </Button>
+                      <div className="bot-action" aria-label={`Go to ${bot.name}`} aria-hidden="true">
+                        <a onClick={() => navigate(`/bot/${bot.url}`)}><i className="fas fa-arrow-right" /></a>
+                      </div>
                     </CardActions>
                   </Card>
                 </div>

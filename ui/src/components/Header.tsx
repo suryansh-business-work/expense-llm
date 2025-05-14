@@ -11,15 +11,17 @@ import {
   ListItemText,
   Box,
   Menu,
-  MenuItem,
   useTheme,
   useMediaQuery,
   Grid,
   Button,
+  LinearProgress,
+  Divider,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { NavLink, useParams, useLocation, useNavigate } from 'react-router-dom';
-import { getBotPageByUrl } from '../pages/BotPagesData';
+import { getBotPageByUrl } from '../pages/data/BotPagesData';
 
 const Header = () => {
   const { botId } = useParams<{ botId: string }>();
@@ -33,14 +35,25 @@ const Header = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
-  // Get user first name from localStorage
+  // Get user first and last name from localStorage
   let firstName = '';
+  let lastName = '';
+  let fullName = '';
   try {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     firstName = user?.firstName || '';
+    lastName = user?.lastName || '';
+    fullName = [firstName, lastName].filter(Boolean).join(' ');
   } catch {
     firstName = '';
+    lastName = '';
+    fullName = '';
   }
+
+  // Simulate current message count (replace with real value if available)
+  const currentMessageCount = 100;
+  const maxMessageCount = 500;
+  const messagePercent = Math.min((currentMessageCount / maxMessageCount) * 100, 100);
 
   const toggleDrawer = (open: boolean) => () => {
     setDrawerOpen(open);
@@ -66,6 +79,11 @@ const Header = () => {
   const handleProfile = () => {
     handleCloseMenu();
     navigate("/profile");
+  };
+
+  const handleManageSubscription = () => {
+    handleCloseMenu();
+    navigate("/manage-subcription");
   };
 
   const navLinks = [
@@ -195,9 +213,80 @@ const Header = () => {
                     vertical: 'top',
                     horizontal: 'right',
                   }}
+                  sx={{ minWidth: 240 }}
                 >
-                  <MenuItem onClick={handleProfile}>Profile</MenuItem>
-                  <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                  <Box sx={{ px: 2, pt: 2, pb: 1, minWidth: 240 }}>
+                    {/* Full name at the top */}
+                    {fullName && (
+                      <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 1 }}>
+                        {fullName}
+                      </Typography>
+                    )}
+                    <Typography variant="body2" sx={{ mb: 0.5 }}>
+                      Messages used: {currentMessageCount}/{maxMessageCount}
+                    </Typography>
+                    <LinearProgress
+                      variant="determinate"
+                      value={messagePercent}
+                      sx={{ height: 8, borderRadius: 5, mb: 1 }}
+                      color={messagePercent < 80 ? "primary" : "error"}
+                    />
+                    <Button size="small" onClick={handleManageSubscription}>Manage Subscription</Button>
+                  </Box>
+                  <Divider />
+                  <Box sx={{ px: 2, py: 1 }}>
+                    <Button
+                      size="small"
+                      component="a"
+                      href="https://yourdomain.com/privacy-policy"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      endIcon={<OpenInNewIcon fontSize="small" />}
+                      sx={{ justifyContent: "flex-start", textTransform: "none", pl: 0 }}
+                      fullWidth
+                    >
+                      Data Protection Policy
+                    </Button>
+                    <Button
+                      size="small"
+                      component="a"
+                      href="https://yourdomain.com/privacy-policy"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      endIcon={<OpenInNewIcon fontSize="small" />}
+                      sx={{ justifyContent: "flex-start", textTransform: "none", pl: 0 }}
+                      fullWidth
+                    >
+                      Privacy Policy
+                    </Button>
+                    <Button
+                      size="small"
+                      onClick={() => {
+                        handleCloseMenu();
+                        navigate("/integrations");
+                      }}
+                      sx={{ justifyContent: "flex-start", textTransform: "none", pl: 0 }}
+                      fullWidth
+                    >
+                      Integrations
+                    </Button>
+                    <Button
+                      size="small"
+                      onClick={() => {
+                        handleCloseMenu();
+                        navigate("/settings");
+                      }}
+                      sx={{ justifyContent: "flex-start", textTransform: "none", pl: 0 }}
+                      fullWidth
+                    >
+                      Settings
+                    </Button>
+                  </Box>
+                  <Divider />
+                  <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', px: 1, py: 0.5 }}>
+                    <Button size="small" onClick={handleProfile}>Profile</Button>
+                    <Button size="small" color="error" onClick={handleLogout}>Logout</Button>
+                  </Box>
                 </Menu>
               </Box>
             </Grid>

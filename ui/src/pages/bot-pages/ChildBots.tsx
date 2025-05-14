@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { getBotPageByUrl } from '../BotPagesData';
+import { getBotPageByUrl } from '../data/BotPagesData';
 import { useState } from 'react';
 import {
   Box,
@@ -13,11 +13,13 @@ import {
   CardContent,
   CardActions,
   Typography,
-  Grid,
+  IconButton,
 } from '@mui/material';
 import { Helmet } from 'react-helmet-async';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import Popover from '@mui/material/Popover';
 
-const BotList = () => {
+const ChildBots = () => {
   const { botId } = useParams<{ botId: string }>();
   const botPage = getBotPageByUrl(botId || '');
   const navigate = useNavigate();
@@ -26,6 +28,8 @@ const BotList = () => {
   const [openEditDialog, setOpenEditDialog] = useState(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [botData, setBotData] = useState({ name: '', description: '', url: '' });
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [popoverBot, setPopoverBot] = useState<any>(null);
 
   const handleCreateDialogOpen = () => setOpenCreateDialog(true);
   const handleCreateDialogClose = () => setOpenCreateDialog(false);
@@ -53,6 +57,34 @@ const BotList = () => {
     handleDeleteDialogClose();
   };
 
+  // Popover handlers
+  const handlePopoverOpen = (event: React.MouseEvent<HTMLElement>, bot: any) => {
+    setAnchorEl(event.currentTarget);
+    setPopoverBot(bot);
+  };
+  const handlePopoverClose = () => {
+    setAnchorEl(null);
+    setPopoverBot(null);
+  };
+
+  // Option handlers (bind with dialogs)
+  const handleEditFromPopover = () => {
+    handlePopoverClose();
+    handleEditDialogOpen(popoverBot);
+  };
+  const handleDeleteFromPopover = () => {
+    handlePopoverClose();
+    handleDeleteDialogOpen(popoverBot);
+  };
+  const handleShareFromPopover = () => {
+    handlePopoverClose();
+    alert(`Share link for bot: ${popoverBot?.name}`);
+  };
+  const handleArchiveFromPopover = () => {
+    handlePopoverClose();
+    alert(`Archive bot: ${popoverBot?.name}`);
+  };
+
   if (!botPage) {
     return (
       <Box sx={{ textAlign: 'center', mt: 5 }}>
@@ -69,16 +101,16 @@ const BotList = () => {
       </Helmet>
       <Box sx={{ maxWidth: 1200, margin: '0 auto' }}>
         {/* Header and Create Button */}
-        <Grid container spacing={2} size={12} sx={{ marginBottom: 3, alignItems: "center" }}>
-          <Grid size={8}>
+        <div className="row mb-3 align-items-center">
+          <div className="col-8">
             <Typography variant="h4" gutterBottom>
               {botPage.botListPage.heading}
             </Typography>
             <Typography variant="body1" gutterBottom>
               {botPage.description}
             </Typography>
-          </Grid>
-          <Grid size={4}>
+          </div>
+          <div className="col-4 text-end">
             <Button
               variant="contained"
               color="primary"
@@ -86,38 +118,70 @@ const BotList = () => {
             >
               Create Bot
             </Button>
-          </Grid>
-        </Grid>
+          </div>
+        </div>
 
         {/* Bot Cards */}
-        <Grid container spacing={3}>
+        <div className="row">
           {(botPage?.bots || []).map((bot: any, index: number) => (
-            <Grid key={index}>
-              <Card sx={{
-                backgroundColor: '#ffffff',
-                borderRadius: '12px',
-                padding: '1rem',
-                boxShadow: '0 12px 24px rgba(0, 0, 0, 0.05)',
-                maxWidth: '900px',
-                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                '&:hover': {
-                  transform: 'translateY(-4px)',
-                  boxShadow: '0 18px 36px rgba(0, 0, 0, 0.08)',
-                },
-              }}>
-                <CardContent>
+            <div className="col-12 col-sm-6 col-md-4 mb-4" key={index}>
+              <Card
+                sx={{
+                  backgroundColor: '#ffffff',
+                  borderRadius: '12px',
+                  padding: '1rem',
+                  boxShadow: '0 12px 24px rgba(0, 0, 0, 0.05)',
+                  maxWidth: '900px',
+                  transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                  '&:hover': {
+                    transform: 'translateY(-4px)',
+                    boxShadow: '0 18px 36px rgba(0, 0, 0, 0.08)',
+                  },
+                  position: 'relative',
+                }}
+              >
+                <Box display="flex" alignItems="center" justifyContent="space-between" mb={1}>
                   <Typography variant="h6">{bot.name}</Typography>
+                  <IconButton
+                    aria-label="more"
+                    aria-controls={`bot-menu-${index}`}
+                    aria-haspopup="true"
+                    onClick={e => handlePopoverOpen(e, bot)}
+                  >
+                    <MoreVertIcon />
+                  </IconButton>
+                  <Popover
+                    id={`bot-menu-${index}`}
+                    open={Boolean(anchorEl) && popoverBot === bot}
+                    anchorEl={anchorEl}
+                    onClose={handlePopoverClose}
+                    anchorOrigin={{
+                      vertical: 'bottom',
+                      horizontal: 'right',
+                    }}
+                    transformOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                  >
+                    <Box>
+                      <Button fullWidth onClick={handleEditFromPopover}>Edit</Button>
+                      <Button fullWidth color="error" onClick={handleDeleteFromPopover}>Delete</Button>
+                      <Button fullWidth onClick={handleShareFromPopover}>Share</Button>
+                      <Button fullWidth onClick={handleArchiveFromPopover}>Archive</Button>
+                    </Box>
+                  </Popover>
+                </Box>
+                <CardContent sx={{ pt: 0 }}>
                   <Typography color="text.secondary">{bot.description}</Typography>
                 </CardContent>
                 <CardActions>
                   <Button size="small" onClick={() => navigate(`/bot/${botId}/chat/${bot.url}/${bot.id}`)}>Go to Bot</Button>
-                  <Button size="small" color="secondary" onClick={() => handleEditDialogOpen(bot)}>Edit</Button>
-                  <Button size="small" color="error" onClick={() => handleDeleteDialogOpen(bot)}>Delete</Button>
                 </CardActions>
               </Card>
-            </Grid>
+            </div>
           ))}
-        </Grid>
+        </div>
       </Box>
 
       {/* Create Bot Dialog */}
@@ -187,4 +251,4 @@ const BotList = () => {
   );
 };
 
-export default BotList;
+export default ChildBots;

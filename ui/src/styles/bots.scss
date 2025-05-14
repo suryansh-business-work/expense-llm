@@ -1,0 +1,40 @@
+.bot-categories {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  a {
+    border-radius: 6px;
+    padding: 6px 10px;
+    list-style: none;
+    color: #4f4f4f;
+    &:hover {
+      color: #444444;
+    }
+    &.active {
+      background: #0c1b32;
+      border-radius: 6px;
+      padding: 6px 10px;
+      color: #ffffff;
+    }
+  }
+}
+
+.bot-card {
+  position: relative;
+  padding-bottom: 50px;
+  min-height: 200px;
+
+  .bot-action {
+    a {
+      position: absolute;
+      background: #0c1b32;
+      color: #fff;
+      right: 0;
+      padding: 10px 24px;
+      bottom: 0;
+      display: block;
+      cursor: pointer;
+    }
+  }
+}

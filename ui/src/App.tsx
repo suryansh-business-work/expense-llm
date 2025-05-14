@@ -1,19 +1,21 @@
 // App.tsx
+import './styles/index.scss';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Chat from './pages/Chat';
 import Dashboard from './pages/Dashboard';
-import Bots from './pages/Bots';
-import BotList from './pages/bot-list/BotList';
+import Bots from './pages/bot-pages/Bots';
+import BotList from './pages/bot-pages/ChildBots';
 import ProtectedRoute, { UnprotectedRoute } from './components/ProtectedRoute';
 import ForgotPassword from './pages/auth-pages/ForgotPassword';
 import Profile from './pages/user-pages/Profile';
-
-import './styles/index.scss';
-import Layout from './pages/Layout';
+import Layout from './pages/layouts/Layout';
 import NotFound from './pages/NotFound';
 import Signup from './pages/auth-pages/Signup';
-import NoHeaderLayout from './pages/NoHeaderLayout';
+import NoHeaderLayout from './pages/layouts/NoHeaderLayout';
 import Login from './pages/auth-pages/Login';
+import ManageSubscription from './pages/user-pages/ManageSubscription';
+import Integrations from './pages/integrations/Integrations';
+import Settings from './pages/user-pages/Settings';
 
 const App = () => {
   return (
@@ -53,6 +55,9 @@ const App = () => {
             </ProtectedRoute>
           }
         >
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/integrations" element={<Integrations />} />
+          <Route path="/manage-subcription" element={<ManageSubscription />} />
           <Route path="bots" element={<Bots />} />
           <Route path="bot/:botId" element={<BotList />} />
           <Route path="bot/:botId/chat/:chatBot/:chatId" element={<Chat />} />

@@ -66,8 +66,7 @@ export default function Profile() {
     register: registerProfile,
     handleSubmit: handleSubmitProfile,
     formState: { errors: profileErrors },
-    reset: resetProfile,
-    watch: watchProfile,
+    reset: resetProfile
   } = useForm({
     resolver: joiResolver(profileSchema),
     mode: "onTouched",
