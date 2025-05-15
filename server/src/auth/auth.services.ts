@@ -12,6 +12,6 @@ export const generateToken = (userId: string) => jwt.sign({ userId }, 'SECRET_KE
 export const sendOTP = async (email: string, phone: string) => {
   const otp = Math.floor(100000 + Math.random() * 900000).toString();
   // Simulate email and SMS sending here
-  console.log(`Send OTP ${otp} to email ${email} and phone ${phone}`);
+  (`Send OTP ${otp} to email ${email} and phone ${phone}`);
   return otp;
 };

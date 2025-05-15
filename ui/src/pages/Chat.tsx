@@ -49,7 +49,7 @@ function sortByTimestamp(data: any, userTimezone = 'UTC') {
 }
 
 const Chat = () => {
-  const { chatId } = useParams();
+  const { chatBotId } = useParams();
   const [messages, setMessages] = useState<Message[]>([]);
   const [userInput, setUserInput] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -64,18 +64,17 @@ const Chat = () => {
   }
 
   const fetchMessages = async () => {
-    if (!chatId) return;
+    if (!chatBotId) return;
     setIsLoading(true);
     try {
       const response = await axios.get(`${API_URL}/list/expenses`, {
         params: {
-          chatId,
+          chatId: chatBotId,
           limit: 10,
         },
       });
       setIsLoading(false);
       const newExpenses = response.data.expenseBotReplyMsgRes;
-      console.log('newExpenses', newExpenses);
       const mappedMessages: Message[] = newExpenses.map((exp: any) => ({
         type: 'bot',
         message: exp,
@@ -99,7 +98,6 @@ const Chat = () => {
           </>
         ),
       }));
-      console.log([...mappedMessages, ...mappedUserMessages])
       setMessages(sortByTimestamp([...mappedMessages, ...mappedUserMessages]));
     } catch (err) {
       console.error('Failed to load messages', err);
@@ -124,7 +122,7 @@ const Chat = () => {
 
     try {
       const response = await axios.post('http://localhost:3000/create/expense', {
-        chatId: chatId,
+        chatId: chatBotId,
         userMsg: userInput
       });
       const botMessage: Message = {

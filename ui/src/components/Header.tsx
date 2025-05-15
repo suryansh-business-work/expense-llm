@@ -25,8 +25,8 @@ import { getBotPageByUrl } from '../pages/data/BotPagesData';
 
 const Header = () => {
   const { botId } = useParams<{ botId: string }>();
-  const { chatId } = useParams<{ chatId: string }>();
-  const { chatBot } = useParams<{ chatBot: string }>();
+  const { childBotType } = useParams<{ childBotType: string }>();
+  const { chatBotId } = useParams<{ chatBotId: string }>();
   const location = useLocation();
   const navigate = useNavigate();
   const botPage = getBotPageByUrl(botId || '');
@@ -88,8 +88,8 @@ const Header = () => {
 
   const navLinks = [
     { to: '/bots', label: 'All Bots' },
-    { to: `/bot/${botId}/chat/${chatBot}/${chatId}`, label: 'Chat' },
-    { to: `/bot/${botId}/dashboard/${chatBot}/${chatId}`, label: 'Dashboard' },
+    { to: `/bot/${childBotType}/chat/${chatBotId}`, label: 'Chat' },
+    { to: `/bot/${childBotType}/dashboard/${chatBotId}`, label: 'Dashboard' },
   ];
 
   const pathParts = location.pathname.split('/');

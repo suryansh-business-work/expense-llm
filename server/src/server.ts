@@ -10,13 +10,22 @@ import ExpenseBotReplyMsgModel from '../db/models/expenseBotReplyMsgModel';
 import ExpenseUserMsgModel from '../db/models/ExpenseUserMsgModel';
 import dayjs from 'dayjs';
 import authRoutes from './auth/auth.routes';
+import childBotsRoutes from './bots-api/childbot.routes';
 
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true,
+}));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
+
 app.use('/auth', authRoutes);
+app.use('/bot', childBotsRoutes);
+
 // Routes
 app.get('/healthcheck', (_req, res) => {
   res.status(200).json({ status: 'ok' });
@@ -49,7 +58,6 @@ app.post('/create/expense', async (req: Request, res: Response): Promise<any> =>
     if (typeof result.amount !== 'number') {
       return res.status(400).json({ errorType: 'parsing-error', error: 'Parsing error: Amount must be a valid number' });
     }
-    console.log(chatId, 'chatId')
     const userMsgSave = new ExpenseUserMsgModel({
       chatId: chatId,
       userMsg: userMsg,

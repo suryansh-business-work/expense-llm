@@ -59,9 +59,9 @@ const App = () => {
           <Route path="/integrations" element={<Integrations />} />
           <Route path="/manage-subcription" element={<ManageSubscription />} />
           <Route path="bots" element={<Bots />} />
-          <Route path="bot/:botId" element={<BotList />} />
-          <Route path="bot/:botId/chat/:chatBot/:chatId" element={<Chat />} />
-          <Route path="bot/:botId/dashboard/:chatBot/:chatId" element={<Dashboard />} />
+          <Route path="bot/:childBotType" element={<BotList />} />
+          <Route path="bot/:childBotType/chat/:chatBotId" element={<Chat />} />
+          <Route path="bot/:childBotType/dashboard/:chatBotId" element={<Dashboard />} />
           <Route path="profile" element={<Profile />} />
         </Route>
         <Route path="*" element={<NotFound />} />

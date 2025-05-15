@@ -16,7 +16,6 @@ interface BotGeneralProps {
 const BotGeneral: React.FC<BotGeneralProps> = ({ message, avatarUrl, timestamp, content, isLoading }) => {
   const [isOptionDialogOpen, setIsOptionDialogOpen] = useState(false);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
-  console.log('message', message);
   return (
     <>
       <div className="message-row bot-message">
