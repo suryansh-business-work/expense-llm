@@ -7,7 +7,7 @@ import { connectDB } from '../db/db';
 import dayjs from 'dayjs';
 import authRoutes from './auth/auth.routes';
 import childBotsRoutes from './bots-api/childbot.routes';
-import { startWebSocketServer } from './chat-api/expense-bot/expense-bot.ws';
+import { startWebSocketServer } from './chat-api/chat.ws';
 
 const app = express();
 
