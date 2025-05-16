@@ -1,4 +1,4 @@
-import { JSX, useEffect, useState } from 'react';
+import { JSX, useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
@@ -25,105 +25,51 @@ export interface ExpenseMessage {
 }
 
 const Chat = () => {
-  const { chatBotId } = useParams();
   const [messages, setMessages] = useState<Message[]>([]);
   const [userInput, setUserInput] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
-
-
-  const fetchMessages = async () => {
-    if (!chatBotId) return;
-    setIsLoading(true);
-    try {
-      const response = await axios.get(`${API_URL}/list/expenses`, {
-        params: {
-          chatId: chatBotId,
-          limit: 10,
-        },
-      });
-      setIsLoading(false);
-      const newExpenses = response.data.expenseBotReplyMsgRes;
-      const mappedMessages: Message[] = newExpenses.map((exp: any) => ({
-        type: 'bot',
-        message: exp,
-        timestamp: formatDateTime(exp?.createdAt),
-        botResponse: (
-          <>
-            <p><strong>Category:</strong> {exp.expenseCategory}</p>
-            <p><strong>Amount:</strong> {exp.amount}</p>
-            <p><strong>Expense From:</strong> {exp.expenseFrom}</p>
-          </>
-        ),
-      }));
-
-      const newUserMsg = response.data.expenseUserMsgRes;
-      const mappedUserMessages: Message[] = newUserMsg.map((exp: any) => ({
-        type: 'user',
-        timestamp: formatDateTime(exp?.createdAt),
-        botResponse: (
-          <>
-            <p>{exp?.userMsg}</p>
-          </>
-        ),
-      }));
-      setMessages([...mappedMessages, ...mappedUserMessages]);
-    } catch (err) {
-      console.error('Failed to load messages', err);
-    }
-    setIsLoading(false);
-  };
+  const ws = useRef<WebSocket | null>(null);
 
   useEffect(() => {
-    fetchMessages();
+    ws.current = new WebSocket('ws://localhost:8080');
+    ws.current.onmessage = async (event) => {
+      setIsLoading(false);
+      let text = '';
+      if (typeof event.data === 'string') {
+        text = event.data;
+      } else if (event.data instanceof Blob) {
+        text = await event.data.text();
+      }
+      setMessages((prev) => [
+        ...prev,
+        {
+          type: 'bot',
+          botResponse: <p>{text}</p>,
+          timestamp: formatDateTime(new Date().toISOString()),
+        },
+      ]);
+    };
+    ws.current.onerror = () => setIsLoading(false);
+    return () => {
+      ws.current?.close();
+    };
   }, []);
 
-  const handleSendMessage = async () => {
-    if (!userInput.trim()) return;
-    const userMessage: Message = {
-      type: 'user',
-      timestamp: formatDateTime(new Date().toISOString()),
-      botResponse: <p>{userInput}</p>,
-    };
-    setMessages((prevMessages) => [...prevMessages, userMessage]);
-    setUserInput('');
-    setIsLoading(true);
-
-    try {
-      const response = await axios.post('http://localhost:3000/create/expense', {
-        chatId: chatBotId,
-        userMsg: userInput
-      });
-      const botMessage: Message = {
-        type: 'bot',
-        timestamp: formatDateTime(response?.data?.user?.createdAt),
-        botResponse: response.data.bot ? (
-          <>
-            <p><strong>Category:</strong> {response?.data?.bot?.expenseCategory}</p>
-            <p><strong>Amount:</strong> {response?.data?.bot?.amount}</p>
-            <p><strong>Expense From:</strong> {response?.data?.bot?.expenseFrom}</p>
-          </>
-        ) : (
-          <p>Sorry, I could not parse that correctly.</p>
-        ),
-      };
-
-      setMessages((prevMessages) => [...prevMessages, botMessage]);
-    } catch (error: any) {
-      const errorMessage = error.response?.data?.error || 'Something went wrong. Please try again later.';
-
-      const errorBotMessage: Message = {
-        type: 'bot',
+  const handleSendMessage = () => {
+    if (!userInput.trim() || !ws.current || ws.current.readyState !== 1) return;
+    setMessages((prev) => [
+      ...prev,
+      {
+        type: 'user',
+        botResponse: <p>{userInput}</p>,
         timestamp: formatDateTime(new Date().toISOString()),
-        botResponse: <p>{errorMessage}</p>,
-      };
-
-      setMessages((prevMessages) => [...prevMessages, errorBotMessage]);
-    }
-
-    setIsLoading(false);
+      },
+    ]);
+    setIsLoading(true);
+    ws.current.send(userInput);
+    setUserInput('');
   };
-
+  
   return (
     <div className="chat-container">
       <div className="chat-bot-wrapper">

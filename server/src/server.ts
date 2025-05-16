@@ -7,7 +7,7 @@ import { connectDB } from '../db/db';
 import dayjs from 'dayjs';
 import authRoutes from './auth/auth.routes';
 import childBotsRoutes from './bots-api/childbot.routes';
-import wss from './chat-api/expense-bot/expense-bot.ws';
+import { startWebSocketServer } from './chat-api/expense-bot/expense-bot.ws';
 
 const app = express();
 
@@ -45,7 +45,7 @@ const startServer = async () => {
   const port = 3000;
   app.listen(port, () => {
     console.log(`🚀 Server is running at http://localhost:${port}`);
-    // wss;
+    startWebSocketServer(); // Start WebSocket server only after DB is connected
   });
 };
 
