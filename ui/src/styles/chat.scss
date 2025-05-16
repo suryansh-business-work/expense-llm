@@ -2,6 +2,10 @@
 
 .chat-container {
   height: 100%;
+  .saved-to-database {
+    position: absolute;
+    right: 10px;
+  }
   .chat-bot-wrapper {
     height: 100%;
     display: flex;
