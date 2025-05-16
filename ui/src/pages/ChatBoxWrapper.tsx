@@ -4,14 +4,6 @@ import LoaderGeneral from "./chat-message-blocks/LoaderGeneral";
 import UserGeneral from "./chat-message-blocks/UserGeneral";
 
 const avatarUrl = 'https://ik.imagekit.io/esdata1/exyconn/logo/exyconn.svg';
-
-// interface Messages {
-//   message: any;
-//   type: 'user' | 'bot';
-//   botResponse: JSX.Element;
-//   timestamp: string;
-// }
-
 interface ChatBoxWrapperProps {
   messages: any;
   isLoading: boolean;
@@ -26,7 +18,6 @@ export const ChatBoxWrapper: React.FC<ChatBoxWrapperProps> = ({ messages, isLoad
   const [scrollTop, setScrollTop] = useState<number>(0);
   const [shouldStickToBottom, setShouldStickToBottom] = useState<boolean>(true);
 
-  // Measure one message height
   useEffect(() => {
     if (measureRef.current) {
       const height = measureRef.current.getBoundingClientRect().height;
@@ -34,15 +25,13 @@ export const ChatBoxWrapper: React.FC<ChatBoxWrapperProps> = ({ messages, isLoad
     }
   }, [messages.length > 0]);
 
-  // Scroll listener
   const handleScroll = useCallback(() => {
     if (!containerRef.current) return;
     const { scrollTop, scrollHeight, clientHeight } = containerRef.current;
     setScrollTop(scrollTop);
-    setShouldStickToBottom(scrollTop + clientHeight >= scrollHeight - 20); // 20px buffer
+    setShouldStickToBottom(scrollTop + clientHeight >= scrollHeight - 20);
   }, []);
 
-  // Auto scroll to bottom when messages update
   useEffect(() => {
     if (shouldStickToBottom && containerRef.current) {
       requestAnimationFrame(() => {
@@ -54,12 +43,10 @@ export const ChatBoxWrapper: React.FC<ChatBoxWrapperProps> = ({ messages, isLoad
     }
   }, [messages, isLoading]);
 
-  // Calculate visible range
   const totalItems = messages.length;
   const startIndex = Math.floor(scrollTop / itemHeight);
   const endIndex = Math.min(totalItems, startIndex + VISIBLE_COUNT);
   const visibleMessages = messages.slice(startIndex, endIndex);
-
   const paddingTop = startIndex * itemHeight;
   const paddingBottom = Math.max(0, (totalItems - endIndex) * itemHeight);
 
@@ -71,7 +58,6 @@ export const ChatBoxWrapper: React.FC<ChatBoxWrapperProps> = ({ messages, isLoad
       style={{ overflowY: 'auto', height: '500px' }} 
     >
       <div className="messages" style={{ paddingTop, paddingBottom }}>
-        {/* Measure one message invisibly */}
         {messages.length > 0 && (
           <div style={{ visibility: 'hidden', position: 'absolute', pointerEvents: 'none' }} ref={measureRef}>
             {messages[0].type === 'user' ? (
@@ -91,8 +77,6 @@ export const ChatBoxWrapper: React.FC<ChatBoxWrapperProps> = ({ messages, isLoad
             )}
           </div>
         )}
-
-        {/* Render only the visible messages */}
         {visibleMessages.map((message: any, index: number) => {
           const realIndex = startIndex + index;
           return message.type === 'user' ? (
@@ -113,8 +97,6 @@ export const ChatBoxWrapper: React.FC<ChatBoxWrapperProps> = ({ messages, isLoad
             />
           );
         })}
-
-        {/* Loader */}
         {isLoading && <LoaderGeneral avatarUrl={avatarUrl} timestamp={''} />}
       </div>
     </div>

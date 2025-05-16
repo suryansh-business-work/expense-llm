@@ -1,11 +1,10 @@
 import { JSX, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
-import timezone from 'dayjs/plugin/timezone';
+
 import { ChatBoxWrapper } from './ChatBoxWrapper';
 import { API_URL } from '../utils/config';
+import { formatDateTime } from '../utils/formatDate';
 
 interface Message {
   type: 'user' | 'bot';
@@ -25,43 +24,13 @@ export interface ExpenseMessage {
   __v: number;
 }
 
-function sortByTimestamp(data: any, userTimezone = 'UTC') {
-  // Sort the data based on timestamp
-  const sorted = data.sort((a: any, b: any) => {
-      const timeA: any = dayjs.utc(a.timestamp, 'DD MMM YYYY hh:mm:ss A').tz(userTimezone);
-      const timeB: any = dayjs.utc(b.timestamp, 'DD MMM YYYY hh:mm:ss A').tz(userTimezone);
-      return timeA - timeB;
-  });
-
-  // Separate user and bot messages
-  const users = sorted.filter((item: any) => item.type === 'user');
-  const bots = sorted.filter((item: any) => item.type === 'bot');
-
-  // Interleave user → bot
-  const result = [];
-  const maxLength = Math.max(users.length, bots.length);
-  for (let i = 0; i < maxLength; i++) {
-      if (users[i]) result.push(users[i]);
-      if (bots[i]) result.push(bots[i]);
-  }
-
-  return result;
-}
-
 const Chat = () => {
   const { chatBotId } = useParams();
   const [messages, setMessages] = useState<Message[]>([]);
   const [userInput, setUserInput] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  dayjs.extend(utc);
-  dayjs.extend(timezone);
 
-  const userTimezone = 'Asia/Kolkata';
-
-  function formatDateTime(isoString: string): string {
-    return dayjs.utc(isoString).tz(userTimezone).format('DD MMM YYYY hh:mm:ss A');
-  }
 
   const fetchMessages = async () => {
     if (!chatBotId) return;
@@ -98,7 +67,7 @@ const Chat = () => {
           </>
         ),
       }));
-      setMessages(sortByTimestamp([...mappedMessages, ...mappedUserMessages]));
+      setMessages([...mappedMessages, ...mappedUserMessages]);
     } catch (err) {
       console.error('Failed to load messages', err);
     }

@@ -6,6 +6,7 @@ import { joiResolver } from "@hookform/resolvers/joi";
 import Joi from "joi";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { useUserContext } from "../../providers/UserProvider";
 
 // Joi validation schema
 const schema = Joi.object({
@@ -18,6 +19,7 @@ export default function Login() {
   const [errorMsg, setErrorMsg] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const { setUser } = useUserContext();
 
   const {
     register,
@@ -43,6 +45,7 @@ export default function Login() {
         // Store token and user in localStorage separately
         localStorage.setItem("token", data.data.token);
         localStorage.setItem("user", JSON.stringify(data.data.user));
+        setUser(data.data.user); // Set user context for real-time updates across app
         reset();
         navigate("/bots"); // Redirect to projected routes page after login
       } else {

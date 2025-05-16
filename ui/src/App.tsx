@@ -7,7 +7,7 @@ import Bots from './pages/bot-pages/Bots';
 import BotList from './pages/bot-pages/ChildBots';
 import ProtectedRoute, { UnprotectedRoute } from './components/ProtectedRoute';
 import ForgotPassword from './pages/auth-pages/ForgotPassword';
-import Profile from './pages/user-pages/Profile';
+import Profile from './pages/user-pages/profile/Profile';
 import Layout from './pages/layouts/Layout';
 import NotFound from './pages/NotFound';
 import Signup from './pages/auth-pages/Signup';

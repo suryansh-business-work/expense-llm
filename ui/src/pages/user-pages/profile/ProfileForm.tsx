@@ -1,0 +1,299 @@
+import { useEffect, useRef, useState } from "react";
+import {
+  TextField,
+  Button,
+  Alert,
+  CircularProgress,
+  IconButton,
+  Typography,
+  Avatar,
+  Tooltip,
+  Fade,
+  Box,
+} from "@mui/material";
+import { useForm } from "react-hook-form";
+import { joiResolver } from "@hookform/resolvers/joi";
+import Joi from "joi";
+import PhotoCamera from "@mui/icons-material/PhotoCamera";
+import { useUserContext } from "../../../providers/UserProvider";
+
+// Profile schema
+const profileSchema = Joi.object({
+  firstName: Joi.string().min(2).max(30).required().label("First Name"),
+  lastName: Joi.string().min(2).max(30).required().label("Last Name"),
+  email: Joi.string().email({ tlds: false }).required().label("Email"),
+  phone: Joi.string()
+    .pattern(/^[0-9]{10}$/)
+    .required()
+    .label("Phone"),
+});
+
+export default function ProfileForm() {
+  const { user, setUser } = useUserContext();
+  const [profileState, setProfileState] = useState({
+    loading: false,
+    success: "",
+    error: "",
+    avatar: null as string | null,
+    uploading: false,
+    user: user,
+  });
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+    watch,
+  } = useForm({
+    resolver: joiResolver(profileSchema),
+    mode: "onTouched",
+    defaultValues: {
+      firstName: profileState.user.firstName || "",
+      lastName: profileState.user.lastName || "",
+      email: profileState.user.email || "",
+      phone: profileState.user.phone || "",
+    },
+  });
+
+  // Avatar upload handler
+  const handleAvatarClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setProfileState((prev) => ({ ...prev, uploading: true }));
+      const reader = new FileReader();
+      reader.onload = () => {
+        setProfileState((prev) => ({
+          ...prev,
+          avatar: reader.result as string,
+          uploading: false,
+        }));
+        // TODO: Upload to server here if needed
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  // Profile update handler
+  const onSubmitProfile = async (form: any) => {
+    setProfileState((prev) => ({
+      ...prev,
+      loading: true,
+      error: "",
+      success: "",
+    }));
+    try {
+      // Only send changed fields
+      const changedFields: any = {};
+      Object.keys(form).forEach((key) => {
+        if (form[key] !== profileState.user[key]) changedFields[key] = form[key];
+      });
+      if (Object.keys(changedFields).length === 0) {
+        setProfileState((prev) => ({
+          ...prev,
+          error: "No changes detected.",
+          loading: false,
+        }));
+        return;
+      }
+      const token = localStorage.getItem("token");
+      const res = await fetch("http://localhost:3000/auth/update-profile", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(changedFields),
+      });
+      const data = await res.json();
+      if (res.ok && data.status === "success") {
+        setProfileState((prev) => ({
+          ...prev,
+          success: "Profile updated successfully.",
+          user: data.data.user,
+        }));
+        localStorage.setItem("user", JSON.stringify(data.data.user));
+        reset(data.data.user);
+        setUser(data.data.user); // update context with new user data
+      } else {
+        setProfileState((prev) => ({
+          ...prev,
+          error: data.message || "Failed to update profile.",
+        }));
+      }
+    } catch {
+      setProfileState((prev) => ({
+        ...prev,
+        error: "Network error. Please try again.",
+      }));
+    }
+    setProfileState((prev) => ({
+      ...prev,
+      loading: false,
+    }));
+  };
+
+  // Sync form with user if changed
+  useEffect(() => {
+    reset({
+      firstName: profileState.user.firstName || "",
+      lastName: profileState.user.lastName || "",
+      email: profileState.user.email || "",
+      phone: profileState.user.phone || "",
+    });
+    // eslint-disable-next-line
+  }, [profileState.user]);
+
+  const firstName = watch("firstName");
+  const lastName = watch("lastName");
+  const email = watch("email");
+
+  return (
+    <>
+      <Box sx={{ display: "flex", alignItems: "center", mb: 4 }}>
+        <Box sx={{ position: "relative", mr: 3 }}>
+          <Tooltip title="Upload profile photo" arrow>
+            <IconButton
+              onClick={handleAvatarClick}
+              sx={{
+                width: 80,
+                height: 80,
+                border: "3px solid #1976d2",
+                background: "#f5f7fa",
+                transition: "box-shadow 0.3s",
+                boxShadow: "0 4px 16px rgba(25, 118, 210, 0.08)",
+                "&:hover": { boxShadow: "0 8px 24px rgba(25, 118, 210, 0.18)" },
+              }}
+              aria-label="Upload profile photo"
+            >
+              <Fade in={!profileState.uploading}>
+                <Avatar
+                  src={profileState.avatar || profileState.user.profilePic || undefined}
+                  sx={{
+                    width: 72,
+                    height: 72,
+                    fontSize: 32,
+                    bgcolor: "#e3f2fd",
+                    color: "#1976d2",
+                  }}
+                >
+                  {!profileState.avatar && (firstName?.[0] || "U")}
+                </Avatar>
+              </Fade>
+              {profileState.uploading && (
+                <CircularProgress
+                  size={48}
+                  sx={{
+                    position: "absolute",
+                    top: 16,
+                    left: 16,
+                    zIndex: 2,
+                  }}
+                />
+              )}
+              <PhotoCamera
+                sx={{
+                  position: "absolute",
+                  bottom: 4,
+                  right: 4,
+                  color: "#1976d2",
+                  background: "#fff",
+                  borderRadius: "50%",
+                  p: 0.5,
+                  fontSize: 24,
+                }}
+              />
+            </IconButton>
+          </Tooltip>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            style={{ display: "none" }}
+            onChange={handleAvatarChange}
+            aria-label="Choose profile photo"
+          />
+        </Box>
+        <Box>
+          <Typography variant="h5" sx={{ fontWeight: 700 }}>
+            {(firstName || "") + (lastName ? " " + lastName : "") || "Profile"}
+          </Typography>
+          <Typography variant="body2" sx={{ color: "#888" }}>
+            {email || "Update your personal information."}
+          </Typography>
+        </Box>
+      </Box>
+      <form onSubmit={handleSubmit(onSubmitProfile)} autoComplete="off">
+        {profileState.error && (
+          <Alert severity="error" sx={{ mb: 2 }}>
+            {profileState.error}
+          </Alert>
+        )}
+        {profileState.success && (
+          <Alert severity="success" sx={{ mb: 2 }}>
+            {profileState.success}
+          </Alert>
+        )}
+        <div className="row">
+          <div className="col-6 mb-3">
+            <TextField
+              label="First Name"
+              {...register("firstName")}
+              error={!!errors.firstName}
+              helperText={errors.firstName?.message as string}
+              fullWidth
+              autoFocus
+            />
+          </div>
+          <div className="col-6 mb-3">
+            <TextField
+              label="Last Name"
+              {...register("lastName")}
+              error={!!errors.lastName}
+              helperText={errors.lastName?.message as string}
+              fullWidth
+            />
+          </div>
+          <div className="col-12 mb-3">
+            <TextField
+              label="Email"
+              type="email"
+              {...register("email")}
+              error={!!errors.email}
+              helperText={errors.email?.message as string}
+              fullWidth
+            />
+          </div>
+          <div className="col-12 mb-4">
+            <TextField
+              label="Phone"
+              {...register("phone")}
+              error={!!errors.phone}
+              helperText={errors.phone?.message as string}
+              fullWidth
+              inputProps={{ maxLength: 10 }}
+            />
+          </div>
+          <div className="col-12">
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              fullWidth
+              disabled={profileState.loading}
+              sx={{ py: 1.5 }}
+            >
+              {profileState.loading ? <CircularProgress size={24} /> : "Update Profile"}
+            </Button>
+          </div>
+        </div>
+      </form>
+    </>
+  );
+}
