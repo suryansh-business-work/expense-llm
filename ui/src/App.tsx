@@ -1,7 +1,7 @@
 // App.tsx
 import './styles/index.scss';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Chat from './pages/Chat';
+import Chat from './pages/chat/Chat';
 import Dashboard from './pages/Dashboard';
 import Bots from './pages/bot-pages/Bots';
 import BotList from './pages/bot-pages/ChildBots';
@@ -16,6 +16,7 @@ import Login from './pages/auth-pages/Login';
 import ManageSubscription from './pages/user-pages/ManageSubscription';
 import Integrations from './pages/integrations/Integrations';
 import Settings from './pages/user-pages/Settings';
+import ChatSettings from './pages/chat/chat-settings/ChatSettings';
 
 const App = () => {
   return (
@@ -62,6 +63,7 @@ const App = () => {
           <Route path="bot/:childBotType" element={<BotList />} />
           <Route path="bot/:childBotType/chat/:chatBotId" element={<Chat />} />
           <Route path="bot/:childBotType/dashboard/:chatBotId" element={<Dashboard />} />
+          <Route path="bot/:childBotType/chat-settings/:chatBotId" element={<ChatSettings />} />
           <Route path="profile" element={<Profile />} />
         </Route>
         <Route path="*" element={<NotFound />} />

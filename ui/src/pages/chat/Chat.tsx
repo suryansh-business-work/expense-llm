@@ -1,7 +1,7 @@
 import { JSX, useEffect, useRef, useState } from 'react';
 import { ChatBoxWrapper } from './ChatBoxWrapper';
-import { formatDateTime } from '../utils/formatDate';
-import { useUserContext } from '../providers/UserProvider';
+import { formatDateTime } from '../../utils/formatDate';
+import { useUserContext } from '../../providers/UserProvider';
 import { useParams } from 'react-router-dom';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, { AlertColor } from '@mui/material/Alert';

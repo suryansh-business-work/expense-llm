@@ -16,10 +16,14 @@ import Popover from '@mui/material/Popover';
 import CreateChildBotDialog from "./CreateChildBotDialog";
 import DeleteChildBotDialog from "./DeleteChildBotDialog";
 import UpdateChildBotDialog from "./UpdateChildBotDialog";
+import { getBotPageByUrl } from "../data/BotPagesData";
 
 const ChildBots = () => {
   const { childBotType } = useParams<{ childBotType: string }>();
   const navigate = useNavigate();
+
+  // Get bot page data by URL
+  const botPageData = getBotPageByUrl(childBotType || "");
 
   const [openCreateDialog, setOpenCreateDialog] = useState(false);
   const [openEditDialog, setOpenEditDialog] = useState(false);
@@ -122,19 +126,16 @@ const ChildBots = () => {
         <div className="row mb-3 align-items-center">
           <div className="col-8">
             <Typography variant="h4" gutterBottom>
-              Bots
-            </Typography>
-            <Typography variant="body1" gutterBottom>
-              Manage your bots of type: <b>{childBotType}</b>
+              {botPageData?.botListPage?.heading + 's' || childBotType}
             </Typography>
           </div>
-          <div className="col-4 text-end">
+          <div className="col-4 d-flex justify-content-end">
             <Button
               variant="contained"
               color="primary"
               onClick={() => setOpenCreateDialog(true)}
             >
-              Create Bot
+              Create {botPageData?.botListPage?.heading || 'Bot'}
             </Button>
           </div>
         </div>
@@ -201,6 +202,7 @@ const ChildBots = () => {
                       Category: {bot.bot?.category || bot.category}
                     </Typography>
                     <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                      Tags: 
                       {(bot.bot?.tags || bot.tags || []).map((tag: string, idx: number) => (
                         <Chip key={tag + idx} label={tag} size="small" color="primary" />
                       ))}

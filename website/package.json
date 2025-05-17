@@ -13,6 +13,7 @@
     "@astrojs/rss": "^4.0.11",
     "@astrojs/sitemap": "^3.3.1",
     "astro": "^5.7.11",
+    "moment-timezone": "^0.5.48",
     "sass": "^1.87.0",
     "stylelint": "^16.19.1",
     "stylelint-config-recommended-scss": "^14.1.0",

@@ -115,6 +115,22 @@ const BotPagesData: BotPage[] = [
     botListPage: {
       heading: 'Reminders Bot'
     }
+  },
+  {
+    id: '7',
+    name: 'Website Scraper',
+    description: 'Extract data from websites efficiently using the Website Scraper Bot.',
+    logo: '',
+    type: {
+      name: 'Professional',
+      value: 'professional',
+      description: 'Bots for professional and project management.',
+      icon: ''
+    },
+    url: 'website-scraper',
+    botListPage: {
+      heading: 'Website Scraper Bot'
+    }
   }
 ];
 
