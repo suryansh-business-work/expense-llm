@@ -1,22 +1,25 @@
-// App.tsx
 import './styles/index.scss';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Chat from './pages/chat/Chat';
-import Dashboard from './pages/Dashboard';
-import Bots from './pages/bot-pages/Bots';
-import BotList from './pages/bot-pages/ChildBots';
-import ProtectedRoute, { UnprotectedRoute } from './components/ProtectedRoute';
-import ForgotPassword from './pages/auth-pages/ForgotPassword';
-import Profile from './pages/user-pages/profile/Profile';
-import Layout from './pages/layouts/Layout';
-import NotFound from './pages/NotFound';
-import Signup from './pages/auth-pages/Signup';
-import NoHeaderLayout from './pages/layouts/NoHeaderLayout';
-import Login from './pages/auth-pages/Login';
-import ManageSubscription from './pages/user-pages/ManageSubscription';
-import Integrations from './pages/integrations/Integrations';
-import Settings from './pages/user-pages/Settings';
-import ChatSettings from './pages/chat/chat-settings/ChatSettings';
+import { lazy } from 'react';
+
+const Chat = lazy(() => import('./pages/chat/Chat'));
+const Dashboard = lazy(() => import('./pages/Dashboard'));
+const Bots = lazy(() => import('./pages/bot-pages/Bots'));
+const BotList = lazy(() => import('./pages/bot-pages/ChildBots'));
+const ProtectedRoute = lazy(() => import('./components/ProtectedRoute'));
+const UnprotectedRoute = lazy(() => import('./components/ProtectedRoute').then(m => ({ default: m.UnprotectedRoute })));
+const ForgotPassword = lazy(() => import('./pages/auth-pages/ForgotPassword'));
+const Profile = lazy(() => import('./pages/user-pages/profile/Profile'));
+const Layout = lazy(() => import('./pages/layouts/Layout'));
+const NotFound = lazy(() => import('./pages/NotFound'));
+const Signup = lazy(() => import('./pages/auth-pages/Signup'));
+const NoHeaderLayout = lazy(() => import('./pages/layouts/NoHeaderLayout'));
+const ManageSubscription = lazy(() => import('./pages/user-pages/ManageSubscription'));
+const Integrations = lazy(() => import('./pages/integrations/Integrations'));
+const Settings = lazy(() => import('./pages/user-pages/Settings'));
+const ChatSettings = lazy(() => import('./pages/chat/chat-settings/ChatSettings'));
+const ChatLab = lazy(() => import('./pages/chat/chat-settings/lab/ChatLab'));
+const Login = lazy(() => import('./pages/auth-pages/Login'));
 
 const App = () => {
   return (
@@ -64,6 +67,7 @@ const App = () => {
           <Route path="bot/:childBotType/chat/:chatBotId" element={<Chat />} />
           <Route path="bot/:childBotType/dashboard/:chatBotId" element={<Dashboard />} />
           <Route path="bot/:childBotType/chat-settings/:chatBotId" element={<ChatSettings />} />
+          <Route path="bot/:childBotType/lab/:chatBotId" element={<ChatLab />} />
           <Route path="profile" element={<Profile />} />
         </Route>
         <Route path="*" element={<NotFound />} />

@@ -21,10 +21,11 @@ const Header = () => {
     { to: `/bot/${childBotType}/chat/${chatBotId}`, label: 'Chat' },
     { to: `/bot/${childBotType}/dashboard/${chatBotId}`, label: 'Dashboard' },
     { to: `/bot/${childBotType}/chat-settings/${chatBotId}`, label: 'Settings' },
+    { to: `/bot/${childBotType}/lab/${chatBotId}`, label: 'Lab' },
   ];
 
   const pathParts = location.pathname.split('/');
-  const isLinkChatOrDashboard = pathParts.includes('chat') || pathParts.includes('dashboard') || pathParts.includes('chat-settings');
+  const isLinkChatOrDashboard = pathParts.includes('chat') || pathParts.includes('dashboard') || pathParts.includes('chat-settings')|| pathParts.includes('lab');
 
   return (
     <>

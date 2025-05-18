@@ -6,14 +6,13 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 
 interface BotGeneralProps {
-  message: any;
   avatarUrl: string;
   timestamp: string;
   content: JSX.Element;
   isLoading: boolean;
 }
 
-const BotGeneral: React.FC<BotGeneralProps> = ({ message, avatarUrl, timestamp, content, isLoading }) => {
+const BotGeneral: React.FC<BotGeneralProps> = ({ avatarUrl, timestamp, content, isLoading }) => {
   const [isOptionDialogOpen, setIsOptionDialogOpen] = useState(false);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   return (

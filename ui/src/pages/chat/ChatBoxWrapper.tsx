@@ -68,7 +68,6 @@ export const ChatBoxWrapper: React.FC<ChatBoxWrapperProps> = ({ messages, isLoad
               />
             ) : (
               <BotGeneral
-                message={messages[0].message}
                 avatarUrl={avatarUrl}
                 timestamp={messages[0].timestamp}
                 content={messages[0].botResponse}
@@ -88,7 +87,6 @@ export const ChatBoxWrapper: React.FC<ChatBoxWrapperProps> = ({ messages, isLoad
             />
           ) : (
             <BotGeneral
-              message={message.message}
               key={realIndex}
               avatarUrl={avatarUrl}
               timestamp={message.timestamp}
