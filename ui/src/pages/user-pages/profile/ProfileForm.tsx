@@ -11,6 +11,10 @@ import {
   Fade,
   Box,
   Skeleton,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
@@ -25,10 +29,6 @@ const profileSchema = Joi.object({
   firstName: Joi.string().min(2).max(30).required().label("First Name"),
   lastName: Joi.string().min(2).max(30).required().label("Last Name"),
   email: Joi.string().email({ tlds: false }).required().label("Email"),
-  phone: Joi.string()
-    .pattern(/^[0-9]{10}$/)
-    .required()
-    .label("Phone"),
 });
 
 export default function ProfileForm() {
@@ -41,6 +41,20 @@ export default function ProfileForm() {
     uploading: false,
     user: user,
   });
+
+  // Dialog state for verification
+  const [verifyDialog, setVerifyDialog] = useState<{
+    open: boolean;
+    type: "email" | null;
+  }>({ open: false, type: null });
+
+  // OTP state
+  const [otp, setOtp] = useState("");
+  const [otpLoading, setOtpLoading] = useState(false);
+  const [, setOtpSent] = useState(false);
+  const [otpError, setOtpError] = useState("");
+  const [otpSuccess, setOtpSuccess] = useState("");
+  const [resendTimer, setResendTimer] = useState(0);
 
   const showSnackbar = useDynamicSnackbar();
 
@@ -59,7 +73,6 @@ export default function ProfileForm() {
       firstName: profileState.user.firstName || "",
       lastName: profileState.user.lastName || "",
       email: profileState.user.email || "",
-      phone: profileState.user.phone || "",
     },
   });
 
@@ -109,7 +122,7 @@ export default function ProfileForm() {
         return;
       }
       const token = localStorage.getItem("token");
-      const res = await fetch(API_LIST.UPDATE_PROFILE, { // <-- Use API_LIST here
+      const res = await fetch(API_LIST.UPDATE_PROFILE, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -154,7 +167,6 @@ export default function ProfileForm() {
       firstName: profileState.user.firstName || "",
       lastName: profileState.user.lastName || "",
       email: profileState.user.email || "",
-      phone: profileState.user.phone || "",
     });
     setProfileState((prev) => ({ ...prev, loading: false }));
     // eslint-disable-next-line
@@ -163,6 +175,94 @@ export default function ProfileForm() {
   const firstName = watch("firstName");
   const lastName = watch("lastName");
   const email = watch("email");
+
+  // Verification dialog handlers
+  const handleOpenVerifyDialog = (type: "email") => {
+    setVerifyDialog({ open: true, type });
+    setOtp("");
+    setOtpError("");
+    setOtpSuccess("");
+    setOtpSent(false);
+    setResendTimer(0);
+  };
+  const handleCloseVerifyDialog = () => {
+    setVerifyDialog({ open: false, type: null });
+    setOtp("");
+    setOtpError("");
+    setOtpSuccess("");
+    setOtpSent(false);
+    setResendTimer(0);
+  };
+
+  // Send OTP API
+  const handleSendOtp = async () => {
+    setOtpLoading(true);
+    setOtpError("");
+    setOtpSuccess("");
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch(API_LIST.SEND_VERIFICATION_OTP, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await res.json();
+      if (res.ok && data.status === "success") {
+        setOtpSent(true);
+        setOtpSuccess("OTP sent to your email.");
+        setResendTimer(60);
+        showSnackbar("OTP sent to your email.", "success");
+      } else {
+        setOtpError(data.message || "Failed to send OTP.");
+        showSnackbar(data.message || "Failed to send OTP.", "error");
+      }
+    } catch {
+      setOtpError("Network error. Please try again.");
+      showSnackbar("Network error. Please try again.", "error");
+    }
+    setOtpLoading(false);
+  };
+
+  // Resend OTP timer
+  useEffect(() => {
+    if (resendTimer > 0) {
+      const timer = setTimeout(() => setResendTimer(resendTimer - 1), 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [resendTimer]);
+
+  // Verify OTP API
+  const handleVerifyOtp = async () => {
+    setOtpLoading(true);
+    setOtpError("");
+    setOtpSuccess("");
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch(API_LIST.VERIFY_USER_OTP, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ otp }),
+      });
+      const data = await res.json();
+      if (res.ok && data.status === "success") {
+        setOtpSuccess("Email verified successfully!");
+        showSnackbar("Email verified successfully!", "success");
+        setUser({ ...user, isUserVerified: true });
+        handleCloseVerifyDialog();
+      } else {
+        setOtpError(data.message || "Invalid OTP.");
+        showSnackbar(data.message || "Invalid OTP.", "error");
+      }
+    } catch {
+      setOtpError("Network error. Please try again.");
+      showSnackbar("Network error. Please try again.", "error");
+    }
+    setOtpLoading(false);
+  };
 
   return (
     <>
@@ -244,7 +344,6 @@ export default function ProfileForm() {
           <Skeleton variant="rectangular" height={56} sx={{ mb: 2 }} />
           <Skeleton variant="rectangular" height={56} sx={{ mb: 2 }} />
           <Skeleton variant="rectangular" height={56} sx={{ mb: 2 }} />
-          <Skeleton variant="rectangular" height={56} sx={{ mb: 2 }} />
           <Skeleton variant="rectangular" height={48} sx={{ mb: 2 }} />
         </Box>
       ) : (
@@ -288,16 +387,23 @@ export default function ProfileForm() {
                 helperText={errors.email?.message as string}
                 fullWidth
               />
-            </div>
-            <div className="col-12 mb-4">
-              <TextField
-                label="Phone"
-                {...register("phone")}
-                error={!!errors.phone}
-                helperText={errors.phone?.message as string}
-                fullWidth
-                inputProps={{ maxLength: 10 }}
-              />
+              {/* Email verification button if not verified */}
+              {user && user.isUserVerified === false && (
+                <Box sx={{ mt: 1 }}>
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    size="small"
+                    onClick={() => {
+                      handleOpenVerifyDialog("email");
+                      handleSendOtp();
+                    }}
+                    disabled={otpLoading}
+                  >
+                    {otpLoading ? <CircularProgress size={18} /> : "Verify Email"}
+                  </Button>
+                </Box>
+              )}
             </div>
             <div className="col-12">
               <Button
@@ -314,6 +420,60 @@ export default function ProfileForm() {
           </div>
         </form>
       )}
+
+      {/* Verification Dialog */}
+      <Dialog open={verifyDialog.open} onClose={handleCloseVerifyDialog}>
+        <DialogTitle>
+          Verify Email
+        </DialogTitle>
+        <DialogContent>
+          <Typography sx={{ mb: 2 }}>
+            Enter the OTP sent to your email address.
+          </Typography>
+          <TextField
+            label="OTP"
+            value={otp}
+            onChange={e => setOtp(e.target.value)}
+            fullWidth
+            sx={{ mb: 2 }}
+            disabled={otpLoading}
+          />
+          {otpError && (
+            <Alert severity="error" sx={{ mb: 2 }}>
+              {otpError}
+            </Alert>
+          )}
+          {otpSuccess && (
+            <Alert severity="success" sx={{ mb: 2 }}>
+              {otpSuccess}
+            </Alert>
+          )}
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleVerifyOtp}
+            disabled={otpLoading || !otp}
+            fullWidth
+            sx={{ mb: 1 }}
+          >
+            {otpLoading ? <CircularProgress size={20} /> : "Verify"}
+          </Button>
+          <Button
+            variant="text"
+            color="primary"
+            onClick={handleSendOtp}
+            disabled={otpLoading || resendTimer > 0}
+            fullWidth
+          >
+            {resendTimer > 0 ? `Resend OTP in ${resendTimer}s` : "Resend OTP"}
+          </Button>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseVerifyDialog} color="primary">
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 }

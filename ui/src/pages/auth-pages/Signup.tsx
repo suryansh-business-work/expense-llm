@@ -6,17 +6,13 @@ import Joi from "joi";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { Link } from "react-router-dom";
-import API_LIST from "../apiList"; // <-- Add this import at the top (adjust path if needed)
+import API_LIST from "../apiList"; 
 
 // Joi validation schema
 const schema = Joi.object({
   firstName: Joi.string().min(2).max(30).required().label("First Name"),
   lastName: Joi.string().min(2).max(30).required().label("Last Name"),
   email: Joi.string().email({ tlds: false }).required().label("Email"),
-  phone: Joi.string()
-    .pattern(/^[0-9]{10}$/)
-    .required()
-    .label("Phone"),
   password: Joi.string().min(6).max(128).required().label("Password"),
   confirmPassword: Joi.any()
     .valid(Joi.ref("password"))
@@ -125,16 +121,6 @@ export default function Signup() {
               error={!!errors.email}
               helperText={errors.email?.message as string}
               fullWidth
-            />
-          </div>
-          <div className="col-12 mb-3">
-            <TextField
-              label="Phone"
-              {...register("phone")}
-              error={!!errors.phone}
-              helperText={errors.phone?.message as string}
-              fullWidth
-              inputProps={{ maxLength: 10 }}
             />
           </div>
           <div className="col-12 mb-3">

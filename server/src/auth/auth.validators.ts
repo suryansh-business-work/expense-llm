@@ -10,9 +10,6 @@ export class SignupDTO {
   @IsEmail({}, { message: 'Invalid email address' })
   email!: string;
 
-  @Matches(/^\d{10}$/, { message: 'Phone must be a 10 digit number' })
-  phone!: string;
-
   @IsString()
   @Length(6, 128, { message: 'Password must be at least 6 characters' })
   password!: string;

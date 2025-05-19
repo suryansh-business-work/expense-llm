@@ -6,6 +6,8 @@ const API_LIST = {
   RESET_PASSWORD: "http://localhost:3000/auth/reset-password",
   UPDATE_PROFILE: "http://localhost:3000/auth/update-profile",
   UPDATE_PASSWORD: "http://localhost:3000/auth/update-password",
+  SEND_VERIFICATION_OTP: "http://localhost:3000/auth/send-verification-otp",
+  VERIFY_USER_OTP: "http://localhost:3000/auth/verify-otp",
 
   // Bot APIs
   GET_BOTS: "http://localhost:3000/bot/bots",

@@ -7,6 +7,7 @@ import HeaderLogo from './HeaderLogo';
 import HeaderNavLinks from './HeaderNavLinks';
 import HeaderUserMenu from './HeaderUserMenu';
 import HeaderDrawer from './HeaderDrawer';
+import HeaderAlert from './HeaderAlert';
 
 const Header = () => {
   const { botId, childBotType, chatBotId } = useParams();
@@ -28,6 +29,7 @@ const Header = () => {
 
   return (
     <>
+      <HeaderAlert />
       <AppBar position="sticky" sx={{ backgroundColor: '#0c1b32' }}>
         <Toolbar>
           <div className="container-fluid">

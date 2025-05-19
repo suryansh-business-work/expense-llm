@@ -8,24 +8,30 @@ import {
   UpdateProfileDTO,
   UpdatePasswordDTO,
 } from './auth.validators';
-import { UserModel } from './auth.models';
+import { OtpVerificationModel, UserModel } from './auth.models';
 import {
   hashPassword,
   comparePasswords,
   generateToken,
   sendOTP,
+  generateOTP,
 } from './auth.services';
 import {
   successResponse,
   errorResponse,
   noContentResponse,
 } from '../utils/response-object'; // adjust path as needed
+import dayjs from "dayjs";
+import timezone from "dayjs/plugin/timezone";
+import utc from "dayjs/plugin/utc";
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 // Utility to sanitize user object (removes sensitive fields)
 const sanitizeUser = (user: any) => {
   if (!user) return null;
   const { password, __v, _id, ...rest } = user.toObject ? user.toObject() : user;
-  return rest;
+  return rest; 
 };
 
 // --- Auth Controllers ---
@@ -36,11 +42,11 @@ export const signup = async (req: Request, res: Response) => {
     const errors = await validate(dto);
     if (errors.length) return errorResponse(res, errors, 'Validation failed');
 
-    const { firstName, lastName, email, phone, password, confirmPassword } = dto;
+    const { firstName, lastName, email, password, confirmPassword } = dto; // phone removed
     if (password !== confirmPassword)
       return errorResponse(res, null, 'Passwords do not match');
 
-    const existing = await UserModel.findOne({ $or: [{ email }, { phone }] });
+    const existing = await UserModel.findOne({ email }); // phone removed from query
     if (existing)
       return errorResponse(res, null, 'User already exists');
 
@@ -48,8 +54,8 @@ export const signup = async (req: Request, res: Response) => {
       firstName,
       lastName,
       email,
-      phone,
       password: await hashPassword(password),
+      isUserVerified: false,
     });
     await user.save();
 
@@ -91,7 +97,7 @@ export const forgotPasswordStep1 = async (req: Request, res: Response) => {
     const user = await UserModel.findOne({ email: dto.email });
     if (!user) return noContentResponse(res, null, 'User not found');
 
-    const otp = await sendOTP(user.email, user.phone);
+    const otp = await sendOTP(user.email);
     otpStore[user.email] = otp;
 
     return successResponse(res, { user: sanitizeUser(user) }, 'OTP sent');
@@ -192,5 +198,61 @@ export const updatePassword = async (req: Request, res: Response) => {
     return successResponse(res, { user: sanitizeUser(user) }, 'Password updated successfully');
   } catch (err) {
     return errorResponse(res, err, 'Failed to update password');
+  }
+};
+
+export const sendVerificationOtp = async (req: { userId: any; }, res: any) => {
+  try {
+    const userId = req.userId;
+    const user = await UserModel.findOne({ userId });
+    if (!user) return errorResponse(res, null, "User not found");
+    if (user.isUserVerified) return errorResponse(res, null, "User already verified");
+
+    // Remove any existing OTPs for this user
+    await OtpVerificationModel.deleteMany({ userId });
+
+    const otp = generateOTP();
+    await OtpVerificationModel.create({
+      userId,
+      email: user.email,
+      otp,
+      createdAt: dayjs().tz("Asia/Kolkata").toDate(),
+    });
+
+    // TODO: Send OTP via email (implement your email logic here)
+    // await sendOTP(user.email);
+    console.log(user.email, "Your OTP", `Your OTP is ${otp}`);
+
+    return successResponse(res, null, "OTP sent to your email");
+  } catch (err) {
+    return errorResponse(res, err, "Failed to send OTP");
+  }
+};
+
+export const verifyUserOtp = async (req: { userId: any; body: { otp: any; }; }, res: any) => {
+  try {
+    const userId = req.userId;
+    const { otp } = req.body;
+    const otpEntry = await OtpVerificationModel.findOne({ userId });
+
+    if (!otpEntry) return errorResponse(res, null, "OTP expired or not found");
+
+    // Check expiry (10 min)
+    const now = dayjs().tz("Asia/Kolkata");
+    const created = dayjs(otpEntry.createdAt).tz("Asia/Kolkata");
+    if (now.diff(created, "minute") > 10) {
+      await OtpVerificationModel.deleteOne({ userId });
+      return errorResponse(res, null, "OTP expired");
+    }
+
+    if (otpEntry.otp !== otp) return errorResponse(res, null, "Invalid OTP");
+
+    // Mark user as verified
+    await UserModel.updateOne({ userId }, { isUserVerified: true });
+    await OtpVerificationModel.deleteOne({ userId });
+
+    return successResponse(res, null, "User verified successfully");
+  } catch (err) {
+    return errorResponse(res, err, "Failed to verify OTP");
   }
 };
