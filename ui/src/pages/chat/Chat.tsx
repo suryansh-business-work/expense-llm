@@ -93,7 +93,7 @@ const Chat = () => {
       childBotType: childBotType,
       chatBotId: chatBotId,
       userInput: userInput,
-      user: user,
+      userId: user?.userId, 
       timestamp: new Date().toISOString(),
     };
     ws.current.send(JSON.stringify(userMessage));

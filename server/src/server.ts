@@ -10,6 +10,7 @@ import childBotsRoutes from './bots-api/childbot.routes';
 import childBotSettingRoutes from './chat-api/chat-settings-api/bot.settings.routes';
 import childBotLabPromptRoutes from './chat-api/chat-lab-apis/prompt/prompt.routes';
 import { startWebSocketServer } from './chat-api/chat.ws';
+import getChatGptResponseRoutes from './chat-api/chatgpt';
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.use('/auth', authRoutes);
 app.use('/bot', childBotsRoutes);
 app.use('/bot', childBotLabPromptRoutes);
 app.use('/bot', childBotSettingRoutes);
+app.use('/chat-gpt', getChatGptResponseRoutes);
 
 // Chat bot lab APIs
 app.use('/bot', authRoutes);

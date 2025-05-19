@@ -5,7 +5,9 @@ const PromptSchema = new Schema({
   prompt: [
     {
       name: { type: String, required: true },
-      prompt: { type: String, required: true }
+      prompt: { type: String, required: true },
+      output: { type: String, default: "" }, // Store as stringified JSON
+      isUseForChat: { type: Boolean, default: false }
     }
   ]
 });

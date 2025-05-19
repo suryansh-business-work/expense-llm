@@ -1,6 +1,6 @@
 const API_LIST = {
   // Auth APIs
-  LOGIN: "http://localhost:3000/auth/login",
+  LOGIN: "http://localhost:3000/auth/signin",
   SIGNUP: "http://localhost:3000/auth/signup",
   FORGOT_PASSWORD: "http://localhost:3000/auth/forgot-password",
   RESET_PASSWORD: "http://localhost:3000/auth/reset-password",

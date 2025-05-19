@@ -1,7 +1,7 @@
 import { WebSocketServer } from "ws";
 import { getChatGptResponse } from "./chatgpt";
-import { webScrapperPrompt } from "./website-scraper/prompt";
 import { scrapeEmailsFromWebsite, scrapePhonesFromWebsite } from "./website-scraper/website-scraper";
+import { getBotPrompt } from "./chat-lab-apis/prompt/prompt.service";
 
 let wss: WebSocketServer | null = null;
 
@@ -17,15 +17,38 @@ export function startWebSocketServer() {
     wss.on("connection", (ws) => {
       ws.on("message", async (message) => {
         let userInput = "";
+        let chatBotId = "";
+        let userId = "";
         try {
           const parsed = JSON.parse(message.toString());
           userInput = parsed.userInput || message.toString();
+          chatBotId = parsed.chatBotId || "";
+          userId = parsed.userId || "";
         } catch {
           userInput = message.toString();
         }
 
-        // Use the helper function to get the response
-        const botMessageRaw = await getChatGptResponse(`${webScrapperPrompt} User Input: ${userInput}`);
+        // Get prompt string using bot id
+        let promptString = "";
+        if (chatBotId) {
+          try {
+            const promptDoc = await getBotPrompt(chatBotId);
+            // promptDoc.prompt is an array, you can join or pick as needed
+            if (promptDoc && Array.isArray(promptDoc.prompt) && promptDoc.prompt.length > 0) {
+              // Example: join all prompt strings with newlines
+              promptString = promptDoc.prompt.map((p: any) => p.prompt).join("\n");
+            }
+          } catch (e) {
+            console.error("Failed to fetch prompt for bot:", chatBotId, e);
+          }
+        }
+
+        // You can now use chatBotId, userId, and promptString in your logic
+        console.log("Received from client:", { chatBotId, userId, userInput, promptString });
+
+        // Use the helper function to get the response, including the prompt string
+        const botMessageRaw = await getChatGptResponse(`${promptString}\nUser Input: ${userInput}`);
+        console.log("`${promptString}\nUser Input: ${userInput}`", `${promptString}\nUser Input: ${userInput}`);
         if (botMessageRaw === undefined) {
           ws.send(JSON.stringify({ error: "Failed to get a response from the AI." }));  
         } else {

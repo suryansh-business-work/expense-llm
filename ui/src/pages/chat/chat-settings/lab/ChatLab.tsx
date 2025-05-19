@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { Box, Tabs, Tab, Paper } from "@mui/material";
-import PromptSection from "./PromptSection";
+import PromptSection from "./prompt-management/PromptSection";
 import FunctionsSection from "./FunctionsSection";
-import OutputSection from "./OutputSection";
 
 const ChatLab = () => {
   const [tab, setTab] = useState(0);
@@ -22,13 +21,11 @@ const ChatLab = () => {
               >
                 <Tab label="Prompt" />
                 <Tab label="Functions" />
-                <Tab label="Output" />
               </Tabs>
               {/* Tab Panels */}
               <Box sx={{ flex: 1, pl: 3 }}>
                 {tab === 0 && <PromptSection />}
                 {tab === 1 && <FunctionsSection />}
-                {tab === 2 && <OutputSection />}
               </Box>
             </Box>
           </Paper>
