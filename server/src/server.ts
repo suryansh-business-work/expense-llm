@@ -3,6 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import { connectDB } from '../db/db';
 
+import bodyParser from 'body-parser';
 // Models Import
 import dayjs from 'dayjs';
 import authRoutes from './auth/auth.routes';
@@ -11,6 +12,8 @@ import childBotSettingRoutes from './chat-api/chat-settings-api/bot.settings.rou
 import childBotLabPromptRoutes from './chat-api/chat-lab-apis/prompt/prompt.routes';
 import { startWebSocketServer } from './chat-api/chat.ws';
 import getChatGptResponseRoutes from './chat-api/chatgpt';
+import imageKitUploadRoutes from './upload/upload.routes';
+import fileUpload from 'express-fileupload'
 
 const app = express();
 
@@ -22,12 +25,24 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+app.use(
+  fileUpload({
+    limits: { fileSize: 999 * 1024 * 1024 }
+    // safeFileNames: true,
+    // preserveExtension: true,
+    // useTempFiles : false,
+    // tempFileDir : 'uploads/'
+  })
+)
 
 app.use('/auth', authRoutes);
 app.use('/bot', childBotsRoutes);
 app.use('/bot', childBotLabPromptRoutes);
 app.use('/bot', childBotSettingRoutes);
 app.use('/chat-gpt', getChatGptResponseRoutes);
+app.use('/v1/api', imageKitUploadRoutes);
 
 // Chat bot lab APIs
 app.use('/bot', authRoutes);

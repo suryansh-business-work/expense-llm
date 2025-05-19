@@ -9,7 +9,7 @@ const HeaderUserMenu = () => {
   const firstName = user?.firstName || '';
   const lastName = user?.lastName || '';
   const fullName = [firstName, lastName].filter(Boolean).join(' ');
-  const profilePic = user?.profilePic || '/user-avatar.jpg';
+  const avatarPic = user?.profileImage;
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const navigate = useNavigate();
@@ -45,7 +45,7 @@ const HeaderUserMenu = () => {
         </Typography>
       )}
       <IconButton onClick={handleAvatarClick} sx={{ p: 0 }}>
-        <Avatar alt="User" src={profilePic} />
+        <Avatar alt="User" src={avatarPic} />
       </IconButton>
       <Menu
         anchorEl={anchorEl}

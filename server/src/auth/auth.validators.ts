@@ -17,6 +17,10 @@ export class SignupDTO {
   @IsString()
   @Length(6, 128, { message: 'Confirm password must be at least 6 characters' })
   confirmPassword!: string;
+
+  @IsOptional()
+  @IsString()
+  profileImage?: string;
 }
 
 export class SigninDTO {
@@ -61,8 +65,8 @@ export class UpdateProfileDTO {
   email?: string;
 
   @IsOptional()
-  @Matches(/^\d{10}$/)
-  phone?: string;
+  @IsString()
+  profileImage?: string;
 }
 
 export class UpdatePasswordDTO {

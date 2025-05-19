@@ -81,20 +81,41 @@ export default function ProfileForm() {
     fileInputRef.current?.click();
   };
 
-  const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // Add this function to handle image upload to ImageKit
+  const handleProfileImageUpload = async (file: File) => {
+    const formData = new FormData();
+    formData.append("files", file);
+
+    const res = await fetch("http://localhost:3000/v1/api/imagekit/upload", {
+      method: "POST",
+      body: formData,
+    });
+    const data = await res.json();
+    if (res.ok && data.status === "success" && Array.isArray(data.data) && data.data[0]?.filePath?.fileUrl) {
+      return data.data[0].filePath.fileUrl;
+    } else {
+      throw new Error(data.message || "Failed to upload image");
+    }
+  };
+
+  // Update handleAvatarChange to upload and set profileImage
+  const handleAvatarChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       setProfileState((prev) => ({ ...prev, uploading: true }));
-      const reader = new FileReader();
-      reader.onload = () => {
+      try {
+        const fileUrl = await handleProfileImageUpload(file);
         setProfileState((prev) => ({
           ...prev,
-          avatar: reader.result as string,
+          avatar: fileUrl,
           uploading: false,
         }));
-        // TODO: Upload to server here if needed
-      };
-      reader.readAsDataURL(file);
+        // Optionally, update immediately in the backend:
+        // await onSubmitProfile({ ...profileState.user, profileImage: fileUrl });
+      } catch (err: any) {
+        setProfileState((prev) => ({ ...prev, uploading: false }));
+        showSnackbar(err.message || "Failed to upload image", "error");
+      }
     }
   };
 
@@ -107,11 +128,14 @@ export default function ProfileForm() {
       success: "",
     }));
     try {
-      // Only send changed fields
       const changedFields: any = {};
       Object.keys(form).forEach((key) => {
         if (form[key] !== profileState.user[key]) changedFields[key] = form[key];
       });
+      // Only send profileImage if avatar is set and changed
+      if (profileState.avatar && profileState.avatar !== profileState.user.profileImage) {
+        changedFields.profileImage = profileState.avatar; // avatar is already the fileUrl
+      }
       if (Object.keys(changedFields).length === 0) {
         setProfileState((prev) => ({
           ...prev,
@@ -284,7 +308,11 @@ export default function ProfileForm() {
             >
               <Fade in={!profileState.uploading}>
                 <Avatar
-                  src={profileState.avatar || profileState.user.profilePic || undefined}
+                  src={
+                    profileState.avatar ||
+                    profileState.user.profileImage || // <-- Use profileImage from user context
+                    undefined
+                  }
                   sx={{
                     width: 72,
                     height: 72,
@@ -386,6 +414,7 @@ export default function ProfileForm() {
                 error={!!errors.email}
                 helperText={errors.email?.message as string}
                 fullWidth
+                disabled // <-- Make email field disabled
               />
               {/* Email verification button if not verified */}
               {user && user.isUserVerified === false && (

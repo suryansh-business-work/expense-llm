@@ -13,13 +13,13 @@ export interface UserContextType {
   createdAt?: string;
   updatedAt?: string;
   timezone?: string;
-  profilePic?: string;
+  profileImage?: string;
   [key: string]: any;
 }
 
 const defaultUser: UserContextType = {
   timezone: DEFAULT_TIMEZONE,
-  profilePic: DEFAULT_PROFILE_PIC,
+  profileImage: DEFAULT_PROFILE_PIC,
 };
 
 const UserContext = createContext<{
@@ -35,7 +35,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const stored = localStorage.getItem(USER_KEY);
     let userObj: UserContextType = stored ? JSON.parse(stored) : {};
     if (!userObj.timezone) userObj.timezone = DEFAULT_TIMEZONE;
-    if (!userObj.profilePic) userObj.profilePic = DEFAULT_PROFILE_PIC;
+    if (!userObj.profileImage) userObj.profileImage = DEFAULT_PROFILE_PIC;
     return userObj;
   });
 

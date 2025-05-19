@@ -8,6 +8,7 @@ const userSchema = new Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   isUserVerified: { type: Boolean, default: false },
+  profileImage: { type: String, default: "https://ik.imagekit.io/esdata1/botify/botify-logo-1_j7vjRlSiwH.png" }, // <-- add this line
 }, { timestamps: true });
 
 const otpVerificationSchema = new Schema({

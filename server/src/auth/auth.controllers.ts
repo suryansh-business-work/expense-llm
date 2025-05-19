@@ -42,7 +42,7 @@ export const signup = async (req: Request, res: Response) => {
     const errors = await validate(dto);
     if (errors.length) return errorResponse(res, errors, 'Validation failed');
 
-    const { firstName, lastName, email, password, confirmPassword } = dto; // phone removed
+    const { firstName, lastName, email, password, confirmPassword, profileImage } = dto; // phone removed
     if (password !== confirmPassword)
       return errorResponse(res, null, 'Passwords do not match');
 
@@ -56,6 +56,7 @@ export const signup = async (req: Request, res: Response) => {
       email,
       password: await hashPassword(password),
       isUserVerified: false,
+      profileImage: profileImage || 'https://ik.imagekit.io/esdata1/botify/botify-logo-1_j7vjRlSiwH.png', // allow custom or default
     });
     await user.save();
 
@@ -79,7 +80,10 @@ export const signin = async (req: Request, res: Response) => {
       return errorResponse(res, null, 'Invalid credentials');
 
     const token = generateToken(user.userId);
-    return successResponse(res, { token, user: sanitizeUser(user) }, 'Signin successful');
+    return successResponse(res, {
+      token,
+      user: sanitizeUser(user),
+    }, 'Login successful');
   } catch (err) {
     return errorResponse(res, err, 'Signin failed');
   }
@@ -151,8 +155,7 @@ export const updateProfile = async (req: Request, res: Response) => {
     const dto = Object.assign(new UpdateProfileDTO(), req.body);
     const errors = await validate(dto, { skipMissingProperties: true });
     if (errors.length) return errorResponse(res, errors, 'Validation failed');
-
-    const allowedUpdates = ['firstName', 'lastName', 'email', 'phone'];
+    const allowedUpdates = ['firstName', 'lastName', 'email', 'profileImage'];
     const updateData: any = {};
     for (const key of allowedUpdates) {
       if (req.body[key]) {
