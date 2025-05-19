@@ -29,3 +29,4 @@ dist-ssr
 
 # dotenv files (keep .env only if needed for default values)
 .env
+.env.*

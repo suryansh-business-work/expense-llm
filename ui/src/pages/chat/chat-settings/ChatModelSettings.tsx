@@ -7,6 +7,7 @@ import {
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import API_LIST from "../../apiList"; // <-- Add this import at the top (adjust path if needed)
 
 const schema = Joi.object({
   model: Joi.string().required(),
@@ -99,7 +100,7 @@ const ChatModelSettings = () => {
       setLoading(true);
       try {
         const res = await axios.get(
-          `http://localhost:3000/bot/chat-setting/${chatBotId}`,
+          API_LIST.GET_CHAT_SETTING(chatBotId), // <-- Use API_LIST here
           {
             headers: {
               "Content-Type": "application/json",
@@ -150,7 +151,7 @@ const ChatModelSettings = () => {
     setSaving(true);
     try {
       await axios.patch(
-        `http://localhost:3000/bot/chat-setting/${chatBotId}`,
+        API_LIST.UPDATE_CHAT_SETTING(chatBotId), // <-- Use API_LIST here
         payload,
         {
           headers: {

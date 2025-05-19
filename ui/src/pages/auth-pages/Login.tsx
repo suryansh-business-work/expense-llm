@@ -7,6 +7,7 @@ import Joi from "joi";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useUserContext } from "../../providers/UserProvider";
+import API_LIST from "../apiList";
 
 // Joi validation schema
 const schema = Joi.object({
@@ -35,7 +36,7 @@ export default function Login() {
     setLoading(true);
     setErrorMsg("");
     try {
-      const res = await fetch("http://localhost:3000/auth/signin", {
+      const res = await fetch(API_LIST.LOGIN, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),

@@ -19,6 +19,7 @@ import {
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import API_LIST from "../../apiList";
 
 const schema = Joi.object({
   font: Joi.string().required(),
@@ -69,7 +70,7 @@ const ChatAppearanceSettings = () => {
       setLoading(true);
       try {
         const res = await axios.get(
-          `http://localhost:3000/bot/chat-setting/${chatBotId}`,
+          API_LIST.GET_CHAT_SETTING(chatBotId),
           {
             headers: {
               "Content-Type": "application/json",
@@ -140,7 +141,7 @@ const ChatAppearanceSettings = () => {
     setSaving(true);
     try {
       await axios.patch(
-        `http://localhost:3000/bot/chat-setting/${chatBotId}`,
+        API_LIST.UPDATE_CHAT_SETTING(chatBotId),
         payload,
         {
           headers: {

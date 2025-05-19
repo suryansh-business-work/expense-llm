@@ -17,6 +17,7 @@ import CreateChildBotDialog from "./CreateChildBotDialog";
 import DeleteChildBotDialog from "./DeleteChildBotDialog";
 import UpdateChildBotDialog from "./UpdateChildBotDialog";
 import { getBotPageByUrl } from "../data/BotPagesData";
+import API_LIST from "../apiList"; 
 
 const ChildBots = () => {
   const { childBotType } = useParams<{ childBotType: string }>();
@@ -45,7 +46,7 @@ const ChildBots = () => {
       setLoading(true);
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch("http://localhost:3000/bot/child-bots", {
+        const res = await fetch(API_LIST.GET_CHILD_BOTS, { // <-- Use API_LIST here
           method: "POST",
           headers: {
             "Content-Type": "application/json",

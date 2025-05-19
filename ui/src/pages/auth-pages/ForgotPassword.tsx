@@ -18,6 +18,7 @@ import { joiResolver } from "@hookform/resolvers/joi";
 import Joi from "joi";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import API_LIST from "../apiList"; 
 
 // Step 1: Email schema
 const emailSchema = Joi.object({
@@ -74,7 +75,7 @@ export default function ForgotPassword() {
     setErrorMsg("");
     setSuccessMsg("");
     try {
-      const res = await fetch("http://localhost:3000/auth/forgot-password", {
+      const res = await fetch(API_LIST.FORGOT_PASSWORD, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: form.email }),
@@ -102,7 +103,7 @@ export default function ForgotPassword() {
     setErrorMsg("");
     setSuccessMsg("");
     try {
-      const res = await fetch("http://localhost:3000/auth/reset-password", {
+      const res = await fetch(API_LIST.RESET_PASSWORD, { // <-- Use API_LIST here
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

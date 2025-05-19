@@ -8,6 +8,7 @@ import dayjs from 'dayjs';
 import authRoutes from './auth/auth.routes';
 import childBotsRoutes from './bots-api/childbot.routes';
 import childBotSettingRoutes from './chat-api/chat-settings-api/bot.settings.routes';
+import childBotLabPromptRoutes from './chat-api/chat-lab-apis/prompt/prompt.routes';
 import { startWebSocketServer } from './chat-api/chat.ws';
 
 const app = express();
@@ -23,7 +24,11 @@ app.use(express.static('public'));
 
 app.use('/auth', authRoutes);
 app.use('/bot', childBotsRoutes);
+app.use('/bot', childBotLabPromptRoutes);
 app.use('/bot', childBotSettingRoutes);
+
+// Chat bot lab APIs
+app.use('/bot', authRoutes);
 
 // Routes
 app.get('/healthcheck', (_req, res) => {

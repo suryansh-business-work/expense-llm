@@ -6,6 +6,7 @@ import Joi from "joi";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { Link } from "react-router-dom";
+import API_LIST from "../apiList"; // <-- Add this import at the top (adjust path if needed)
 
 // Joi validation schema
 const schema = Joi.object({
@@ -46,7 +47,7 @@ export default function Signup() {
     setErrorMsg("");
     setSuccessMsg("");
     try {
-      const res = await fetch("http://localhost:3000/auth/signup", {
+      const res = await fetch(API_LIST.SIGNUP, { // <-- Use API_LIST here
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
