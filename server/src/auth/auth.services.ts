@@ -12,17 +12,11 @@ export const generateToken = (userId: string) => jwt.sign({ userId }, 'SECRET_KE
 
 export const generateOTP = () => Math.floor(100000 + Math.random() * 900000).toString();
 
-export const sendOTP = async (email: string) => {
-  const otp = generateOTP();
-  console.log(`Send OTP ${otp} to email ${email}`);
-  return otp;
-};
-
 export const verifyGoogleToken = async (token: string) => {
   const ticket = await client.verifyIdToken({
     idToken: token,
     audience: process.env.GOOGLE_CLIENT_ID,
   });
   const payload = ticket.getPayload();
-  return payload; // contains email, name, picture, etc.
+  return payload;
 };

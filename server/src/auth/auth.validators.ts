@@ -21,6 +21,10 @@ export class SignupDTO {
   @IsOptional()
   @IsString()
   profileImage?: string;
+
+  @IsOptional()
+  @IsString()
+  role?: 'general' | 'dev' | 'admin'; 
 }
 
 export class SigninDTO {

@@ -13,7 +13,6 @@ import {
   hashPassword,
   comparePasswords,
   generateToken,
-  sendOTP,
   generateOTP,
   verifyGoogleToken,
 } from './auth.services';
@@ -43,11 +42,11 @@ export const signup = async (req: Request, res: Response) => {
     const errors = await validate(dto);
     if (errors.length) return errorResponse(res, errors, 'Validation failed');
 
-    const { firstName, lastName, email, password, confirmPassword, profileImage } = dto; // phone removed
+    const { firstName, lastName, email, password, confirmPassword, profileImage, role } = dto;
     if (password !== confirmPassword)
       return errorResponse(res, null, 'Passwords do not match');
 
-    const existing = await UserModel.findOne({ email }); // phone removed from query
+    const existing = await UserModel.findOne({ email });
     if (existing)
       return errorResponse(res, null, 'User already exists');
 
@@ -57,7 +56,8 @@ export const signup = async (req: Request, res: Response) => {
       email,
       password: await hashPassword(password),
       isUserVerified: false,
-      profileImage: profileImage || 'https://ik.imagekit.io/esdata1/botify/botify-logo-1_j7vjRlSiwH.png', // allow custom or default
+      profileImage: profileImage || 'https://ik.imagekit.io/esdata1/botify/botify-logo-1_j7vjRlSiwH.png',
+      role: role || "general", // <-- set role, default to general
     });
     await user.save();
 
@@ -107,7 +107,8 @@ export const forgotPasswordStep1 = async (req: Request, res: Response) => {
     const user = await UserModel.findOne({ email: dto.email });
     if (!user) return noContentResponse(res, null, 'User not found');
 
-    const otp = await sendOTP(user.email);
+    const otp = generateOTP();
+    console.log(user.email, "Your OTP", `Your OTP is ${otp}`);
     otpStore[user.email] = otp;
 
     return successResponse(res, { user: sanitizeUser(user) }, 'OTP sent');
@@ -266,9 +267,10 @@ export const verifyUserOtp = async (req: { userId: any; body: { otp: any; }; }, 
   }
 };
 
+// For Google signup
 export const signupWithGoogle = async (req: Request, res: Response) => {
   try {
-    const { credential } = req.body;
+    const { credential, role } = req.body; // <-- accept role from body
     if (!credential) return errorResponse(res, null, "Missing Google credential");
 
     const payload = await verifyGoogleToken(credential);
@@ -290,6 +292,7 @@ export const signupWithGoogle = async (req: Request, res: Response) => {
       isUserVerified: true,
       profileImage: payload.picture,
       password: undefined, // No password for Google users
+      role: role || "general", // <-- set role, default to general
     });
     await user.save();
 
