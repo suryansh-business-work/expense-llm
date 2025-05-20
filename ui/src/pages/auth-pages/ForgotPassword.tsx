@@ -12,13 +12,14 @@ import {
   InputAdornment,
   IconButton,
   Link as MuiLink,
+  Card,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import Joi from "joi";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import API_LIST from "../apiList"; 
+import API_LIST from "../apiList";
 
 // Step 1: Email schema
 const emailSchema = Joi.object({
@@ -130,155 +131,167 @@ export default function ForgotPassword() {
   };
 
   return (
-    <div className="container" style={{ maxWidth: 500, marginTop: 48 }}>
-      <div className="row mb-4">
-        <div className="col-12 text-center">
-          <img
-            src="/logo/botify-logo-dark.svg"
-            alt="Botify Your Life"
-            width={120}
-            style={{ marginBottom: 8 }}
-          />
-        </div>
-      </div>
-      <Box sx={{ width: "100%", mb: 3 }}>
-        <Stepper activeStep={activeStep} alternativeLabel>
-          {steps.map((label) => (
-            <Step key={label}>
-              <StepLabel>{label}</StepLabel>
-            </Step>
-          ))}
-        </Stepper>
-      </Box>
-      {errorMsg && (
-        <div className="row mb-2">
-          <div className="col-12">
-            <Alert severity="error">{errorMsg}</Alert>
+    <div className="container" style={{ maxWidth: 600, marginTop: 48 }}>
+      <Card
+        sx={{
+          backgroundColor: '#ffffff',
+          borderRadius: '12px',
+          boxShadow: '0 12px 24px rgba(0, 0, 0, 0.05)',
+          maxWidth: '900px',
+          transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+          padding: 4,
+        }}
+        className="bot-card"
+        tabIndex={0}
+      >
+        <div className="row mb-4">
+          <div className="col-12 text-center">
+            <img
+              src="/logo/botify-logo-dark.svg"
+              alt="Botify Your Life"
+              width={120}
+              style={{ marginBottom: 8 }}
+            />
           </div>
         </div>
-      )}
-      {successMsg && (
-        <div className="row mb-2">
-          <div className="col-12">
-            <Alert severity="success">{successMsg}</Alert>
-          </div>
-        </div>
-      )}
-      {activeStep === 0 && (
-        <form onSubmit={handleSubmitEmail(onSubmitEmail)} autoComplete="off">
-          <div className="row">
-            <div className="col-12 mb-3">
-              <TextField
-                label="Email"
-                type="email"
-                {...registerEmail("email")}
-                error={!!emailErrors.email}
-                helperText={emailErrors.email?.message as string}
-                fullWidth
-                autoFocus
-              />
-            </div>
+        <Box sx={{ width: "100%", mb: 3 }}>
+          <Stepper activeStep={activeStep} alternativeLabel>
+            {steps.map((label) => (
+              <Step key={label}>
+                <StepLabel>{label}</StepLabel>
+              </Step>
+            ))}
+          </Stepper>
+        </Box>
+        {errorMsg && (
+          <div className="row mb-2">
             <div className="col-12">
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                fullWidth
-                disabled={loading}
-                sx={{ py: 1.5 }}
-              >
-                {loading ? <CircularProgress size={24} /> : "Send OTP"}
-              </Button>
+              <Alert severity="error">{errorMsg}</Alert>
             </div>
           </div>
-          <div className="row mt-3">
-            <div className="col-12 text-center">
-              <span>
-                Remember your password?{" "}
-                <MuiLink component={Link} to="/login">
-                  Sign In
-                </MuiLink>
-              </span>
-            </div>
-          </div>
-        </form>
-      )}
-      {activeStep === 1 && (
-        <form onSubmit={handleSubmitReset(onSubmitReset)} autoComplete="off">
-          <div className="row">
-            <div className="col-12 mb-3">
-              <TextField
-                label="OTP"
-                {...registerReset("otp")}
-                error={!!resetErrors.otp}
-                helperText={resetErrors.otp?.message as string}
-                fullWidth
-                autoFocus
-              />
-            </div>
-            <div className="col-12 mb-3">
-              <TextField
-                label="New Password"
-                type={showNewPassword ? "text" : "password"}
-                {...registerReset("newPassword")}
-                error={!!resetErrors.newPassword}
-                helperText={resetErrors.newPassword?.message as string}
-                fullWidth
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label={showNewPassword ? "Hide password" : "Show password"}
-                        onClick={() => setShowNewPassword((show) => !show)}
-                        edge="end"
-                        tabIndex={-1}
-                      >
-                        {showNewPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </div>
-            <div className="col-12 mb-4">
-              <TextField
-                label="Confirm Password"
-                type={showConfirm ? "text" : "password"}
-                {...registerReset("confirmPassword")}
-                error={!!resetErrors.confirmPassword}
-                helperText={resetErrors.confirmPassword?.message as string}
-                fullWidth
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label={showConfirm ? "Hide password" : "Show password"}
-                        onClick={() => setShowConfirm((show) => !show)}
-                        edge="end"
-                        tabIndex={-1}
-                      >
-                        {showConfirm ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </div>
+        )}
+        {successMsg && (
+          <div className="row mb-2">
             <div className="col-12">
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                fullWidth
-                disabled={loading}
-                sx={{ py: 1.5 }}
-              >
-                {loading ? <CircularProgress size={24} /> : "Reset Password"}
-              </Button>
+              <Alert severity="success">{successMsg}</Alert>
             </div>
           </div>
-        </form>
-      )}
+        )}
+        {activeStep === 0 && (
+          <form onSubmit={handleSubmitEmail(onSubmitEmail)} autoComplete="off">
+            <div className="row">
+              <div className="col-12 mb-3">
+                <TextField
+                  label="Email"
+                  type="email"
+                  {...registerEmail("email")}
+                  error={!!emailErrors.email}
+                  helperText={emailErrors.email?.message as string}
+                  fullWidth
+                />
+              </div>
+              <div className="col-12">
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                  disabled={loading}
+                  sx={{ py: 1.5 }}
+                >
+                  {loading ? <CircularProgress size={24} /> : "Send OTP"}
+                </Button>
+              </div>
+            </div>
+            <div className="row mt-3">
+              <div className="col-12 text-center">
+                <span>
+                  Remember your password?{" "}
+                  <MuiLink component={Link} to="/login">
+                    Sign In
+                  </MuiLink>
+                </span>
+              </div>
+            </div>
+          </form>
+        )}
+        {activeStep === 1 && (
+          <form onSubmit={handleSubmitReset(onSubmitReset)} autoComplete="off">
+            <div className="row">
+              <div className="col-12 mb-3">
+                <TextField
+                  label="OTP"
+                  {...registerReset("otp")}
+                  error={!!resetErrors.otp}
+                  helperText={resetErrors.otp?.message as string}
+                  fullWidth
+                  autoFocus
+                />
+              </div>
+              <div className="col-12 mb-3">
+                <TextField
+                  label="New Password"
+                  type={showNewPassword ? "text" : "password"}
+                  {...registerReset("newPassword")}
+                  error={!!resetErrors.newPassword}
+                  helperText={resetErrors.newPassword?.message as string}
+                  fullWidth
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label={showNewPassword ? "Hide password" : "Show password"}
+                          onClick={() => setShowNewPassword((show) => !show)}
+                          edge="end"
+                          tabIndex={-1}
+                        >
+                          {showNewPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              </div>
+              <div className="col-12 mb-4">
+                <TextField
+                  label="Confirm Password"
+                  type={showConfirm ? "text" : "password"}
+                  {...registerReset("confirmPassword")}
+                  error={!!resetErrors.confirmPassword}
+                  helperText={resetErrors.confirmPassword?.message as string}
+                  fullWidth
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label={showConfirm ? "Hide password" : "Show password"}
+                          onClick={() => setShowConfirm((show) => !show)}
+                          edge="end"
+                          tabIndex={-1}
+                        >
+                          {showConfirm ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              </div>
+              <div className="col-12">
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                  disabled={loading}
+                  sx={{ py: 1.5 }}
+                >
+                  {loading ? <CircularProgress size={24} /> : "Reset Password"}
+                </Button>
+              </div>
+            </div>
+          </form>
+        )}
+      </Card>
     </div>
   );
 }

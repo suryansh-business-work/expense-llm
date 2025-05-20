@@ -112,24 +112,26 @@ const PromptAccordionItem = ({
                 label="Use for chat"
                 sx={{ mr: 2, userSelect: "none" }}
               />
-              <IconButton
-                aria-label="delete"
-                color="error"
-                onClick={e => {
-                  e.stopPropagation();
-                  handleDeletePrompt(idx);
-                }}
-                disabled={fields.length === 1}
-                size="small"
-              >
-                <Delete />
-              </IconButton>
             </div>
           </div>
         </div>
       </AccordionSummary>
       <AccordionDetails>
         <div className="row">
+          <div className="col-12 col-md-12 mb-3">
+            <IconButton
+              aria-label="delete"
+              color="error"
+              onClick={e => {
+                e.stopPropagation();
+                handleDeletePrompt(idx);
+              }}
+              disabled={fields.length === 1}
+              size="small"
+            >
+              <Delete />
+            </IconButton>
+          </div>
           <div className="col-12 col-md-6 mb-3">
             <Controller
               name={`prompt.${idx}.name`}

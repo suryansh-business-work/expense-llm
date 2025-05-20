@@ -10,7 +10,6 @@ import {
   IconButton,
   Chip,
 } from '@mui/material';
-import { Helmet } from 'react-helmet-async';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Popover from '@mui/material/Popover';
 import CreateChildBotDialog from "./CreateChildBotDialog";
@@ -119,9 +118,6 @@ const ChildBots = () => {
 
   return (
     <Box sx={{ padding: 4 }}>
-      <Helmet>
-        <title>Child Bots - Bot Management</title>
-      </Helmet>
       <Box sx={{ maxWidth: 1200, margin: '0 auto' }}>
         {/* Header and Create Button */}
         <div className="row mb-3 align-items-center">

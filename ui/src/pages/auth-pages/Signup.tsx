@@ -1,12 +1,13 @@
 import { useState } from "react";
-import { TextField, Button, Alert, CircularProgress, IconButton, InputAdornment, Link as MuiLink } from "@mui/material";
+import { TextField, Button, Alert, CircularProgress, IconButton, InputAdornment, Link as MuiLink, Divider, Checkbox, FormControlLabel, Card } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import Joi from "joi";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { Link } from "react-router-dom";
-import API_LIST from "../apiList"; 
+import API_LIST from "../apiList";
+import { GoogleLogin } from '@react-oauth/google';
 
 // Joi validation schema
 const schema = Joi.object({
@@ -27,6 +28,7 @@ export default function Signup() {
   const [errorMsg, setErrorMsg] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
 
   const {
     register,
@@ -39,6 +41,10 @@ export default function Signup() {
   });
 
   const onSubmit = async (form: any) => {
+    if (!acceptedTerms) {
+      setErrorMsg("You must accept the Terms and Conditions to sign up.");
+      return;
+    }
     setLoading(true);
     setErrorMsg("");
     setSuccessMsg("");
@@ -61,147 +67,223 @@ export default function Signup() {
     setLoading(false);
   };
 
+  // Handler for Google signup success
+  const handleGoogleSignupSuccess = async (credentialResponse: any) => {
+    try {
+      // Send credentialResponse.credential to your backend for verification and signup/login
+      const res = await fetch(API_LIST.GOOGLE_LOGIN, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ credential: credentialResponse.credential }),
+      });
+      const data = await res.json();
+      if (res.ok && data.status === "success") {
+        setSuccessMsg("Signup successful! You can now sign in.");
+        // Optionally, auto-login:
+        // localStorage.setItem("token", data.data.token);
+        // localStorage.setItem("user", JSON.stringify(data.data.user));
+        // setUser(data.data.user);
+        // navigate("/bots");
+      } else {
+        setErrorMsg(data.message || "Google signup failed");
+      }
+    } catch (err) {
+      setErrorMsg("Google signup error. Please try again.");
+    }
+  };
+
+  // Handler for Google signup error
+  const handleGoogleSignupError = () => {
+    setErrorMsg("Google signup was unsuccessful. Please try again.");
+  };
+
   return (
-    <div className="container" style={{ maxWidth: 500, marginTop: 48 }}>
-      <div className="row mb-4">
-        <div className="col-12 text-center">
-          <img
-            src="/logo/botify-logo-dark.svg"
-            alt="Botify Your Life"
-            width={120}
-            style={{ marginBottom: 8 }}
-          />
-        </div>
-      </div>
-      <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
-        <div className="row mb-3">
-          <div className="col-12">
-            <h2>Sign Up</h2>
-          </div>
-        </div>
-        {errorMsg && (
-          <div className="row mb-2">
-            <div className="col-12">
-              <Alert severity="error">{errorMsg}</Alert>
-            </div>
-          </div>
-        )}
-        {successMsg && (
-          <div className="row mb-2">
-            <div className="col-12">
-              <Alert severity="success">{successMsg}</Alert>
-            </div>
-          </div>
-        )}
-        <div className="row">
-          <div className="col-6 mb-3">
-            <TextField
-              label="First Name"
-              {...register("firstName")}
-              error={!!errors.firstName}
-              helperText={errors.firstName?.message as string}
-              fullWidth
-              autoFocus
-            />
-          </div>
-          <div className="col-6 mb-3">
-            <TextField
-              label="Last Name"
-              {...register("lastName")}
-              error={!!errors.lastName}
-              helperText={errors.lastName?.message as string}
-              fullWidth
-            />
-          </div>
-          <div className="col-12 mb-3">
-            <TextField
-              label="Email"
-              type="email"
-              {...register("email")}
-              error={!!errors.email}
-              helperText={errors.email?.message as string}
-              fullWidth
-            />
-          </div>
-          <div className="col-12 mb-3">
-            <TextField
-              label="Password"
-              type={showPassword ? "text" : "password"}
-              {...register("password")}
-              error={!!errors.password}
-              helperText={errors.password?.message as string}
-              fullWidth
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label={showPassword ? "Hide password" : "Show password"}
-                      onClick={() => setShowPassword((show) => !show)}
-                      edge="end"
-                      tabIndex={-1}
-                    >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-            />
-          </div>
-          <div className="col-12 mb-4">
-            <TextField
-              label="Confirm Password"
-              type={showConfirm ? "text" : "password"}
-              {...register("confirmPassword")}
-              error={!!errors.confirmPassword}
-              helperText={errors.confirmPassword?.message as string}
-              fullWidth
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label={showConfirm ? "Hide password" : "Show password"}
-                      onClick={() => setShowConfirm((show) => !show)}
-                      edge="end"
-                      tabIndex={-1}
-                    >
-                      {showConfirm ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-            />
-          </div>
-          <div className="col-12">
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              fullWidth
-              disabled={loading}
-              sx={{ py: 1.5 }}
-            >
-              {loading ? <CircularProgress size={24} /> : "Sign Up"}
-            </Button>
-          </div>
-        </div>
-        <div className="row mt-3">
+    <div className="container" style={{ maxWidth: 600, marginTop: 48 }}>
+      <Card
+        sx={{
+          backgroundColor: '#ffffff',
+          borderRadius: '12px',
+          boxShadow: '0 12px 24px rgba(0, 0, 0, 0.05)',
+          maxWidth: '900px',
+          transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+          padding: 4,
+        }}
+        className="bot-card"
+        tabIndex={0}
+      >
+        <div className="row mb-4">
           <div className="col-12 text-center">
-            <span>
+            <img
+              src="/logo/botify-logo-dark.svg"
+              alt="Botify Your Life"
+              width={120}
+              style={{ marginBottom: 8 }}
+            />
+          </div>
+        </div>
+        <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
+          <div className="row mb-3">
+            <div className="col-12">
+              <h2>Sign Up</h2>
+            </div>
+          </div>
+          {errorMsg && (
+            <div className="row pb-4">
+              <div className="col-12">
+                <Alert severity="error">{errorMsg}</Alert>
+              </div>
+            </div>
+          )}
+          {successMsg && (
+            <div className="row pb-4">
+              <div className="col-12">
+                <Alert severity="success">{successMsg}</Alert>
+              </div>
+            </div>
+          )}
+          <div className="row">
+            <div className="col-6 mb-3">
+              <TextField
+                label="First Name"
+                {...register("firstName")}
+                error={!!errors.firstName}
+                helperText={errors.firstName?.message as string}
+                fullWidth
+                disabled={loading}
+              />
+            </div>
+            <div className="col-6 mb-3">
+              <TextField
+                label="Last Name"
+                {...register("lastName")}
+                error={!!errors.lastName}
+                helperText={errors.lastName?.message as string}
+                fullWidth
+                disabled={loading}
+              />
+            </div>
+            <div className="col-12 mb-3">
+              <TextField
+                label="Email"
+                type="email"
+                {...register("email")}
+                error={!!errors.email}
+                helperText={errors.email?.message as string}
+                fullWidth
+                disabled={loading}
+              />
+            </div>
+            <div className="col-12 mb-3">
+              <TextField
+                label="Password"
+                type={showPassword ? "text" : "password"}
+                {...register("password")}
+                error={!!errors.password}
+                helperText={errors.password?.message as string}
+                fullWidth
+                disabled={loading}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label={showPassword ? "Hide password" : "Show password"}
+                        onClick={() => setShowPassword((show) => !show)}
+                        edge="end"
+                        tabIndex={-1}
+                        disabled={loading}
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </div>
+            <div className="col-12 mb-4">
+              <TextField
+                label="Confirm Password"
+                type={showConfirm ? "text" : "password"}
+                {...register("confirmPassword")}
+                error={!!errors.confirmPassword}
+                helperText={errors.confirmPassword?.message as string}
+                fullWidth
+                disabled={loading}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label={showConfirm ? "Hide password" : "Show password"}
+                        onClick={() => setShowConfirm((show) => !show)}
+                        edge="end"
+                        tabIndex={-1}
+                        disabled={loading}
+                      >
+                        {showConfirm ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </div>
+            <div className="col-12 mb-3">
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={acceptedTerms}
+                    onChange={(e) => setAcceptedTerms(e.target.checked)}
+                    color="primary"
+                    disabled={loading}
+                  />
+                }
+                label={
+                  <span>
+                    I accept the{" "}
+                    <MuiLink
+                      href="/terms-and-conditions"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Terms and Conditions
+                    </MuiLink>
+                  </span>
+                }
+              />
+            </div>
+            <div className="col-12 mb-4">
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                fullWidth
+                disabled={loading}
+                sx={{ py: 1.5 }}
+              >
+                {loading ? <CircularProgress size={24} /> : "Sign Up"}
+              </Button>
+            </div>
+            <div className="col-12 mb-3">
+              <Divider>or</Divider>
+            </div>
+            <div className="col-12 mb-3">
+              <GoogleLogin
+                onSuccess={handleGoogleSignupSuccess}
+                onError={handleGoogleSignupError}
+                width="100%"
+                size="large"
+                shape="rectangular"
+                text="signup_with"
+                containerProps={{ style: { width: "100%" } }}
+              />
+            </div>
+            <div className="col-12 mb-3">
               Already have an account?{" "}
               <MuiLink component={Link} to="/login">
                 Sign In
               </MuiLink>
-            </span>
+            </div>
           </div>
-        </div>
-        <div className="row mt-2">
-          <div className="col-12 text-center">
-            <MuiLink component={Link} to="/forgot-password">
-              Forgot password?
-            </MuiLink>
-          </div>
-        </div>
-      </form>
-    </div>
+        </form>
+      </Card >
+    </div >
   );
 }

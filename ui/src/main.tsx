@@ -1,21 +1,17 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { HelmetProvider, Helmet } from 'react-helmet-async'; // Import HelmetProvider
 import App from './App.tsx';
 import { UserProvider } from './providers/UserProvider.tsx';
 import { DynamicSnackbarProvider } from './hooks/useDynamicSnackbar.tsx';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <UserProvider>
       <DynamicSnackbarProvider>
-        <HelmetProvider>
-          <Helmet>
-            <title>Botify your life</title>
-            <link rel="canonical" href="https://www.tacobell.com/" />
-          </Helmet>
+        <GoogleOAuthProvider clientId="YOUR_GOOGLE_CLIENT_ID">
           <App />
-        </HelmetProvider>
+        </GoogleOAuthProvider>
       </DynamicSnackbarProvider>
     </UserProvider>
   </StrictMode>,
