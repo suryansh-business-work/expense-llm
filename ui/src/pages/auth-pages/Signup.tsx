@@ -71,7 +71,7 @@ export default function Signup() {
   const handleGoogleSignupSuccess = async (credentialResponse: any) => {
     try {
       // Send credentialResponse.credential to your backend for verification and signup/login
-      const res = await fetch(API_LIST.GOOGLE_LOGIN, {
+      const res = await fetch(API_LIST.GOOGLE_SIGNUP, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ credential: credentialResponse.credential }),

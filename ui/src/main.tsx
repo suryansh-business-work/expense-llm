@@ -9,7 +9,7 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <UserProvider>
       <DynamicSnackbarProvider>
-        <GoogleOAuthProvider clientId="YOUR_GOOGLE_CLIENT_ID">
+        <GoogleOAuthProvider clientId="508129946567-ohklo0ttnkjnv1lbumjuugsljeudpltu.apps.googleusercontent.com">
           <App />
         </GoogleOAuthProvider>
       </DynamicSnackbarProvider>

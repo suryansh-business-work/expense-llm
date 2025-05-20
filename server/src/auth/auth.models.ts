@@ -6,7 +6,7 @@ const userSchema = new Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
+  password: { type: String, required: false },
   isUserVerified: { type: Boolean, default: false },
   profileImage: { type: String, default: "https://ik.imagekit.io/esdata1/botify/botify-logo-1_j7vjRlSiwH.png" }, // <-- add this line
 }, { timestamps: true });

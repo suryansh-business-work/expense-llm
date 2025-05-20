@@ -1,5 +1,8 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import { OAuth2Client } from 'google-auth-library';
+
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 export const hashPassword = async (password: string) => await bcrypt.hash(password, 10);
 
@@ -13,4 +16,13 @@ export const sendOTP = async (email: string) => {
   const otp = generateOTP();
   console.log(`Send OTP ${otp} to email ${email}`);
   return otp;
+};
+
+export const verifyGoogleToken = async (token: string) => {
+  const ticket = await client.verifyIdToken({
+    idToken: token,
+    audience: process.env.GOOGLE_CLIENT_ID,
+  });
+  const payload = ticket.getPayload();
+  return payload; // contains email, name, picture, etc.
 };

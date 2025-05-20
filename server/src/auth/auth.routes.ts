@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { signup, signin, forgotPasswordStep1, forgotPasswordStep2, getUserInfo, updateProfile, updatePassword, sendVerificationOtp, verifyUserOtp } from "./auth.controllers";
+import { signup, signin, forgotPasswordStep1, forgotPasswordStep2, getUserInfo, updateProfile, updatePassword, sendVerificationOtp, verifyUserOtp, signupWithGoogle, signinWithGoogle } from "./auth.controllers";
 import { authenticateJWT } from "./auth.middleware";
 
 const router = Router();
@@ -22,5 +22,9 @@ router.patch('/update-profile', authenticateJWT, updateProfile);
 router.patch('/update-password', authenticateJWT, updatePassword);
 router.post("/send-verification-otp", authenticateJWT, sendVerificationOtp);
 router.post("/verify-otp", authenticateJWT, verifyUserOtp);
+
+// Signup and Signin with Google
+router.post("/signup-google", signupWithGoogle);
+router.post("/signin-google", signinWithGoogle);
 
 export default router;

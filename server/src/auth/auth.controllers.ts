@@ -15,6 +15,7 @@ import {
   generateToken,
   sendOTP,
   generateOTP,
+  verifyGoogleToken,
 } from './auth.services';
 import {
   successResponse,
@@ -73,10 +74,15 @@ export const signin = async (req: Request, res: Response) => {
     if (errors.length) return errorResponse(res, errors, 'Validation failed');
 
     const { identifier, password } = dto;
-    const user = await UserModel.findOne({
-      $or: [{ email: identifier }, { phone: identifier }],
-    });
-    if (!user || !(await comparePasswords(password, user.password)))
+    const user = await UserModel.findOne({ email: identifier });
+    if (!user) return errorResponse(res, null, 'Invalid credentials');
+
+    // If user has no password, warn to login with Google
+    if (!user.password) {
+      return errorResponse(res, null, "Kindly login with Google. You do not have any password with your account.");
+    }
+
+    if (!(await comparePasswords(password, user.password)))
       return errorResponse(res, null, 'Invalid credentials');
 
     const token = generateToken(user.userId);
@@ -192,7 +198,7 @@ export const updatePassword = async (req: Request, res: Response) => {
     const user = await UserModel.findOne({ userId });
     if (!user) return errorResponse(res, null, 'User not found');
 
-    const valid = await comparePasswords(currentPassword, user.password);
+    const valid = await comparePasswords(currentPassword, user.password ?? "");
     if (!valid) return errorResponse(res, null, 'Current password is incorrect');
 
     user.password = await hashPassword(newPassword);
@@ -257,5 +263,65 @@ export const verifyUserOtp = async (req: { userId: any; body: { otp: any; }; }, 
     return successResponse(res, null, "User verified successfully");
   } catch (err) {
     return errorResponse(res, err, "Failed to verify OTP");
+  }
+};
+
+export const signupWithGoogle = async (req: Request, res: Response) => {
+  try {
+    const { credential } = req.body;
+    if (!credential) return errorResponse(res, null, "Missing Google credential");
+
+    const payload = await verifyGoogleToken(credential);
+    if (!payload?.email) return errorResponse(res, null, "Google account has no email");
+
+    // Check if user already exists
+    let user = await UserModel.findOne({ email: payload.email });
+
+    if (user) {
+      // User already exists, show message to sign in
+      return errorResponse(res, null, "User already exists. You can sign in.");
+    }
+
+    // Create new user
+    user = new UserModel({
+      firstName: payload.given_name || "",
+      lastName: payload.family_name || "",
+      email: payload.email,
+      isUserVerified: true,
+      profileImage: payload.picture,
+      password: undefined, // No password for Google users
+    });
+    await user.save();
+
+    const token = generateToken(user.userId);
+    return successResponse(res, { token, user: sanitizeUser(user) }, "Signup successful with Google");
+  } catch (err) {
+    return errorResponse(res, err, "Google signup failed");
+  }
+};
+
+export const signinWithGoogle = async (req: Request, res: Response) => {
+  try {
+    const { credential } = req.body;
+    if (!credential) return errorResponse(res, null, "Missing Google credential");
+
+    const payload = await verifyGoogleToken(credential);
+    if (!payload?.email) return errorResponse(res, null, "Google account has no email");
+
+    const user = await UserModel.findOne({ email: payload.email });
+
+    if (!user) {
+      return errorResponse(res, null, "No account found. Please sign up with Google first.");
+    }
+
+    // If user has password, warn to login with password
+    if (user.password) {
+      return errorResponse(res, null, "Kindly login with email and password. You do not have a Google account linked.");
+    }
+
+    const token = generateToken(user.userId);
+    return successResponse(res, { token, user: sanitizeUser(user) }, "Login successful with Google");
+  } catch (err) {
+    return errorResponse(res, err, "Google signin failed");
   }
 };

@@ -8,7 +8,8 @@ const API_LIST = {
   UPDATE_PASSWORD: "http://localhost:3000/auth/update-password",
   SEND_VERIFICATION_OTP: "http://localhost:3000/auth/send-verification-otp",
   VERIFY_USER_OTP: "http://localhost:3000/auth/verify-otp",
-  GOOGLE_LOGIN: "http://localhost:3000/api/auth/google-login",
+  GOOGLE_SIGNIN: "http://localhost:3000/auth/signin-google",
+  GOOGLE_SIGNUP: "http://localhost:3000/auth/signup-google",
 
   // Bot APIs
   GET_BOTS: "http://localhost:3000/bot/bots",
