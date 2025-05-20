@@ -1,6 +1,10 @@
 import './styles/index.scss';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { lazy } from 'react';
+import AdminDashboard from './pages/admin/AdminDashboard';
+import AdminLayout from './pages/admin/AdminLayout';
+import UsersList from './pages/admin/UsersList';
+import ThemeManagement from './pages/admin/design-system/ThemeManagement';
 
 const Chat = lazy(() => import('./pages/chat/Chat'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
@@ -69,6 +73,18 @@ const App = () => {
           <Route path="bot/:childBotType/chat-settings/:chatBotId" element={<ChatSettings />} />
           <Route path="bot/:childBotType/lab/:chatBotId" element={<ChatLab />} />
           <Route path="profile" element={<Profile />} />
+        </Route>
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <AdminLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route path="dashboard" element={<AdminDashboard />} />
+          <Route path="users" element={<UsersList />} />
+          <Route path="theme-management" element={<ThemeManagement />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

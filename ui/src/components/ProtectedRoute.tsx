@@ -5,7 +5,7 @@ import { useUserContext } from "../providers/UserProvider";
 export default function ProtectedRoute({ children }: { children: JSX.Element }) {
   const { user } = useUserContext();
   const token = localStorage.getItem("token");
-
+  
   if (!token || !user) return <Navigate to="/login" replace />;
   return children;
 }

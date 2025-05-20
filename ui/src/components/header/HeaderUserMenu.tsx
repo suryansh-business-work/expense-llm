@@ -126,6 +126,19 @@ const HeaderUserMenu = () => {
           >
             Settings
           </Button>
+          {user?.role === "admin" && (
+            <Button
+              size="small"
+              onClick={() => {
+                handleCloseMenu();
+                navigate("/admin/dashboard");
+              }}
+              sx={{ justifyContent: "flex-start", textTransform: "none", pl: 0 }}
+              fullWidth
+            >
+              Admin
+            </Button>
+          )}
         </Box>
         <Divider />
         <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', px: 1, py: 0.5 }}>

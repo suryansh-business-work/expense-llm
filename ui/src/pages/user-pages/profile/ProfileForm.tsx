@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import {
   TextField,
-  Button,
   Alert,
   CircularProgress,
   IconButton,
@@ -23,6 +22,7 @@ import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import { useUserContext } from "../../../providers/UserProvider";
 import { useDynamicSnackbar } from "../../../hooks/useDynamicSnackbar";
 import API_LIST from "../../apiList";
+import Button from "../../admin/design-system/components/Button";
 
 // Profile schema
 const profileSchema = Joi.object({
@@ -422,7 +422,7 @@ export default function ProfileForm() {
                   <Button
                     variant="outlined"
                     color="primary"
-                    size="small"
+                    size="medium"
                     onClick={() => {
                       handleOpenVerifyDialog("email");
                       handleSendOtp();
@@ -440,10 +440,11 @@ export default function ProfileForm() {
                 variant="contained"
                 color="primary"
                 fullWidth
+                size="large"
                 disabled={profileState.loading}
-                sx={{ py: 1.5 }}
+                loading={profileState.loading}
               >
-                {profileState.loading ? <CircularProgress size={24} /> : "Update Profile"}
+                Update Profile
               </Button>
             </div>
           </div>
@@ -483,7 +484,6 @@ export default function ProfileForm() {
             onClick={handleVerifyOtp}
             disabled={otpLoading || !otp}
             fullWidth
-            sx={{ mb: 1 }}
           >
             {otpLoading ? <CircularProgress size={20} /> : "Verify"}
           </Button>
