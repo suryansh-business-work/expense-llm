@@ -1,8 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, IconButton, Avatar, Menu, Typography, Button, LinearProgress, Divider } from '@mui/material';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { useNavigate } from 'react-router-dom';
 import { useUserContext } from '../../providers/UserProvider';
+import axios from "axios";
+
+// Get first day of the current month as a Date object
+function getFirstDayOfMonth() {
+  const d = new Date();
+  return new Date(d.getFullYear(), d.getMonth(), 1).toISOString();
+}
+
+// Get end of the current month as an ISO string
+
+function getEndOfMonth() {
+  const d = new Date();
+  // Set to first day of next month, then subtract 1 ms
+  const end = new Date(d.getFullYear(), d.getMonth() + 1, 1);
+  end.setMilliseconds(-1);
+  return end.toISOString();
+}
 
 const HeaderUserMenu = () => {
   const { user } = useUserContext();
@@ -12,13 +29,39 @@ const HeaderUserMenu = () => {
   const avatarPic = user?.profileImage;
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [totalPromptTokenSizeUsed, setTotalPromptTokenSizeUsed] = useState<number>(0);
+  const [totalPromptTokenSizeAvailable] = useState<number>(10000); 
+  const [totalPromptTokenSizeUsedPercentage, setTotalPromptTokenSizeUsedPercentage] = useState<number>(0);
+  const [, setMenuOpen] = useState(false);
   const navigate = useNavigate();
-  const currentMessageCount = 100;
-  const maxMessageCount = 500;
-  const messagePercent = Math.min((currentMessageCount / maxMessageCount) * 100, 100);
 
-  const handleAvatarClick = (event: React.MouseEvent<HTMLElement>) => setAnchorEl(event.currentTarget);
-  const handleCloseMenu = () => setAnchorEl(null);
+  // Fetch usage summary only when menu is opened
+  const fetchUsageSummary = async () => {
+    const startDate = getFirstDayOfMonth();
+    const endDate = getEndOfMonth();
+    const botOwnerUserId = user?.userId || "";
+
+    const apiUrl = `http://localhost:3000/v1/api/subscription-usage/user/${botOwnerUserId}/date-range?startDate=${startDate}&endDate=${endDate}`;
+
+    try {
+      const response = await axios.get(apiUrl);
+      const { totalPromptTokenSize } = response.data;
+      setTotalPromptTokenSizeUsed(totalPromptTokenSize || 0);
+      setTotalPromptTokenSizeUsedPercentage(Math.min(((totalPromptTokenSize) / totalPromptTokenSizeAvailable) * 100, 100));
+    } catch (err) {
+      console.error("Failed to fetch usage summary:", err);
+    }
+  };
+
+  const handleAvatarClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+    setMenuOpen(true);
+    fetchUsageSummary();
+  };
+  const handleCloseMenu = () => {
+    setAnchorEl(null);
+    setMenuOpen(false);
+  };
 
   const handleLogout = () => {
     handleCloseMenu();
@@ -36,6 +79,13 @@ const HeaderUserMenu = () => {
     handleCloseMenu();
     navigate("/manage-subcription");
   };
+
+  useEffect(() => {
+    // Cleanup function to reset menu state on unmount
+    return () => {
+      setMenuOpen(false);
+    };
+  }, []);
 
   return (
     <div className="col-auto d-flex justify-content-end align-items-center">
@@ -68,13 +118,13 @@ const HeaderUserMenu = () => {
             </Typography>
           )}
           <Typography variant="body2" sx={{ mb: 0.5 }}>
-            Messages used: {currentMessageCount}/{maxMessageCount}
+            Token used: {totalPromptTokenSizeUsed}/{totalPromptTokenSizeAvailable} (<b>{totalPromptTokenSizeUsedPercentage}% Used</b>)
           </Typography>
           <LinearProgress
             variant="determinate"
-            value={messagePercent}
+            value={totalPromptTokenSizeUsedPercentage}
             sx={{ height: 8, borderRadius: 5, mb: 1 }}
-            color={messagePercent < 80 ? "primary" : "error"}
+            color={totalPromptTokenSizeUsedPercentage < 80 ? "primary" : "error"}
           />
           <Button size="small" onClick={handleManageSubscription}>Manage Subscription</Button>
         </Box>

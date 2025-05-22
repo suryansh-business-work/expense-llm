@@ -1,189 +1,175 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Box,
   Typography,
   LinearProgress,
   Paper,
-  Button,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  TextField,
-  IconButton,
+  Divider,
+  Drawer,
 } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
+import Table from "../admin/design-system/components/Table";
+import Button from "../admin/design-system/components/Button";
+import axios from "axios";
+import { useUserContext } from "../../providers/UserProvider";
+
+function getFirstDayOfMonth() {
+  const d = new Date();
+  return new Date(d.getFullYear(), d.getMonth(), 1).toISOString();
+}
+function getEndOfMonth() {
+  const d = new Date();
+  const end = new Date(d.getFullYear(), d.getMonth() + 1, 1);
+  end.setMilliseconds(-1);
+  return end.toISOString();
+}
+
+// Example pricing data
+const pricingData = [
+  { tokens: 100, price: 5 },
+  { tokens: 500, price: 20 },
+  { tokens: 1000, price: 35 },
+  { tokens: 5000, price: 150 },
+  { tokens: 10000, price: 250 },
+  { tokens: 100000, price: 250 },
+  { tokens: 1000000, price: 350 },
+  { tokens: 10000000, price: 450 },
+  { tokens: 100000000, price: 550 },
+];
 
 export default function ManageSubscription() {
-  // Simulate current message count (replace with real value if available)
-  const currentMessageCount = 100;
-  const maxMessageCount = 500;
-  const messagePercent = Math.min(
-    (currentMessageCount / maxMessageCount) * 100,
-    100
-  );
+  const { user } = useUserContext();
+  const [totalPromptTokenSizeUsed, setTotalPromptTokenSizeUsed] = useState<number>(0);
+  const [totalPromptTokenSizeAvailable] = useState<number>(10000); // Example quota
+  const [totalPromptTokenSizeUsedPercentage, setTotalPromptTokenSizeUsedPercentage] = useState<number>(0);
+  const [usageHistory, setUsageHistory] = useState<any[]>([]);
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
-  // Purchase state
-  const [purchaseCount, setPurchaseCount] = useState(100);
-  const pricePerMessage = 0.05; // Example: 5 paise per message
-  const [openDialog, setOpenDialog] = useState(false);
+  // Fetch usage summary and history on mount
+  useEffect(() => {
+    const fetchUsageSummary = async () => {
+      const startDate = getFirstDayOfMonth();
+      const endDate = getEndOfMonth();
+      const botOwnerUserId = user?.userId || "";
 
-  // Card form state
-  const [cardNumber, setCardNumber] = useState("");
-  const [cardName, setCardName] = useState("");
-  const [expiry, setExpiry] = useState("");
-  const [cvv, setCvv] = useState("");
+      const apiUrl = `http://localhost:3000/v1/api/subscription-usage/user/${botOwnerUserId}/date-range?startDate=${startDate}&endDate=${endDate}`;
 
-  const handlePurchaseClick = () => setOpenDialog(true);
-  const handleDialogClose = () => setOpenDialog(false);
+      try {
+        const response = await axios.get(apiUrl);
+        const { totalPromptTokenSize, history } = response.data;
+        setTotalPromptTokenSizeUsed(totalPromptTokenSize || 0);
+        setTotalPromptTokenSizeUsedPercentage(Math.min(((totalPromptTokenSize) / totalPromptTokenSizeAvailable) * 100, 100));
+        setUsageHistory(history || []);
+      } catch (err) {
+        console.error("Failed to fetch usage summary:", err);
+      }
+    };
+    fetchUsageSummary();
+    // eslint-disable-next-line
+  }, [user?.userId]);
 
-  const handleCountChange = (val: number) => {
-    setPurchaseCount((prev) => Math.max(1, prev + val));
-  };
+  // Table columns for usage history
+  const columns = [
+    { key: "createdAt", label: "Date", render: (row: any) => new Date(row.createdAt).toLocaleString() },
+    { key: "prompt", label: "Prompt", sortable: true },
+    { key: "promptTokenSize", label: "Token Used", sortable: true },
+    { key: "botId", label: "Bot ID", sortable: true },
+    { key: "userName", label: "User Name", render: (row: any) => row.userContext ? `${row.userContext.firstName} ${row.userContext.lastName}` : "" },
+    { key: "email", label: "Email", render: (row: any) => row.userContext?.email || "" },
+    { key: "role", label: "Role", render: (row: any) => row.userContext?.role || "" },
+    { key: "timezone", label: "Timezone", render: (row: any) => row.userContext?.timezone || "" },
+  ];
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const val = Math.max(1, parseInt(e.target.value) || 1);
-    setPurchaseCount(val);
-  };
-
-  const handlePurchase = () => {
-    // Implement purchase logic here
-    alert(
-      `Purchased ${purchaseCount} messages for ₹${(
-        purchaseCount * pricePerMessage
-      ).toFixed(2)}`
-    );
-    setOpenDialog(false);
-  };
+  // Table columns for pricing
+  const pricingColumns = [
+    { key: "tokens", label: "Tokens" },
+    { key: "price", label: "Price ($)" },
+    {
+      key: "buy",
+      label: "",
+      render: (row: any) => (
+        <Button
+          size="small"
+          color="primary"
+          onClick={() => alert(`Buy ${row.tokens} tokens for ₹${row.price}`)}
+        >
+          Buy
+        </Button>
+      ),
+    },
+  ];
 
   return (
-    <div className="container" style={{ maxWidth: 600, marginTop: 48 }}>
+    <div className="container mt-5 mb-5">
       <Paper elevation={3} sx={{ p: 4 }}>
         <Typography variant="h5" gutterBottom>
           Manage Subscription
         </Typography>
-        <Box sx={{ mb: 2 }}>
+        <Box sx={{ mb: 2, display: "flex", alignItems: "center", gap: 2 }}>
           <Typography variant="body2" sx={{ mb: 0.5 }}>
-            Messages used: {currentMessageCount}/{maxMessageCount}
+            <b>Token used:</b> {totalPromptTokenSizeUsed}/{totalPromptTokenSizeAvailable} (<b>{totalPromptTokenSizeUsedPercentage}% Used</b>)
           </Typography>
-          <LinearProgress
-            variant="determinate"
-            value={messagePercent}
-            sx={{ height: 8, borderRadius: 5, mb: 1 }}
-            color={messagePercent < 80 ? "primary" : "error"}
-          />
-        </Box>
-        {/* Purchase Form */}
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 2,
-            mb: 2,
-            mt: 3,
-          }}
-        >
-          <Typography variant="body1" sx={{ minWidth: 120 }}>
-            Buy Messages:
-          </Typography>
-          <IconButton
-            aria-label="decrease"
-            onClick={() => handleCountChange(-1)}
-            size="small"
-          >
-            <RemoveIcon />
-          </IconButton>
-          <TextField
-            type="number"
-            value={purchaseCount}
-            onChange={handleInputChange}
-            inputProps={{ min: 1, style: { textAlign: "center", width: 60 } }}
-            size="small"
-          />
-          <IconButton
-            aria-label="increase"
-            onClick={() => handleCountChange(1)}
-            size="small"
-          >
-            <AddIcon />
-          </IconButton>
-          <Typography variant="body1" sx={{ minWidth: 100 }}>
-            ₹{(purchaseCount * pricePerMessage).toFixed(2)}
-          </Typography>
-          <IconButton
-            color="primary"
-            aria-label="purchase"
-            onClick={handlePurchaseClick}
-            size="large"
-          >
-            <ShoppingCartIcon />
-          </IconButton>
-        </Box>
-      </Paper>
-      {/* Purchase Dialog */}
-      <Dialog open={openDialog} onClose={handleDialogClose} maxWidth="xs" fullWidth>
-        <DialogTitle>
-          Purchase {purchaseCount} Messages (₹{(purchaseCount * pricePerMessage).toFixed(2)})
-        </DialogTitle>
-        <DialogContent>
-          <Box sx={{ mb: 2 }}>
-            <Typography variant="body2" sx={{ mb: 1 }}>
-              Enter your card details to complete the purchase.
-            </Typography>
-            <TextField
-              label="Card Number"
-              value={cardNumber}
-              onChange={(e) => setCardNumber(e.target.value)}
-              fullWidth
-              margin="dense"
-              inputProps={{ maxLength: 19 }}
-              placeholder="1234 5678 9012 3456"
-            />
-            <TextField
-              label="Cardholder Name"
-              value={cardName}
-              onChange={(e) => setCardName(e.target.value)}
-              fullWidth
-              margin="dense"
-              placeholder="Name on Card"
-            />
-            <Box sx={{ display: "flex", gap: 2 }}>
-              <TextField
-                label="Expiry"
-                value={expiry}
-                onChange={(e) => setExpiry(e.target.value)}
-                margin="dense"
-                placeholder="MM/YY"
-                inputProps={{ maxLength: 5 }}
-                sx={{ flex: 1 }}
-              />
-              <TextField
-                label="CVV"
-                value={cvv}
-                onChange={(e) => setCvv(e.target.value)}
-                margin="dense"
-                placeholder="CVV"
-                inputProps={{ maxLength: 4 }}
-                sx={{ flex: 1 }}
-                type="password"
-              />
-            </Box>
-          </Box>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleDialogClose}>Cancel</Button>
           <Button
-            onClick={handlePurchase}
-            variant="contained"
+            size="small"
             color="primary"
-            disabled={!cardNumber || !cardName || !expiry || !cvv}
+            variant="contained"
+            startIcon={<ShoppingCartIcon />}
+            onClick={() => setDrawerOpen(true)}
+            style={{ marginLeft: 12 }}
           >
-            Pay ₹{(purchaseCount * pricePerMessage).toFixed(2)}
+            Buy Tokens
           </Button>
-        </DialogActions>
-      </Dialog>
+        </Box>
+        <LinearProgress
+          variant="determinate"
+          value={totalPromptTokenSizeUsedPercentage}
+          sx={{ height: 8, borderRadius: 5, mb: 1 }}
+          color={totalPromptTokenSizeUsedPercentage < 80 ? "primary" : "error"}
+        />
+        <Divider sx={{ my: 3 }} />
+        <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 1 }}>
+          Usage History
+        </Typography>
+        <div style={{ maxHeight: 300, overflowY: "auto" }}>
+          <Table
+            columns={columns}
+            data={usageHistory}
+            defaultPageSize={5}
+            pageSizeOptions={[5, 10]}
+            style={{ background: "#fafbfc" }}
+          />
+        </div>
+      </Paper>
+      {/* Pricing Drawer */}
+      <Drawer
+        anchor="right"
+        open={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+        PaperProps={{ style: { width: 800, padding: 24 } }}
+      >
+        <Box sx={{ p: 3 }}>
+          <Typography variant="h6" gutterBottom>
+            Buy Tokens
+          </Typography>
+          <Divider sx={{ mb: 2 }} />
+          <Table
+            columns={pricingColumns}
+            data={pricingData}
+            defaultPageSize={5}
+            pageSizeOptions={[5]}
+            style={{ background: "#fafbfc" }}
+          />
+          <Button
+            variant="outlined"
+            color="secondary"
+            fullWidth
+            style={{ marginTop: 24 }}
+            onClick={() => setDrawerOpen(false)}
+          >
+            Close
+          </Button>
+        </Box>
+      </Drawer>
     </div>
   );
 }

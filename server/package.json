@@ -25,6 +25,7 @@
     "express": "^5.1.0",
     "express-fileupload": "^1.5.1",
     "google-auth-library": "^9.15.1",
+    "gpt-tokenizer": "^2.9.0",
     "i": "^0.3.7",
     "imagekit": "^6.0.0",
     "jsonwebtoken": "^9.0.2",

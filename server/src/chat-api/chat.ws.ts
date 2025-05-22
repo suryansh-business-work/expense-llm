@@ -2,72 +2,85 @@ import { WebSocketServer } from "ws";
 import { getChatGptResponse } from "./chatgpt";
 import { scrapeEmailsFromWebsite, scrapePhonesFromWebsite } from "./website-scraper/website-scraper";
 import { getBotPrompt } from "./chat-lab-apis/prompt/prompt.service";
+import * as service from "../chat-api/chat-messages-api/message.service";
+import { createUsage } from "./subscription-api/subscription-usage.service";
+import { encode } from "gpt-tokenizer";
 
 let wss: WebSocketServer | null = null;
 
-
-/**
- * Initializes the WebSocket server.
- * Call this only after the database connection is established.
- */
 export function startWebSocketServer() {
   if (!wss) {
     wss = new WebSocketServer({ port: 8080 });
 
     wss.on("connection", (ws) => {
       ws.on("message", async (message) => {
-        let userInput = "";
-        let chatBotId = "";
-        let userId = "";
         try {
-          const parsed = JSON.parse(message.toString());
-          userInput = parsed.userInput || message.toString();
-          chatBotId = parsed.chatBotId || "";
-          userId = parsed.userId || "";
-        } catch {
-          userInput = message.toString();
-        }
+          const clientData = JSON.parse(message.toString());
+          const { firstLoadConnect, chatBotId, userInput, role, userContext } = clientData;
 
-        // Get prompt string using bot id
-        let promptString = "";
-        if (chatBotId) {
+          // On initial connect, send chat history
+          if (firstLoadConnect) {
+            const result = await service.getMessages(chatBotId);
+            ws.send(JSON.stringify(result));
+            return;
+          }
+
+          // Save user message
+          if (userInput && role === "user") {
+            await service.createMessage({
+              botId: chatBotId,
+              role: "user",
+              content: userInput,
+              userContext: userContext
+            });
+          }
+
+          // Get prompt for the bot (if needed for context)
+          let promptString = "";
           try {
             const promptDoc = await getBotPrompt(chatBotId);
-            // promptDoc.prompt is an array, you can join or pick as needed
             if (promptDoc && Array.isArray(promptDoc.prompt) && promptDoc.prompt.length > 0) {
-              // Example: join all prompt strings with newlines
-              promptString = promptDoc.prompt.map((p: any) => p.prompt).join("\n");
+              // Only use prompts where isUseForChat is true
+              promptString = promptDoc.prompt
+                .filter((p: any) => p.isUseForChat)
+                .map((p: any) => p.prompt)
+                .join("\n");
             }
           } catch (e) {
             console.error("Failed to fetch prompt for bot:", chatBotId, e);
           }
-        }
-
-        // You can now use chatBotId, userId, and promptString in your logic
-        console.log("Received from client:", { chatBotId, userId, userInput, promptString });
-
-        // Use the helper function to get the response, including the prompt string
-        const botMessageRaw = await getChatGptResponse(`${promptString}\nUser Input: ${userInput}`);
-        console.log("`${promptString}\nUser Input: ${userInput}`", `${promptString}\nUser Input: ${userInput}`);
-        if (botMessageRaw === undefined) {
-          ws.send(JSON.stringify({ error: "Failed to get a response from the AI." }));  
-        } else {
-          let botMessage: any;
+          await createUsage({
+            botId: chatBotId,
+            botOwnerUserId: userContext.userId,
+            promptTokenSize: encode(`${promptString}\nUser Input: ${userInput}`).length,
+            prompt: `${promptString}\nUser Input: ${userInput}`,
+            userContext: userContext
+          });
+          // Get bot response (with prompt context if needed)
+          const botResponseRaw = await getChatGptResponse(`${promptString}\nUser Input: ${userInput}`);
+          let botContent = botResponseRaw;
           try {
-            botMessage = typeof botMessageRaw === "string" ? JSON.parse(botMessageRaw) : botMessageRaw;
+            // Try to parse if it's JSON
+            const parsed = typeof botResponseRaw === "string" ? JSON.parse(botResponseRaw) : botResponseRaw;
+            if (parsed && parsed.message) botContent = parsed.message;
           } catch {
-            botMessage = { message: botMessageRaw };
+            // If not JSON, keep as is
           }
-          console.log("Bot message:", botMessage);
-          if (botMessage?.functionName === 'scrapeEmailsFromWebsite') {
-            const response = await scrapeEmailsFromWebsite(botMessage?.functionParams?.url);
-            ws.send(JSON.stringify(response));
-          } else if (botMessage?.functionName === 'scrapePhonesFromWebsite') {
-            const response = await scrapePhonesFromWebsite(botMessage?.functionParams?.url);
-            ws.send(JSON.stringify(response));
-          } else {
-            ws.send(await getChatGptResponse(userInput));
-          }
+
+          // Save bot message
+          const botResObject = {
+            botId: chatBotId,
+            role: "bot",
+            content: botContent,
+            userContext: userContext
+          };
+          await service.createMessage(botResObject);
+
+          // Send bot message to client as array for consistency
+          ws.send(JSON.stringify([botResObject]));
+        } catch (err) {
+          console.error("WebSocket message error:", err);
+          ws.send(JSON.stringify({ error: "Internal server error." }));
         }
       });
     });

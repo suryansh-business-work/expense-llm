@@ -7,7 +7,7 @@ import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, { AlertColor } from '@mui/material/Alert';
 
 interface Message {
-  type: 'user' | 'bot';
+  role: 'user' | 'bot' | 'system';
   botResponse: JSX.Element;
   timestamp: string;
 }
@@ -27,7 +27,7 @@ const Chat = () => {
 
   const ws = useRef<WebSocket | null>(null);
   const { user } = useUserContext();
-  const { childBotType, chatBotId } = useParams<{ childBotType: string; chatBotId: string }>();
+  const { chatBotId } = useParams<{ childBotType: string; chatBotId: string }>();
 
   useEffect(() => {
     let wsInstance: WebSocket;
@@ -39,6 +39,15 @@ const Chat = () => {
       wsInstance.onopen = () => {
         setWsConnected(true);
         setToast({ open: true, message: 'WebSocket connected', severity: 'success' });
+        // Request chat history on connect
+        wsInstance.send(
+          JSON.stringify({
+            firstLoadConnect: true,
+            userContext: user,
+            chatBotId,
+            userInput: null,
+          })
+        );
       };
 
       wsInstance.onclose = () => {
@@ -61,14 +70,35 @@ const Chat = () => {
         } else if (event.data instanceof Blob) {
           text = await event.data.text();
         }
-        setMessages((prev) => [
-          ...prev,
-          {
-            type: 'bot',
-            botResponse: <p>{text}</p>,
-            timestamp: formatDateTime(new Date().toISOString()),
-          },
-        ]);
+        try {
+          const parsed = JSON.parse(text);
+          console.log(parsed)
+          const botMessages = Array.isArray(parsed)
+            ? parsed
+            : Array.isArray(parsed.messages)
+              ? parsed.messages
+              : [parsed];
+
+          setMessages((prev) => [
+            ...prev,
+            ...botMessages.map((data: any) => ({
+              role: data?.role || 'bot',
+              botResponse: <p>{typeof data?.content === 'string' ? data.content : JSON.stringify(data?.content)}</p>,
+              timestamp: formatDateTime(data?.createdAt || new Date().toISOString()),
+              userContext: data?.userContext
+            })),
+          ]);
+        } catch (error) {
+          setMessages((prev) => [
+            ...prev,
+            {
+              role: 'bot',
+              botResponse: <p>{text}</p>,
+              timestamp: formatDateTime(new Date().toISOString()),
+              userContext: user
+            },
+          ]);
+        }
       };
 
       ws.current = wsInstance;
@@ -80,7 +110,8 @@ const Chat = () => {
       if (reconnectTimeout) clearTimeout(reconnectTimeout);
       wsInstance?.close();
     };
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [chatBotId, user]);
 
   const handleSendMessage = () => {
     if (!userInput.trim() || !ws.current || ws.current.readyState !== 1) {
@@ -88,24 +119,25 @@ const Chat = () => {
       return;
     }
     const timestamp = formatDateTime(new Date().toISOString());
-    setIsLoading(true);
-    const userMessage = {
-      childBotType: childBotType,
-      chatBotId: chatBotId,
-      userInput: userInput,
-      userId: user?.userId, 
-      timestamp: new Date().toISOString(),
-    };
-    ws.current.send(JSON.stringify(userMessage));
     setMessages((prev) => [
       ...prev,
       {
-        type: 'user',
+        role: 'user',
         botResponse: <p>{userInput}</p>,
-        timestamp: timestamp,
+        timestamp,
       },
     ]);
+    ws.current.send(
+      JSON.stringify({
+        firstLoadConnect: false,
+        userContext: user,
+        chatBotId,
+        userInput,
+        role: 'user',
+      })
+    );
     setUserInput('');
+    setIsLoading(true);
   };
 
   return (

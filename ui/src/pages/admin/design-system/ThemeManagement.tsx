@@ -329,7 +329,7 @@ export default function ThemeManagement() {
                 height: "100%",
               }}
             >
-              {themeSections.map((section, idx) => (
+              {themeSections.map((section) => (
                 <Tab key={section.key} label={section.label} />
               ))}
             </Tabs>

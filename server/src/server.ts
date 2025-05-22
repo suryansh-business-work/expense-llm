@@ -14,6 +14,7 @@ import { startWebSocketServer } from './chat-api/chat.ws';
 import getChatGptResponseRoutes from './chat-api/chatgpt';
 import imageKitUploadRoutes from './upload/upload.routes';
 import fileUpload from 'express-fileupload'
+import subscriptionRoutes from './chat-api/subscription-api/subscription-usage.routes';
 
 const app = express();
 
@@ -43,6 +44,7 @@ app.use('/bot', childBotLabPromptRoutes);
 app.use('/bot', childBotSettingRoutes);
 app.use('/chat-gpt', getChatGptResponseRoutes);
 app.use('/v1/api', imageKitUploadRoutes);
+app.use('/v1/api/subscription-usage', subscriptionRoutes);
 
 // Chat bot lab APIs
 app.use('/bot', authRoutes);

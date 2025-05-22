@@ -60,7 +60,7 @@ export const ChatBoxWrapper: React.FC<ChatBoxWrapperProps> = ({ messages, isLoad
       <div className="messages" style={{ paddingTop, paddingBottom }}>
         {messages.length > 0 && (
           <div style={{ visibility: 'hidden', position: 'absolute', pointerEvents: 'none' }} ref={measureRef}>
-            {messages[0].type === 'user' ? (
+            {messages[0].role === 'user' ? (
               <UserGeneral
                 avatarUrl={avatarUrl}
                 timestamp={messages[0].timestamp}
@@ -78,7 +78,7 @@ export const ChatBoxWrapper: React.FC<ChatBoxWrapperProps> = ({ messages, isLoad
         )}
         {visibleMessages.map((message: any, index: number) => {
           const realIndex = startIndex + index;
-          return message.type === 'user' ? (
+          return message.role === 'user' ? (
             <UserGeneral
               key={realIndex}
               avatarUrl={avatarUrl}
