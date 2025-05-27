@@ -4,7 +4,7 @@ import { lazy } from 'react';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminLayout from './pages/admin/AdminLayout';
 import UsersList from './pages/admin/UsersList';
-import ThemeManagement from './pages/admin/design-system/ThemeManagement';
+import ThemeManagement from './pages/admin/design-system/ComponentList';
 
 const Chat = lazy(() => import('./pages/chat/Chat'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));

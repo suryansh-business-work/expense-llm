@@ -1,0 +1,310 @@
+openapi: 3.0.0
+info:
+  title: Design System API
+  version: 1.0.0
+  description: Theme and Property management APIs for the design system
+
+servers:
+  - url: http://localhost:3000/design-system
+
+tags:
+  - name: Theme
+  - name: Property
+
+components:
+  schemas:
+    Theme:
+      type: object
+      properties:
+        themeId:
+          type: string
+          format: uuid
+          description: Auto-generated UUID
+        themeName:
+          type: string
+      required:
+        - themeName
+    Property:
+      type: object
+      properties:
+        propertyId:
+          type: string
+          format: uuid
+          description: Auto-generated UUID
+        themeId:
+          type: string
+          format: uuid
+        name:
+          type: string
+        propertyType:
+          type: string
+        propertyValues:
+          type: array
+          items:
+            type: string
+      required:
+        - themeId
+        - name
+        - propertyType
+    PropertyValues:
+      type: object
+      properties:
+        propertyValues:
+          type: array
+          items:
+            type: string
+    RemovePropertyValue:
+      type: object
+      properties:
+        value:
+          type: string
+
+paths:
+  /:
+    post:
+      tags: [Theme]
+      summary: Create a new theme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                themeName:
+                  type: string
+              required: [themeName]
+      responses:
+        200:
+          description: Theme created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Theme'
+    get:
+      tags: [Theme]
+      summary: Get all themes
+      responses:
+        200:
+          description: List of themes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Theme'
+
+  /theme/{themeId}:
+    get:
+      tags: [Theme]
+      summary: Get a theme by ID
+      parameters:
+        - in: path
+          name: themeId
+          schema:
+            type: string
+          required: true
+      responses:
+        200:
+          description: Theme object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Theme'
+    patch:
+      tags: [Theme]
+      summary: Update a theme
+      parameters:
+        - in: path
+          name: themeId
+          schema:
+            type: string
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                themeName:
+                  type: string
+      responses:
+        200:
+          description: Theme updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Theme'
+    delete:
+      tags: [Theme]
+      summary: Delete a theme
+      parameters:
+        - in: path
+          name: themeId
+          schema:
+            type: string
+          required: true
+      responses:
+        200:
+          description: Theme deleted
+
+  /property:
+    post:
+      tags: [Property]
+      summary: Create a property for a theme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                themeId:
+                  type: string
+                  format: uuid
+                name:
+                  type: string
+                propertyType:
+                  type: string
+                propertyValues:
+                  type: array
+                  items:
+                    type: string
+              required: [themeId, name, propertyType]
+      responses:
+        200:
+          description: Property created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Property'
+
+  /property/{themeId}:
+    get:
+      tags: [Property]
+      summary: Get all properties for a theme
+      parameters:
+        - in: path
+          name: themeId
+          schema:
+            type: string
+          required: true
+      responses:
+        200:
+          description: List of properties
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Property'
+
+  /property/detail/{propertyId}:
+    get:
+      tags: [Property]
+      summary: Get a property by propertyId
+      parameters:
+        - in: path
+          name: propertyId
+          schema:
+            type: string
+          required: true
+      responses:
+        200:
+          description: Property object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Property'
+
+  /property/{propertyId}:
+    patch:
+      tags: [Property]
+      summary: Update a property
+      parameters:
+        - in: path
+          name: propertyId
+          schema:
+            type: string
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                propertyType:
+                  type: string
+                propertyValues:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        200:
+          description: Property updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Property'
+    delete:
+      tags: [Property]
+      summary: Delete a property
+      parameters:
+        - in: path
+          name: propertyId
+          schema:
+            type: string
+          required: true
+      responses:
+        200:
+          description: Property deleted
+
+  /property/{propertyId}/values:
+    post:
+      tags: [Property]
+      summary: Add property values (array)
+      parameters:
+        - in: path
+          name: propertyId
+          schema:
+            type: string
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PropertyValues'
+      responses:
+        200:
+          description: Property values added
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Property'
+    delete:
+      tags: [Property]
+      summary: Remove property value (by value)
+      parameters:
+        - in: path
+          name: propertyId
+          schema:
+            type: string
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemovePropertyValue'
+      responses:
+        200:
+          description: Property value removed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Property'

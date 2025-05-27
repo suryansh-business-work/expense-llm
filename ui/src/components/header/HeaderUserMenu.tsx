@@ -118,7 +118,7 @@ const HeaderUserMenu = () => {
             </Typography>
           )}
           <Typography variant="body2" sx={{ mb: 0.5 }}>
-            Token used: {totalPromptTokenSizeUsed}/{totalPromptTokenSizeAvailable} (<b>{totalPromptTokenSizeUsedPercentage}% Used</b>)
+            Token used: {totalPromptTokenSizeUsed}/{totalPromptTokenSizeAvailable} (<b>{totalPromptTokenSizeUsedPercentage.toFixed(1)}% Used</b>)
           </Typography>
           <LinearProgress
             variant="determinate"
