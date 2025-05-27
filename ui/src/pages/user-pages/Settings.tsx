@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Paper,
   Typography,
@@ -7,33 +7,12 @@ import {
 import Appearance from "./Appearance";
 import Notifications from "./Notifications";
 
-const API_BASE = "http://localhost:3000/design-system";
-
 export default function Settings() {
   const [notifications, setNotifications] = useState({
     promotions: true,
     account: true,
     bots: true,
   });
-
-  // Theme API integration
-  const [selectedThemeId, setSelectedThemeId] = useState<string>("");
-
-  useEffect(() => {
-    fetchThemes();
-  }, []);
-
-  const fetchThemes = async () => {
-    try {
-      const res = await fetch(`${API_BASE}/get`);
-      const data = await res.json();
-      if (Array.isArray(data.data)) {
-        if (data.data.length && !selectedThemeId) {
-          setSelectedThemeId(data.data[0].themeId);
-        }
-      }
-    } catch (err) { }
-  };
 
   return (
     <div className="container mt-5">
@@ -44,10 +23,7 @@ export default function Settings() {
         <Divider sx={{ my: 3 }} />
         <div className="row">
           <div className="col-12 col-md-6 mb-4">
-            <Appearance
-              selectedThemeId={selectedThemeId}
-              setSelectedThemeId={setSelectedThemeId}
-            />
+            <Appearance />
           </div>
           <div className="col-12 col-md-6 mb-4">
             <Notifications

@@ -48,7 +48,7 @@ export const ChatBoxWrapper: React.FC<ChatBoxWrapperProps> = ({ messages, isLoad
   const endIndex = Math.min(totalItems, startIndex + VISIBLE_COUNT);
   const visibleMessages = messages.slice(startIndex, endIndex);
   const paddingTop = startIndex * itemHeight;
-  const paddingBottom = Math.max(0, (totalItems - endIndex) * itemHeight);
+  const paddingBottom = Math.max(0, (totalItems - endIndex) * itemHeight) + 20;
 
   return (
     <div

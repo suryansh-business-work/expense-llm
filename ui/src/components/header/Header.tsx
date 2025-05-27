@@ -8,6 +8,7 @@ import HeaderNavLinks from './HeaderNavLinks';
 import HeaderUserMenu from './HeaderUserMenu';
 import HeaderDrawer from './HeaderDrawer';
 import HeaderAlert from './HeaderAlert';
+// import { useAppTheme } from '../../pages/admin/design-system/ThemeProvider';
 
 const Header = () => {
   const { botId, childBotType, chatBotId } = useParams();
@@ -16,6 +17,7 @@ const Header = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  // const appTheme = useAppTheme();
 
   const navLinks = [
     { to: '/bots', label: 'All Bots' },

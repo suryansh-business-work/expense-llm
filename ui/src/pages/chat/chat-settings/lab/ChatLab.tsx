@@ -1,31 +1,53 @@
 import { useState } from "react";
-import { Box, Tabs, Tab, Paper } from "@mui/material";
+import { Box, Paper, Stepper, Step, StepLabel, Button } from "@mui/material";
 import PromptSection from "./prompt-management/PromptSection";
-import FunctionsSection from "./FunctionsSection";
+import McpServers from "./MCPServers";
+
+const steps = ["Prompt", "Mcp Servers"];
 
 const ChatLab = () => {
-  const [tab, setTab] = useState(0);
+  const [activeStep, setActiveStep] = useState(0);
+
+  const handleNext = () => {
+    setActiveStep((prev) => Math.min(prev + 1, steps.length - 1));
+  };
+
+  const handleBack = () => {
+    setActiveStep((prev) => Math.max(prev - 1, 0));
+  };
 
   return (
     <div className="container-fluid py-4">
       <div className="row justify-content-center">
         <div className="col-md-10 col-lg-8">
           <Paper elevation={3} sx={{ p: 3 }}>
-            <Box sx={{ display: "flex" }}>
-              {/* Vertical Tabs */}
-              <Tabs
-                orientation="vertical"
-                value={tab}
-                onChange={(_, v) => setTab(v)}
-                sx={{ borderRight: 1, borderColor: "divider", minWidth: 180 }}
-              >
-                <Tab label="Prompt" />
-                <Tab label="Functions" />
-              </Tabs>
-              {/* Tab Panels */}
-              <Box sx={{ flex: 1, pl: 3 }}>
-                {tab === 0 && <PromptSection />}
-                {tab === 1 && <FunctionsSection />}
+            <Box sx={{ width: "100%" }}>
+              <Stepper activeStep={activeStep} alternativeLabel>
+                {steps.map((label) => (
+                  <Step key={label}>
+                    <StepLabel>{label}</StepLabel>
+                  </Step>
+                ))}
+              </Stepper>
+              <Box sx={{ mt: 4 }}>
+                {activeStep === 0 && <PromptSection />}
+                {activeStep === 1 && <McpServers />}
+              </Box>
+              <Box sx={{ display: "flex", justifyContent: "space-between", mt: 3 }}>
+                <Button
+                  disabled={activeStep === 0}
+                  onClick={handleBack}
+                  variant="outlined"
+                >
+                  Back
+                </Button>
+                <Button
+                  disabled={activeStep === steps.length - 1}
+                  onClick={handleNext}
+                  variant="contained"
+                >
+                  Next
+                </Button>
               </Box>
             </Box>
           </Paper>

@@ -37,6 +37,10 @@ export const getTheme = async (req: Request, res: Response) => {
 // 4. Update Theme
 export const updateTheme = async (req: Request, res: Response) => {
   try {
+    // If selected is being set to true, set all others to false first
+    if (req.body.selected === true) {
+      await service.updateTheme(null, { selected: false }); // Set all to false
+    }
     const theme = await service.updateTheme(req.params.themeId, req.body);
     if (!theme) return noContentResponse(res, null, "Theme not found");
     return successResponse(res, theme, "Theme updated");

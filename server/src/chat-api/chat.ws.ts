@@ -10,7 +10,7 @@ let wss: WebSocketServer | null = null;
 
 export function startWebSocketServer() {
   if (!wss) {
-    wss = new WebSocketServer({ port: 8080 });
+    wss = new WebSocketServer({ port: 8081 });
 
     wss.on("connection", (ws) => {
       ws.on("message", async (message) => {
@@ -43,8 +43,11 @@ export function startWebSocketServer() {
               // Only use prompts where isUseForChat is true
               promptString = promptDoc.prompt
                 .filter((p: any) => p.isUseForChat)
-                .map((p: any) => p.prompt)
-                .join("\n");
+                .map((p: any) => {
+                  // Combine prompt, output example, and userInput
+                  return `${p.prompt} ${p.output ? "\nExample Output: " + p.output : ""}\nUser Input: ${userInput}`;
+                })
+                .join("\n\n");
             }
           } catch (e) {
             console.error("Failed to fetch prompt for bot:", chatBotId, e);
@@ -52,12 +55,12 @@ export function startWebSocketServer() {
           await createUsage({
             botId: chatBotId,
             botOwnerUserId: userContext.userId,
-            promptTokenSize: encode(`${promptString}\nUser Input: ${userInput}`).length,
-            prompt: `${promptString}\nUser Input: ${userInput}`,
+            promptTokenSize: encode(promptString).length,
+            prompt: promptString,
             userContext: userContext
           });
           // Get bot response (with prompt context if needed)
-          const botResponseRaw = await getChatGptResponse(`${promptString}\nUser Input: ${userInput}`);
+          const botResponseRaw = await getChatGptResponse(promptString);
           let botContent = botResponseRaw;
           try {
             // Try to parse if it's JSON

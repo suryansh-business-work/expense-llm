@@ -5,6 +5,8 @@ import { useUserContext } from '../../providers/UserProvider';
 import { useParams } from 'react-router-dom';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, { AlertColor } from '@mui/material/Alert';
+import ChatBoxSetting from './ChatBoxSetting';
+import ChatInput from './ChatInput';
 
 interface Message {
   role: 'user' | 'bot' | 'system';
@@ -34,7 +36,7 @@ const Chat = () => {
     let reconnectTimeout: ReturnType<typeof setTimeout> | null = null;
 
     const connectWebSocket = () => {
-      wsInstance = new WebSocket('ws://localhost:8080');
+      wsInstance = new WebSocket('ws://localhost:8081');
 
       wsInstance.onopen = () => {
         setWsConnected(true);
@@ -144,21 +146,13 @@ const Chat = () => {
     <div className="chat-container">
       <div className="chat-bot-wrapper">
         <ChatBoxWrapper messages={messages} isLoading={isLoading} />
-        <div className="chat-input-container">
-          <input
-            type="text"
-            placeholder="Type your message here..."
-            value={userInput}
-            onChange={(e) => setUserInput(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') handleSendMessage();
-            }}
-            disabled={!wsConnected}
-          />
-          <button onClick={handleSendMessage} disabled={!wsConnected}>
-            <i className="fa-solid fa-paper-plane"></i>
-          </button>
-        </div>
+        <ChatBoxSetting />
+        <ChatInput
+          userInput={userInput}
+          setUserInput={setUserInput}
+          handleSendMessage={handleSendMessage}
+          wsConnected={wsConnected}
+        />
       </div>
       <Snackbar
         open={toast.open}
