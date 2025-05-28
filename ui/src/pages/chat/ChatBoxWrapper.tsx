@@ -2,8 +2,13 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import BotGeneral from "./chat-message-blocks/BotGeneral";
 import LoaderGeneral from "./chat-message-blocks/LoaderGeneral";
 import UserGeneral from "./chat-message-blocks/UserGeneral";
+import axios from "axios";
+import API_LIST from "../apiList";
+import { useParams } from "react-router-dom";
+import { Alert, Snackbar } from "@mui/material";
+import { useUserContext } from "../../providers/UserProvider";
 
-const avatarUrl = 'https://ik.imagekit.io/esdata1/exyconn/logo/exyconn.svg';
+const avatarUrl = 'https://mui.com/static/images/avatar/3.jpg';
 interface ChatBoxWrapperProps {
   messages: any;
   isLoading: boolean;
@@ -17,6 +22,17 @@ export const ChatBoxWrapper: React.FC<ChatBoxWrapperProps> = ({ messages, isLoad
   const [itemHeight, setItemHeight] = useState<number>(100);
   const [scrollTop, setScrollTop] = useState<number>(0);
   const [shouldStickToBottom, setShouldStickToBottom] = useState<boolean>(true);
+  const { chatBotId } = useParams<{ chatBotId: string }>();
+  const token = localStorage.getItem("token");
+  const [, setAppearanceLoading] = useState(true);
+  const [chatAppearance, setChatAppearance] = useState<any>({});
+  const { user } = useUserContext();
+
+  const [snackbar, setSnackbar] = useState<{ open: boolean; message: string; severity: "success" | "error" }>({
+    open: false,
+    message: "",
+    severity: "success",
+  });
 
   useEffect(() => {
     if (measureRef.current) {
@@ -31,6 +47,32 @@ export const ChatBoxWrapper: React.FC<ChatBoxWrapperProps> = ({ messages, isLoad
     setScrollTop(scrollTop);
     setShouldStickToBottom(scrollTop + clientHeight >= scrollHeight - 20);
   }, []);
+
+  useEffect(() => {
+    const fetchSettings = async () => {
+      if (!chatBotId) return;
+      setAppearanceLoading(true);
+      try {
+        const res = await axios.get(
+          API_LIST.GET_CHAT_SETTING(chatBotId),
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const appearance = res?.data?.data?.setting?.appearance;
+        setChatAppearance(appearance)
+      } catch (err: any) {
+        setSnackbar({ open: true, message: "Failed to load appearance settings", severity: "error" });
+      } finally {
+        setAppearanceLoading(false);
+      }
+    };
+    fetchSettings();
+    // eslint-disable-next-line
+  }, [chatBotId]);
 
   useEffect(() => {
     if (shouldStickToBottom && containerRef.current) {
@@ -55,19 +97,21 @@ export const ChatBoxWrapper: React.FC<ChatBoxWrapperProps> = ({ messages, isLoad
       className="chat-box"
       ref={containerRef}
       onScroll={handleScroll}
-      style={{ overflowY: 'auto', height: '500px' }} 
+      style={{ overflowY: 'auto', height: '500px', background: chatAppearance?.chatBackground || '#fff' }}
     >
       <div className="messages" style={{ paddingTop, paddingBottom }}>
         {messages.length > 0 && (
           <div style={{ visibility: 'hidden', position: 'absolute', pointerEvents: 'none' }} ref={measureRef}>
             {messages[0].role === 'user' ? (
               <UserGeneral
-                avatarUrl={avatarUrl}
+                chatAppearance={chatAppearance}
+                userContext={messages[0]?.userContext ? messages[0].userContext : user}
                 timestamp={messages[0].timestamp}
                 content={messages[0].botResponse}
               />
             ) : (
               <BotGeneral
+                chatAppearance={chatAppearance}
                 avatarUrl={avatarUrl}
                 timestamp={messages[0].timestamp}
                 content={messages[0].botResponse}
@@ -80,13 +124,15 @@ export const ChatBoxWrapper: React.FC<ChatBoxWrapperProps> = ({ messages, isLoad
           const realIndex = startIndex + index;
           return message.role === 'user' ? (
             <UserGeneral
+              chatAppearance={chatAppearance}
               key={realIndex}
-              avatarUrl={avatarUrl}
+              userContext={message?.userContext ? message.userContext : user}
               timestamp={message.timestamp}
               content={message.botResponse}
             />
           ) : (
             <BotGeneral
+              chatAppearance={chatAppearance}
               key={realIndex}
               avatarUrl={avatarUrl}
               timestamp={message.timestamp}
@@ -95,7 +141,21 @@ export const ChatBoxWrapper: React.FC<ChatBoxWrapperProps> = ({ messages, isLoad
             />
           );
         })}
-        {isLoading && <LoaderGeneral avatarUrl={avatarUrl} timestamp={''} />}
+        {isLoading && <LoaderGeneral timestamp={''} />}
+        <Snackbar
+          open={snackbar.open}
+          autoHideDuration={3000}
+          onClose={() => setSnackbar(s => ({ ...s, open: false }))}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        >
+          <Alert
+            onClose={() => setSnackbar(s => ({ ...s, open: false }))}
+            severity={snackbar.severity}
+            sx={{ width: "100%" }}
+          >
+            {snackbar.message}
+          </Alert>
+        </Snackbar>
       </div>
     </div>
   );

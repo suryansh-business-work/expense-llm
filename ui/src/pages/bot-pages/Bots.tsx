@@ -1,6 +1,5 @@
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import Avatar from '@mui/material/Avatar';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardHeader from '@mui/material/CardHeader';
@@ -106,7 +105,7 @@ const Bots = () => {
           </div>
         </div>
         <div className="row">
-          <nav className="col-3" aria-label="Bot Category">
+          <nav className="col-12 col-sm-12 col-md-4 col-lg-3 mb-4" aria-label="Bot Category">
             <ul className="bot-categories" role="listbox" aria-labelledby="bot-category-heading">
               {BOT_CATEGORIES.map((cat) => (
                 <li key={cat.value} className="mb-2" role="option" aria-selected={category === cat.value}>
@@ -143,10 +142,10 @@ const Bots = () => {
               ))}
             </ul>
           </nav>
-          <main className="col-9" aria-labelledby="bots-heading">
+          <main className="col-12 col-sm-12 col-md-8 col-lg-9" aria-labelledby="bots-heading">
             <div className="row">
               {filteredBots.map((bot, index) => (
-                <div className="col-12 col-sm-6 col-md-4 mb-4" key={index}>
+                <div className="col-12 col-sm-6 col-md-6 mb-4" key={index}>
                   <Card
                     sx={{
                       backgroundColor: '#ffffff',
@@ -164,22 +163,6 @@ const Bots = () => {
                     aria-label={`${bot.name}: ${bot.description}`}
                   >
                     <CardHeader
-                      avatar={
-                        <Avatar
-                          aria-label={`${bot.name} logo`}
-                          sx={{ alignSelf: "flex-start" }} // Top align the avatar
-                        >
-                          {bot.logo ? (
-                            <img
-                              src={bot.logo}
-                              alt={`${bot.name} logo`}
-                              style={{ width: "100%", height: "100%" }}
-                            />
-                          ) : (
-                            bot.name.slice(0, 1)
-                          )}
-                        </Avatar>
-                      }
                       title={<h4>{bot.name}</h4>}
                       subheader={bot.description}
                     />

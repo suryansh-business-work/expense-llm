@@ -11,9 +11,9 @@ import HeaderAlert from './HeaderAlert';
 // import { useAppTheme } from '../../pages/admin/design-system/ThemeProvider';
 
 const Header = () => {
-  const { botId, childBotType, chatBotId } = useParams();
+  const { childBotType, chatBotId } = useParams();
   const location = useLocation();
-  const botPage = getBotPageByUrl(botId || '');
+  const botPage = getBotPageByUrl(childBotType || '');
   const [drawerOpen, setDrawerOpen] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
@@ -25,14 +25,13 @@ const Header = () => {
     { to: `/bot/${childBotType}/chat-settings/${chatBotId}`, label: 'Settings' },
     { to: `/bot/${childBotType}/lab/${chatBotId}`, label: 'Lab' }
   ];
-
   const pathParts = location.pathname.split('/');
   const isLinkChatOrDashboard = pathParts.includes('chat') || pathParts.includes('chat-settings')|| pathParts.includes('lab');
 
   return (
     <>
       <HeaderAlert />
-      <AppBar position="sticky" sx={{ backgroundColor: '#0c1b32' }}>
+      <AppBar position="sticky" sx={{ backgroundColor: '#fff', color: '#000' }}>
         <Toolbar>
           <div className="container-fluid">
             <div className="row align-items-center w-100">

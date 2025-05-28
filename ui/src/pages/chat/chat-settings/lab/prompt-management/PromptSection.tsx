@@ -250,10 +250,10 @@ const PromptSection = () => {
         { userInput: prompt + "\n" + testUserInput },
         {
           headers:
-            {
-              "Content-Type": "application/json",
-              ...(token ? { Authorization: `Bearer ${token}` } : {}),
-            },
+          {
+            "Content-Type": "application/json",
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          },
         }
       );
       const apiRaw = resp.data?.data?.prompt;
@@ -283,116 +283,110 @@ const PromptSection = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit, onError)}>
-      <Typography variant="h6" gutterBottom>
-        Manage Prompts
-      </Typography>
-      <Typography
-        variant="subtitle1"
-        sx={{
-          mb: 2,
-          color: "#6c757d",
-          display: "flex",
-          alignItems: "center",
-          gap: 1,
-          fontWeight: 400,
-          fontSize: 16,
-          background: "#f5faff",
-          borderRadius: 1,
-          px: 2,
-          py: 1,
-          textTransform: "none", // ensure normal case
-        }}
-      >
-        <span style={{ color: "#1976d2", marginRight: 8, display: "flex", alignItems: "center" }}>
-          <i className="fa fa-info-circle" style={{ fontSize: 20, marginRight: 6 }} />
-        </span>
-        If you do not enable this, the chat will use default chatgpt behavior. enable and customize a prompt here to make the assistant interpret user input and call functions as you define—this acts as the system prompt for your bot's advanced logic.
-      </Typography>
-      <div className="row mb-3">
-        <div className="col-12">
-          <Button
-            type="submit"
-            variant="contained"
-            disabled={
-              (
-                (
-                  saving ||
-                  loading ||
-                  Object.keys(errors.prompt || {}).length > 0 ||
-                  Object.keys(outputJsonErrors).length > 0
-                )
-                // || (!isDirty && !isOnlyUseForChatDirty)
-              )
+    <div className="mb-3">
+      <form onSubmit={handleSubmit(onSubmit, onError)}>
+        <Typography variant="h5" gutterBottom>
+          Manage Prompts
+        </Typography>
+        <Typography
+          variant="subtitle1"
+          sx={{
+            mb: 2,
+            color: "#6c757d",
+            display: "flex",
+            alignItems: "center",
+            gap: 1,
+            fontWeight: 400,
+            fontSize: 16,
+            background: "#f5faff",
+            borderRadius: 1,
+            px: 2,
+            py: 1,
+            textTransform: "none", // ensure normal case
+          }}
+        >
+          <span style={{ color: "#1976d2", marginRight: 8, display: "flex", alignItems: "center" }}>
+            <i className="fa fa-info-circle" style={{ fontSize: 20, marginRight: 6 }} />
+          </span>
+          If you do not enable this, the chat will use default chatgpt behavior. enable and customize a prompt here to make the assistant interpret user input and call functions as you define—this acts as the system prompt for your bot's advanced logic.
+        </Typography>
+        <Button
+          variant="outlined"
+          startIcon={<Add />}
+          onClick={() => {
+            if (fields.length >= MAX_PROMPTS) {
+              showSnackbar(`You can add up to ${MAX_PROMPTS} prompts only.`, "info");
+              return;
             }
-            startIcon={saving ? <CircularProgress size={20} color="inherit" /> : null}
-            sx={{ mb: 2 }}
-          >
-            {saving ? "Saving..." : "Save Prompts"}
-          </Button>
-        </div>
-      </div>
-      <div className="row mb-3">
-        <div className="col-12">
-          <Button
-            variant="outlined"
-            startIcon={<Add />}
-            onClick={() => {
-              if (fields.length >= MAX_PROMPTS) {
-                showSnackbar(`You can add up to ${MAX_PROMPTS} prompts only.`, "info");
-                return;
-              }
-              append(defaultPrompt);
-              setExpanded(fields.length);
-            }}
-            sx={{ mb: 2 }}
-            disabled={fields.length >= MAX_PROMPTS}
-          >
-            Add Prompt
-          </Button>
-        </div>
-      </div>
-      {loading ? (
-        <Box display="flex" flexDirection="column" gap={2} className="mb-3">
-          <Skeleton variant="rectangular" height={56} />
-          <Skeleton variant="rectangular" height={56} />
-        </Box>
-      ) : (
-        <PromptAccordionList
-          fields={fields}
-          expanded={expanded}
-          onAccordionChange={handleAccordionChange}
-          control={control}
-          errors={errors}
-          outputJsonErrors={outputJsonErrors}
-          promptValues={promptValues}
-          tokenSizes={tokenSizes}
-          handleSelectPrompt={handleSelectPrompt}
-          handleDeletePrompt={handleDeletePrompt}
-          openTestDrawer={openTestDrawer}
+            append(defaultPrompt);
+            setExpanded(fields.length);
+          }}
+          sx={{ mb: 2 }}
+          disabled={fields.length >= MAX_PROMPTS}
+        >
+          Add Prompt
+        </Button>
+        {loading ? (
+          <Box display="flex" flexDirection="column" gap={2} className="mb-3">
+            <Skeleton variant="rectangular" height={56} />
+            <Skeleton variant="rectangular" height={56} />
+          </Box>
+        ) : (
+          <PromptAccordionList
+            fields={fields}
+            expanded={expanded}
+            onAccordionChange={handleAccordionChange}
+            control={control}
+            errors={errors}
+            outputJsonErrors={outputJsonErrors}
+            promptValues={promptValues}
+            tokenSizes={tokenSizes}
+            handleSelectPrompt={handleSelectPrompt}
+            handleDeletePrompt={handleDeletePrompt}
+            openTestDrawer={openTestDrawer}
+          />
+        )}
+        <PromptDeleteDialog
+          open={deleteIdx !== null}
+          onCancel={() => setDeleteIdx(null)}
+          onConfirm={confirmDeletePrompt}
         />
-      )}
-      <PromptDeleteDialog
-        open={deleteIdx !== null}
-        onCancel={() => setDeleteIdx(null)}
-        onConfirm={confirmDeletePrompt}
-      />
-      <PromptTestDrawer
-        open={testDrawer.open}
-        onClose={closeTestDrawer}
-        getDrawerPromptName={getDrawerPromptName}
-        promptValues={promptValues}
-        testDrawer={testDrawer}
-        testUserInput={testUserInput}
-        setTestUserInput={setTestUserInput}
-        testOutput={testOutput}
-        setTestOutput={setTestOutput}
-        testLoadingDrawer={testLoadingDrawer}
-        handleTestPrompt={handleTestPrompt}
-        testResult={testResult}
-        apiOutput={apiOutput}
-      />
-    </form>
+        <PromptTestDrawer
+          open={testDrawer.open}
+          onClose={closeTestDrawer}
+          getDrawerPromptName={getDrawerPromptName}
+          promptValues={promptValues}
+          testDrawer={testDrawer}
+          testUserInput={testUserInput}
+          setTestUserInput={setTestUserInput}
+          testOutput={testOutput}
+          setTestOutput={setTestOutput}
+          testLoadingDrawer={testLoadingDrawer}
+          handleTestPrompt={handleTestPrompt}
+          testResult={testResult}
+          apiOutput={apiOutput}
+        />
+        <Button
+          type="submit"
+          variant="contained"
+          disabled={
+            (
+              (
+                saving ||
+                loading ||
+                Object.keys(errors.prompt || {}).length > 0 ||
+                Object.keys(outputJsonErrors).length > 0
+              )
+              // || (!isDirty && !isOnlyUseForChatDirty)
+            )
+          }
+          startIcon={saving ? <CircularProgress size={20} color="inherit" /> : null}
+          sx={{ mb: 2 }}
+        >
+          {saving ? "Saving..." : "Save Prompts"}
+        </Button>
+      </form>
+    </div>
   );
 };
 

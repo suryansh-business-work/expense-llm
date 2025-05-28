@@ -1,5 +1,5 @@
-import { Typography, Button } from '@mui/material';
-import { NavLink } from 'react-router-dom';
+import { Typography, ToggleButton, ToggleButtonGroup } from '@mui/material';
+import { NavLink, useLocation } from 'react-router-dom';
 
 const HeaderNavLinks = ({
   isMobile,
@@ -11,33 +11,49 @@ const HeaderNavLinks = ({
   isLinkChatOrDashboard: boolean;
   navLinks: { to: string; label: string }[];
   botPage: any;
-}) => (
-  <div className="col">
-    <div className="d-flex align-items-center">
-      {botPage && (
-        <Typography variant="h5" sx={{ fontWeight: 'bold', marginRight: '20px' }}>
-          {botPage.botListPage.heading}
-        </Typography>
-      )}
-      {!isMobile && isLinkChatOrDashboard &&
-        navLinks.slice(1).map((link) => (
-          <NavLink key={link.to} to={link.to}>
-            {({ isActive }) => (
-              <Button
+}) => {
+  const location = useLocation();
+  const current = navLinks.find((link) => location.pathname.startsWith(link.to))?.to || navLinks[0]?.to;
+
+  return (
+    <div className="col">
+      <div className="d-flex align-items-center">
+        {!isMobile && isLinkChatOrDashboard && (
+          <ToggleButtonGroup value={current} exclusive sx={{ background: 'transparent', ml: 1 }}>
+            {navLinks.slice(1).map((link) => (
+              <ToggleButton
+                key={link.to}
+                value={link.to}
+                component={NavLink}
+                to={link.to}
                 sx={{
-                  marginRight: '20px',
-                  fontWeight: isActive ? 'bold' : 'normal',
-                  color: '#fff'
+                  fontWeight: location.pathname.startsWith(link.to) ? 'bold' : 'normal',
+                  padding: '8px 26px',
+                  color: '#000',
+                  textTransform: 'none', // <-- normal case
+                  '&.Mui-selected': {
+                    backgroundColor: '#1976d2',
+                    color: '#fff',
+                    '&:hover': {
+                      backgroundColor: '#115293',
+                      color: '#fff',
+                    },
+                  },
                 }}
-                variant={isActive ? 'contained' : 'text'}
               >
                 {link.label}
-              </Button>
-            )}
-          </NavLink>
-        ))}
+              </ToggleButton>
+            ))}
+          </ToggleButtonGroup>
+        )}
+        {botPage && (
+          <Typography variant="h5" sx={{ marginLeft: '20px' }}>
+            {botPage.botListPage.heading}
+          </Typography>
+        )}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default HeaderNavLinks;

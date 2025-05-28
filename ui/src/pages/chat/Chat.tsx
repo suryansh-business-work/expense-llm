@@ -5,8 +5,8 @@ import { useUserContext } from '../../providers/UserProvider';
 import { useParams } from 'react-router-dom';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, { AlertColor } from '@mui/material/Alert';
-import ChatBoxSetting from './ChatBoxSetting';
 import ChatInput from './ChatInput';
+import ChatTopPannel from './ChatTopPannel';
 
 interface Message {
   role: 'user' | 'bot' | 'system';
@@ -40,7 +40,7 @@ const Chat = () => {
 
       wsInstance.onopen = () => {
         setWsConnected(true);
-        setToast({ open: true, message: 'WebSocket connected', severity: 'success' });
+        setToast({ open: true, message: 'Chat Connected', severity: 'success' });
         // Request chat history on connect
         wsInstance.send(
           JSON.stringify({
@@ -54,14 +54,14 @@ const Chat = () => {
 
       wsInstance.onclose = () => {
         setWsConnected(false);
-        setToast({ open: true, message: 'WebSocket disconnected', severity: 'error' });
+        setToast({ open: true, message: 'Chat Disconnected', severity: 'error' });
         reconnectTimeout = setTimeout(connectWebSocket, 2000);
       };
 
       wsInstance.onerror = () => {
         setIsLoading(false);
         setWsConnected(false);
-        setToast({ open: true, message: 'WebSocket error', severity: 'error' });
+        setToast({ open: true, message: 'Chat error', severity: 'error' });
       };
 
       wsInstance.onmessage = async (event) => {
@@ -145,14 +145,20 @@ const Chat = () => {
   return (
     <div className="chat-container">
       <div className="chat-bot-wrapper">
+        <ChatTopPannel />
         <ChatBoxWrapper messages={messages} isLoading={isLoading} />
-        <ChatBoxSetting />
-        <ChatInput
-          userInput={userInput}
-          setUserInput={setUserInput}
-          handleSendMessage={handleSendMessage}
-          wsConnected={wsConnected}
-        />
+        <div className='container'>
+          <div className='row'>
+            <div className='col-12'>
+              <ChatInput
+                userInput={userInput}
+                setUserInput={setUserInput}
+                handleSendMessage={handleSendMessage}
+                wsConnected={wsConnected}
+              />
+            </div>
+          </div>
+        </div>
       </div>
       <Snackbar
         open={toast.open}

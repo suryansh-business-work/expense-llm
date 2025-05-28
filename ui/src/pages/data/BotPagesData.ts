@@ -85,22 +85,6 @@ const BotPagesData: BotPage[] = [
     }
   },
   {
-    id: '5',
-    name: 'Wishlist',
-    description: 'Create and track your short-term and long-term wishes with the Wishlist Bot.',
-    logo: '',
-    type: {
-      name: 'Daily life',
-      value: 'daily-life',
-      description: 'Bots for daily routines, reminders, and personal management.',
-      icon: ''
-    },
-    url: 'wishlist-bot',
-    botListPage: {
-      heading: 'Wishlist Bot'
-    }
-  },
-  {
     id: '6',
     name: 'Reminders',
     description: 'Never miss an important event or meeting with the Reminders Bot.',

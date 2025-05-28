@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, IconButton, Avatar, Menu, Typography, Button, LinearProgress, Divider } from '@mui/material';
+import { Box, Avatar, Menu, Typography, Button, LinearProgress, Divider } from '@mui/material';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { useNavigate } from 'react-router-dom';
 import { useUserContext } from '../../providers/UserProvider';
@@ -30,7 +30,7 @@ const HeaderUserMenu = () => {
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [totalPromptTokenSizeUsed, setTotalPromptTokenSizeUsed] = useState<number>(0);
-  const [totalPromptTokenSizeAvailable] = useState<number>(10000); 
+  const [totalPromptTokenSizeAvailable] = useState<number>(10000);
   const [totalPromptTokenSizeUsedPercentage, setTotalPromptTokenSizeUsedPercentage] = useState<number>(0);
   const [, setMenuOpen] = useState(false);
   const navigate = useNavigate();
@@ -89,14 +89,15 @@ const HeaderUserMenu = () => {
 
   return (
     <div className="col-auto d-flex justify-content-end align-items-center">
-      {firstName && (
-        <Typography sx={{ color: '#fff', mr: 1 }}>
-          {firstName} {lastName}
-        </Typography>
-      )}
-      <IconButton onClick={handleAvatarClick} sx={{ p: 0 }}>
-        <Avatar alt="User" src={avatarPic} />
-      </IconButton>
+      <Button onClick={handleAvatarClick} sx={{ p: 0 }}>
+        {firstName && (
+          <div className="d-flex align-items-center ps-2 pe-2">
+            <span className="d-none d-md-inline-block me-3">{firstName} {lastName}</span>
+            <Avatar alt={user?.firstName} src={avatarPic} />
+          </div>
+        )}
+
+      </Button>
       <Menu
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}

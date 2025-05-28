@@ -7,12 +7,12 @@ const schema = Joi.object({
   useChatHistory: Joi.boolean().required(),
 });
 
-type ChatBoxSettingForm = {
+type ChatBotSettingForm = {
   useChatHistory: boolean;
 };
 
-export default function ChatBoxSetting() {
-  const { control } = useForm<ChatBoxSettingForm>({
+export default function ChatBotSetting() {
+  const { control } = useForm<ChatBotSettingForm>({
     defaultValues: { useChatHistory: true },
     resolver: joiResolver(schema),
   });
@@ -20,10 +20,6 @@ export default function ChatBoxSetting() {
   return (
     <Paper
       className="ps-3"
-      sx={{
-        background: "#efefef",
-        borderTop: "1px solid #c3c3c3",
-      }}
     >
       <Controller
         name="useChatHistory"

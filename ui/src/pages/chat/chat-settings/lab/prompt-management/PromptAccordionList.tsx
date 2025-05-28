@@ -26,7 +26,7 @@ const PromptAccordionList = ({
   handleDeletePrompt: (idx: number) => void;
   openTestDrawer: (idx: number) => void;
 }) => (
-  <div className="container-fluid">
+  <div>
     {fields.map((item, idx) => (
       <PromptAccordionItem
         key={item.id}

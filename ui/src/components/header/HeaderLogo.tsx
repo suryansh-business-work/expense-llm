@@ -20,7 +20,7 @@ const HeaderLogo = ({ isMobile, setDrawerOpen }: { isMobile: boolean, setDrawerO
     <div className="col-auto">
       <div className="logo">
         <NavLink to="/bots">
-          <img src="/logo/botify-logo.svg" alt="Botify Your Life" />
+          <img src="/logo/botify-logo-dark.svg" alt="Botify Your Life" />
         </NavLink>
       </div>
     </div>

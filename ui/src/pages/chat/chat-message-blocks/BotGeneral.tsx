@@ -1,5 +1,5 @@
 // components/Chat/BotGeneral.tsx
-import { Button, Dialog, List, ListItem, ListItemButton, ListItemText } from '@mui/material';
+import { Avatar, Button, Dialog, List, ListItem, ListItemButton, ListItemText } from '@mui/material';
 import React, { JSX, useState } from 'react';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -10,19 +10,27 @@ interface BotGeneralProps {
   timestamp: string;
   content: JSX.Element;
   isLoading: boolean;
+  chatAppearance: any;
 }
 
-const BotGeneral: React.FC<BotGeneralProps> = ({ avatarUrl, timestamp, content, isLoading }) => {
+const BotGeneral: React.FC<BotGeneralProps> = ({ avatarUrl, timestamp, content, isLoading, chatAppearance }) => {
   const [isOptionDialogOpen, setIsOptionDialogOpen] = useState(false);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   return (
     <>
       <div className="message-row bot-message">
         <div className="avatar-image">
-          <img src={avatarUrl} alt="avatar" className="avatar" />
+          <Avatar
+            src={avatarUrl}
+            alt="avatar"
+            sx={{ width: 40, height: 40 }}
+            style={{ display: isLoading ? 'none' : 'block' }}
+            
+          />
         </div>
-        <div className="message-bubble" tabIndex={1}>
+        <div className="message-bubble" tabIndex={1} style={{ backgroundColor: chatAppearance?.bot?.bubble?.background || '#f0f0f0', color: chatAppearance?.bot?.bubble?.textColor || '#000' }}>
           <div className="bot-message">
+            <div className="user-name mb-2" style={{fontSize: '12px', color: '#333', opacity: '0.8'}}>{`Bot`}</div>
             <div className='bot-action'><a onClick={() => setIsOptionDialogOpen(true)}><i className="fa-solid fa-ellipsis-vertical"></i></a></div>
             {content}
           </div>
