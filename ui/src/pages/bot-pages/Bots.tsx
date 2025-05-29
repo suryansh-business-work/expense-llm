@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -7,6 +7,9 @@ import BotPagesData from "../data/BotPagesData";
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
+import Button from '@mui/material/Button';
+import CreateBotDialog from "./CreateBotDialog";
+import { MCPClient } from "./mcpClient";
 
 // Map type value to icon class (Font Awesome 5+ CSS classes)
 const typeIconMap: Record<string, string> = {
@@ -21,7 +24,11 @@ const Bots = () => {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("all");
   const [searchFocus, setSearchFocus] = useState(false);
+  const [createDialogOpen, setCreateDialogOpen] = useState(false);
   const navigate = useNavigate();
+  const [input, setInput] = useState("");
+  const [response, setResponse] = useState("");
+  const mcpRef = useRef<MCPClient | null>(null);
 
   // Dynamically create categories from BotPagesData
   const BOT_CATEGORIES = useMemo(() => {
@@ -45,6 +52,28 @@ const Bots = () => {
     ];
   }, []);
 
+  // useEffect(() => {
+  //   const client = new MCPClient((message) => {
+  //     // Handle tool response
+  //     const content = message.content?.[0]?.text;
+  //     if (content) setResponse(content);
+  //   });
+
+  //   client.connect();
+  //   mcpRef.current = client;
+
+  //   return () => client.close();
+  // }, []);
+
+  // useEffect(() => {
+  //   const sendReverseString = async () => {
+  //     if (mcpRef.current) {
+  //       await mcpRef.current.sendToolCall("reverse-string", { text: "Hello World" });
+  //     }
+  //   };
+  //   sendReverseString();
+  // }, []);
+  
   // Filter bots by category and search
   const filteredBots = bots.filter((bot) => {
     // If search is focused, ignore category filter
@@ -70,14 +99,22 @@ const Bots = () => {
   };
   const handleSearchBlur = () => setSearchFocus(false);
 
+  const handleCreateBot = (data: any) => {
+    // TODO: handle bot creation (API call etc.)
+    console.log("Bot Created:", data);
+  };
+
   return (
     <>
       <div className="container">
         <div className="row pt-4 align-items-center">
-          <div className="col-6">
+          <div className="col-12 col-md-3 col-lg-3">
             <h1 id="bots-heading">Bots</h1>
           </div>
-          <div className="col-6 d-flex justify-content-end align-items-center" style={{ minHeight: 80 }}>
+          <div className="col-12 col-md-9 col-lg-9 d-flex justify-content-end align-items-center" style={{ minHeight: 80 }}>
+            <Button variant="contained" onClick={() => setCreateDialogOpen(true)} sx={{ mr: 2 }}>
+              Create Bot
+            </Button>
             <TextField
               variant="outlined"
               size="small"
@@ -183,6 +220,11 @@ const Bots = () => {
           </main>
         </div>
       </div>
+      <CreateBotDialog
+        open={createDialogOpen}
+        onClose={() => setCreateDialogOpen(false)}
+        onSubmit={handleCreateBot}
+      />
     </>
   );
 };

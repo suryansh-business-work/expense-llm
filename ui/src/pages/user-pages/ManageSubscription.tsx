@@ -6,10 +6,10 @@ import {
   Paper,
   Divider,
   Drawer,
+  Button,
 } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Table from "../admin/design-system/components/Table";
-import Button from "../admin/design-system/components/Button";
 import axios from "axios";
 import { useUserContext } from "../../providers/UserProvider";
 
@@ -40,7 +40,7 @@ const pricingData = [
 export default function ManageSubscription() {
   const { user } = useUserContext();
   const [totalPromptTokenSizeUsed, setTotalPromptTokenSizeUsed] = useState<number>(0);
-  const [totalPromptTokenSizeAvailable] = useState<number>(10000); // Example quota
+  const [totalPromptTokenSizeAvailable, setTotalPromptTokenSizeAvailable] = useState<number>(0);
   const [totalPromptTokenSizeUsedPercentage, setTotalPromptTokenSizeUsedPercentage] = useState<number>(0);
   const [usageHistory, setUsageHistory] = useState<any[]>([]);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -56,9 +56,10 @@ export default function ManageSubscription() {
 
       try {
         const response = await axios.get(apiUrl);
-        const { totalPromptTokenSize, history } = response.data;
+        const { totalPromptTokenSize, history, userCurrentTokenCount } = response.data;
         setTotalPromptTokenSizeUsed(totalPromptTokenSize || 0);
-        setTotalPromptTokenSizeUsedPercentage(Math.min(((totalPromptTokenSize) / totalPromptTokenSizeAvailable) * 100, 100));
+        setTotalPromptTokenSizeAvailable(userCurrentTokenCount?.tokenCount || 0)
+        setTotalPromptTokenSizeUsedPercentage(Math.min(((totalPromptTokenSize) / userCurrentTokenCount?.tokenCount) * 100, 100));
         setUsageHistory(history || []);
       } catch (err) {
         console.error("Failed to fetch usage summary:", err);
@@ -107,7 +108,7 @@ export default function ManageSubscription() {
         </Typography>
         <Box sx={{ mb: 2, display: "flex", alignItems: "center", gap: 2 }}>
           <Typography variant="body2" sx={{ mb: 0.5 }}>
-            <b>Token used:</b> {totalPromptTokenSizeUsed}/{totalPromptTokenSizeAvailable} (<b>{totalPromptTokenSizeUsedPercentage}% Used</b>)
+            <b>Token used:</b> {totalPromptTokenSizeUsed}/{totalPromptTokenSizeAvailable} (<b>{totalPromptTokenSizeUsedPercentage.toFixed(1)}% Used</b>)
           </Typography>
           <Button
             size="small"

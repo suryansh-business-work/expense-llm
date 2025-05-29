@@ -1,4 +1,4 @@
-import { SubscriptionUsageModel } from "./subscription-usage.model";
+import { SubcriptionModel, SubscriptionUsageModel } from "./subscription-usage.model";
 
 export const createUsage = async (data: any) => {
   return SubscriptionUsageModel.create(data);
@@ -22,10 +22,13 @@ export const getUsageByDateRange = async (
     createdAt: { $gte: startDate, $lte: endDate },
   }).sort({ createdAt: -1 });
 
+  // Use findOne to get a single subscription entry for the user
+  const userCurrentTokenCount = await SubcriptionModel.findOne({ userId: botOwnerUserId });
+
   const totalPromptTokenSize = history.reduce(
     (sum, item) => sum + (item.promptTokenSize || 0),
     0
   );
 
-  return { totalPromptTokenSize, history };
+  return { totalPromptTokenSize, history, userCurrentTokenCount };
 };

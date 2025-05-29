@@ -28,17 +28,17 @@ const BotGeneral: React.FC<BotGeneralProps> = ({ avatarUrl, timestamp, content, 
             
           />
         </div>
+        <div className="user-name mb-2" style={{fontSize: '12px', color: '#333', opacity: '0.8'}}>{`Bot`}</div>
         <div className="message-bubble" tabIndex={1} style={{ backgroundColor: chatAppearance?.bot?.bubble?.background || '#f0f0f0', color: chatAppearance?.bot?.bubble?.textColor || '#000' }}>
           <div className="bot-message">
-            <div className="user-name mb-2" style={{fontSize: '12px', color: '#333', opacity: '0.8'}}>{`Bot`}</div>
             <div className='bot-action'><a onClick={() => setIsOptionDialogOpen(true)}><i className="fa-solid fa-ellipsis-vertical"></i></a></div>
             {content}
           </div>
           <div className='message-bottom-section'>
-            <div className="timestamp">{timestamp}</div>
             {!isLoading && <div className='saved-to-database'><i className="fa-solid fa-check-double"></i></div>}
           </div>
         </div>
+        <div className="timestamp">{timestamp}</div>
       </div>
       <Dialog
         open={isOptionDialogOpen}

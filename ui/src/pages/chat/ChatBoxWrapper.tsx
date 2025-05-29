@@ -5,7 +5,7 @@ import UserGeneral from "./chat-message-blocks/UserGeneral";
 import axios from "axios";
 import API_LIST from "../apiList";
 import { useParams } from "react-router-dom";
-import { Alert, Snackbar } from "@mui/material";
+import { Alert, Snackbar, Skeleton, Avatar, Backdrop, CircularProgress } from "@mui/material";
 import { useUserContext } from "../../providers/UserProvider";
 
 const avatarUrl = 'https://mui.com/static/images/avatar/3.jpg';
@@ -16,6 +16,49 @@ interface ChatBoxWrapperProps {
 
 const VISIBLE_COUNT = 10;
 
+const MessageSkeleton = ({ align = "left" }: { align?: "left" | "right" }) => (
+  <div
+    style={{
+      display: "flex",
+      flexDirection: align === "right" ? "row-reverse" : "row",
+      alignItems: "flex-start",
+      gap: 12,
+      marginBottom: 24,
+    }}
+  >
+    <Skeleton variant="circular">
+      <Avatar />
+    </Skeleton>
+    <div
+      style={{
+        flex: 1,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: align === "right" ? "flex-end" : "flex-start",
+      }}
+    >
+      <Skeleton
+        variant="text"
+        width="30%"
+        height={24}
+        sx={{ alignSelf: align === "right" ? "flex-end" : "flex-start" }}
+      />
+      <Skeleton
+        variant="text"
+        width="80%"
+        height={18}
+        sx={{ alignSelf: align === "right" ? "flex-end" : "flex-start" }}
+      />
+      <Skeleton
+        variant="text"
+        width="60%"
+        height={18}
+        sx={{ alignSelf: align === "right" ? "flex-end" : "flex-start" }}
+      />
+    </div>
+  </div>
+);
+
 export const ChatBoxWrapper: React.FC<ChatBoxWrapperProps> = ({ messages, isLoading }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const measureRef = useRef<HTMLDivElement | null>(null);
@@ -24,7 +67,7 @@ export const ChatBoxWrapper: React.FC<ChatBoxWrapperProps> = ({ messages, isLoad
   const [shouldStickToBottom, setShouldStickToBottom] = useState<boolean>(true);
   const { chatBotId } = useParams<{ chatBotId: string }>();
   const token = localStorage.getItem("token");
-  const [, setAppearanceLoading] = useState(true);
+  const [appearanceLoading, setAppearanceLoading] = useState(true);
   const [chatAppearance, setChatAppearance] = useState<any>({});
   const { user } = useUserContext();
 
@@ -97,9 +140,26 @@ export const ChatBoxWrapper: React.FC<ChatBoxWrapperProps> = ({ messages, isLoad
       className="chat-box"
       ref={containerRef}
       onScroll={handleScroll}
-      style={{ overflowY: 'auto', height: '500px', background: chatAppearance?.chatBackground || '#fff' }}
+      style={{ overflowY: 'auto', height: '500px', background: chatAppearance?.chatBackground || '#fff', position: 'relative' }}
     >
-      <div className="messages" style={{ paddingTop, paddingBottom }}>
+      {/* Block full chat loader until appearanceLoading is false */}
+      <Backdrop
+        open={appearanceLoading}
+        sx={{ color: "#1976d2", zIndex: 10, position: "absolute", backgroundColor: "rgba(255, 255, 255, 0.8)" }}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
+      <div className="messages" style={{ paddingTop, paddingBottom, opacity: appearanceLoading ? 0.3 : 1, pointerEvents: appearanceLoading ? "none" : "auto" }}>
+        {/* Skeleton loading when loading and no messages */}
+        {isLoading || messages.length === 0 && appearanceLoading && (
+          <>
+            <MessageSkeleton align="left" />
+            <MessageSkeleton align="right" />
+            <MessageSkeleton align="left" />
+            <MessageSkeleton align="right" />
+            <MessageSkeleton align="left" />
+          </>
+        )}
         {messages.length > 0 && (
           <div style={{ visibility: 'hidden', position: 'absolute', pointerEvents: 'none' }} ref={measureRef}>
             {messages[0].role === 'user' ? (
@@ -141,7 +201,8 @@ export const ChatBoxWrapper: React.FC<ChatBoxWrapperProps> = ({ messages, isLoad
             />
           );
         })}
-        {isLoading && <LoaderGeneral timestamp={''} />}
+        {/* Show loader for streaming/loading after messages */}
+        {isLoading && messages.length > 0 && <LoaderGeneral timestamp={''} />}
         <Snackbar
           open={snackbar.open}
           autoHideDuration={3000}

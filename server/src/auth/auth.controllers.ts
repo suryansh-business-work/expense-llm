@@ -24,6 +24,7 @@ import {
 import dayjs from "dayjs";
 import timezone from "dayjs/plugin/timezone";
 import utc from "dayjs/plugin/utc";
+import { SubcriptionModel } from '../chat-api/subscription-api/subscription-usage.model';
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
@@ -60,7 +61,11 @@ export const signup = async (req: Request, res: Response) => {
       role: role || "general", // <-- set role, default to general
     });
     await user.save();
-
+    const subcriptionModel = new SubcriptionModel({
+      userId: user?.userId,
+      tokenCount: 1000000, // Default token count
+    })
+    await subcriptionModel.save();
     return successResponse(res, { user: sanitizeUser(user) }, 'User registered successfully');
   } catch (err) {
     return errorResponse(res, err, 'Signup failed');
@@ -295,6 +300,11 @@ export const signupWithGoogle = async (req: Request, res: Response) => {
       role: role || "general", // <-- set role, default to general
     });
     await user.save();
+    const subcriptionModel = new SubcriptionModel({
+      userId: user?.userId,
+      tokenCount: 1000000, // Default token count
+    })
+    await subcriptionModel.save();
 
     const token = generateToken(user.userId);
     return successResponse(res, { token, user: sanitizeUser(user) }, "Signup successful with Google");

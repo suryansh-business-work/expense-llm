@@ -30,7 +30,7 @@ const HeaderUserMenu = () => {
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [totalPromptTokenSizeUsed, setTotalPromptTokenSizeUsed] = useState<number>(0);
-  const [totalPromptTokenSizeAvailable] = useState<number>(10000);
+  const [totalPromptTokenSizeAvailable, setTotalPromptTokenSizeAvailable] = useState<number>(0);
   const [totalPromptTokenSizeUsedPercentage, setTotalPromptTokenSizeUsedPercentage] = useState<number>(0);
   const [, setMenuOpen] = useState(false);
   const navigate = useNavigate();
@@ -45,9 +45,10 @@ const HeaderUserMenu = () => {
 
     try {
       const response = await axios.get(apiUrl);
-      const { totalPromptTokenSize } = response.data;
+      const { totalPromptTokenSize, userCurrentTokenCount } = response.data;
+      setTotalPromptTokenSizeAvailable(userCurrentTokenCount?.tokenCount || 0)
       setTotalPromptTokenSizeUsed(totalPromptTokenSize || 0);
-      setTotalPromptTokenSizeUsedPercentage(Math.min(((totalPromptTokenSize) / totalPromptTokenSizeAvailable) * 100, 100));
+      setTotalPromptTokenSizeUsedPercentage(Math.min(((totalPromptTokenSize) / userCurrentTokenCount?.tokenCount) * 100, 100));
     } catch (err) {
       console.error("Failed to fetch usage summary:", err);
     }

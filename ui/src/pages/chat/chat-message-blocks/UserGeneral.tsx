@@ -32,11 +32,11 @@ const UserGeneral: React.FC<UserGeneralProps> = ({ userContext, timestamp, conte
         />
       </Tooltip>
     </div>
+    <div className="user-name mb-2" style={{fontSize: '12px', color: '#333', opacity: '0.8'}}>{`${userContext.firstName} ${userContext.lastName}`}</div>
     <div className="message-bubble" style={{ backgroundColor: chatAppearance?.user?.bubble?.background || '#f0f0f0', color: chatAppearance?.user?.bubble?.textColor || '#000' }} tabIndex={1}>
-      <div className="user-name mb-2" style={{fontSize: '12px', color: '#333', opacity: '0.8'}}>{`${userContext.firstName} ${userContext.lastName}`}</div>
       {content}
-      <div className="timestamp">{timestamp}</div>
     </div>
+    <div className="timestamp">{timestamp}</div>
   </div>
 );
 

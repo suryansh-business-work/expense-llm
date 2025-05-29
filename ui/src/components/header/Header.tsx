@@ -1,4 +1,4 @@
-import { AppBar, Toolbar } from '@mui/material';
+import { AppBar, Toolbar, Box } from '@mui/material';
 import HeaderLogo from './HeaderLogo';
 import HeaderUserMenu from './HeaderUserMenu';
 import HeaderAlert from './HeaderAlert';
@@ -12,12 +12,10 @@ const Header = () => {
       <HeaderAlert />
       <AppBar position="sticky" sx={{ backgroundColor: '#fff', color: '#000' }}>
         <Toolbar>
-          <div className="container-fluid">
-            <div className="row align-items-center w-100 justify-content-between">
-              <HeaderLogo />
-              <HeaderUserMenu />
-            </div>
-          </div>
+          <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%" }}>
+            <HeaderLogo />
+            <HeaderUserMenu />
+          </Box>
         </Toolbar>
       </AppBar>
     </>
