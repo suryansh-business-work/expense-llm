@@ -1,5 +1,21 @@
 import React, { useRef, useState } from "react";
-import { Popover, List, ListItem, ListItemButton, ListItemText, Button, Chip, Typography, ButtonGroup } from "@mui/material";
+import {
+  Popover,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Button,
+  Chip,
+  Typography,
+  ButtonGroup,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  IconButton,
+} from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 import ChatBotSetting from "./ChatBoxSetting";
 
 interface ChatInputProps {
@@ -35,10 +51,13 @@ const ChatInput: React.FC<ChatInputProps> = ({
 
   // State to keep track of selected files and errors
   const [selectedFiles, setSelectedFiles] = useState<
-    { name: string; type: string; error?: boolean }[]
+    { name: string; type: string; file?: File; error?: boolean }[]
   >([]);
-
   const [fileError, setFileError] = useState<string | null>(null);
+
+  // Dialog state for file preview
+  const [previewFile, setPreviewFile] = useState<{ file: File; type: string; name: string } | null>(null);
+  const [confirmDeleteIdx, setConfirmDeleteIdx] = useState<number | null>(null);
 
   // Check if any selected file has error
   const hasInvalidFile = selectedFiles.some((file) => file.error);
@@ -84,7 +103,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
       const isValid = validateFile(file, type);
       setSelectedFiles((prev) => [
         ...prev,
-        { name: file.name, type, error: !isValid },
+        { name: file.name, type, file, error: !isValid },
       ]);
       setFileError(
         isValid
@@ -96,8 +115,19 @@ const ChatInput: React.FC<ChatInputProps> = ({
   };
 
   const handleRemoveFile = (index: number) => {
-    setSelectedFiles((prev) => prev.filter((_, i) => i !== index));
-    setFileError(null);
+    setConfirmDeleteIdx(index);
+  };
+
+  const confirmRemoveFile = () => {
+    if (confirmDeleteIdx !== null) {
+      setSelectedFiles((prev) => prev.filter((_, i) => i !== confirmDeleteIdx));
+      setFileError(null);
+      setConfirmDeleteIdx(null);
+    }
+  };
+
+  const cancelRemoveFile = () => {
+    setConfirmDeleteIdx(null);
   };
 
   // Settings popover handlers
@@ -106,6 +136,37 @@ const ChatInput: React.FC<ChatInputProps> = ({
   };
   const handleSettingsClose = () => {
     setSettingsAnchorEl(null);
+  };
+
+  // File preview dialog content
+  const renderPreviewContent = () => {
+    if (!previewFile) return null;
+    const url = URL.createObjectURL(previewFile.file);
+    if (previewFile.type === "image") {
+      return <img src={url} alt={previewFile.name} style={{ maxWidth: "100%", maxHeight: 400 }} />;
+    }
+    if (previewFile.type === "audio") {
+      return (
+        <audio controls style={{ width: "100%" }}>
+          <source src={url} />
+          Your browser does not support the audio element.
+        </audio>
+      );
+    }
+    // For docs, just show file name and download option
+    return (
+      <div>
+        <Typography variant="subtitle1">{previewFile.name}</Typography>
+        <Button
+          href={url}
+          download={previewFile.name}
+          variant="outlined"
+          sx={{ mt: 2 }}
+        >
+          Download
+        </Button>
+      </div>
+    );
   };
 
   return (
@@ -123,12 +184,14 @@ const ChatInput: React.FC<ChatInputProps> = ({
                 key={idx}
                 label={`${file.name} (${FILE_TYPE_LABEL[file.type] || file.type})`}
                 onDelete={() => handleRemoveFile(idx)}
+                onClick={() => file.file && setPreviewFile({ file: file.file, type: file.type, name: file.name })}
                 sx={{
                   mr: 1,
                   mb: 1,
                   color: file.error ? "error.main" : undefined,
                   borderColor: file.error ? "error.main" : undefined,
                   background: file.error ? "#ffebee" : undefined,
+                  cursor: file.file ? "pointer" : "default",
                 }}
                 color={file.error ? "error" : "info"}
                 variant="outlined"
@@ -142,6 +205,47 @@ const ChatInput: React.FC<ChatInputProps> = ({
           </div>
         </div>
       )}
+
+      {/* Confirm Delete Dialog */}
+      <Dialog open={confirmDeleteIdx !== null} onClose={cancelRemoveFile}>
+        <DialogTitle>Remove File</DialogTitle>
+        <DialogContent>
+          <Typography>
+            Are you sure you want to remove{' '}
+            <b>
+              {confirmDeleteIdx !== null && selectedFiles[confirmDeleteIdx]?.name}
+            </b>
+            ?
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={cancelRemoveFile}>Cancel</Button>
+          <Button onClick={confirmRemoveFile} color="error" variant="contained">
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* File Preview Dialog */}
+      <Dialog open={!!previewFile} onClose={() => setPreviewFile(null)} maxWidth="sm" fullWidth>
+        <DialogTitle>
+          File Preview
+          <IconButton
+            aria-label="close"
+            onClick={() => setPreviewFile(null)}
+            sx={{ position: "absolute", right: 8, top: 8 }}
+          >
+            <CloseIcon />
+          </IconButton>
+        </DialogTitle>
+        <DialogContent dividers>{renderPreviewContent()}</DialogContent>
+        <DialogActions>
+          <Button onClick={() => setPreviewFile(null)} variant="contained">
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
+
       <div className="chat-input-container row">
         {/* Attach Button */}
         <div className="col-auto">
