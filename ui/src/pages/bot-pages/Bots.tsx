@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect, useRef } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -9,7 +9,6 @@ import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 import Button from '@mui/material/Button';
 import CreateBotDialog from "./CreateBotDialog";
-import { MCPClient } from "./mcpClient";
 
 // Map type value to icon class (Font Awesome 5+ CSS classes)
 const typeIconMap: Record<string, string> = {
@@ -26,9 +25,6 @@ const Bots = () => {
   const [searchFocus, setSearchFocus] = useState(false);
   const [createDialogOpen, setCreateDialogOpen] = useState(false);
   const navigate = useNavigate();
-  const [input, setInput] = useState("");
-  const [response, setResponse] = useState("");
-  const mcpRef = useRef<MCPClient | null>(null);
 
   // Dynamically create categories from BotPagesData
   const BOT_CATEGORIES = useMemo(() => {
@@ -52,28 +48,10 @@ const Bots = () => {
     ];
   }, []);
 
-  // useEffect(() => {
-  //   const client = new MCPClient((message) => {
-  //     // Handle tool response
-  //     const content = message.content?.[0]?.text;
-  //     if (content) setResponse(content);
-  //   });
+  useEffect(() => {
 
-  //   client.connect();
-  //   mcpRef.current = client;
+  }, []);
 
-  //   return () => client.close();
-  // }, []);
-
-  // useEffect(() => {
-  //   const sendReverseString = async () => {
-  //     if (mcpRef.current) {
-  //       await mcpRef.current.sendToolCall("reverse-string", { text: "Hello World" });
-  //     }
-  //   };
-  //   sendReverseString();
-  // }, []);
-  
   // Filter bots by category and search
   const filteredBots = bots.filter((bot) => {
     // If search is focused, ignore category filter
