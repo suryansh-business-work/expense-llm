@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import * as ctrl from './childbot.controllers';
-import { authenticateJWT } from '../auth/auth.middleware';
+import { authenticateJWT } from '../../auth/auth.middleware';
 
 const router = Router();
 

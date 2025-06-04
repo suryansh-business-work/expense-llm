@@ -1,3 +1,11 @@
+.create-bot {
+    background: linear-gradient(45deg, #85d5e757, #7a9ed254, #ba6ac93d, #de54c217, #f86b2d4f);
+    padding: 0 16px;
+    backdrop-filter: blur(10px);
+    border-radius: 4px;
+    box-shadow: inset -20px 5px 10px -20px #00000021, inset -40px 50px 7px -55px #00000021;
+}
+
 .bot-categories {
   list-style: none;
   padding: 0;

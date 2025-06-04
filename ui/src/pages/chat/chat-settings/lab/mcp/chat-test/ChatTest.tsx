@@ -1,13 +1,18 @@
 import React, { useState, useRef, useEffect } from "react";
 import {
   TextField, Button, Paper, Box, Typography, CircularProgress, Alert,
-  Divider, IconButton, Tooltip
+  Divider, IconButton, Tooltip, MenuItem, Select, FormControl, InputLabel
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import axios from "axios";
+import { CHAT_GPT_KEY } from "../../../../../../utils/config";
 
-const OPENAI_API_KEY = ""; // Replace with your key
+const OPENAI_API_KEY = `${CHAT_GPT_KEY}`; // Replace with your key
+
+const LLM_MODELS: Record<string, string[]> = {
+  "chatgpt": ["gpt-3.5-turbo", "gpt-4"]
+};
 
 interface ChatTestProps {
   tools: any[];
@@ -23,10 +28,32 @@ const ChatTest: React.FC<ChatTestProps> = ({ tools, mcpClient }) => {
   const [pendingTool, setPendingTool] = useState<any>(null);
   const chatEndRef = useRef<HTMLDivElement>(null);
 
-  // Auto-scroll to bottom on new message
+  // LLM/model selection state
+  const [llm, setLlm] = useState<"chatgpt">("chatgpt");
+  const [model, setModel] = useState<string>(LLM_MODELS["chatgpt"][0]);
+
+  // Update model when LLM changes
   useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, loading]);
+    setModel(LLM_MODELS[llm][0]);
+  }, [llm]);
+
+  // Clear chat history if tools array becomes empty
+  useEffect(() => {
+    if (!tools || tools.length === 0) {
+      setMessages([]);
+      setThinking([]);
+      setError(null);
+      setPendingTool(null);
+    }
+  }, [tools]);
+
+  // Clear chat history if model changes
+  useEffect(() => {
+    setMessages([]);
+    setThinking([]);
+    setError(null);
+    setPendingTool(null);
+  }, [model]);
 
   // Helper: Ask ChatGPT to extract arguments for a tool from a prompt
   async function extractArgsWithChatGPT(tool: any, prompt: string) {
@@ -43,7 +70,7 @@ const ChatTest: React.FC<ChatTestProps> = ({ tools, mcpClient }) => {
     const res = await axios.post(
       'https://api.openai.com/v1/chat/completions',
       {
-        model: 'gpt-4',
+        model,
         messages: [
           { role: 'system', content: sysPrompt },
         ],
@@ -120,10 +147,10 @@ const ChatTest: React.FC<ChatTestProps> = ({ tools, mcpClient }) => {
     // Normal flow: tool selection
     if (!tools || tools.length === 0) {
       setThinking([]);
-      setError("Connect to Event Source to view tools.");
+      setError("Connect to Event Source to enable chat test tool.");
       setMessages(msgs => [
         ...msgs,
-        { role: "assistant", content: "Connect to Event Source to view tools." }
+        { role: "assistant", content: "Connect to Event Source to enable chat test tool." }
       ]);
       setLoading(false);
       setPrompt('');
@@ -144,7 +171,7 @@ Reply with only the tool name or "none".
       const res = await axios.post(
         'https://api.openai.com/v1/chat/completions',
         {
-          model: 'gpt-4',
+          model,
           messages: [
             { role: 'system', content: toolSelectPrompt }
           ],
@@ -207,7 +234,7 @@ Reply with only the tool name or "none".
         const res = await axios.post(
           'https://api.openai.com/v1/chat/completions',
           {
-            model: 'gpt-4',
+            model,
             messages: [
               { role: 'system', content: 'You are a helpful assistant.' },
               { role: 'user', content: prompt }
@@ -250,10 +277,10 @@ Reply with only the tool name or "none".
   if (!tools || tools.length === 0) {
     return (
       <Paper variant="outlined" sx={{ minHeight: 350, p: 2 }}>
-        <Typography variant="h6" gutterBottom>Chat</Typography>
+        <Typography variant="h6" gutterBottom>Chat Test</Typography>
         <Box sx={{ minHeight: 200, display: "flex", alignItems: "center", justifyContent: "center" }}>
           <Alert severity="info" sx={{ width: "100%", textAlign: "center" }}>
-            Connect to Event Source to view tools.
+            Connect to Event Source to enable chat test tool.
           </Alert>
         </Box>
         <Box mt={2} display="flex" gap={1}>
@@ -273,6 +300,33 @@ Reply with only the tool name or "none".
 
   return (
     <Paper variant="outlined" sx={{ minHeight: 350, p: 2, background: "#fafbfc" }}>
+      {/* LLM and Model selection */}
+      <Box display="flex" gap={2} mb={2}>
+        <FormControl size="small" sx={{ minWidth: 120 }}>
+          <InputLabel id="llm-select-label">LLM</InputLabel>
+          <Select
+            labelId="llm-select-label"
+            value={llm}
+            label="LLM"
+            onChange={e => setLlm(e.target.value as "chatgpt")}
+          >
+            <MenuItem value="chatgpt">ChatGPT</MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl size="small" sx={{ minWidth: 160 }}>
+          <InputLabel id="model-select-label">Model</InputLabel>
+          <Select
+            labelId="model-select-label"
+            value={model}
+            label="Model"
+            onChange={e => setModel(e.target.value)}
+          >
+            {LLM_MODELS[llm].map(m => (
+              <MenuItem key={m} value={m}>{m}</MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </Box>
       <Box display="flex" alignItems="center" justifyContent="space-between" mb={1}>
         <Typography variant="h5" gutterBottom>
           Chat Test{" "}
@@ -339,11 +393,18 @@ Reply with only the tool name or "none".
         <TextField
           value={prompt}
           onChange={e => setPrompt(e.target.value)}
-          onKeyDown={e => { if (e.key === "Enter") handleSend(); }}
+          onKeyDown={e => {
+            if (e.key === "Enter" && !loading && prompt.trim()) {
+              e.preventDefault();
+              handleSend();
+            }
+          }}
           fullWidth
           placeholder="Type your prompt..."
           disabled={loading}
           autoFocus
+          type="text"
+          multiline={false}
         />
         <Button
           variant="contained"

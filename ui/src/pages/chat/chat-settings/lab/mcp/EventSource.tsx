@@ -14,7 +14,7 @@ interface EventSourceProps {
 }
 
 const EventSource: React.FC<EventSourceProps> = ({ onConnected }) => {
-  const [eventUrl, setEventUrl] = useState("http://localhost:3001/sse");
+  const [eventUrl, setEventUrl] = useState("http://localhost:3001/mcp/sse");
   const [logs, setLogs] = useState<string[]>([]);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [connState, setConnState] = useState<ConnState>("idle");

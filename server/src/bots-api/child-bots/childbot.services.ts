@@ -1,10 +1,9 @@
+import { PromptModel } from '../../chat-api/chat-lab-apis/prompt/prompt.models';
+import { ChatSettingModel } from '../../chat-api/chat-settings-api/bot.settings.model';
 import { ChildBotModel, UserBotMappingModel } from './childbot.models';
-import { ChatSettingModel } from '../chat-api/chat-settings-api/bot.settings.model';
-import { PromptModel } from '../chat-api/chat-lab-apis/prompt/prompt.models';
 import mongoose from 'mongoose';
 
 // You may want to import your default settings structure:
-import { chatSettings } from '../chat-api/chat-settings-api/structure';
 
 export const createChildBot = async (userId: string, data: any) => {
   const session = await mongoose.startSession();

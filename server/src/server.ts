@@ -5,6 +5,7 @@ import bodyParser from 'body-parser';
 import fileUpload from 'express-fileupload';
 import path from 'path';
 import dayjs from 'dayjs';
+import 'reflect-metadata';
 
 // Swagger/OpenAPI
 import swaggerUi from 'swagger-ui-express';
@@ -17,7 +18,8 @@ import { connectDB } from '../db/db';
 import authRoutes from './auth/auth.routes';
 
 // Bot APIs
-import childBotsRoutes from './bots-api/childbot.routes';
+import childBotsRoutes from './bots-api/child-bots/childbot.routes';
+import botsRoutes from './bots-api/bots.routes';
 import childBotSettingRoutes from './chat-api/chat-settings-api/bot.settings.routes';
 import childBotLabPromptRoutes from './chat-api/chat-lab-apis/prompt/prompt.routes';
 import { startWebSocketServer } from './chat-api/chat.ws';
@@ -68,6 +70,7 @@ app.use(
 app.use('/auth', authRoutes);
 
 // Bot APIs
+app.use('/bot', botsRoutes); // Main bot routes
 app.use('/bot', childBotsRoutes);
 app.use('/bot', childBotLabPromptRoutes);
 app.use('/bot', childBotSettingRoutes);

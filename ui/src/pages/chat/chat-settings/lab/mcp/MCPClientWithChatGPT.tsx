@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Box } from '@mui/material';
 import RegisteredTools from "./RegisteredTools";
 import EventSource from './EventSource';
-import ChatTest from "./ChatTest";
+import ChatTest from "./chat-test/ChatTest";
 
 const MCPClientWithChatGPT = () => {
   const [tools, setTools] = useState<any[]>([]);
