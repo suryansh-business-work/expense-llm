@@ -6,7 +6,7 @@ import {
 import { useForm, Controller } from "react-hook-form";
 import CloseIcon from "@mui/icons-material/Close";
 import axios from "axios";
-import { API_URL, CHAT_GPT_KEY } from "../../utils/config";
+import { API_URL, CHAT_GPT_KEY } from "../../../utils/config";
 
 const categories = [
   { value: "finance", label: "Finance" },

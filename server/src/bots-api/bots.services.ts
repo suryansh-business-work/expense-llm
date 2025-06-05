@@ -111,3 +111,7 @@ export const listBotsForUserByCategory = async (userId: string) => {
     },
   ]);
 };
+
+export const getBotById = async (botId: string) => {
+  return BotModel.findOne({ botId });
+};

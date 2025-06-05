@@ -54,3 +54,14 @@ export const listBotsByCategory = async (req: Request, res: Response) => {
     return errorResponse(res, err, 'Failed to fetch bots');
   }
 };
+
+export const getBotById = async (req: Request, res: Response) => {
+  try {
+    const botId = req.params.id;
+    const bot = await service.getBotById(botId);
+    if (!bot) return errorResponse(res, null, 'Bot not found');
+    return successResponse(res, { bot }, 'Bot details fetched');
+  } catch (err) {
+    return errorResponse(res, err, 'Failed to fetch bot details');
+  }
+};

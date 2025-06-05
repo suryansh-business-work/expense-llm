@@ -1,5 +1,6 @@
 // MUI components
 import { Box, IconButton, Tooltip, Button, Stack, Typography, Drawer, Divider } from "@mui/material";
+import Skeleton from "@mui/material/Skeleton";
 
 // MUI icons
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
@@ -16,8 +17,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 
 // Data and utilities
-import { getBotPageByUrl } from "../data/BotPagesData";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 // Dialogs
@@ -25,6 +25,8 @@ import FeedbackDialog from "./dialogs/FeedbackDialog";
 import SuggestionDialog from "./dialogs/SuggestionDialog";
 import InfoDialog from "./dialogs/InfoDialog";
 import HelpDialog from "./dialogs/HelpDialog";
+
+const API_BASE = "http://localhost:3000/bot";
 
 const ChatTopPannel = () => {
   const navigate = useNavigate();
@@ -37,7 +39,35 @@ const ChatTopPannel = () => {
   const [openHelp, setOpenHelp] = useState(false);
   const [openInfo, setOpenInfo] = useState(false);
 
-  const botPage = getBotPageByUrl(childBotType || "");
+  const [botPageData, setBotPageData] = useState<any>(null);
+  const [botPageLoading, setBotPageLoading] = useState(true);
+
+  // Fetch bot details by ID (childBotType)
+  useEffect(() => {
+    if (!childBotType) return;
+    setBotPageLoading(true);
+    const fetchBotDetails = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const res = await fetch(`${API_BASE}/bot-info/${childBotType}`, {
+          headers: {
+            "Content-Type": "application/json",
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          },
+        });
+        const result = await res.json();
+        if (res.ok && result.status === "success") {
+          setBotPageData(result.data.bot);
+        } else {
+          setBotPageData(null);
+        }
+      } catch {
+        setBotPageData(null);
+      }
+      setBotPageLoading(false);
+    };
+    fetchBotDetails();
+  }, [childBotType]);
 
   const navLinks = [
     { to: `/bot/${childBotType}/chat/${chatBotId}`, label: "Chat", icon: <ChatIcon fontSize="small" /> },
@@ -205,7 +235,9 @@ const ChatTopPannel = () => {
             )}
           </div>
           <div className="col-auto">
-            {botPage && (
+            {botPageLoading ? (
+              <Skeleton width={180} height={32} />
+            ) : botPageData ? (
               <Typography
                 sx={{
                   fontWeight: 500,
@@ -215,9 +247,9 @@ const ChatTopPannel = () => {
                   justifyContent: "center"
                 }}
               >
-                {botPage.botListPage.heading}
+                {botPageData?.botListPage?.heading || botPageData?.name}
               </Typography>
-            )}
+            ) : null}
           </div>
           {!isMobile && (
             <div className="col-auto">

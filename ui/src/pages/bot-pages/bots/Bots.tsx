@@ -7,14 +7,14 @@ import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 import Button from '@mui/material/Button';
-import CreateOrUpdateBotDialog from "./CreateOrUpdateBotDialog";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogActions from '@mui/material/DialogActions';
-import CircularProgress from "@mui/material/CircularProgress";
+import Skeleton from "@mui/material/Skeleton";
 import DescriptionWithReadMore from "./DescriptionWithReadMore";
+import CreateOrUpdateBotDialog from "./CreateOrUpdateBotDialog";
 
 // Map type value to icon class (Font Awesome 5+ CSS classes)
 const typeIconMap: Record<string, string> = {
@@ -151,17 +151,23 @@ const Bots = () => {
         <section className="mt-4 mb-4 create-bot">
           <div className="row align-items-center">
             <div className="col-12 col-md-3 col-lg-3">
-              <h1 id="bots-heading" tabIndex={-1}>Bots</h1>
+              <h1 id="bots-heading" tabIndex={-1}>
+                {loading ? <Skeleton width={120} height={40} /> : "Bots"}
+              </h1>
             </div>
             <div className="col-12 col-md-9 col-lg-9 d-flex justify-content-end align-items-center" style={{ minHeight: 80 }}>
-              <Button
-                variant="text"
-                onClick={() => setCreateDialogOpen(true)}
-                sx={{ mr: 2 }}
-                aria-label="Create a new bot"
-              >
-                <i className="fas fa-plus me-2" aria-hidden="true" /> Create Bot
-              </Button>
+              {loading ? (
+                <Skeleton variant="rectangular" width={120} height={36} sx={{ borderRadius: 2, mr: 2 }} />
+              ) : (
+                <Button
+                  variant="text"
+                  onClick={() => setCreateDialogOpen(true)}
+                  sx={{ mr: 2 }}
+                  aria-label="Create a new bot"
+                >
+                  <i className="fas fa-plus me-2" aria-hidden="true" /> Create Bot
+                </Button>
+              )}
               <TextField
                 variant="outlined"
                 size="small"
@@ -188,7 +194,7 @@ const Bots = () => {
                     </InputAdornment>
                   ),
                 }}
-                disabled={bots.length === 0}
+                disabled={bots.length === 0 || loading}
               />
             </div>
           </div>
@@ -196,62 +202,75 @@ const Bots = () => {
         <div className="row">
           <nav className="col-12 col-sm-12 col-md-4 col-lg-3 mb-4" aria-label="Bot Category">
             <ul className="bot-categories" role="listbox" aria-labelledby="bot-category-heading">
-              {BOT_CATEGORIES.map((cat) => (
-                <li key={cat.value} className="mb-2" role="option" aria-selected={category === cat.value}>
-                  <a
-                    href="#"
-                    className={`d-flex align-items-center ${(category === cat.value && (!searchFocus || cat.value === "all")) ||
-                      (searchFocus && cat.value === "all")
-                      ? "active fw-bold text-primary"
-                      : ""
-                      }`}
-                    style={{ cursor: "pointer", textDecoration: "none" }}
-                    onClick={e => {
-                      e.preventDefault();
-                      setCategory(cat.value);
-                      setSearch("");
-                      setSearchFocus(false);
-                    }}
-                    tabIndex={0}
-                    aria-label={cat.label}
-                    aria-current={category === cat.value ? "true" : undefined}
-                    onKeyDown={e => {
-                      if (e.key === "Enter" || e.key === " ") {
-                        e.preventDefault();
-                        setCategory(cat.value);
-                        setSearch("");
-                        setSearchFocus(false);
-                      }
-                    }}
-                  >
-                    <i className={`${cat.icon} me-2`} aria-hidden="true" />
-                    {cat.label}
-                  </a>
-                </li>
-              ))}
+              {loading
+                ? Array.from({ length: 4 }).map((_, idx) => (
+                    <li key={idx} className="mb-2">
+                      <Skeleton variant="rectangular" width={160} height={32} sx={{ borderRadius: 2 }} />
+                    </li>
+                  ))
+                : BOT_CATEGORIES.map((cat) => (
+                    <li key={cat.value} className="mb-2" role="option" aria-selected={category === cat.value}>
+                      <a
+                        href="#"
+                        className={`d-flex align-items-center ${(category === cat.value && (!searchFocus || cat.value === "all")) ||
+                          (searchFocus && cat.value === "all")
+                          ? "active fw-bold text-primary"
+                          : ""
+                          }`}
+                        style={{ cursor: "pointer", textDecoration: "none" }}
+                        onClick={e => {
+                          e.preventDefault();
+                          setCategory(cat.value);
+                          setSearch("");
+                          setSearchFocus(false);
+                        }}
+                        tabIndex={0}
+                        aria-label={cat.label}
+                        aria-current={category === cat.value ? "true" : undefined}
+                        onKeyDown={e => {
+                          if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            setCategory(cat.value);
+                            setSearch("");
+                            setSearchFocus(false);
+                          }
+                        }}
+                      >
+                        <i className={`${cat.icon} me-2`} aria-hidden="true" />
+                        {cat.label}
+                      </a>
+                    </li>
+                  ))}
             </ul>
           </nav>
           <main className="col-12 col-sm-12 col-md-8 col-lg-9" aria-labelledby="bots-heading">
             <div className="row" aria-live="polite">
               {loading ? (
-                <div
-                  role="status"
-                  aria-busy="true"
-                  style={{
-                    position: "fixed",
-                    top: 64,
-                    left: 0,
-                    width: "100vw",
-                    height: "100vh",
-                    background: "rgba(0,0,0,0.7)",
-                    zIndex: 2000,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center"
-                  }}
-                >
-                  <CircularProgress size={60} aria-label="Loading bots" />
-                </div>
+                Array.from({ length: 4 }).map((_, idx) => (
+                  <div className="col-12 col-sm-6 col-md-6 mb-4" key={idx}>
+                    <Card
+                      sx={{
+                        backgroundColor: '#ffffff',
+                        borderRadius: '12px',
+                        boxShadow: '0 12px 24px rgba(0, 0, 0, 0.05)',
+                        maxWidth: '900px',
+                        minHeight: 220,
+                        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                        '&:hover': {
+                          transform: 'translateY(-4px)',
+                          boxShadow: '0 18px 36px rgba(0, 0, 0, 0.08)',
+                        },
+                        p: 2,
+                      }}
+                      className="bot-card"
+                    >
+                      <Skeleton variant="text" width="60%" height={36} sx={{ mb: 2 }} />
+                      <Skeleton variant="text" width="90%" height={24} sx={{ mb: 1 }} />
+                      <Skeleton variant="text" width="80%" height={20} sx={{ mb: 2 }} />
+                      <Skeleton variant="rectangular" width={80} height={32} sx={{ mt: 2, borderRadius: 2 }} />
+                    </Card>
+                  </div>
+                ))
               ) : filteredBots.length > 0 ? (
                 filteredBots.map((bot, index) => {
                   const botData = bot.bot || bot;
@@ -325,7 +344,7 @@ const Bots = () => {
                           </Button>
                           <div className="bot-action" aria-label={`Go to ${botData.name}`} aria-hidden="true">
                             <a
-                              onClick={() => navigate(`/bot/${botData.botId || botData.url}`)}
+                              onClick={() => navigate(`/bots/${botData.botId || botData.url}`)}
                               tabIndex={0}
                               aria-label={`Open bot ${botData.name}`}
                               style={{ cursor: "pointer" }}
@@ -415,7 +434,7 @@ const Bots = () => {
             color="error"
             variant="contained"
             disabled={deleteLoading}
-            startIcon={deleteLoading ? <CircularProgress size={18} /> : null}
+            startIcon={deleteLoading ? <Skeleton variant="circular" width={18} height={18} /> : null}
             aria-label="Confirm delete bot"
           >
             Delete

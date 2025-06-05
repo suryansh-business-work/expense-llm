@@ -8,8 +8,8 @@ import ThemeManagement from './pages/admin/design-system/ComponentList';
 
 const Chat = lazy(() => import('./pages/chat/Chat'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
-const Bots = lazy(() => import('./pages/bot-pages/Bots'));
-const BotList = lazy(() => import('./pages/bot-pages/ChildBots'));
+const Bots = lazy(() => import('./pages/bot-pages/bots/Bots'));
+const BotList = lazy(() => import('./pages/bot-pages/child-bots/ChildBots'));
 const ProtectedRoute = lazy(() => import('./components/ProtectedRoute'));
 const UnprotectedRoute = lazy(() => import('./components/ProtectedRoute').then(m => ({ default: m.UnprotectedRoute })));
 const ForgotPassword = lazy(() => import('./pages/auth-pages/ForgotPassword'));
@@ -67,7 +67,7 @@ const App = () => {
           <Route path="/integrations" element={<Integrations />} />
           <Route path="/manage-subcription" element={<ManageSubscription />} />
           <Route path="bots" element={<Bots />} />
-          <Route path="bot/:childBotType" element={<BotList />} />
+          <Route path="bots/:childBotType" element={<BotList />} />
           <Route path="bot/:childBotType/chat/:chatBotId" element={<Chat />} />
           <Route path="bot/:childBotType/dashboard/:chatBotId" element={<Dashboard />} />
           <Route path="bot/:childBotType/chat-settings/:chatBotId" element={<ChatSettings />} />

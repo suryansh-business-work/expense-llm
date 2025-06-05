@@ -1,6 +1,4 @@
-import { useForm, Controller } from "react-hook-form";
-import { joiResolver } from "@hookform/resolvers/joi";
-import Joi from "joi";
+import { useEffect, useRef, useState } from "react";
 import {
   Dialog,
   DialogTitle,
@@ -13,31 +11,45 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useForm, Controller } from "react-hook-form";
+import Joi from "joi";
+import { joiResolver } from "@hookform/resolvers/joi";
 
 const schema = Joi.object({
   name: Joi.string().min(2).max(50).required().label("Bot Name"),
   description: Joi.string().max(200).allow("").label("Description"),
   tags: Joi.array().items(Joi.string().max(20)).label("Tags"),
-  category: Joi.string().max(50).allow("").label("Category"), // not required
+  category: Joi.string().max(50).allow("").label("Category"),
 });
 
-interface CreateChildBotDialogProps {
+interface ChildBotDialogProps {
   open: boolean;
   onClose: () => void;
-  onCreated: (bot: any) => void;
-  type: string; // from url param
+  onSubmitSuccess: (bot: any) => void;
+  type: string;
+  mode: "create" | "update";
+  bot?: any;
 }
 
-export default function CreateChildBotDialog({ open, onClose, onCreated, type }: CreateChildBotDialogProps) {
+export default function ChildBotDialog({
+  open,
+  onClose,
+  onSubmitSuccess,
+  type,
+  mode,
+  bot,
+}: ChildBotDialogProps) {
   const [loading, setLoading] = useState(false);
+  const [tagInput, setTagInput] = useState("");
+  const tagInputRef = useRef<HTMLInputElement>(null);
+
   const {
     control,
     handleSubmit,
-    reset,
     setValue,
     getValues,
-    formState: { errors },
+    reset,
+    formState: { errors, isSubmitting },
   } = useForm({
     resolver: joiResolver(schema),
     defaultValues: {
@@ -48,41 +60,75 @@ export default function CreateChildBotDialog({ open, onClose, onCreated, type }:
     },
   });
 
-  const [tagInput, setTagInput] = useState("");
+  useEffect(() => {
+    if (mode === "update" && bot) {
+      setValue("name", bot.name || bot.bot?.name || "");
+      setValue("description", bot.description || bot.bot?.description || "");
+      setValue("tags", bot.tags || bot.bot?.tags || []);
+      setValue("category", bot.category || bot.bot?.category || "");
+    } else {
+      reset();
+    }
+    setTagInput("");
+    // eslint-disable-next-line
+  }, [bot, open, mode]);
 
   const handleAddTag = () => {
-    const tags = getValues("tags") || [];
-    if (tagInput.trim() && !tags.includes(tagInput.trim())) {
-      setValue("tags", [...tags, tagInput.trim()]);
+    const value = tagInput.trim();
+    if (value && !(getValues("tags") || []).includes(value)) {
+      setValue("tags", [...(getValues("tags") || []), value]);
       setTagInput("");
+      if (tagInputRef.current) tagInputRef.current.value = "";
+    }
+  };
+
+  const handleTagInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleAddTag();
     }
   };
 
   const handleDeleteTag = (tagToDelete: string) => {
-    const tags = getValues("tags") || [];
-    setValue("tags", tags.filter((tag) => tag !== tagToDelete));
+    setValue(
+      "tags",
+      (getValues("tags") || []).filter((tag: string) => tag !== tagToDelete)
+    );
   };
 
   const onSubmit = async (data: any) => {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch("http://localhost:3000/bot/create/child-bot", {
-        method: "POST",
+      let url = "";
+      let method: "POST" | "PATCH" = "POST";
+      let payload: any = { ...data, type };
+
+      if (mode === "create") {
+        url = "http://localhost:3000/bot/create/child-bot";
+        method = "POST";
+      } else {
+        const botId = bot.botId || bot.id;
+        url = `http://localhost:3000/bot/update/child-bot/${botId}`;
+        method = "PATCH";
+      }
+
+      const res = await fetch(url, {
+        method,
         headers: {
           "Content-Type": "application/json",
           Authorization: token ? `Bearer ${token}` : "",
         },
-        body: JSON.stringify({ ...data, type }),
+        body: JSON.stringify(payload),
         credentials: "include",
       });
       const result = await res.json();
       if (res.ok && result.status === "success") {
-        onCreated(result.data.bot);
+        onSubmitSuccess(result.data.bot || { ...bot, ...data });
         reset();
         onClose();
       } else {
-        alert(result.message || "Failed to create bot");
+        alert(result.message || `Failed to ${mode === "create" ? "create" : "update"} bot`);
       }
     } catch (err) {
       alert("Network error");
@@ -92,7 +138,9 @@ export default function CreateChildBotDialog({ open, onClose, onCreated, type }:
 
   return (
     <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
-      <DialogTitle>Create a New Bot</DialogTitle>
+      <DialogTitle>
+        {mode === "create" ? "Create a New Bot" : "Update Bot"}
+      </DialogTitle>
       <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
         <DialogContent>
           <Controller
@@ -154,6 +202,8 @@ export default function CreateChildBotDialog({ open, onClose, onCreated, type }:
                         label={tag}
                         onDelete={() => handleDeleteTag(tag)}
                         sx={{ mb: 0.5 }}
+                        color="primary"
+                        size="small"
                       />
                     ))}
                   </>
@@ -165,14 +215,10 @@ export default function CreateChildBotDialog({ open, onClose, onCreated, type }:
                 label="Add Tag"
                 value={tagInput}
                 onChange={e => setTagInput(e.target.value)}
-                onKeyDown={e => {
-                  if (e.key === "Enter") {
-                    e.preventDefault();
-                    handleAddTag();
-                  }
-                }}
+                onKeyDown={handleTagInputKeyDown}
                 size="small"
                 sx={{ flex: 1 }}
+                inputRef={tagInputRef}
               />
               <Button variant="outlined" onClick={handleAddTag} disabled={!tagInput.trim()}>
                 Add
@@ -186,9 +232,15 @@ export default function CreateChildBotDialog({ open, onClose, onCreated, type }:
           </Box>
         </DialogContent>
         <DialogActions>
-          <Button onClick={onClose} disabled={loading}>Cancel</Button>
-          <Button type="submit" variant="contained" color="primary" disabled={loading}>
-            {loading ? "Creating..." : "Create"}
+          <Button onClick={onClose} disabled={loading || isSubmitting}>Cancel</Button>
+          <Button type="submit" variant="contained" color="primary" disabled={loading || isSubmitting}>
+            {loading || isSubmitting
+              ? mode === "create"
+                ? "Creating..."
+                : "Saving..."
+              : mode === "create"
+              ? "Create"
+              : "Save"}
           </Button>
         </DialogActions>
       </form>
