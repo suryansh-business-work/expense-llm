@@ -27,6 +27,7 @@ import getChatGptResponseRoutes from './chat-api/chatgpt';
 
 // MCP Servers APIs
 import mcpServersRoutes from './mcp-servers/mcp-servers.routes';
+import toolsRoutes from './mcp-servers/tools-api/tools-api.routs';
 
 // Upload & Subscription APIs
 import imageKitUploadRoutes from './upload/upload.routes';
@@ -86,6 +87,7 @@ app.use('/v1/api/subscription-usage', subscriptionRoutes);
 
 // MCP Servers
 app.use('/v1/api/mcp-server', mcpServersRoutes);
+app.use('/v1/api/mcp-server/tool', toolsRoutes);
 
 // Design System
 app.use('/design-system', themeRoutes);

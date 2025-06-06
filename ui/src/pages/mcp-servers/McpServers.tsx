@@ -1,18 +1,35 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Box, Tabs, Tab, Divider } from "@mui/material";
 import { McpServerProvider } from "./context/McpServerContext";
 import YourMcpServer from "./YourMcpServer";
 import McpServersMarketplace from "./McpServersMarketplace";
-import DynamicBreadcrumb from "../../components/DynamicBreadcrumb";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const McpServers = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [tab, setTab] = useState(0);
 
-  // Define breadcrumb items
-  const breadcrumbItems = [
-    { label: 'Home', path: '/' },
-    { label: 'MCP Servers Marketplace' }
-  ];
+  // Set initial tab based on URL path
+  useEffect(() => {
+    if (location.pathname.includes('/lab/mcp-servers/your-servers')) {
+      setTab(1);
+    } else {
+      setTab(0);
+    }
+  }, [location.pathname]);
+
+  // Handle tab change and update URL
+  const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
+    setTab(newValue);
+    
+    // Update URL based on selected tab
+    if (newValue === 0) {
+      navigate('/lab/mcp-servers/marketplace');
+    } else {
+      navigate('/lab/mcp-servers/your-servers');
+    }
+  };
 
   return (
     <McpServerProvider>
@@ -26,21 +43,14 @@ const McpServers = () => {
             py: { xs: 2, md: 3 },
           }}
         >
-          {/* Back Button and Breadcrumbs */}
-          <DynamicBreadcrumb
-            items={breadcrumbItems}
-            backPath="/bots"
-            showBack={true}
-            backLabel="Back"
-          />
-
-          {/* Tabs */}
           <Tabs
             value={tab}
-            onChange={(_, v) => setTab(v)}
+            onChange={handleTabChange}
             sx={{
               minHeight: 32,
               background: "#f3f6fb",
+              borderRadius: 2,
+              padding: "4px",
               "& .MuiTab-root": {
                 minHeight: 32,
                 px: 2,
@@ -55,6 +65,7 @@ const McpServers = () => {
                 color: "#1976d2",
               },
             }}
+            TabIndicatorProps={{ style: { display: "none" } }}
           >
             <Tab label="MCP Servers Marketplace" />
             <Tab label="Your MCP Servers" />

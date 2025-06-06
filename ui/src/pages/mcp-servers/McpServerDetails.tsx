@@ -1,421 +1,1029 @@
-import { useState, useRef } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import {
   Box,
   Typography,
-  Chip,
+  Paper,
   Button,
   Divider,
   Avatar,
-  Tabs,
-  Tab,
-  Paper,
-  Rating,
+  Skeleton,
+  Alert,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
   TextField,
   IconButton,
+  Chip,
   Tooltip,
-  useTheme,
+  Snackbar,
+  Switch,
+  FormControlLabel,
 } from "@mui/material";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import ShareIcon from "@mui/icons-material/Share";
-import StarIcon from "@mui/icons-material/Star";
-import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import { useNavigate } from "react-router-dom";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import EditIcon from "@mui/icons-material/Edit";
+import StorageIcon from "@mui/icons-material/Storage";
+import BuildIcon from "@mui/icons-material/Build";
+import CloseIcon from "@mui/icons-material/Close";
+import SaveIcon from "@mui/icons-material/Save";
+import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import SettingsEthernetIcon from "@mui/icons-material/SettingsEthernet";
+import DeleteIcon from "@mui/icons-material/Delete";
+import AspectRatioIcon from "@mui/icons-material/AspectRatio";
+import CircularProgress from "@mui/material/CircularProgress";
 
-const dummyServer = {
-  id: "1",
-  name: "Botifylife Finance MCP",
-  description: "A managed compute provider for finance bots. Fast, secure, and scalable.",
-  images: [
-    "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80",
-    "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=900&q=80",
-  ],
-  rating: 4.8,
-  comments: 23,
-  tags: ["Finance", "Secure", "Fast"],
-  launchedBy: "Botifylife",
-  privacy: "Your data is encrypted and never shared.",
-  pricing: "Free tier available. Pro: $19/mo.",
-  support: "Email and chat support available 24/7.",
-  related: [
-    { name: "Botifylife AI MCP", id: "2" },
-    { name: "Botifylife Data MCP", id: "3" },
-  ],
-};
-
-const dummyComments = [
-  {
-    user: "Alice",
-    avatar: "",
-    rating: 5,
-    comment: "Great MCP server for my finance bots!",
-    date: "2025-06-01",
-  },
-  {
-    user: "Bob",
-    avatar: "",
-    rating: 4,
-    comment: "Fast and reliable, but could use more integrations.",
-    date: "2025-06-03",
-  },
-];
-
-const tabLabels = [
-  "Overview",
-  "Rating",
-  "Details",
-  "Privacy",
-  "Pricing",
-  "Support",
-  "Related",
-];
+// Import the delete dialog component
+import McpDeleteDialog from "./McpDeleteDialog";
 
 const McpServerDetails = () => {
-  const [tab, setTab] = useState(0);
-  const [userRating, setUserRating] = useState<number | null>(null);
-  const [comment, setComment] = useState("");
+  const { mcpServerId } = useParams<{ mcpServerId: string }>();
   const navigate = useNavigate();
-  const theme = useTheme();
-  const sliderRef = useRef<any>(null);
-
-  // In real app, fetch server details by id
-
-  const handleShare = () => {
-    navigator.clipboard.writeText(window.location.href);
-    alert("Link copied to clipboard!");
+  
+  // State for compact UI mode
+  const [compactMode, setCompactMode] = useState(false);
+  
+  // State for server data
+  const [server, setServer] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [toolCount, setToolCount] = useState(0);
+  
+  // State for edit dialog
+  const [openEditDialog, setOpenEditDialog] = useState(false);
+  const [editingServer, setEditingServer] = useState<any>({
+    mcpServerName: "",
+    description: "",
+    images: []
+  });
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
+  
+  // State for delete dialog
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  
+  // State for copy notification
+  const [copySnackbar, setCopySnackbar] = useState(false);
+  
+  // Fetch server details
+  const getServerDetails = useCallback(async () => {
+    if (!mcpServerId) return;
+    
+    setLoading(true);
+    setError(null);
+    
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch(`http://localhost:3000/v1/api/mcp-server/get/${mcpServerId}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+      });
+      
+      if (!res.ok) {
+        throw new Error(`Server responded with status: ${res.status}`);
+      }
+      
+      const result = await res.json();
+      
+      if (result.status === "success") {
+        setServer(result.data || null);
+        setToolCount(result.data?.toolCount || 0);
+        
+        // Initialize edit form with current values
+        setEditingServer({
+          mcpServerName: result.data?.mcpServerName || "",
+          description: result.data?.description || "A powerful MCP server for your automation needs.",
+          images: result.data?.images || []
+        });
+      } else {
+        setError(result.message || "Failed to load server details");
+      }
+    } catch (err: any) {
+      console.error("Error fetching server details:", err);
+      setError(err.message || "An error occurred while fetching server details");
+    } finally {
+      setLoading(false);
+    }
+  }, [mcpServerId]);
+  
+  // Update server details
+  const handleUpdateServer = async () => {
+    if (!mcpServerId) return;
+    
+    setIsSaving(true);
+    setSaveError(null);
+    
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch(`http://localhost:3000/v1/api/mcp-server/update/${mcpServerId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+        body: JSON.stringify({
+          mcpServerName: editingServer.mcpServerName,
+          description: editingServer.description,
+          images: editingServer.images
+        }),
+      });
+      
+      if (!res.ok) {
+        throw new Error(`Server responded with status: ${res.status}`);
+      }
+      
+      const result = await res.json();
+      
+      if (result.status === "success") {
+        // Close dialog and refresh server details
+        setOpenEditDialog(false);
+        getServerDetails();
+      } else {
+        setSaveError(result.message || "Failed to update server details");
+      }
+    } catch (err: any) {
+      console.error("Error updating server:", err);
+      setSaveError(err.message || "An error occurred while updating server details");
+    } finally {
+      setIsSaving(false);
+    }
+  };
+  
+  // Handle file upload for images
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+    
+    // For now, we'll just simulate image URLs
+    // In a real app, you'd upload these to your server/cloud storage
+    const newImages = [...editingServer.images];
+    
+    Array.from(files).forEach(file => {
+      // Create a temporary URL for the image
+      const imageUrl = URL.createObjectURL(file);
+      newImages.push(imageUrl);
+    });
+    
+    setEditingServer({
+      ...editingServer,
+      images: newImages.slice(0, 5) // Limit to 5 images max
+    });
+  };
+  
+  // Remove an image
+  const handleRemoveImage = (index: number) => {
+    const newImages = [...editingServer.images];
+    newImages.splice(index, 1);
+    
+    setEditingServer({
+      ...editingServer,
+      images: newImages
+    });
+  };
+  
+  // Load server details on component mount
+  useEffect(() => {
+    getServerDetails();
+  }, [getServerDetails]);
+  
+  // Handle edit dialog open/close
+  const handleOpenEditDialog = () => {
+    setOpenEditDialog(true);
+  };
+  
+  const handleCloseEditDialog = () => {
+    setOpenEditDialog(false);
+    setSaveError(null);
   };
 
-  const handleCommentSubmit = () => {
-    // In real app, post comment
-    setComment("");
-    alert("Comment submitted!");
+  // Handle server deletion success
+  const handleDeleteSuccess = () => {
+    // Navigate back to the server list
+    navigate('/lab/mcp-servers/your-servers');
+  };
+  
+  // Handle copy of server path
+  const handleCopyPath = () => {
+    const ssePath = `http://localhost:3000/v1/api/mcp-server/${mcpServerId}/events`;
+    navigator.clipboard.writeText(ssePath)
+      .then(() => setCopySnackbar(true))
+      .catch(err => console.error('Failed to copy path:', err));
   };
 
-  return (
-    <Box sx={{ background: "#f6f8fa", minHeight: "100vh", py: { xs: 1, md: 3 } }}>
-      <Box
-        sx={{
-          maxWidth: 1100,
-          margin: "0 auto",
-          background: "#fff",
-          borderRadius: 4,
-          boxShadow: "0 4px 32px rgba(25,118,210,0.08)",
-          px: { xs: 1, sm: 2, md: 4 },
-          py: { xs: 1.5, md: 3 },
-          transition: "box-shadow 0.2s",
-        }}
-      >
-        {/* Back and Share */}
-        <Box display="flex" alignItems="center" justifyContent="space-between" mb={2}>
-          <Button
-            startIcon={<ArrowBackIcon />}
-            onClick={() => navigate(-1)}
-            sx={{
-              background: "#e3eafc",
-              color: "#1976d2",
-              fontWeight: 500,
-              borderRadius: 2,
-              px: 2,
-              boxShadow: "none",
-              "&:hover": { background: "#d2e3fc" },
-              minWidth: 90,
-              fontSize: 15,
-            }}
-            variant="contained"
-            aria-label="Back"
-          >
-            Back
-          </Button>
-          <Tooltip title="Share MCP Server">
-            <IconButton onClick={handleShare} sx={{ color: "#1976d2" }}>
-              <ShareIcon />
-            </IconButton>
-          </Tooltip>
+  if (loading) {
+    return (
+      <Box sx={{ p: 3, display: "flex", flexDirection: "column", gap: 2 }}>
+        <Skeleton variant="text" width={300} height={60} />
+        <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
+          <Skeleton variant="rectangular" width={120} height={36} sx={{ borderRadius: 1 }} />
+          <Skeleton variant="rectangular" width={90} height={36} sx={{ borderRadius: 1 }} />
         </Box>
+        <Skeleton variant="rectangular" height={200} sx={{ borderRadius: 2, mt: 2 }} />
+      </Box>
+    );
+  }
 
-        {/* Image Slider */}
-        <Box
+  // Compact view
+  if (compactMode) {
+    return (
+      <>
+        <Paper
+          elevation={0}
           sx={{
-            width: "100%",
-            mb: 3,
+            p: 2,
+            mb: 4,
             borderRadius: 3,
-            overflow: "hidden",
-            boxShadow: "0 2px 16px rgba(25,118,210,0.08)",
-            position: "relative",
+            boxShadow: "0 8px 32px rgba(0,0,0,0.08)",
+            border: "1px solid #f0f0f0",
           }}
         >
-          {/* Left Arrow */}
-          <IconButton
-            onClick={() => sliderRef.current?.slickPrev()}
-            sx={{
-              position: "absolute",
-              top: "50%",
-              left: 12,
-              zIndex: 2,
-              transform: "translateY(-50%)",
-              background: "#fff",
-              boxShadow: "0 2px 8px rgba(25,118,210,0.10)",
-              "&:hover": { background: "#e3eafc" },
-              width: 40,
-              height: 40,
-              display: { xs: "none", sm: "flex" },
-            }}
-            aria-label="Previous image"
+          {error && (
+            <Alert severity="error" sx={{ mb: 2, borderRadius: 2 }}>
+              {error}
+            </Alert>
+          )}
+          
+          <Box 
+            display="flex" 
+            alignItems="center" 
+            justifyContent="space-between"
+            flexWrap="wrap"
+            gap={1}
           >
-            <ChevronLeftIcon sx={{ fontSize: 28, color: "#1976d2" }} />
-          </IconButton>
-          {/* Right Arrow */}
-          <IconButton
-            onClick={() => sliderRef.current?.slickNext()}
-            sx={{
-              position: "absolute",
-              top: "50%",
-              right: 12,
-              zIndex: 2,
-              transform: "translateY(-50%)",
-              background: "#fff",
-              boxShadow: "0 2px 8px rgba(25,118,210,0.10)",
-              "&:hover": { background: "#e3eafc" },
-              width: 40,
-              height: 40,
-              display: { xs: "none", sm: "flex" },
-            }}
-            aria-label="Next image"
-          >
-            <ChevronRightIcon sx={{ fontSize: 28, color: "#1976d2" }} />
-          </IconButton>
-          <Slider
-            ref={sliderRef}
-            dots={true}
-            infinite={true}
-            speed={500}
-            slidesToShow={1}
-            slidesToScroll={1}
-            arrows={false}
-            adaptiveHeight={false}
-            centerMode={true}
-            centerPadding="0px"
-            dotsClass="slick-dots slick-thumb"
-          >
-            {dummyServer.images.map((img, idx) => (
-              <Box
-                key={idx}
-                sx={{
-                  width: "100%",
-                  height: { xs: 180, sm: 240, md: 340 },
-                  background: `url(${img}) center center / cover no-repeat`,
-                  borderRadius: 3,
-                  position: "relative",
-                  transition: "box-shadow 0.2s",
-                }}
-              />
-            ))}
-          </Slider>
-        </Box>
-
-        {/* Title, tags, launch info */}
-        <Box
-          display="flex"
-          alignItems={{ xs: "flex-start", sm: "center" }}
-          flexDirection={{ xs: "column", sm: "row" }}
-          gap={2}
-          mb={1}
-        >
-          <Typography variant="h5" sx={{ fontWeight: 700, flexShrink: 0 }}>
-            {dummyServer.name}
-          </Typography>
-          <Box display="flex" gap={1} flexWrap="wrap">
-            {dummyServer.tags.map((tag, i) => (
-              <Chip key={i} label={tag} color="primary" size="small" sx={{ fontWeight: 500 }} />
-            ))}
-          </Box>
-          <Typography
-            variant="body2"
-            sx={{
-              color: "#888",
-              ml: { xs: 0, sm: 2 },
-              mt: { xs: 0.5, sm: 0 },
-              fontSize: 15,
-            }}
-          >
-            Launched by <b>{dummyServer.launchedBy}</b>
-          </Typography>
-        </Box>
-        <Box display="flex" alignItems="center" gap={3} mb={2} mt={0.5}>
-          <Box display="flex" alignItems="center" gap={0.5}>
-            <StarIcon sx={{ color: "#FFD600", fontSize: 20 }} />
-            <Typography variant="body2" sx={{ fontWeight: 500 }}>
-              {dummyServer.rating}
-            </Typography>
-          </Box>
-          <Box display="flex" alignItems="center" gap={0.5}>
-            <ChatBubbleOutlineIcon sx={{ color: "#1976d2", fontSize: 18 }} />
-            <Typography variant="body2" sx={{ fontWeight: 500 }}>
-              {dummyServer.comments}
-            </Typography>
-          </Box>
-        </Box>
-
-        {/* Tabs */}
-        <Tabs
-          value={tab}
-          onChange={(_, v) => setTab(v)}
-          sx={{
-            minHeight: 32,
-            mb: 2,
-            background: "#f3f6fb",
-            borderRadius: 2,
-            px: 1,
-            "& .MuiTab-root": {
-              minHeight: 32,
-              px: 2,
-              py: 0.5,
-              fontWeight: 600,
-              fontSize: 15,
-              borderRadius: 2,
-              textTransform: "none",
-            },
-            "& .Mui-selected": {
-              background: "#e3eafc",
-              color: "#1976d2",
-            },
-          }}
-          TabIndicatorProps={{
-            style: { display: "none" }
-          }}
-          variant="scrollable"
-          scrollButtons="auto"
-        >
-          {tabLabels.map(label => (
-            <Tab key={label} label={label} />
-          ))}
-        </Tabs>
-        <Divider sx={{ mb: 2 }} />
-
-        {/* Tab Panels */}
-        {tab === 0 && (
-          <Box>
-            <Typography variant="body1" sx={{ mb: 2, color: "#444", fontSize: 17 }}>
-              {dummyServer.description}
-            </Typography>
-          </Box>
-        )}
-        {tab === 1 && (
-          <Box>
-            <Typography variant="h6" sx={{ mb: 1 }}>
-              User Ratings & Comments
-            </Typography>
-            <Box mb={2}>
-              <Rating
-                value={userRating}
-                onChange={(_, v) => setUserRating(v)}
-                precision={0.5}
-                size="large"
-              />
-              <TextField
-                label="Add a comment"
-                multiline
-                minRows={2}
-                fullWidth
-                value={comment}
-                onChange={e => setComment(e.target.value)}
-                sx={{ mt: 1 }}
-              />
-              <Button
-                variant="contained"
-                sx={{ mt: 1, borderRadius: 2, fontWeight: 600 }}
-                disabled={!userRating || !comment}
-                onClick={handleCommentSubmit}
-              >
-                Submit
-              </Button>
-            </Box>
-            <Divider sx={{ mb: 2 }} />
-            {dummyComments.map((c, i) => (
-              <Paper
-                key={i}
-                sx={{
-                  p: 2,
-                  mb: 2,
-                  background: theme.palette.mode === "dark" ? "#23272f" : "#f9fafb",
-                  borderRadius: 2,
-                  boxShadow: "0 1px 8px rgba(25,118,210,0.06)",
+            {/* Server name and tool count */}
+            <Box display="flex" alignItems="center" gap={2}>
+              <Avatar 
+                sx={{ 
+                  bgcolor: "primary.main", 
+                  width: 42, 
+                  height: 42, 
+                  fontSize: 18,
+                  fontWeight: "bold"
                 }}
               >
-                <Box display="flex" alignItems="center" gap={2} mb={1}>
-                  <Avatar sx={{ bgcolor: "#e3eafc", color: "#1976d2", fontWeight: 700 }}>
-                    {c.user[0]}
-                  </Avatar>
-                  <Typography sx={{ fontWeight: 600 }}>{c.user}</Typography>
-                  <Rating value={c.rating} readOnly size="small" />
-                  <Typography variant="caption" sx={{ color: "#888" }}>
-                    {c.date}
+                {server?.mcpServerName?.charAt(0)?.toUpperCase() || "S"}
+              </Avatar>
+              
+              <Box>
+                <Typography variant="h6" fontWeight={700} color="primary">
+                  {server?.mcpServerName || "Unnamed Server"}
+                </Typography>
+                <Box display="flex" alignItems="center" gap={1}>
+                  <BuildIcon sx={{ color: 'text.secondary', fontSize: 16 }} />
+                  <Typography variant="body2" color="text.secondary">
+                    {toolCount} tool{toolCount !== 1 ? "s" : ""}
                   </Typography>
                 </Box>
-                <Typography sx={{ color: "#444" }}>{c.comment}</Typography>
-              </Paper>
-            ))}
-          </Box>
-        )}
-        {tab === 2 && (
-          <Box>
-            <Typography variant="body1" sx={{ color: "#444" }}>
-              <b>Details:</b> {dummyServer.description}
-            </Typography>
-          </Box>
-        )}
-        {tab === 3 && (
-          <Box>
-            <Typography variant="body1" sx={{ color: "#444" }}>
-              <b>Privacy:</b> {dummyServer.privacy}
-            </Typography>
-          </Box>
-        )}
-        {tab === 4 && (
-          <Box>
-            <Typography variant="body1" sx={{ color: "#444" }}>
-              <b>Pricing:</b> {dummyServer.pricing}
-            </Typography>
-          </Box>
-        )}
-        {tab === 5 && (
-          <Box>
-            <Typography variant="body1" sx={{ color: "#444" }}>
-              <b>Support:</b> {dummyServer.support}
-            </Typography>
-          </Box>
-        )}
-        {tab === 6 && (
-          <Box>
-            <Typography variant="h6" sx={{ mb: 1 }}>
-              Related MCP Servers
-            </Typography>
-            <Box display="flex" gap={2} flexWrap="wrap">
-              {dummyServer.related.map((rel, i) => (
-                <Button
-                  key={i}
-                  variant="outlined"
-                  sx={{
-                    borderRadius: 2,
-                    fontWeight: 600,
-                    px: 2,
-                    py: 0.5,
-                    fontSize: 15,
+              </Box>
+            </Box>
+            
+            {/* URL with copy button */}
+            <Box 
+              sx={{ 
+                flex: "1 1 auto",
+                display: "flex", 
+                justifyContent: "center",
+                px: 2,
+                maxWidth: { xs: '100%', md: '50%' }
+              }}
+            >
+              <Box 
+                sx={{ 
+                  display: "flex", 
+                  alignItems: "center",
+                  border: "1px solid #e0e0e0",
+                  borderRadius: 6,
+                  py: 0.5,
+                  px: 2,
+                  bgcolor: "#f8fafd",
+                  maxWidth: '100%'
+                }}
+              >
+                <Typography
+                  noWrap
+                  sx={{ 
+                    fontSize: 13,
+                    fontFamily: "monospace",
+                    color: "text.secondary"
                   }}
-                  onClick={() => navigate(`/mcp-servers/${rel.id}`)}
                 >
-                  {rel.name}
+                  http://localhost:3000/v1/api/mcp-server/{mcpServerId}/events
+                </Typography>
+                <Tooltip title="Copy endpoint URL">
+                  <IconButton 
+                    size="small"
+                    onClick={handleCopyPath}
+                    sx={{ 
+                      ml: 1,
+                      color: "primary.main",
+                    }}
+                  >
+                    <ContentCopyIcon fontSize="small" />
+                  </IconButton>
+                </Tooltip>
+              </Box>
+            </Box>
+            
+            {/* Action buttons */}
+            <Box display="flex" alignItems="center" gap={1}>
+              <Tooltip title="Expand view">
+                <Button 
+                  size="small"
+                  variant="outlined"
+                  onClick={() => setCompactMode(false)}
+                  startIcon={<AspectRatioIcon />}
+                  sx={{ borderRadius: 2 }}
+                >
+                  Expand
                 </Button>
-              ))}
+              </Tooltip>
+              
+              <Tooltip title="Edit server">
+                <IconButton
+                  onClick={handleOpenEditDialog}
+                  sx={{ color: 'primary.main' }}
+                >
+                  <EditIcon />
+                </IconButton>
+              </Tooltip>
+              
+              <Tooltip title="Delete server">
+                <IconButton
+                  onClick={() => setDeleteDialogOpen(true)}
+                  sx={{ color: 'error.main' }}
+                >
+                  <DeleteIcon />
+                </IconButton>
+              </Tooltip>
             </Box>
           </Box>
+        </Paper>
+
+        {/* Copy success notification */}
+        <Snackbar
+          open={copySnackbar}
+          autoHideDuration={3000}
+          onClose={() => setCopySnackbar(false)}
+          message="Server endpoint copied to clipboard"
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        />
+
+        {/* Edit Dialog */}
+        <Dialog 
+          open={openEditDialog} 
+          onClose={handleCloseEditDialog}
+          fullWidth
+          maxWidth="md"
+        >
+          <DialogTitle sx={{ pb: 1 }}>
+            <Box display="flex" justifyContent="space-between" alignItems="center">
+              <Typography variant="h5" fontWeight={600}>
+                Edit Server Details
+              </Typography>
+              <IconButton onClick={handleCloseEditDialog} size="small">
+                <CloseIcon />
+              </IconButton>
+            </Box>
+          </DialogTitle>
+          
+          <DialogContent sx={{ pt: 3 }}>
+            {saveError && (
+              <Alert severity="error" sx={{ mb: 3, borderRadius: 2 }}>
+                {saveError}
+              </Alert>
+            )}
+            
+            <Typography variant="subtitle2" fontWeight={600} mb={0.5}>
+              Server Name*
+            </Typography>
+            <TextField
+              value={editingServer.mcpServerName}
+              onChange={(e) => setEditingServer({ 
+                ...editingServer, 
+                mcpServerName: e.target.value 
+              })}
+              fullWidth
+              variant="outlined"
+              placeholder="Enter a name for your server"
+              size="small"
+              sx={{ mb: 3 }}
+            />
+            
+            <Typography variant="subtitle2" fontWeight={600} mb={0.5}>
+              Description
+            </Typography>
+            <TextField
+              value={editingServer.description}
+              onChange={(e) => setEditingServer({ 
+                ...editingServer, 
+                description: e.target.value 
+              })}
+              fullWidth
+              variant="outlined"
+              placeholder="Describe what this server does"
+              multiline
+              rows={4}
+              sx={{ mb: 3 }}
+            />
+            
+            <Typography variant="subtitle2" fontWeight={600} mb={1}>
+              Server Images
+            </Typography>
+            <Box sx={{ mb: 3 }}>
+              <div className="row g-2">
+                {editingServer.images.map((img: string, index: number) => (
+                  <div className="col-6 col-sm-4 col-md-3" key={index}>
+                    <Box
+                      sx={{
+                        position: "relative",
+                        height: 150,
+                        borderRadius: 2,
+                        overflow: "hidden",
+                        boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+                      }}
+                    >
+                      <img 
+                        src={img} 
+                        alt={`Server ${index + 1}`} 
+                        style={{ 
+                          width: "100%", 
+                          height: "100%", 
+                          objectFit: "cover" 
+                        }} 
+                      />
+                      <IconButton
+                        onClick={() => handleRemoveImage(index)}
+                        size="small"
+                        sx={{
+                          position: "absolute",
+                          top: 5,
+                          right: 5,
+                          background: "rgba(0,0,0,0.5)",
+                          color: "#fff",
+                          "&:hover": { background: "rgba(0,0,0,0.7)" }
+                        }}
+                      >
+                        <CloseIcon fontSize="small" />
+                      </IconButton>
+                    </Box>
+                  </div>
+                ))}
+                
+                {editingServer.images.length < 5 && (
+                  <div className="col-6 col-sm-4 col-md-3">
+                    <Box
+                      sx={{
+                        height: 150,
+                        borderRadius: 2,
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        border: "2px dashed #ccc",
+                        cursor: "pointer",
+                        "&:hover": { borderColor: "#1976d2" }
+                      }}
+                      component="label"
+                    >
+                      <input
+                        type="file"
+                        accept="image/*"
+                        hidden
+                        onChange={handleImageUpload}
+                        multiple
+                      />
+                      <AddPhotoAlternateIcon 
+                        sx={{ fontSize: 36, color: "#1976d2", mb: 1 }} 
+                      />
+                      <Typography variant="body2" color="text.secondary">
+                        Add Image
+                      </Typography>
+                    </Box>
+                  </div>
+                )}
+              </div>
+              <Typography variant="caption" color="text.secondary" sx={{ mt: 1, display: "block" }}>
+                Upload up to 5 images. Recommended size: 1200x800px.
+              </Typography>
+            </Box>
+          </DialogContent>
+          
+          <DialogActions sx={{ px: 3, py: 2 }}>
+            <Button 
+              variant="outlined" 
+              onClick={handleCloseEditDialog}
+              sx={{ borderRadius: 2 }}
+            >
+              Cancel
+            </Button>
+            <Button
+              variant="contained"
+              startIcon={isSaving ? <CircularProgress size={20} color="inherit" /> : <SaveIcon />}
+              onClick={handleUpdateServer}
+              disabled={!editingServer.mcpServerName || isSaving}
+              sx={{ 
+                borderRadius: 2,
+                px: 3,
+                py: 1,
+                fontWeight: 600,
+                boxShadow: "0 4px 12px rgba(25,118,210,0.12)",
+              }}
+            >
+              {isSaving ? "Saving..." : "Save Changes"}
+            </Button>
+          </DialogActions>
+        </Dialog>
+        
+        {/* Delete Dialog */}
+        <McpDeleteDialog
+          open={deleteDialogOpen}
+          onClose={() => setDeleteDialogOpen(false)}
+          mcpServerId={mcpServerId || ""}
+          serverName={server?.mcpServerName || ""}
+          onDeleteSuccess={handleDeleteSuccess}
+        />
+      </>
+    );
+  }
+
+  // Regular detailed view (existing code)
+  return (
+    <>
+      <Paper
+        elevation={0}
+        sx={{
+          p: 3,
+          mb: 4,
+          borderRadius: 3,
+          boxShadow: "0 8px 32px rgba(0,0,0,0.08)",
+          border: "1px solid #f0f0f0",
+        }}
+      >
+        {/* Compact mode toggle - NEW */}
+        <Box display="flex" justifyContent="flex-end" mb={2}>
+          <FormControlLabel
+            control={
+              <Switch
+                checked={compactMode}
+                onChange={(e) => setCompactMode(e.target.checked)}
+                color="primary"
+              />
+            }
+            label={
+              <Typography variant="body2" fontWeight={500}>
+                Compact UI
+              </Typography>
+            }
+          />
+        </Box>
+        
+        {error && (
+          <Alert severity="error" sx={{ mb: 3, borderRadius: 2 }}>
+            {error}
+          </Alert>
         )}
-      </Box>
-    </Box>
+        
+        <Box 
+          display="flex" 
+          justifyContent="space-between" 
+          alignItems={{ xs: "flex-start", sm: "center" }}
+          flexDirection={{ xs: "column", sm: "row" }}
+          gap={{ xs: 2, sm: 0 }}
+          mb={3}
+        >
+          <Box>
+            <Typography variant="h4" fontWeight={700} color="primary">
+              {server?.mcpServerName || "Unnamed Server"}
+            </Typography>
+            <Typography variant="body1" color="text.secondary" mt={1}>
+              ID: {server?.mcpServerId}
+            </Typography>
+          </Box>
+          
+          <Box display="flex" gap={1}>
+            <Button
+              variant="contained"
+              startIcon={<EditIcon />}
+              onClick={handleOpenEditDialog}
+              sx={{
+                borderRadius: 2,
+                px: 2,
+                py: 1,
+                fontWeight: 600,
+                boxShadow: "0 4px 12px rgba(25,118,210,0.12)",
+              }}
+            >
+              Edit Server
+            </Button>
+            
+            {/* Add Delete button */}
+            <Button
+              variant="outlined"
+              color="error"
+              startIcon={<DeleteIcon />}
+              onClick={() => setDeleteDialogOpen(true)}
+              sx={{
+                borderRadius: 2,
+                px: 2,
+                py: 1,
+                fontWeight: 600,
+              }}
+            >
+              Delete
+            </Button>
+          </Box>
+        </Box>
+        
+        <Divider sx={{ mb: 3 }} />
+        
+        {/* Server Connection Details - NEW SECTION */}
+        <Box 
+          sx={{ 
+            mb: 4, 
+            p: 2.5, 
+            borderRadius: 3,
+            bgcolor: "#f0f7ff",
+            border: "1px solid rgba(25,118,210,0.2)"
+          }}
+        >
+          <Box display="flex" alignItems="center" mb={2}>
+            <SettingsEthernetIcon sx={{ color: "primary.main", mr: 1.5 }} />
+            <Typography variant="subtitle1" fontWeight={600}>
+              Connection Information
+            </Typography>
+            <Chip 
+              label="SSE Transport" 
+              size="small" 
+              color="primary"
+              sx={{ ml: 2, fontWeight: 500 }}
+            />
+          </Box>
+          
+          <Box display="flex" flexDirection={{ xs: "column", sm: "row" }} gap={2}>
+            <Box flex={1}>
+              <Typography variant="body2" fontWeight={500} color="text.secondary" mb={0.5}>
+                Server Endpoint
+              </Typography>
+              <Box 
+                sx={{ 
+                  display: "flex", 
+                  alignItems: "center",
+                  border: "1px solid #e0e0e0",
+                  borderRadius: 1,
+                  p: 1,
+                  bgcolor: "#fff"
+                }}
+              >
+                <Typography
+                  sx={{ 
+                    flex: 1,
+                    fontSize: 13,
+                    fontFamily: "monospace",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
+                    color: "text.primary"
+                  }}
+                >
+                  http://localhost:3000/v1/api/mcp-server/{mcpServerId}/events
+                </Typography>
+                <Tooltip title="Copy endpoint URL">
+                  <IconButton 
+                    size="small"
+                    onClick={handleCopyPath}
+                    sx={{ 
+                      ml: 1,
+                      color: "primary.main",
+                      bgcolor: "rgba(25,118,210,0.08)",
+                      "&:hover": {
+                        bgcolor: "rgba(25,118,210,0.15)",
+                      }
+                    }}
+                  >
+                    <ContentCopyIcon fontSize="small" />
+                  </IconButton>
+                </Tooltip>
+              </Box>
+            </Box>
+            
+            <Box>
+              <Typography variant="body2" fontWeight={500} color="text.secondary" mb={0.5}>
+                Transport Type
+              </Typography>
+              <Box 
+                sx={{ 
+                  p: 1, 
+                  display: "flex", 
+                  alignItems: "center",
+                  gap: 1,
+                  border: "1px solid #e0e0e0",
+                  borderRadius: 1,
+                  bgcolor: "#fff"
+                }}
+              >
+                <Box 
+                  component="span" 
+                  sx={{ 
+                    width: 10, 
+                    height: 10, 
+                    borderRadius: "50%", 
+                    bgcolor: "#4caf50",
+                    display: "inline-block"
+                  }} 
+                />
+                <Typography fontWeight={500}>SSE (Server-Sent Events)</Typography>
+              </Box>
+            </Box>
+          </Box>
+          
+          <Typography variant="caption" color="text.secondary" sx={{ mt: 1, display: "block" }}>
+            Use this endpoint to establish a real-time connection with the MCP server.
+          </Typography>
+        </Box>
+        
+        <div className="row">
+          <div className="col-12 col-md-7">
+            <Typography variant="subtitle1" fontWeight={600} mb={2}>
+              Server Details
+            </Typography>
+            
+            <Box sx={{ mb: 3 }}>
+              <Typography variant="body2" fontWeight={500} color="text.secondary" mb={0.5}>
+                Description
+              </Typography>
+              <Typography variant="body1">
+                {server?.description || "No description available."}
+              </Typography>
+            </Box>
+            
+            <Box sx={{ mb: 3 }}>
+              <Typography variant="body2" fontWeight={500} color="text.secondary" mb={0.5}>
+                Created At
+              </Typography>
+              <Typography variant="body1">
+                {server?.createdAt ? new Date(server.createdAt).toLocaleString() : "N/A"}
+              </Typography>
+            </Box>
+            
+            <Box sx={{ mb: 3 }}>
+              <Typography variant="body2" fontWeight={500} color="text.secondary" mb={0.5}>
+                Creator ID
+              </Typography>
+              <Typography variant="body1">
+                {server?.mcpServerCreatorId || "N/A"}
+              </Typography>
+            </Box>
+          </div>
+          
+          <div className="col-12 col-md-5">
+            <Typography variant="subtitle1" fontWeight={600} mb={2}>
+              Performance Metrics
+            </Typography>
+            
+            <Box 
+              sx={{ 
+                display: "flex", 
+                flexDirection: "column", 
+                gap: 2 
+              }}
+            >
+              <Paper 
+                sx={{ 
+                  p: 2, 
+                  borderRadius: 2, 
+                  background: "#f8fafd",
+                  border: "1px solid #edf2f7"
+                }}
+              >
+                <Box display="flex" alignItems="center" gap={1.5}>
+                  <Avatar sx={{ bgcolor: "#e3f2fd", width: 40, height: 40 }}>
+                    <BuildIcon sx={{ color: "#1976d2" }} />
+                  </Avatar>
+                  <Box>
+                    <Typography variant="h6" fontWeight={600}>
+                      {toolCount}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      Total Tools
+                    </Typography>
+                  </Box>
+                </Box>
+              </Paper>
+              
+              <Paper 
+                sx={{ 
+                  p: 2, 
+                  borderRadius: 2, 
+                  background: "#f8fafd",
+                  border: "1px solid #edf2f7"
+                }}
+              >
+                <Box display="flex" alignItems="center" gap={1.5}>
+                  <Avatar sx={{ bgcolor: "#e8f5e9", width: 40, height: 40 }}>
+                    <StorageIcon sx={{ color: "#43a047" }} />
+                  </Avatar>
+                  <Box>
+                    <Typography variant="h6" fontWeight={600}>
+                      100%
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      Uptime
+                    </Typography>
+                  </Box>
+                </Box>
+              </Paper>
+            </Box>
+          </div>
+        </div>
+      </Paper>
+
+      {/* Copy success notification */}
+      <Snackbar
+        open={copySnackbar}
+        autoHideDuration={3000}
+        onClose={() => setCopySnackbar(false)}
+        message="Server endpoint copied to clipboard"
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      />
+
+      {/* Edit Dialog */}
+      <Dialog 
+        open={openEditDialog} 
+        onClose={handleCloseEditDialog}
+        fullWidth
+        maxWidth="md"
+      >
+        <DialogTitle sx={{ pb: 1 }}>
+          <Box display="flex" justifyContent="space-between" alignItems="center">
+            <Typography variant="h5" fontWeight={600}>
+              Edit Server Details
+            </Typography>
+            <IconButton onClick={handleCloseEditDialog} size="small">
+              <CloseIcon />
+            </IconButton>
+          </Box>
+        </DialogTitle>
+        
+        <DialogContent sx={{ pt: 3 }}>
+          {saveError && (
+            <Alert severity="error" sx={{ mb: 3, borderRadius: 2 }}>
+              {saveError}
+            </Alert>
+          )}
+          
+          <Typography variant="subtitle2" fontWeight={600} mb={0.5}>
+            Server Name*
+          </Typography>
+          <TextField
+            value={editingServer.mcpServerName}
+            onChange={(e) => setEditingServer({ 
+              ...editingServer, 
+              mcpServerName: e.target.value 
+            })}
+            fullWidth
+            variant="outlined"
+            placeholder="Enter a name for your server"
+            size="small"
+            sx={{ mb: 3 }}
+          />
+          
+          <Typography variant="subtitle2" fontWeight={600} mb={0.5}>
+            Description
+          </Typography>
+          <TextField
+            value={editingServer.description}
+            onChange={(e) => setEditingServer({ 
+              ...editingServer, 
+              description: e.target.value 
+            })}
+            fullWidth
+            variant="outlined"
+            placeholder="Describe what this server does"
+            multiline
+            rows={4}
+            sx={{ mb: 3 }}
+          />
+          
+          <Typography variant="subtitle2" fontWeight={600} mb={1}>
+            Server Images
+          </Typography>
+          <Box sx={{ mb: 3 }}>
+            <div className="row g-2">
+              {editingServer.images.map((img: string, index: number) => (
+                <div className="col-6 col-sm-4 col-md-3" key={index}>
+                  <Box
+                    sx={{
+                      position: "relative",
+                      height: 150,
+                      borderRadius: 2,
+                      overflow: "hidden",
+                      boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+                    }}
+                  >
+                    <img 
+                      src={img} 
+                      alt={`Server ${index + 1}`} 
+                      style={{ 
+                        width: "100%", 
+                        height: "100%", 
+                        objectFit: "cover" 
+                      }} 
+                    />
+                    <IconButton
+                      onClick={() => handleRemoveImage(index)}
+                      size="small"
+                      sx={{
+                        position: "absolute",
+                        top: 5,
+                        right: 5,
+                        background: "rgba(0,0,0,0.5)",
+                        color: "#fff",
+                        "&:hover": { background: "rgba(0,0,0,0.7)" }
+                      }}
+                    >
+                      <CloseIcon fontSize="small" />
+                    </IconButton>
+                  </Box>
+                </div>
+              ))}
+              
+              {editingServer.images.length < 5 && (
+                <div className="col-6 col-sm-4 col-md-3">
+                  <Box
+                    sx={{
+                      height: 150,
+                      borderRadius: 2,
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      border: "2px dashed #ccc",
+                      cursor: "pointer",
+                      "&:hover": { borderColor: "#1976d2" }
+                    }}
+                    component="label"
+                  >
+                    <input
+                      type="file"
+                      accept="image/*"
+                      hidden
+                      onChange={handleImageUpload}
+                      multiple
+                    />
+                    <AddPhotoAlternateIcon 
+                      sx={{ fontSize: 36, color: "#1976d2", mb: 1 }} 
+                    />
+                    <Typography variant="body2" color="text.secondary">
+                      Add Image
+                    </Typography>
+                  </Box>
+                </div>
+              )}
+            </div>
+            <Typography variant="caption" color="text.secondary" sx={{ mt: 1, display: "block" }}>
+              Upload up to 5 images. Recommended size: 1200x800px.
+            </Typography>
+          </Box>
+        </DialogContent>
+        
+        <DialogActions sx={{ px: 3, py: 2 }}>
+          <Button 
+            variant="outlined" 
+            onClick={handleCloseEditDialog}
+            sx={{ borderRadius: 2 }}
+          >
+            Cancel
+          </Button>
+          <Button
+            variant="contained"
+            startIcon={isSaving ? <CircularProgress size={20} color="inherit" /> : <SaveIcon />}
+            onClick={handleUpdateServer}
+            disabled={!editingServer.mcpServerName || isSaving}
+            sx={{ 
+              borderRadius: 2,
+              px: 3,
+              py: 1,
+              fontWeight: 600,
+              boxShadow: "0 4px 12px rgba(25,118,210,0.12)",
+            }}
+          >
+            {isSaving ? "Saving..." : "Save Changes"}
+          </Button>
+        </DialogActions>
+      </Dialog>
+      
+      {/* Delete Dialog */}
+      <McpDeleteDialog
+        open={deleteDialogOpen}
+        onClose={() => setDeleteDialogOpen(false)}
+        mcpServerId={mcpServerId || ""}
+        serverName={server?.mcpServerName || ""}
+        onDeleteSuccess={handleDeleteSuccess}
+      />
+    </>
   );
 };
 

@@ -268,7 +268,7 @@ const Bots = () => {
                 variant="text"
                 color="secondary"
                 sx={{ mt: 1, textTransform: "none", fontWeight: 500, display: "flex", alignItems: "center", gap: 1 }}
-                onClick={() => navigate("/lab/mcp-servers")}
+                onClick={() => navigate("/lab/mcp-servers/marketplace")}
                 startIcon={<StorageIcon />}
               >
                 MCP Servers

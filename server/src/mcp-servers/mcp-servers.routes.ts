@@ -8,8 +8,7 @@ router.post("/create", authenticateJWT, ctrl.createMcpServer);
 router.get("/list", authenticateJWT, ctrl.listMcpServersByUser);
 router.delete("/delete/:id", authenticateJWT, ctrl.deleteMcpServer);
 router.patch("/update/:id", authenticateJWT, ctrl.updateMcpServer);
-
-router.get("/:id", ctrl.getMcpServerDetails);
+router.get("/get/:id", ctrl.getMcpServerDetails);
 
 
 router.post("/details", authenticateJWT, ctrl.createMcpServerDetails);
