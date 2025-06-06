@@ -5,6 +5,8 @@ import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminLayout from './pages/admin/AdminLayout';
 import UsersList from './pages/admin/UsersList';
 import ThemeManagement from './pages/admin/design-system/ComponentList';
+import McpServers from './pages/mcp-servers/McpServers';
+import McpServerDetails from './pages/mcp-servers/McpServerDetails';
 
 const Chat = lazy(() => import('./pages/chat/Chat'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
@@ -72,6 +74,8 @@ const App = () => {
           <Route path="bot/:childBotType/dashboard/:chatBotId" element={<Dashboard />} />
           <Route path="bot/:childBotType/chat-settings/:chatBotId" element={<ChatSettings />} />
           <Route path="bot/:childBotType/lab/:chatBotId" element={<ChatLab />} />
+          <Route path="lab/mcp-servers" element={<McpServers />} />
+          <Route path="lab/mcp-server/:id" element={<McpServerDetails />} />
           <Route path="profile" element={<Profile />} />
         </Route>
         <Route

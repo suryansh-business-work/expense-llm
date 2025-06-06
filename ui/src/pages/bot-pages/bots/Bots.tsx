@@ -13,8 +13,10 @@ import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogActions from '@mui/material/DialogActions';
 import Skeleton from "@mui/material/Skeleton";
+import Divider from "@mui/material/Divider";
 import DescriptionWithReadMore from "./DescriptionWithReadMore";
 import CreateOrUpdateBotDialog from "./CreateOrUpdateBotDialog";
+import StorageIcon from '@mui/icons-material/Storage';
 
 // Map type value to icon class (Font Awesome 5+ CSS classes)
 const typeIconMap: Record<string, string> = {
@@ -204,44 +206,74 @@ const Bots = () => {
             <ul className="bot-categories" role="listbox" aria-labelledby="bot-category-heading">
               {loading
                 ? Array.from({ length: 4 }).map((_, idx) => (
-                    <li key={idx} className="mb-2">
-                      <Skeleton variant="rectangular" width={160} height={32} sx={{ borderRadius: 2 }} />
-                    </li>
-                  ))
+                  <li key={idx} className="mb-2">
+                    <Skeleton variant="rectangular" width={160} height={32} sx={{ borderRadius: 2 }} />
+                  </li>
+                ))
                 : BOT_CATEGORIES.map((cat) => (
-                    <li key={cat.value} className="mb-2" role="option" aria-selected={category === cat.value}>
-                      <a
-                        href="#"
-                        className={`d-flex align-items-center ${(category === cat.value && (!searchFocus || cat.value === "all")) ||
-                          (searchFocus && cat.value === "all")
-                          ? "active fw-bold text-primary"
-                          : ""
-                          }`}
-                        style={{ cursor: "pointer", textDecoration: "none" }}
-                        onClick={e => {
+                  <li key={cat.value} className="mb-2" role="option" aria-selected={category === cat.value}>
+                    <a
+                      href="#"
+                      className={`d-flex align-items-center ${(category === cat.value && (!searchFocus || cat.value === "all")) ||
+                        (searchFocus && cat.value === "all")
+                        ? "active fw-bold text-primary"
+                        : ""
+                        }`}
+                      style={{ cursor: "pointer", textDecoration: "none" }}
+                      onClick={e => {
+                        e.preventDefault();
+                        setCategory(cat.value);
+                        setSearch("");
+                        setSearchFocus(false);
+                      }}
+                      tabIndex={0}
+                      aria-label={cat.label}
+                      aria-current={category === cat.value ? "true" : undefined}
+                      onKeyDown={e => {
+                        if (e.key === "Enter" || e.key === " ") {
                           e.preventDefault();
                           setCategory(cat.value);
                           setSearch("");
                           setSearchFocus(false);
-                        }}
-                        tabIndex={0}
-                        aria-label={cat.label}
-                        aria-current={category === cat.value ? "true" : undefined}
-                        onKeyDown={e => {
-                          if (e.key === "Enter" || e.key === " ") {
-                            e.preventDefault();
-                            setCategory(cat.value);
-                            setSearch("");
-                            setSearchFocus(false);
-                          }
-                        }}
-                      >
-                        <i className={`${cat.icon} me-2`} aria-hidden="true" />
-                        {cat.label}
-                      </a>
-                    </li>
-                  ))}
+                        }
+                      }}
+                    >
+                      <i className={`${cat.icon} me-2`} aria-hidden="true" />
+                      {cat.label}
+                    </a>
+                  </li>
+                ))}
             </ul>
+            <Divider sx={{ my: 2 }} />
+            <Card
+              sx={{
+                backgroundColor: '#fff',
+                borderRadius: '12px',
+                boxShadow: 'none',
+                padding: 2,
+              }}>
+              <div
+                style={{
+                  fontWeight: 600,
+                  fontSize: 16,
+                  color: "#4f4f4f",
+                  marginBottom: 8,
+                  gap: 8,
+                  letterSpacing: 0.2,
+                }}
+              >
+                Labs
+              </div>
+              <Button
+                variant="text"
+                color="secondary"
+                sx={{ mt: 1, textTransform: "none", fontWeight: 500, display: "flex", alignItems: "center", gap: 1 }}
+                onClick={() => navigate("/lab/mcp-servers")}
+                startIcon={<StorageIcon />}
+              >
+                MCP Servers
+              </Button>
+            </Card>
           </nav>
           <main className="col-12 col-sm-12 col-md-8 col-lg-9" aria-labelledby="bots-heading">
             <div className="row" aria-live="polite">

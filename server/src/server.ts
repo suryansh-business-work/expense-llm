@@ -25,6 +25,9 @@ import childBotLabPromptRoutes from './chat-api/chat-lab-apis/prompt/prompt.rout
 import { startWebSocketServer } from './chat-api/chat.ws';
 import getChatGptResponseRoutes from './chat-api/chatgpt';
 
+// MCP Servers APIs
+import mcpServersRoutes from './mcp-servers/mcp-servers.routes';
+
 // Upload & Subscription APIs
 import imageKitUploadRoutes from './upload/upload.routes';
 import subscriptionRoutes from './chat-api/subscription-api/subscription-usage.routes';
@@ -80,6 +83,9 @@ app.use('/chat-gpt', getChatGptResponseRoutes);
 // Upload & Subscription
 app.use('/v1/api', imageKitUploadRoutes);
 app.use('/v1/api/subscription-usage', subscriptionRoutes);
+
+// MCP Servers
+app.use('/v1/api/mcp-server', mcpServersRoutes);
 
 // Design System
 app.use('/design-system', themeRoutes);

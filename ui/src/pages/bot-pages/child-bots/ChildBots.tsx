@@ -158,7 +158,7 @@ const ChildBots = () => {
     <Box sx={{ background: "#f6f8fa", minHeight: "100vh" }}>
       <Box
         sx={{
-          maxWidth: 1200,
+          maxWidth: 1320,
           margin: '0 auto 0 auto',
           borderRadius: 3,
           px: { xs: 2, md: 4 },
