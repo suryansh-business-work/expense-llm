@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import { useNavigate } from "react-router-dom"; // Add this import
 import {
   Box,
   Typography,
@@ -20,16 +21,19 @@ import {
 import BuildIcon from "@mui/icons-material/Build";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import ScienceIcon from "@mui/icons-material/Science"; // Add this for Tool Lab icon
 
 // Import tool management components
-import CreateAndUpdateTool from "./CreateAndUpdateTool";
-import DeleteTool from "./DeleteTool";
+import CreateAndUpdateToolDialog from "./CreateAndUpdateToolDialog";
+import DeleteDialogTool from "./DeleteDialogTool";
 
 interface ToolsProps {
   mcpServerId: string;
 }
 
 const Tools: React.FC<ToolsProps> = ({ mcpServerId }) => {
+  const navigate = useNavigate(); // Add navigate hook
+  
   // State for tools
   const [tools, setTools] = useState<any[]>([]);
   const [toolsLoading, setToolsLoading] = useState(false);
@@ -41,6 +45,11 @@ const Tools: React.FC<ToolsProps> = ({ mcpServerId }) => {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [selectedToolForDelete, setSelectedToolForDelete] = useState<any>(null);
   
+  // Add navigation handler for Tool Lab
+  const handleToolLabClick = (tool: any) => {
+    navigate(`/lab/mcp-server/your-server/${mcpServerId}/tool/${tool.toolId}`);
+  };
+
   // Fetch tools for this server
   const getServerTools = useCallback(async () => {
     if (!mcpServerId) return;
@@ -219,6 +228,7 @@ const Tools: React.FC<ToolsProps> = ({ mcpServerId }) => {
                     
                     <TableCell align="right">
                       <ButtonGroup size="small" variant="outlined">
+                        {/* Edit Tool Button */}
                         <Tooltip title="Edit tool">
                           <Button
                             startIcon={<EditIcon fontSize="small" />}
@@ -234,6 +244,28 @@ const Tools: React.FC<ToolsProps> = ({ mcpServerId }) => {
                             Edit
                           </Button>
                         </Tooltip>
+                        
+                        {/* NEW: Tool Lab Button */}
+                        <Tooltip title="Open Tool Lab">
+                          <Button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleToolLabClick(tool);
+                            }}
+                            sx={{ 
+                              borderRadius: '0',
+                              borderLeft: 0,
+                              borderRight: 0,
+                              borderColor: 'divider',
+                              color: 'info.main',
+                            }}
+                            startIcon={<ScienceIcon fontSize="small" />}
+                          >
+                            Tool Lab
+                          </Button>
+                        </Tooltip>
+                        
+                        {/* Delete Tool Button */}
                         <Tooltip title="Delete tool">
                           <Button
                             color="error"
@@ -244,7 +276,6 @@ const Tools: React.FC<ToolsProps> = ({ mcpServerId }) => {
                             }}
                             sx={{ 
                               borderRadius: '0 4px 4px 0',
-                              borderLeft: 0,
                               minWidth: 40,
                               borderColor: 'divider'
                             }}
@@ -267,24 +298,81 @@ const Tools: React.FC<ToolsProps> = ({ mcpServerId }) => {
             </Table>
           </TableContainer>
         ) : (
-          <Box sx={{ p: 4, textAlign: "center" }}>
-            <Typography variant="body1" color="text.secondary">
-              No tools have been created to this server yet.
+          <Box 
+            sx={{ 
+              p: { xs: 3, sm: 5 },
+              textAlign: "center",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              borderRadius: 4,
+              bgcolor: "#fafbfc",
+              border: "1px dashed #dce0e6"
+            }}
+          >
+            <Box
+              sx={{
+                width: 80,
+                height: 80,
+                borderRadius: "50%",
+                bgcolor: "rgba(25,118,210,0.08)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                mb: 3
+              }}
+            >
+              <BuildIcon sx={{ fontSize: 36, color: "primary.main" }} />
+            </Box>
+            
+            <Typography variant="h5" fontWeight={700} color="text.primary" mb={1.5}>
+              Power Up Your MCP Server
             </Typography>
+            
+            <Typography 
+              variant="body1" 
+              color="text.secondary"
+              sx={{ 
+                maxWidth: 500, 
+                mx: "auto", 
+                mb: 3.5,
+                lineHeight: 1.6
+              }}
+            >
+              This server has no tools yet. Add your first tool to unlock the full potential of your MCP server and start automating tasks.
+            </Typography>
+            
             <Button 
               variant="contained" 
-              sx={{ mt: 2, borderRadius: 2 }}
+              size="large"
               startIcon={<BuildIcon />}
               onClick={handleAddTool}
+              sx={{
+                borderRadius: 2,
+                px: 4,
+                py: 1.2,
+                fontWeight: 600,
+                boxShadow: "0 6px 16px rgba(25,118,210,0.2)",
+                transition: "all 0.2s",
+                "&:hover": {
+                  transform: "translateY(-2px)",
+                  boxShadow: "0 8px 20px rgba(25,118,210,0.3)",
+                }
+              }}
             >
-              Create Your First Tool
+              Add Your First Tool
             </Button>
+            
+            <Typography variant="caption" color="text.secondary" mt={3}>
+              Tools give your MCP server functionality and purpose
+            </Typography>
           </Box>
         )}
       </Paper>
       
       {/* Tool Create/Update Dialog */}
-      <CreateAndUpdateTool
+      <CreateAndUpdateToolDialog
         open={toolDialogOpen}
         onClose={handleToolDialogClose}
         mcpServerId={mcpServerId}
@@ -293,7 +381,7 @@ const Tools: React.FC<ToolsProps> = ({ mcpServerId }) => {
       />
       
       {/* Delete Tool Dialog */}
-      <DeleteTool
+      <DeleteDialogTool
         open={deleteDialogOpen}
         onClose={() => setDeleteDialogOpen(false)}
         tool={selectedToolForDelete}

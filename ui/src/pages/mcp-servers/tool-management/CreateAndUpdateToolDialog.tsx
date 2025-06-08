@@ -36,7 +36,7 @@ interface ToolFormData {
   toolParams: ToolParam[];
 }
 
-interface CreateAndUpdateToolProps {
+interface CreateAndUpdateToolDialogProps {
   open: boolean;
   onClose: () => void;
   mcpServerId: string;
@@ -46,13 +46,13 @@ interface CreateAndUpdateToolProps {
 
 const paramTypes = ["string", "number", "boolean", "array", "object", "date"];
 
-const CreateAndUpdateTool = ({
+const CreateAndUpdateToolDialog = ({
   open,
   onClose,
   mcpServerId,
   tool,
   onSuccess,
-}: CreateAndUpdateToolProps) => {
+}: CreateAndUpdateToolDialogProps) => {
   const isEditMode = !!tool;
   
   // Form state
@@ -376,4 +376,5 @@ const CreateAndUpdateTool = ({
   );
 };
 
-export default CreateAndUpdateTool;
+export default CreateAndUpdateToolDialog;
+

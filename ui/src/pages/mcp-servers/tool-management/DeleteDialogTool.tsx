@@ -17,7 +17,7 @@ interface DeleteToolProps {
   onSuccess?: () => void;
 }
 
-const DeleteTool = ({ open, onClose, tool, onSuccess }: DeleteToolProps) => {
+const DeleteDialogTool = ({ open, onClose, tool, onSuccess }: DeleteToolProps) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -105,4 +105,4 @@ const DeleteTool = ({ open, onClose, tool, onSuccess }: DeleteToolProps) => {
   );
 };
 
-export default DeleteTool;
+export default DeleteDialogTool;

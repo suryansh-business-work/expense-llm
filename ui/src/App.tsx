@@ -8,6 +8,7 @@ import ThemeManagement from './pages/admin/design-system/ComponentList';
 import McpServers from './pages/mcp-servers/McpServers';
 import YourMcpServerManagement from './pages/mcp-servers/YourMcpServerManagement';
 import McpServerDetailsPage from './pages/mcp-servers/McpServerDetailsPage';
+import ToolLaboratory from './pages/mcp-servers/tool-management/tool-laboratory/ToolLaboratory';
 
 const Chat = lazy(() => import('./pages/chat/Chat'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
@@ -78,6 +79,7 @@ const App = () => {
           <Route path="lab/mcp-servers/:servers" element={<McpServers />} />
           <Route path="lab/mcp-server/:mcpServerId" element={<McpServerDetailsPage />} />
           <Route path="lab/mcp-server/your-server/:mcpServerId" element={<YourMcpServerManagement />} />
+          <Route path="lab/mcp-server/your-server/:mcpServerId/tool/:toolId" element={<ToolLaboratory />} />
           <Route path="profile" element={<Profile />} />
         </Route>
         <Route
