@@ -11,8 +11,8 @@ import SettingsIcon from "@mui/icons-material/Settings";
 // Import components
 import CodeSection from './components/CodeSection';
 import ToolSettingsSection from './components/ToolSettingsSection';
-import TerminalSection from './components/TerminalSection';
 import ToolDetailsSection from './components/ToolDetailsSection';
+import TerminalSection from "./components/TerminalSection";
 
 const ToolLaboratoryContainer: React.FC = () => {
   const { mcpServerId, toolId } = useParams<{ mcpServerId: string; toolId: string }>();
@@ -69,7 +69,6 @@ const ToolLaboratoryContainer: React.FC = () => {
           <ToolSettingsSection />
         )}
       </>
-      {/* Terminal Section */}
       <TerminalSection />
     </Box>
   );

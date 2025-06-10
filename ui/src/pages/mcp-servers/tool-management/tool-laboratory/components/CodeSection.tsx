@@ -191,30 +191,6 @@ const CodeSection: React.FC = () => {
           }
         />
       </Box>
-      
-      {/* Package dependencies information */}
-      <Box 
-        sx={{ 
-          mt: 2, 
-          p: 2, 
-          borderRadius: 1, 
-          bgcolor: 'rgba(0,0,0,0.03)',
-          border: '1px dashed rgba(0,0,0,0.1)'
-        }}
-      >
-        <Typography variant="subtitle2" fontWeight={600} mb={1}>
-          Node.js Package Dependencies
-        </Typography>
-        <Typography variant="body2" sx={{ mb: 1 }}>
-          Basic functionality: No additional packages required. <br/>
-          HTTP requests: <code>npm install axios</code> <br/>
-          Database: <code>npm install mongoose</code> (MongoDB) or <code>npm install pg</code> (PostgreSQL)
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          <i>Note: Install packages using npm in your server environment before using them.</i>
-        </Typography>
-      </Box>
-      
       <Snackbar
         open={snackbar.open}
         autoHideDuration={3000}

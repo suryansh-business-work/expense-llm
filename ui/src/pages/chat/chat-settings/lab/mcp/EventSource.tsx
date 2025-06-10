@@ -14,7 +14,7 @@ interface EventSourceProps {
 }
 
 const EventSource: React.FC<EventSourceProps> = ({ onConnected }) => {
-  const [eventUrl, setEventUrl] = useState("http://localhost:3001/mcp/sse");
+  const [eventUrl, setEventUrl] = useState("http://localhost:3001/50d4f219-3dc0-450c-8fed-47f09e854e91/mcp/sse");
   const [logs, setLogs] = useState<string[]>([]);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [connState, setConnState] = useState<ConnState>("idle");
@@ -26,6 +26,11 @@ const EventSource: React.FC<EventSourceProps> = ({ onConnected }) => {
       ...logs,
       `[${new Date().toLocaleTimeString()}] ${msg}`
     ]);
+  };
+
+  // Get authentication token from localStorage
+  const getAuthToken = (): string | null => {
+    return localStorage.getItem('token');
   };
 
   // Connect and log all steps
@@ -41,17 +46,36 @@ const EventSource: React.FC<EventSourceProps> = ({ onConnected }) => {
       onConnected([], null); // Clear tools on disconnect
       return;
     }
+    
     if (connState === "failed") {
       // On retry, clear tools as well
       onConnected([], null);
     }
+    
     setConnState("connecting");
     addLog("Start checking EventSource...");
-    setLogs(logs => [...logs, `[${new Date().toLocaleTimeString()}] Connecting to ${eventUrl}...`]);
+    
+    // Get token from localStorage
+    const token = getAuthToken();
+    if (!token) {
+      addLog("❌ Authentication token not found in localStorage.");
+      setConnState("failed");
+      return;
+    }
+    
+    addLog("🔑 Authentication token retrieved from localStorage.");
+
+    // Create URL with token
+    const url = new URL(eventUrl);
+    url.searchParams.append('token', token);
+    
+    setLogs(logs => [...logs, `[${new Date().toLocaleTimeString()}] Connecting to ${url.toString()}...`]);
+    
     if (eventSourceRef.current) {
       eventSourceRef.current.close();
     }
-    const es = new window.EventSource(eventUrl);
+    
+    const es = new window.EventSource(url.toString());
     eventSourceRef.current = es;
 
     es.onopen = async () => {
@@ -60,19 +84,27 @@ const EventSource: React.FC<EventSourceProps> = ({ onConnected }) => {
       // Fetch tools using MCP SDK
       try {
         const mcpClient = new Client({ name: "ui-client", version: "1.0.0" });
-        await mcpClient.connect(new SSEClientTransport(new URL(eventUrl)));
+        
+        // Create SSEClientTransport with authentication
+        const transport = new SSEClientTransport(url);
+        
+        // Connect to the MCP server
+        await mcpClient.connect(transport);
+        
         const toolList = (await mcpClient.listTools()).tools;
         addLog(`🛠️ Loaded ${toolList.length} tools.`);
         onConnected(toolList, mcpClient); // Send tools to parent
       } catch (err: any) {
-        addLog("❌ Failed to load tools.");
+        addLog(`❌ Failed to load tools: ${err.message}`);
         onConnected([], null); // Send empty list on error
       }
     };
+    
     es.onmessage = (event) => {
-      console.log("EventSource opened:", event.data);
+      console.log("EventSource message:", event.data);
       addLog(`Event: ${event.data}`);
     };
+    
     es.onerror = () => {
       addLog("❌ Error or connection closed.");
       setConnState("failed");
