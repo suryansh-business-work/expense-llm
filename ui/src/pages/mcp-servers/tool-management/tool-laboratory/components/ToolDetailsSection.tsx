@@ -4,7 +4,6 @@ import {
   Typography,
   Button,
   Stack,
-  Chip,
   Alert,
   Paper
 } from "@mui/material";
@@ -104,16 +103,6 @@ const ToolDetailsSection: React.FC<ToolDetailsSectionProps> = ({ mcpServerId }) 
             </Box>
             
             <Box display="flex" alignItems="center" gap={2} mt={1}>
-              <Chip 
-                label={tool?.toolStatus} 
-                size="small"
-                sx={{ 
-                  bgcolor: tool?.toolStatus === 'active' ? '#e3fcef' : '#f0f1f3',
-                  color: tool?.toolStatus === 'active' ? '#0a7d40' : '#5f6368',
-                  textTransform: 'capitalize',
-                  fontWeight: 500
-                }}
-              />
               <Typography variant="body2" color="text.secondary">
                 ID: {tool?.toolId}
               </Typography>

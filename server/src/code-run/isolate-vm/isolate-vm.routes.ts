@@ -1,13 +1,13 @@
 import express from 'express';
-import { executeTool, registerTool } from './isolate-vm.controller';
+import { executeTool } from './isolate-vm.controller';
 
 
 const router = express.Router();
 
 // Register new tool
-router.post('/:serverId/register', registerTool);
+// router.post('/:serverId/register/tool/:toolId', registerTool);
 
 // Call dynamic tool
-router.post('/:serverId/tools/:toolName', executeTool);
+router.post('/:serverId/execute/tool/:toolId', executeTool);
 
 export default router;
