@@ -10,12 +10,13 @@ const transports = {};
  * Initialize the MCP server for a specific server ID
  * @param {string} serverId - Server ID
  * @param {string} token - Authentication token
+ * @param {boolean} forceRefresh - Whether to force refresh of server data
  * @returns {Promise<Object>} MCP server instance
  */
-export async function setupMcpServer(serverId, token) {
+export async function setupMcpServer(serverId, token, forceRefresh = false) {
   try {
-    // Check if server is already initialized
-    if (servers[serverId]) {
+    // Check if server is already initialized and refresh is not forced
+    if (servers[serverId] && !forceRefresh) {
       return servers[serverId];
     }
 
@@ -24,14 +25,31 @@ export async function setupMcpServer(serverId, token) {
     const tools = await fetchToolListings(serverId, token);
     const serverDetails = serverResponse.data;
 
-    const mcpServer = new McpServer({
-      name: serverDetails.mcpServerName || "Default Server Name",
-      version: "1.0.0"
-    });
+    // If a server instance already exists, update it rather than creating a new one
+    let mcpServer;
+    if (servers[serverId] && forceRefresh) {
+      mcpServer = servers[serverId];
+      // console.log(`Refreshing server ${serverId} with latest data`);
+    } else {
+      mcpServer = new McpServer({
+        name: serverDetails.mcpServerName || "Default Server Name",
+        version: "1.0.0"
+      });
+    }
 
     const toolsData = tools?.data;
 
     if (toolsData && Array.isArray(toolsData)) {
+      // Clear existing tools if this is a refresh
+      if (forceRefresh) {
+        // There's no direct way to clear tools in McpServer,
+        // so we're replacing the entire instance
+        mcpServer = new McpServer({
+          name: serverDetails.mcpServerName || "Default Server Name",
+          version: "1.0.0"
+        });
+      }
+
       toolsData.forEach(tool => {
         const schema = buildZodSchema(tool.toolParams);
         mcpServer.tool(
@@ -40,6 +58,7 @@ export async function setupMcpServer(serverId, token) {
           schema,
           async (arg) => {
             try {
+              // Always use current token for execution
               const result = await executeTool(serverId, tool.toolId, arg, token);
               
               let parsedResult = result;

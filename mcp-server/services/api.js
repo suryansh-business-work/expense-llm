@@ -8,11 +8,15 @@ import config from "../config/index.js";
  */
 export async function fetchServerDetails(serverId, token) {
   try {
+    console.log(`Fetching server details for ${serverId}...`);
+    
     const response = await fetch(`${config.apiBaseUrl}/mcp-server/get/${serverId}`, {
       headers: {
         "Content-Type": "application/json",
         "Authorization": token ? `Bearer ${token}` : ''
-      }
+      },
+      // Prevent caching at the fetch level
+      cache: 'no-store'
     });
 
     if (!response.ok) {
@@ -34,11 +38,15 @@ export async function fetchServerDetails(serverId, token) {
  */
 export async function fetchToolListings(serverId, token) {
   try {
+    console.log(`Fetching tool listings for ${serverId}...`);
+    
     const response = await fetch(`${config.apiBaseUrl}/mcp-server/tool/list/${serverId}`, {
       headers: {
         "Content-Type": "application/json",
         "Authorization": token ? `Bearer ${token}` : ''
-      }
+      },
+      // Prevent caching at the fetch level
+      cache: 'no-store'
     });
 
     if (!response.ok) {

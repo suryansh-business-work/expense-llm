@@ -16,9 +16,10 @@ router.get("/:serverId/mcp/sse", optionalAuthMiddleware, async (req, res) => {
     return res.status(400).send('Missing serverId parameter');
   }
 
-  // Set up the MCP server for this serverId if not already done
+  // Set up the MCP server for this serverId - force refresh!
   try {
-    const mcpServer = await setupMcpServer(serverId, token);
+    // Always force refresh on SSE connection to get latest data
+    const mcpServer = await setupMcpServer(serverId, token, true);
 
     // Create transport for this connection
     const transport = new SSEServerTransport(`/${serverId}/messages`, res);
@@ -41,7 +42,6 @@ router.get("/:serverId/mcp/sse", optionalAuthMiddleware, async (req, res) => {
 router.post("/:serverId/messages", optionalAuthMiddleware, async (req, res) => {
   const { serverId } = req.params;
   const { sessionId } = req.query;
-  const token = req.token;
   
   if (!serverId || !sessionId) {
     return res.status(400).send('Missing serverId or sessionId parameter');

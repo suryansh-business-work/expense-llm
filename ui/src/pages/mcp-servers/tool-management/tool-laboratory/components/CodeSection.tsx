@@ -135,8 +135,8 @@ const CodeSection: React.FC = () => {
         }}
       >
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <i className="fa-brands fa-node-js me-2"></i>
-          <Typography variant="subtitle1">Node.js</Typography>
+          <i className="fa-brands fa-js me-2"></i>
+          <Typography variant="body1">Javascript</Typography>
         </Box>
         <Box>
           <Tooltip title="Copy code">

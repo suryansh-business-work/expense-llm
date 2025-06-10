@@ -207,7 +207,7 @@ const McpServerDetails = () => {
   
   // Handle copy of server path
   const handleCopyPath = () => {
-    const ssePath = `http://localhost:3000/v1/api/mcp-server/${mcpServerId}/events`;
+    const ssePath = `http://localhost:3001/${mcpServerId}/mcp/sse`;
     navigator.clipboard.writeText(ssePath)
       .then(() => setCopySnackbar(true))
       .catch(err => console.error('Failed to copy path:', err));
@@ -310,7 +310,7 @@ const McpServerDetails = () => {
                     color: "text.secondary"
                   }}
                 >
-                  http://localhost:3000/v1/api/mcp-server/{mcpServerId}/events
+                  http://localhost:3001/{mcpServerId}/mcp/sse
                 </Typography>
                 <Tooltip title="Copy endpoint URL">
                   <IconButton 
@@ -688,7 +688,7 @@ const McpServerDetails = () => {
                     color: "text.primary"
                   }}
                 >
-                  http://localhost:3000/v1/api/mcp-server/{mcpServerId}/events
+                  http://localhost:3001/{mcpServerId}/mcp/sse
                 </Typography>
                 <Tooltip title="Copy endpoint URL">
                   <IconButton 
@@ -721,7 +721,8 @@ const McpServerDetails = () => {
                   gap: 1,
                   border: "1px solid #e0e0e0",
                   borderRadius: 1,
-                  bgcolor: "#fff"
+                  bgcolor: "#fff",
+                  height: 48
                 }}
               >
                 <Box 
