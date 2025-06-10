@@ -1,17 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import {
   Box,
   Typography,
   Button,
-  Stack,
   Alert,
-  Paper
+  Paper,
+  CircularProgress
 } from "@mui/material";
-import SaveIcon from "@mui/icons-material/Save";
-import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { useNavigate } from "react-router-dom";
-import { useToolContext } from '../context/ToolContext';
+import axios from 'axios';
 
 interface ToolDetailsSectionProps {
   mcpServerId: string;
@@ -19,16 +17,45 @@ interface ToolDetailsSectionProps {
 
 const ToolDetailsSection: React.FC<ToolDetailsSectionProps> = ({ mcpServerId }) => {
   const navigate = useNavigate();
-  const {
-    tool,
-    loading,
-    error,
-    serverName,
-    handleSave,
-    isDirty,
-    isSaving,
-    saveError
-  } = useToolContext();
+  const { toolId } = useParams<{ toolId: string }>();
+  
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [toolData, setToolData] = useState<any>(null);
+  const [serverName, setServerName] = useState("Loading...");
+  
+  // Fetch tool and server data
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!toolId) return;
+      
+      try {
+        // Get auth token
+        const token = localStorage.getItem("token");
+        if (!token) throw new Error("Authentication required");
+        
+        const headers = { Authorization: `Bearer ${token}` };
+        
+        // Fetch server name
+        const serverRes = await axios.get(`http://localhost:3000/v1/api/mcp-server/get/${mcpServerId}`, { headers });
+        if (serverRes.data?.data) {
+          setServerName(serverRes.data.data.mcpServerName || "Unknown Server");
+        }
+        
+        // Fetch tool details
+        const toolRes = await axios.get(`http://localhost:3000/v1/api/mcp-server/tool/get/${toolId}`, { headers });
+        if (toolRes.data?.data) {
+          setToolData(toolRes.data.data);
+        }
+      } catch (err: any) {
+        setError(err.message || "Failed to load tool data");
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchData();
+  }, [mcpServerId, toolId]);
 
   return (
     <>
@@ -66,7 +93,13 @@ const ToolDetailsSection: React.FC<ToolDetailsSectionProps> = ({ mcpServerId }) 
           boxShadow: "0 1px 3px rgba(0,0,0,0.05)",
         }}
       >
-        {!loading && !error && tool && (
+        {loading ? (
+          <Box sx={{ textAlign: 'center', py: 2 }}>
+            <CircularProgress size={24} />
+          </Box>
+        ) : error ? (
+          <Alert severity="error">{error}</Alert>
+        ) : toolData && (
           <Box>
             <Box display="flex" justifyContent="space-between" alignItems="center" mb={1}>
               <Box>
@@ -74,55 +107,22 @@ const ToolDetailsSection: React.FC<ToolDetailsSectionProps> = ({ mcpServerId }) 
                   Server: {serverName}
                 </Typography>
                 <Typography variant="h4" fontWeight={700}>
-                  {tool?.toolName || "Unnamed Tool"}
+                  {toolData.toolName || "Unnamed Tool"}
                 </Typography>
               </Box>
-              <Stack direction="row" spacing={1}>
-                <Button
-                  variant="outlined"
-                  startIcon={<PlayArrowIcon />}
-                  color="success"
-                  sx={{ borderRadius: 2 }}
-                >
-                  Test Run
-                </Button>
-                <Button
-                  variant="contained"
-                  startIcon={<SaveIcon />}
-                  onClick={handleSave}
-                  disabled={isSaving || !isDirty}
-                  sx={{ 
-                    borderRadius: 2,
-                    bgcolor: isDirty ? "primary.main" : "grey.400",
-                    boxShadow: isDirty ? "0 4px 10px rgba(25,118,210,0.15)" : "none"
-                  }}
-                >
-                  {isSaving ? "Saving..." : "Save Changes"}
-                </Button>
-              </Stack>
             </Box>
             
             <Box display="flex" alignItems="center" gap={2} mt={1}>
               <Typography variant="body2" color="text.secondary">
-                ID: {tool?.toolId}
+                ID: {toolData.toolId}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                Updated: {tool?.updatedAt ? new Date(tool.updatedAt).toLocaleString() : "N/A"}
+                Updated: {toolData.updatedAt ? new Date(toolData.updatedAt).toLocaleString() : "N/A"}
               </Typography>
             </Box>
           </Box>
         )}
       </Paper>
-      
-      {/* Error message for save operation */}
-      {saveError && (
-        <Alert 
-          severity="error" 
-          sx={{ mb: 2 }}
-        >
-          {saveError}
-        </Alert>
-      )}
     </>
   );
 };

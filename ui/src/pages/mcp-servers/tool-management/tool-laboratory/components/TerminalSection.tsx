@@ -11,28 +11,24 @@ import {
 } from "@mui/material";
 import TerminalIcon from "@mui/icons-material/Terminal";
 import CloseIcon from "@mui/icons-material/Close";
-import { useToolContext } from '../context/ToolContext';
 
 interface PackageInfo {
   name: string;
   description?: string;
   version?: string;
-  source: "npm" | "pip";
 }
 
 const TerminalSection: React.FC = () => {
-  const { language } = useToolContext();
-  
   const [terminalOpen, setTerminalOpen] = useState(false);
   const [terminalOutput, setTerminalOutput] = useState<string[]>([
-    "Terminal ready. You can install packages here.",
+    "Terminal ready. You can install npm packages here.",
     "Type 'help' for available commands."
   ]);
   const [terminalInput, setTerminalInput] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
   const [, setPackageSearchResults] = useState<PackageInfo[]>([]);
   const terminalRef = useRef<HTMLDivElement>(null);
-  
+
   // Scroll terminal to bottom when output changes
   useEffect(() => {
     if (terminalRef.current) {
@@ -71,65 +67,58 @@ const TerminalSection: React.FC = () => {
           setTerminalOutput(prev => [...prev, "❌ Error: Please specify a package to install"]);
           return;
         }
-        
+
         const packageName = args[1];
-        const packageSource = language === 'nodejs' ? 'npm' : 'pip';
-        
-        setTerminalOutput(prev => [...prev, `Installing ${packageName} from ${packageSource}...`]);
-        
+
+        setTerminalOutput(prev => [...prev, `Installing ${packageName} from npm...`]);
+
         // Mock installation - replace with actual API call
         await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate API delay
-        
+
         setTerminalOutput(prev => [
-          ...prev, 
+          ...prev,
           `✅ Successfully installed ${packageName}`,
-          packageSource === 'npm' 
-            ? `Added ${packageName} to package.json dependencies` 
-            : `Package ${packageName} added to requirements.txt`
+          `Added ${packageName} to package.json dependencies`
         ]);
       } else if (cmd === 'search') {
         if (args.length < 2) {
           setTerminalOutput(prev => [...prev, "❌ Error: Please specify a search query"]);
           return;
         }
-        
+
         const query = args.slice(1).join(' ');
-        const packageSource = language === 'nodejs' ? 'npm' : 'pip';
-        
-        setTerminalOutput(prev => [...prev, `Searching for ${query} in ${packageSource}...`]);
-        
+
+        setTerminalOutput(prev => [...prev, `Searching for ${query} in npm...`]);
+
         // Mock search results - replace with actual API call
         await new Promise(resolve => setTimeout(resolve, 800)); // Simulate API delay
-        
+
         // Generate some fake results based on the query
         const mockResults = [
-          { name: `${query}-core`, description: `Core library for ${query}`, version: "1.0.0", source: packageSource },
-          { name: `${query}-utils`, description: `Utilities for ${query}`, version: "0.8.5", source: packageSource },
-          { name: `${packageSource === 'npm' ? '@types/' : 'types-'}${query}`, description: `Type definitions for ${query}`, version: "2.1.3", source: packageSource }
+          { name: `${query}-core`, description: `Core library for ${query}`, version: "1.0.0" },
+          { name: `${query}-utils`, description: `Utilities for ${query}`, version: "0.8.5" },
+          { name: `@types/${query}`, description: `Type definitions for ${query}`, version: "2.1.3" }
         ] as PackageInfo[];
-        
+
         setPackageSearchResults(mockResults);
         setTerminalOutput(prev => [
-          ...prev, 
+          ...prev,
           `Found ${mockResults.length} packages matching "${query}":`,
-          ...mockResults.map((pkg, i) => `  ${i+1}. ${pkg.name}@${pkg.version} - ${pkg.description}`)
+          ...mockResults.map((pkg, i) => `  ${i + 1}. ${pkg.name}@${pkg.version} - ${pkg.description}`)
         ]);
       } else if (cmd === 'list') {
         // Mock list of installed packages
-        const packageSource = language === 'nodejs' ? 'npm' : 'pip';
         const mockInstalled = [
-          { name: 'axios', version: '1.3.4', source: 'npm' },
-          { name: 'lodash', version: '4.17.21', source: 'npm' },
-          { name: 'requests', version: '2.28.2', source: 'pip' },
-          { name: 'numpy', version: '1.23.5', source: 'pip' }
-        ].filter(pkg => pkg.source === packageSource);
-        
+          { name: 'axios', version: '1.3.4' },
+          { name: 'lodash', version: '4.17.21' }
+        ];
+
         if (mockInstalled.length === 0) {
-          setTerminalOutput(prev => [...prev, `No ${packageSource} packages installed yet.`]);
+          setTerminalOutput(prev => [...prev, `No npm packages installed yet.`]);
         } else {
           setTerminalOutput(prev => [
-            ...prev, 
-            `Installed ${packageSource} packages:`,
+            ...prev,
+            `Installed npm packages:`,
             ...mockInstalled.map(pkg => `  ${pkg.name}@${pkg.version}`)
           ]);
         }
@@ -145,7 +134,7 @@ const TerminalSection: React.FC = () => {
 
   return (
     <Box mt={3}>
-      <Button 
+      <Button
         variant={terminalOpen ? "outlined" : "contained"}
         color={terminalOpen ? "inherit" : "primary"}
         startIcon={<TerminalIcon />}
@@ -154,21 +143,21 @@ const TerminalSection: React.FC = () => {
       >
         {terminalOpen ? "Hide Terminal" : "Open Terminal"}
       </Button>
-      
+
       {terminalOpen && (
         <Paper
           elevation={0}
-          sx={{ 
-            border: '1px solid rgba(0,0,0,0.12)', 
+          sx={{
+            border: '1px solid rgba(0,0,0,0.12)',
             borderRadius: 2,
             bgcolor: '#282c34'
           }}
         >
           {/* Terminal header */}
-          <Box 
-            sx={{ 
-              p: 1, 
-              bgcolor: '#21252b', 
+          <Box
+            sx={{
+              p: 1,
+              bgcolor: '#21252b',
               borderTopLeftRadius: 8,
               borderTopRightRadius: 8,
               borderBottom: '1px solid rgba(255,255,255,0.1)',
@@ -178,12 +167,12 @@ const TerminalSection: React.FC = () => {
             }}
           >
             <Typography variant="body2" sx={{ color: '#abb2bf', fontFamily: 'monospace' }}>
-              {language === 'nodejs' ? 'npm' : 'pip'} terminal
+              npm terminal
             </Typography>
             <Box>
               <Tooltip title="Clear Terminal">
-                <IconButton 
-                  size="small" 
+                <IconButton
+                  size="small"
                   sx={{ color: '#abb2bf' }}
                   onClick={() => setTerminalOutput([])}
                 >
@@ -192,13 +181,13 @@ const TerminalSection: React.FC = () => {
               </Tooltip>
             </Box>
           </Box>
-          
+
           {/* Terminal output */}
-          <Box 
+          <Box
             ref={terminalRef}
-            sx={{ 
-              p: 2, 
-              height: '300px', 
+            sx={{
+              p: 2,
+              height: '300px',
               overflowY: 'auto',
               color: '#abb2bf',
               fontFamily: 'monospace',
@@ -208,13 +197,13 @@ const TerminalSection: React.FC = () => {
             }}
           >
             {terminalOutput.map((line, i) => (
-              <Box 
-                key={i} 
-                sx={{ 
-                  mb: 0.5, 
-                  color: line.startsWith('❌') ? '#e06c75' : 
-                         line.startsWith('✅') ? '#98c379' : 
-                         line.startsWith('>') ? '#e5c07b' : '#abb2bf'
+              <Box
+                key={i}
+                sx={{
+                  mb: 0.5,
+                  color: line.startsWith('❌') ? '#e06c75' :
+                    line.startsWith('✅') ? '#98c379' :
+                      line.startsWith('>') ? '#e5c07b' : '#abb2bf'
                 }}
               >
                 {line}
@@ -229,25 +218,25 @@ const TerminalSection: React.FC = () => {
               </Box>
             )}
           </Box>
-          
+
           {/* Terminal input */}
-          <Box 
-            sx={{ 
+          <Box
+            sx={{
               p: 1.5,
               borderTop: '1px solid rgba(255,255,255,0.05)',
               display: 'flex',
               alignItems: 'center'
             }}
           >
-            <Typography 
-              sx={{ 
-                color: '#61afef', 
-                fontFamily: 'monospace', 
+            <Typography
+              sx={{
+                color: '#61afef',
+                fontFamily: 'monospace',
                 mr: 1.5,
                 fontSize: '0.875rem'
               }}
             >
-              {language === 'nodejs' ? '>' : '$'}
+              &gt;
             </Typography>
             <TextField
               fullWidth
@@ -259,13 +248,13 @@ const TerminalSection: React.FC = () => {
                   handleTerminalCommand(terminalInput);
                 }
               }}
-              placeholder={isProcessing ? 'Processing...' : `Type commands (e.g., install ${language === 'nodejs' ? 'axios' : 'requests'})`}
+              placeholder={isProcessing ? 'Processing...' : 'Type commands (e.g., install axios)'}
               disabled={isProcessing}
               InputProps={{
                 disableUnderline: true,
-                sx: { 
-                  color: '#abb2bf', 
-                  fontFamily: 'monospace', 
+                sx: {
+                  color: '#abb2bf',
+                  fontFamily: 'monospace',
                   fontSize: '0.875rem',
                   '&::placeholder': {
                     color: 'rgba(171, 178, 191, 0.5)'
@@ -275,122 +264,63 @@ const TerminalSection: React.FC = () => {
               autoFocus
             />
           </Box>
-          
+
           {/* Package quick install */}
-          {language === 'nodejs' && (
-            <Box sx={{ p: 1.5, borderTop: '1px solid rgba(255,255,255,0.05)' }}>
-              <Typography variant="caption" sx={{ color: '#abb2bf', display: 'block', mb: 1 }}>
-                Quick install common packages:
-              </Typography>
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-                <Button 
-                  size="small" 
-                  variant="outlined" 
-                  sx={{ 
-                    color: '#abb2bf', 
-                    borderColor: 'rgba(171, 178, 191, 0.3)',
-                    '&:hover': { borderColor: '#abb2bf' }
-                  }}
-                  onClick={() => handleTerminalCommand('install axios')}
-                >
-                  axios
-                </Button>
-                <Button 
-                  size="small" 
-                  variant="outlined" 
-                  sx={{ 
-                    color: '#abb2bf', 
-                    borderColor: 'rgba(171, 178, 191, 0.3)',
-                    '&:hover': { borderColor: '#abb2bf' }
-                  }}
-                  onClick={() => handleTerminalCommand('install lodash')}
-                >
-                  lodash
-                </Button>
-                <Button 
-                  size="small" 
-                  variant="outlined" 
-                  sx={{ 
-                    color: '#abb2bf', 
-                    borderColor: 'rgba(171, 178, 191, 0.3)',
-                    '&:hover': { borderColor: '#abb2bf' }
-                  }}
-                  onClick={() => handleTerminalCommand('install mongoose')}
-                >
-                  mongoose
-                </Button>
-                <Button 
-                  size="small" 
-                  variant="outlined" 
-                  sx={{ 
-                    color: '#abb2bf', 
-                    borderColor: 'rgba(171, 178, 191, 0.3)',
-                    '&:hover': { borderColor: '#abb2bf' }
-                  }}
-                  onClick={() => handleTerminalCommand('install express')}
-                >
-                  express
-                </Button>
-              </Box>
+          <Box sx={{ p: 1.5, borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+            <Typography variant="caption" sx={{ color: '#abb2bf', display: 'block', mb: 1 }}>
+              Quick install common packages:
+            </Typography>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+              <Button
+                size="small"
+                variant="outlined"
+                sx={{
+                  color: '#abb2bf',
+                  borderColor: 'rgba(171, 178, 191, 0.3)',
+                  '&:hover': { borderColor: '#abb2bf' }
+                }}
+                onClick={() => handleTerminalCommand('install axios')}
+              >
+                axios
+              </Button>
+              <Button
+                size="small"
+                variant="outlined"
+                sx={{
+                  color: '#abb2bf',
+                  borderColor: 'rgba(171, 178, 191, 0.3)',
+                  '&:hover': { borderColor: '#abb2bf' }
+                }}
+                onClick={() => handleTerminalCommand('install lodash')}
+              >
+                lodash
+              </Button>
+              <Button
+                size="small"
+                variant="outlined"
+                sx={{
+                  color: '#abb2bf',
+                  borderColor: 'rgba(171, 178, 191, 0.3)',
+                  '&:hover': { borderColor: '#abb2bf' }
+                }}
+                onClick={() => handleTerminalCommand('install mongoose')}
+              >
+                mongoose
+              </Button>
+              <Button
+                size="small"
+                variant="outlined"
+                sx={{
+                  color: '#abb2bf',
+                  borderColor: 'rgba(171, 178, 191, 0.3)',
+                  '&:hover': { borderColor: '#abb2bf' }
+                }}
+                onClick={() => handleTerminalCommand('install express')}
+              >
+                express
+              </Button>
             </Box>
-          )}
-          {language === 'python' && (
-            <Box sx={{ p: 1.5, borderTop: '1px solid rgba(255,255,255,0.05)' }}>
-              <Typography variant="caption" sx={{ color: '#abb2bf', display: 'block', mb: 1 }}>
-                Quick install common packages:
-              </Typography>
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-                <Button 
-                  size="small" 
-                  variant="outlined" 
-                  sx={{ 
-                    color: '#abb2bf', 
-                    borderColor: 'rgba(171, 178, 191, 0.3)',
-                    '&:hover': { borderColor: '#abb2bf' }
-                  }}
-                  onClick={() => handleTerminalCommand('install requests')}
-                >
-                  requests
-                </Button>
-                <Button 
-                  size="small" 
-                  variant="outlined" 
-                  sx={{ 
-                    color: '#abb2bf', 
-                    borderColor: 'rgba(171, 178, 191, 0.3)',
-                    '&:hover': { borderColor: '#abb2bf' }
-                  }}
-                  onClick={() => handleTerminalCommand('install pandas')}
-                >
-                  pandas
-                </Button>
-                <Button 
-                  size="small" 
-                  variant="outlined" 
-                  sx={{ 
-                    color: '#abb2bf', 
-                    borderColor: 'rgba(171, 178, 191, 0.3)',
-                    '&:hover': { borderColor: '#abb2bf' }
-                  }}
-                  onClick={() => handleTerminalCommand('install numpy')}
-                >
-                  numpy
-                </Button>
-                <Button 
-                  size="small" 
-                  variant="outlined" 
-                  sx={{ 
-                    color: '#abb2bf', 
-                    borderColor: 'rgba(171, 178, 191, 0.3)',
-                    '&:hover': { borderColor: '#abb2bf' }
-                  }}
-                  onClick={() => handleTerminalCommand('install scikit-learn')}
-                >
-                  scikit-learn
-                </Button>
-              </Box>
-            </Box>
-          )}
+          </Box>
         </Paper>
       )}
     </Box>

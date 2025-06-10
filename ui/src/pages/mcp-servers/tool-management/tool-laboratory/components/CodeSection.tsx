@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import {
   Box,
   Typography,
@@ -12,81 +13,104 @@ import {
 import Editor from "@monaco-editor/react";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import CircularProgress from "@mui/material/CircularProgress";
-import { useToolContext } from '../context/ToolContext';
 import axios from "axios";
-import { useParams } from 'react-router-dom';
 
 const API_BASE = "http://localhost:3000/v1/api/mcp-server/tool-code";
 
-// Helper to get auth headers with token from localStorage
+// Helper to get auth headers
 const getAuthHeaders = () => {
   const token = localStorage.getItem("token");
   return token ? { Authorization: `Bearer ${token}` } : {};
 };
 
 const CodeSection: React.FC = () => {
-  const {
-    code,
-    setCode,
-    handleCodeChange,
-    selectedToolId,
-    setSelectedToolId
-  } = useToolContext();
-
-  const [loading, setLoading] = useState(false);
-  const [snackbar, setSnackbar] = useState<{ open: boolean, message: string, severity: "success" | "error" }>({ open: false, message: "", severity: "success" });
-  const { toolId } = useParams();
+  // Get parameters from URL
+  const { mcpServerId, toolId } = useParams<{ mcpServerId: string; toolId: string }>();
   
-  // Fetch tool code for selected toolId using /get/:toolId
+  // Local state management
+  const [code, setCode] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [snackbar, setSnackbar] = useState<{ open: boolean; message: string; severity: "success" | "error" }>({ 
+    open: false, 
+    message: "", 
+    severity: "success" 
+  });
+  
+  // Fetch code from API when component mounts
   useEffect(() => {
     if (!toolId) return;
+    
     setLoading(true);
     axios.get(`${API_BASE}/get/${toolId}`, {
       headers: getAuthHeaders()
     })
       .then(res => {
         if (res.data?.data?.toolCode) {
-          setCode((prev: any) => ({
-            ...prev,
-            nodejs: res.data.data.toolCode
-          }));
+          setCode(res.data.data.toolCode);
         }
       })
-      .catch(() => setSnackbar({ open: true, message: "Failed to fetch tool code.", severity: "error" }))
-      .finally(() => setLoading(false));
-    // eslint-disable-next-line
-  }, [selectedToolId]);
-
-  // Save or update code
-  const handleSave = async () => {
-    setLoading(true);
-    try {
-      const res = await axios.post(`${API_BASE}/save`, {
-          toolId: toolId,
-          toolCode: code.nodejs
-        }, {
-          headers: getAuthHeaders()
+      .catch(() => {
+        setSnackbar({
+          open: true,
+          message: "Failed to fetch tool code",
+          severity: "error"
         });
-        setSelectedToolId(res.data.data.toolId);
-        setSnackbar({ open: true, message: "Tool code created.", severity: "success" });
-    } catch {
-      setSnackbar({ open: true, message: "Failed to save tool code.", severity: "error" });
-    }
-    setLoading(false);
+      })
+      .finally(() => setLoading(false));
+  }, [toolId]);
+  
+  // Add keyboard shortcut for Ctrl+S
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Check for Ctrl+S or Cmd+S (Mac)
+      if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+        e.preventDefault(); // Prevent browser's save dialog
+        handleSave();
+      }
+    };
+    
+    // Add event listener
+    window.addEventListener('keydown', handleKeyDown);
+    
+    // Cleanup
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [code, toolId, mcpServerId]); // Dependencies needed for handleSave
+  
+  // Handle code changes
+  const handleCodeChange = (value: string | undefined) => {
+    setCode(value || "");
   };
-
-  // List all tool codes for user
-  const handleList = async () => {
+  
+  // Handle save
+  const handleSave = async () => {
+    if (!toolId || !mcpServerId || loading) return;
+    
     setLoading(true);
     try {
-      const res = await axios.get(`${API_BASE}/list`, {
+      // Save code
+      await axios.post(`${API_BASE}/save`, {
+        toolId,
+        toolCode: code
+      }, {
         headers: getAuthHeaders()
       });
-      setSnackbar({ open: true, message: `Fetched ${res.data.data.length} tool codes.`, severity: "success" });
-    } catch {
-      setSnackbar({ open: true, message: "Failed to fetch tool codes.", severity: "error" });
+      
+      setSnackbar({
+        open: true,
+        message: "Code saved successfully",
+        severity: "success"
+      });
+    } catch (error) {
+      setSnackbar({
+        open: true,
+        message: "Failed to save code",
+        severity: "error"
+      });
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (
@@ -116,7 +140,7 @@ const CodeSection: React.FC = () => {
         </Box>
         <Box>
           <Tooltip title="Copy code">
-            <IconButton onClick={() => navigator.clipboard.writeText(code.nodejs)}>
+            <IconButton onClick={() => navigator.clipboard.writeText(code)}>
               <ContentCopyIcon />
             </IconButton>
           </Tooltip>
@@ -130,16 +154,6 @@ const CodeSection: React.FC = () => {
           >
             Save
           </Button>
-          <Button
-            variant="text"
-            color="secondary"
-            size="small"
-            sx={{ ml: 1 }}
-            onClick={handleList}
-            disabled={loading}
-          >
-            List All
-          </Button>
         </Box>
       </Box>
       
@@ -149,7 +163,7 @@ const CodeSection: React.FC = () => {
           height="100%"
           defaultLanguage="javascript"
           theme="vs-dark"
-          value={code.nodejs}
+          value={code}
           onChange={handleCodeChange}
           options={{
             fontSize: 14,
@@ -197,9 +211,10 @@ const CodeSection: React.FC = () => {
           Database: <code>npm install mongoose</code> (MongoDB) or <code>npm install pg</code> (PostgreSQL)
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          <i>Note: Install packages using npm/pip in your MCP server's environment before using them.</i>
+          <i>Note: Install packages using npm in your server environment before using them.</i>
         </Typography>
       </Box>
+      
       <Snackbar
         open={snackbar.open}
         autoHideDuration={3000}

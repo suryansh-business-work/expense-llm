@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import {
   Box,
   Typography,
@@ -9,24 +10,161 @@ import {
   InputLabel,
   Select,
   MenuItem,
-  IconButton
+  IconButton,
+  CircularProgress,
+  Alert,
+  Snackbar
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useToolContext } from '../context/ToolContext';
+import SaveIcon from "@mui/icons-material/Save";
+import axios from 'axios';
+
+interface Parameter {
+  name: string;
+  type: string;
+  description: string;
+  required: boolean;
+}
 
 const ToolSettingsSection: React.FC = () => {
-  const {
-    toolName,
-    setToolName,
-    toolDescription,
-    setToolDescription,
-    toolParameters,
-    handleAddParameter,
-    handleRemoveParameter,
-    handleParameterChange,
-    setIsDirty
-  } = useToolContext();
+  const { mcpServerId, toolId } = useParams<{ mcpServerId: string; toolId: string }>();
+  
+  // Local state management
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [toolName, setToolName] = useState("");
+  const [toolDescription, setToolDescription] = useState("");
+  const [parameters, setParameters] = useState<Parameter[]>([]);
+  const [isDirty, setIsDirty] = useState(false);
+  const [snackbar, setSnackbar] = useState<{ open: boolean; message: string; severity: "success" | "error" }>({
+    open: false,
+    message: "",
+    severity: "success"
+  });
+
+  // Fetch tool data
+  useEffect(() => {
+    const fetchToolData = async () => {
+      if (!toolId) return;
+      
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) throw new Error("Authentication required");
+        
+        const headers = { Authorization: `Bearer ${token}` };
+        
+        const response = await axios.get(
+          `http://localhost:3000/v1/api/mcp-server/tool/get/${toolId}`,
+          { headers }
+        );
+        
+        const data = response.data?.data;
+        if (data) {
+          setToolName(data.toolName || "");
+          setToolDescription(data.toolDescription || "");
+          
+          // Map API parameter structure to our component structure
+          if (Array.isArray(data.toolParams)) {
+            const mappedParams = data.toolParams.map((param: any) => ({
+              name: param.paramName || "",
+              type: param.paramType || "string",
+              description: "",  // API might not provide this
+              required: true    // API might not provide this
+            }));
+            setParameters(mappedParams);
+          }
+        }
+      } catch (err: any) {
+        setError(err.message || "Failed to load tool data");
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchToolData();
+  }, [toolId]);
+
+  // Handle save
+  const handleSave = async () => {
+    if (!toolId || !mcpServerId) return;
+    
+    setSaving(true);
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) throw new Error("Authentication required");
+      
+      // Map our parameters back to API format
+      const apiParams = parameters.map(param => ({
+        paramName: param.name,
+        paramType: param.type
+      }));
+      
+      // Update tool data
+      await axios.patch(
+        `http://localhost:3000/v1/api/mcp-server/tool/update/${toolId}`,
+        {
+          toolName,
+          toolDescription,
+          toolParams: apiParams
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      );
+      
+      setIsDirty(false);
+      setSnackbar({
+        open: true,
+        message: "Tool settings saved successfully",
+        severity: "success"
+      });
+    } catch (err: any) {
+      setSnackbar({
+        open: true,
+        message: err.message || "Failed to save tool settings",
+        severity: "error"
+      });
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  // Add parameter
+  const handleAddParameter = () => {
+    setParameters([
+      ...parameters,
+      { name: "", type: "string", description: "", required: false }
+    ]);
+    setIsDirty(true);
+  };
+
+  // Remove parameter
+  const handleRemoveParameter = (index: number) => {
+    setParameters(parameters.filter((_, i) => i !== index));
+    setIsDirty(true);
+  };
+
+  // Update parameter
+  const handleParameterChange = (index: number, field: keyof Parameter, value: any) => {
+    const updatedParams = [...parameters];
+    updatedParams[index] = { ...updatedParams[index], [field]: value };
+    setParameters(updatedParams);
+    setIsDirty(true);
+  };
+
+  if (loading) {
+    return (
+      <Box sx={{ textAlign: 'center', py: 4 }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  if (error) {
+    return <Alert severity="error">{error}</Alert>;
+  }
 
   return (
     <Paper
@@ -39,6 +177,23 @@ const ToolSettingsSection: React.FC = () => {
         mb: 4
       }}
     >
+      {/* Save button */}
+      <Box display="flex" justifyContent="flex-end" mb={2}>
+        <Button
+          variant="contained"
+          startIcon={<SaveIcon />}
+          onClick={handleSave}
+          disabled={saving || !isDirty}
+          sx={{ 
+            borderRadius: 2,
+            bgcolor: isDirty ? "primary.main" : "grey.400",
+            boxShadow: isDirty ? "0 4px 10px rgba(25,118,210,0.15)" : "none"
+          }}
+        >
+          {saving ? "Saving..." : "Save Changes"}
+        </Button>
+      </Box>
+      
       <Typography variant="h6" fontWeight={600} mb={3}>
         Basic Information
       </Typography>
@@ -75,7 +230,7 @@ const ToolSettingsSection: React.FC = () => {
           />
         </div>
       </div>
-      
+
       <Box mt={4} mb={2} display="flex" justifyContent="space-between" alignItems="center">
         <Typography variant="h6" fontWeight={600}>
           Parameters
@@ -91,7 +246,7 @@ const ToolSettingsSection: React.FC = () => {
       </Box>
       
       {/* Parameters list */}
-      {toolParameters.length === 0 ? (
+      {parameters.length === 0 ? (
         <Box sx={{ 
           p: 3, 
           textAlign: 'center',
@@ -104,7 +259,7 @@ const ToolSettingsSection: React.FC = () => {
           </Typography>
         </Box>
       ) : (
-        toolParameters.map((param, index) => (
+        parameters.map((param, index) => (
           <Paper
             key={index}
             elevation={0}
@@ -115,69 +270,61 @@ const ToolSettingsSection: React.FC = () => {
               borderRadius: 2
             }}
           >
-            <div className="row g-2 align-items-start">
-              <div className="col-12 col-md-3">
-                <TextField
-                  label="Name"
-                  fullWidth
-                  size="small"
-                  value={param.name}
-                  onChange={(e) => handleParameterChange(index, 'name', e.target.value)}
-                  variant="outlined"
-                />
+            <Box display="flex" justifyContent="space-between" alignItems="center">
+              <Typography variant="subtitle2" fontWeight={600}>
+                Parameter {index + 1}
+              </Typography>
+              <IconButton 
+                color="error" 
+                onClick={() => handleRemoveParameter(index)}
+                size="small"
+              >
+                <DeleteIcon fontSize="small" />
+              </IconButton>
+            </Box>
+            
+            <Box mt={1}>
+              <div className="row g-2">
+                <div className="col-12 col-md-6">
+                  <TextField
+                    label="Name"
+                    fullWidth
+                    size="small"
+                    value={param.name}
+                    onChange={(e) => handleParameterChange(index, 'name', e.target.value)}
+                  />
+                </div>
+                <div className="col-12 col-md-6">
+                  <FormControl fullWidth size="small">
+                    <InputLabel>Type</InputLabel>
+                    <Select
+                      value={param.type}
+                      label="Type"
+                      onChange={(e) => handleParameterChange(index, 'type', e.target.value)}
+                    >
+                      <MenuItem value="string">String</MenuItem>
+                      <MenuItem value="number">Number</MenuItem>
+                      <MenuItem value="boolean">Boolean</MenuItem>
+                      <MenuItem value="object">Object</MenuItem>
+                      <MenuItem value="array">Array</MenuItem>
+                    </Select>
+                  </FormControl>
+                </div>
               </div>
-              <div className="col-12 col-md-2">
-                <FormControl fullWidth size="small">
-                  <InputLabel>Type</InputLabel>
-                  <Select
-                    value={param.type}
-                    onChange={(e) => handleParameterChange(index, 'type', e.target.value)}
-                    label="Type"
-                  >
-                    <MenuItem value="string">String</MenuItem>
-                    <MenuItem value="number">Number</MenuItem>
-                    <MenuItem value="boolean">Boolean</MenuItem>
-                    <MenuItem value="object">Object</MenuItem>
-                    <MenuItem value="array">Array</MenuItem>
-                  </Select>
-                </FormControl>
-              </div>
-              <div className="col-12 col-md-4">
-                <TextField
-                  label="Description"
-                  fullWidth
-                  size="small"
-                  value={param.description}
-                  onChange={(e) => handleParameterChange(index, 'description', e.target.value)}
-                  variant="outlined"
-                />
-              </div>
-              <div className="col-6 col-md-2">
-                <FormControl fullWidth size="small">
-                  <InputLabel>Required</InputLabel>
-                  <Select
-                    value={param.required ? "true" : "false"}
-                    onChange={(e) => handleParameterChange(index, 'required', e.target.value === "true")}
-                    label="Required"
-                  >
-                    <MenuItem value="true">Yes</MenuItem>
-                    <MenuItem value="false">No</MenuItem>
-                  </Select>
-                </FormControl>
-              </div>
-              <div className="col-6 col-md-1 d-flex justify-content-center align-items-center">
-                <IconButton 
-                  color="error" 
-                  onClick={() => handleRemoveParameter(index)}
-                  size="small"
-                >
-                  <DeleteIcon />
-                </IconButton>
-              </div>
-            </div>
+            </Box>
           </Paper>
         ))
       )}
+      
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={3000}
+        onClose={() => setSnackbar({ ...snackbar, open: false })}
+      >
+        <Alert severity={snackbar.severity} sx={{ width: '100%' }}>
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
     </Paper>
   );
 };
