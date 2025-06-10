@@ -63,6 +63,8 @@ interface ToolContextType {
   handleParameterChange: (index: number, field: keyof ToolParameter, value: any) => void;
   handleCodeChange: (value: string | undefined) => void;
   generateCodeWithComments: (tool: { toolName: string; toolDescription: string; toolParams: ToolParameter[]; }, language: "nodejs" | "python") => string;
+  selectedToolId: string | null;
+  setSelectedToolId: (id: string | null) => void;
 }
 
 const ToolContext = createContext<ToolContextType | undefined>(undefined);
@@ -99,6 +101,7 @@ export const ToolProvider: React.FC<ToolProviderProps> = ({ children, mcpServerI
   const [saveError, setSaveError] = useState<string | null>(null);
   const [saveSuccess, setSaveSuccess] = useState(false);
   const [isDirty, setIsDirty] = useState(false);
+  const [selectedToolId, setSelectedToolId] = useState<string | null>(null);
 
   // Generate code with comments
   const generateCodeWithComments = (tool: {
@@ -425,7 +428,9 @@ export const ToolProvider: React.FC<ToolProviderProps> = ({ children, mcpServerI
         handleRemoveParameter,
         handleParameterChange,
         handleCodeChange,
-        generateCodeWithComments
+        generateCodeWithComments,
+        selectedToolId,
+        setSelectedToolId
       }}
     >
       {children}

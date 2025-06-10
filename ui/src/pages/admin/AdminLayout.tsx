@@ -11,6 +11,7 @@ const navItems = [
   { text: "Admin Dashboard", icon: <DashboardIcon />, path: "/admin/dashboard" },
   { text: "All Users", icon: <PeopleIcon />, path: "/admin/users" },
   { text: "Theme Management", icon: <PaletteIcon />, path: "/admin/theme-management" },
+  { text: "Docker Management", icon: <PaletteIcon />, path: "/admin/docker-management" },
 ];
 
 export default function AdminLayout() {

@@ -1,0 +1,33 @@
+# docker-compose.yml
+version: "3.8"
+
+services:
+  app:
+    image: node:20
+    container_name: my_node_app
+    working_dir: /usr/src/app
+    volumes:
+      - .:/usr/src/app
+    command: npm run dev
+    ports:
+      - "3001:3001"
+    depends_on:
+      - mongo
+    networks:
+      - mynet
+
+  mongo:
+    image: mongo:6
+    container_name: my_mongo_db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - mynet
+
+volumes:
+  mongo-data:
+
+networks:
+  mynet:

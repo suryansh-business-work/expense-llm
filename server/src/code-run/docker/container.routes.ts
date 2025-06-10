@@ -7,18 +7,18 @@ import {
   restartContainer,
   deleteContainer,
   renameContainer,
-  inspectContainer,
-} from "../docker/container.controller.js";
+  inspectContainer
+} from "./container.controller";
 
 const router = express.Router();
 
-router.get("/", listContainers);
-router.post("/", createContainer);
-router.post("/:id/start", startContainer);
-router.post("/:id/stop", stopContainer);
-router.post("/:id/restart", restartContainer);
-router.delete("/:id", deleteContainer);
-router.patch("/:id/rename", renameContainer);
-router.get("/:id", inspectContainer);
+router.get("/docker/containers", listContainers);
+router.post("/docker/container/create", createContainer);
+router.post("/docker/container/:id/start", startContainer);
+router.post("/docker/container/:id/stop", stopContainer);
+router.post("/docker/container/:id/restart", restartContainer);
+router.delete("/docker/container/:id", deleteContainer);
+router.patch("/docker/container/:id/rename", renameContainer);
+router.get("/docker/container/:id", inspectContainer);
 
 export default router;

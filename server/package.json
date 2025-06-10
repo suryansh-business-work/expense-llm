@@ -29,6 +29,7 @@
     "gpt-tokenizer": "^2.9.0",
     "i": "^0.3.7",
     "imagekit": "^6.0.0",
+    "isolated-vm": "^5.0.4",
     "jsonwebtoken": "^9.0.2",
     "mjml": "^4.15.3",
     "mongoose": "^8.14.0",

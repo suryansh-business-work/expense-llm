@@ -70,6 +70,7 @@ const EventSource: React.FC<EventSourceProps> = ({ onConnected }) => {
       }
     };
     es.onmessage = (event) => {
+      console.log("EventSource opened:", event.data);
       addLog(`Event: ${event.data}`);
     };
     es.onerror = () => {

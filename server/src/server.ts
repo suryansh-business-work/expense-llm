@@ -28,6 +28,7 @@ import getChatGptResponseRoutes from './chat-api/chatgpt';
 // MCP Servers APIs
 import mcpServersRoutes from './mcp-servers/mcp-servers.routes';
 import toolsRoutes from './mcp-servers/tools-api/tools-api.routs';
+import toolCodeRoutes from './mcp-servers/tool-code/tool-code.routes';
 
 // Upload & Subscription APIs
 import imageKitUploadRoutes from './upload/upload.routes';
@@ -36,6 +37,10 @@ import subscriptionRoutes from './chat-api/subscription-api/subscription-usage.r
 // Design System APIs
 import { themeRoutes } from './design-system/theme/theme.routes';
 import propertyRoutes from './design-system/property/property.routes';
+
+// Code Run routes
+import dockerContainerRoutes from './code-run/docker/container.routes';
+import isolateVmRoutes from './code-run/isolate-vm/isolate-vm.routes';
 
 // Express App Initialization
 const app = express();
@@ -88,10 +93,15 @@ app.use('/v1/api/subscription-usage', subscriptionRoutes);
 // MCP Servers
 app.use('/v1/api/mcp-server', mcpServersRoutes);
 app.use('/v1/api/mcp-server/tool', toolsRoutes);
+app.use('/v1/api/mcp-server/tool-code', toolCodeRoutes);
 
 // Design System
 app.use('/design-system', themeRoutes);
 app.use('/design-system', propertyRoutes);
+
+// Code Run routes
+app.use('/v1/api/code-run', dockerContainerRoutes);
+app.use('/v1/api', isolateVmRoutes);
 
 // ===============
 // Utility Routes

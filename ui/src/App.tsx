@@ -9,6 +9,7 @@ import McpServers from './pages/mcp-servers/McpServers';
 import YourMcpServerManagement from './pages/mcp-servers/YourMcpServerManagement';
 import McpServerDetailsPage from './pages/mcp-servers/McpServerDetailsPage';
 import ToolLaboratory from './pages/mcp-servers/tool-management/tool-laboratory/ToolLaboratory';
+import DockerManagement from './pages/admin/DockerManagement';
 
 const Chat = lazy(() => import('./pages/chat/Chat'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
@@ -80,6 +81,7 @@ const App = () => {
           <Route path="lab/mcp-server/:mcpServerId" element={<McpServerDetailsPage />} />
           <Route path="lab/mcp-server/your-server/:mcpServerId" element={<YourMcpServerManagement />} />
           <Route path="lab/mcp-server/your-server/:mcpServerId/tool/:toolId" element={<ToolLaboratory />} />
+
           <Route path="profile" element={<Profile />} />
         </Route>
         <Route
@@ -93,6 +95,7 @@ const App = () => {
           <Route path="dashboard" element={<AdminDashboard />} />
           <Route path="users" element={<UsersList />} />
           <Route path="theme-management" element={<ThemeManagement />} />
+          <Route path="docker-management" element={<DockerManagement />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
