@@ -41,7 +41,7 @@ const McpServerDetails = () => {
   const navigate = useNavigate();
   
   // State for compact UI mode
-  const [compactMode, setCompactMode] = useState(false);
+  const [compactMode, setCompactMode] = useState(true);
   
   // State for server data
   const [server, setServer] = useState<any>(null);

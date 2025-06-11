@@ -74,7 +74,7 @@ const ChatTest: React.FC<ChatTestProps> = ({ tools, mcpClient }) => {
         messages: [
           { role: 'system', content: sysPrompt },
         ],
-        max_tokens: 100,
+        max_tokens: 1000,
         temperature: 0,
       },
       {
@@ -107,8 +107,11 @@ const ChatTest: React.FC<ChatTestProps> = ({ tools, mcpClient }) => {
     if (pendingTool) {
       setThinking(th => [...th, `Trying to extract arguments for "${pendingTool.name}" from your reply...`]);
       const args = await extractArgsWithChatGPT(pendingTool, prompt);
+      console.log("Extracted args:", args);
       const requiredParams = Object.keys(pendingTool.inputSchema?.properties || {});
       const missing = requiredParams.filter(k => !args || args[k] === undefined || args[k] === "");
+      console.log("Missing params:", missing);
+      console.log("pendingTool.inputSchema?.properties:", pendingTool.inputSchema?.properties);
       if (missing.length === 0) {
         // All arguments present, call tool
         try {
@@ -193,11 +196,16 @@ Reply with only the tool name or "none".
     }
 
     const matchedTool = tools.find(t => t.name.toLowerCase() === selectedToolName.toLowerCase());
+    console.log("Matched tool:", matchedTool);
     if (matchedTool && mcpClient && typeof mcpClient.callTool === "function") {
       setThinking(th => [...th, `Extracting arguments for "${matchedTool.name}"...`]);
       const args = await extractArgsWithChatGPT(matchedTool, prompt);
+      console.log("Extracted args:", args);
       const requiredParams = Object.keys(matchedTool.inputSchema?.properties || {});
       const missing = requiredParams.filter(k => !args || args[k] === undefined || args[k] === "");
+      console.log("Missing params:", missing);
+      console.log("matchedTool.inputSchema?.properties:", matchedTool.inputSchema?.properties);
+      
       if (missing.length === 0) {
         // All arguments present, call tool
         try {
