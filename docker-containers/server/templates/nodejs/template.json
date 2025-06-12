@@ -1,0 +1,12 @@
+{
+  "baseImage": "ubuntu:22.04",
+  "name": "nodejs-server",
+  "ports": ["3000:3000/tcp", "9229:9229/tcp"],
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "volumes": ["./app:/app"],
+  "memory": "512m",
+  "cpu": 0.5,
+  "dependencies": ["nodejs:18"]
+}

@@ -1,0 +1,20 @@
+2025-06-12T13:41:26.810Z [error]: Failed to connect to Docker: connect ENOENT //./pipe/docker_engine
+2025-06-12T13:48:20.858Z [error]: Error installing dependency nodejs:18: (HTTP code 409) container stopped/paused - container 80d75840b88ad95a717e3f0d07ab60a35598c32b688fb2578e5c9696410651f7 is not running 
+2025-06-12T13:48:20.858Z [error]: Error creating container: (HTTP code 409) container stopped/paused - container 80d75840b88ad95a717e3f0d07ab60a35598c32b688fb2578e5c9696410651f7 is not running 
+2025-06-12T13:48:20.859Z [error]: Error creating container: (HTTP code 409) container stopped/paused - container 80d75840b88ad95a717e3f0d07ab60a35598c32b688fb2578e5c9696410651f7 is not running 
+2025-06-12T13:48:45.822Z [error]: Error installing dependency nodejs:18: (HTTP code 409) container stopped/paused - container 0c8a02d99cda5a3b4d4f59deb4f05786ae12bb4c89874173c2e40fa21123d516 is not running 
+2025-06-12T13:48:45.822Z [error]: Error creating container: (HTTP code 409) container stopped/paused - container 0c8a02d99cda5a3b4d4f59deb4f05786ae12bb4c89874173c2e40fa21123d516 is not running 
+2025-06-12T13:48:45.823Z [error]: Error creating container: (HTTP code 409) container stopped/paused - container 0c8a02d99cda5a3b4d4f59deb4f05786ae12bb4c89874173c2e40fa21123d516 is not running 
+2025-06-12T13:58:28.194Z [error]: Error executing command: (HTTP code 409) container stopped/paused - container 0c8a02d99cda5a3b4d4f59deb4f05786ae12bb4c89874173c2e40fa21123d516 is not running 
+2025-06-12T13:59:31.903Z [error]: Error executing command: (HTTP code 409) container stopped/paused - container 0c8a02d99cda5a3b4d4f59deb4f05786ae12bb4c89874173c2e40fa21123d516 is not running 
+2025-06-12T14:04:55.460Z [error]: Error executing command: (HTTP code 409) container stopped/paused - container 0c8a02d99cda5a3b4d4f59deb4f05786ae12bb4c89874173c2e40fa21123d516 is not running 
+2025-06-12T14:05:07.702Z [error]: Error executing command: (HTTP code 409) container stopped/paused - container 0c8a02d99cda5a3b4d4f59deb4f05786ae12bb4c89874173c2e40fa21123d516 is not running 
+2025-06-12T14:05:08.670Z [error]: Error executing command: (HTTP code 409) container stopped/paused - container 0c8a02d99cda5a3b4d4f59deb4f05786ae12bb4c89874173c2e40fa21123d516 is not running 
+2025-06-12T14:05:14.959Z [error]: Error getting container 0c8a02d99cda5a3b4d4f59deb4f05786ae12bb4c89874173c2e40fa21123d51d6: (HTTP code 404) no such container - No such container: 0c8a02d99cda5a3b4d4f59deb4f05786ae12bb4c89874173c2e40fa21123d51d6 
+2025-06-12T14:06:05.086Z [error]: Error executing command: (HTTP code 409) container stopped/paused - container 0c8a02d99cda5a3b4d4f59deb4f05786ae12bb4c89874173c2e40fa21123d516 is not running 
+2025-06-12T14:06:05.948Z [error]: Error executing command: (HTTP code 409) container stopped/paused - container 0c8a02d99cda5a3b4d4f59deb4f05786ae12bb4c89874173c2e40fa21123d516 is not running 
+2025-06-12T14:06:06.767Z [error]: Error executing command: (HTTP code 409) container stopped/paused - container 0c8a02d99cda5a3b4d4f59deb4f05786ae12bb4c89874173c2e40fa21123d516 is not running 
+2025-06-12T14:14:41.951Z [error]: Error starting container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60: (HTTP code 304) container already started -  
+2025-06-12T14:14:41.952Z [error]: Failed to start container: (HTTP code 304) container already started -  
+2025-06-12T16:48:40.234Z [error]: Error getting container asd: (HTTP code 404) no such container - No such container: asd 
+2025-06-12T16:48:40.237Z [error]: Error getting container asd: (HTTP code 404) no such container - No such container: asd 

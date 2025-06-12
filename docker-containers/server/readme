@@ -1,0 +1,39 @@
+# Docker Container Management API
+
+A TypeScript API for dynamically creating and managing Docker containers with configurable dependencies.
+
+## Features
+
+- Create Docker containers from base images (with automatic pulling)
+- Install dependencies like MongoDB, PostgreSQL, Node.js, etc.
+- Configure container resources (memory, CPU)
+- Expose and map ports
+- Mount volumes
+- List, inspect, and remove containers
+
+## API Endpoints
+
+### Status
+- `GET /api/status` - Check Docker connection status
+
+### Containers
+- `GET /api/containers` - List all containers
+- `GET /api/containers/:id` - Get container details
+- `POST /api/containers` - Create a new container
+- `DELETE /api/containers/:id` - Remove a container
+- `POST /api/containers/:id/dependencies` - Install dependencies in an existing container
+
+## Example Usage
+
+### Create a container with MongoDB
+
+```json
+POST /api/containers
+{
+  "name": "mongodb-server",
+  "baseImage": "ubuntu:22.04",
+  "ports": ["27017:27017/tcp"],
+  "volumes": ["./mongo-data:/data/db"],
+  "memory": "1024m",
+  "dependencies": ["mongodb:6.0"]
+}

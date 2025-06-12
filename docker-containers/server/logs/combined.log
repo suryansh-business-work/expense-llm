@@ -1,0 +1,197 @@
+2025-06-12T13:35:54.527Z [info]: Server is running on port 3500
+2025-06-12T13:35:56.124Z [info]: Server is running on port 3500
+2025-06-12T13:35:58.072Z [info]: Server is running on port 3500
+2025-06-12T13:36:16.317Z [info]: Server is running on port 3500
+2025-06-12T13:37:27.608Z [info]: Server is running on port 3500
+2025-06-12T13:37:28.658Z [info]: Server is running on port 3500
+2025-06-12T13:37:29.605Z [info]: Server is running on port 3500
+2025-06-12T13:37:40.045Z [info]: Server is running on port 3500
+2025-06-12T13:37:42.670Z [info]: Server is running on port 3500
+2025-06-12T13:37:43.461Z [info]: Server is running on port 3500
+2025-06-12T13:39:38.890Z [info]: Server is running on port 3500
+2025-06-12T13:39:41.540Z [info]: Server is running on port 3500
+2025-06-12T13:39:42.393Z [info]: Server is running on port 3500
+2025-06-12T13:39:47.360Z [info]: Server is running on port 3500
+2025-06-12T13:39:48.425Z [info]: Server is running on port 3500
+2025-06-12T13:39:49.134Z [info]: Server is running on port 3500
+2025-06-12T13:39:52.962Z [info]: Server is running on port 3500
+2025-06-12T13:39:55.112Z [info]: Server is running on port 3500
+2025-06-12T13:41:12.334Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T13:41:18.044Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T13:41:26.810Z [error]: Failed to connect to Docker: connect ENOENT //./pipe/docker_engine
+2025-06-12T13:41:39.661Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T13:44:08.654Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T13:48:13.843Z [info]: Pulling image: ubuntu:22.04
+2025-06-12T13:48:20.243Z [info]: Successfully pulled image: ubuntu:22.04
+2025-06-12T13:48:20.595Z [info]: Installing nodejs:18 in container 80d75840b88ad95a717e3f0d07ab60a35598c32b688fb2578e5c9696410651f7
+2025-06-12T13:48:20.858Z [error]: Error installing dependency nodejs:18: (HTTP code 409) container stopped/paused - container 80d75840b88ad95a717e3f0d07ab60a35598c32b688fb2578e5c9696410651f7 is not running 
+2025-06-12T13:48:20.858Z [error]: Error creating container: (HTTP code 409) container stopped/paused - container 80d75840b88ad95a717e3f0d07ab60a35598c32b688fb2578e5c9696410651f7 is not running 
+2025-06-12T13:48:20.859Z [error]: Error creating container: (HTTP code 409) container stopped/paused - container 80d75840b88ad95a717e3f0d07ab60a35598c32b688fb2578e5c9696410651f7 is not running 
+2025-06-12T13:48:38.774Z [info]: Pulling image: ubuntu:22.04
+2025-06-12T13:48:45.308Z [info]: Successfully pulled image: ubuntu:22.04
+2025-06-12T13:48:45.531Z [info]: Installing nodejs:18 in container 0c8a02d99cda5a3b4d4f59deb4f05786ae12bb4c89874173c2e40fa21123d516
+2025-06-12T13:48:45.822Z [error]: Error installing dependency nodejs:18: (HTTP code 409) container stopped/paused - container 0c8a02d99cda5a3b4d4f59deb4f05786ae12bb4c89874173c2e40fa21123d516 is not running 
+2025-06-12T13:48:45.822Z [error]: Error creating container: (HTTP code 409) container stopped/paused - container 0c8a02d99cda5a3b4d4f59deb4f05786ae12bb4c89874173c2e40fa21123d516 is not running 
+2025-06-12T13:48:45.823Z [error]: Error creating container: (HTTP code 409) container stopped/paused - container 0c8a02d99cda5a3b4d4f59deb4f05786ae12bb4c89874173c2e40fa21123d516 is not running 
+2025-06-12T13:56:37.212Z [info]: Server is running on port 3500
+2025-06-12T13:56:39.938Z [info]: Server is running on port 3500
+2025-06-12T13:56:41.013Z [info]: Server is running on port 3500
+2025-06-12T13:57:22.623Z [info]: Server is running on port 3500
+2025-06-12T13:57:25.489Z [info]: Server is running on port 3500
+2025-06-12T13:57:26.502Z [info]: Server is running on port 3500
+2025-06-12T13:57:38.109Z [info]: Server is running on port 3500
+2025-06-12T13:57:39.753Z [info]: Server is running on port 3500
+2025-06-12T13:57:40.460Z [info]: Server is running on port 3500
+2025-06-12T13:58:28.194Z [error]: Error executing command: (HTTP code 409) container stopped/paused - container 0c8a02d99cda5a3b4d4f59deb4f05786ae12bb4c89874173c2e40fa21123d516 is not running 
+2025-06-12T13:59:31.903Z [error]: Error executing command: (HTTP code 409) container stopped/paused - container 0c8a02d99cda5a3b4d4f59deb4f05786ae12bb4c89874173c2e40fa21123d516 is not running 
+2025-06-12T14:02:20.795Z [info]: Server is running on port 3500
+2025-06-12T14:02:22.824Z [info]: Server is running on port 3500
+2025-06-12T14:02:24.708Z [info]: Server is running on port 3500
+2025-06-12T14:02:25.433Z [info]: Server is running on port 3500
+2025-06-12T14:02:45.658Z [info]: Server is running on port 3500
+2025-06-12T14:02:46.713Z [info]: Server is running on port 3500
+2025-06-12T14:02:47.519Z [info]: Server is running on port 3500
+2025-06-12T14:02:55.599Z [info]: Server is running on port 3500
+2025-06-12T14:02:56.908Z [info]: Server is running on port 3500
+2025-06-12T14:02:57.787Z [info]: Server is running on port 3500
+2025-06-12T14:03:06.105Z [info]: Server is running on port 3500
+2025-06-12T14:03:07.210Z [info]: Server is running on port 3500
+2025-06-12T14:03:07.953Z [info]: Server is running on port 3500
+2025-06-12T14:03:10.119Z [info]: Server is running on port 3500
+2025-06-12T14:03:30.092Z [info]: Server is running on port 3500
+2025-06-12T14:03:32.163Z [info]: Server is running on port 3500
+2025-06-12T14:03:32.838Z [info]: Server is running on port 3500
+2025-06-12T14:04:55.460Z [error]: Error executing command: (HTTP code 409) container stopped/paused - container 0c8a02d99cda5a3b4d4f59deb4f05786ae12bb4c89874173c2e40fa21123d516 is not running 
+2025-06-12T14:05:07.702Z [error]: Error executing command: (HTTP code 409) container stopped/paused - container 0c8a02d99cda5a3b4d4f59deb4f05786ae12bb4c89874173c2e40fa21123d516 is not running 
+2025-06-12T14:05:08.670Z [error]: Error executing command: (HTTP code 409) container stopped/paused - container 0c8a02d99cda5a3b4d4f59deb4f05786ae12bb4c89874173c2e40fa21123d516 is not running 
+2025-06-12T14:05:14.959Z [error]: Error getting container 0c8a02d99cda5a3b4d4f59deb4f05786ae12bb4c89874173c2e40fa21123d51d6: (HTTP code 404) no such container - No such container: 0c8a02d99cda5a3b4d4f59deb4f05786ae12bb4c89874173c2e40fa21123d51d6 
+2025-06-12T14:05:27.081Z [info]: Server is running on port 3500
+2025-06-12T14:05:27.740Z [info]: Server is running on port 3500
+2025-06-12T14:05:44.176Z [info]: Container started: 0c8a02d99cda5a3b4d4f59deb4f05786ae12bb4c89874173c2e40fa21123d516
+2025-06-12T14:06:05.086Z [error]: Error executing command: (HTTP code 409) container stopped/paused - container 0c8a02d99cda5a3b4d4f59deb4f05786ae12bb4c89874173c2e40fa21123d516 is not running 
+2025-06-12T14:06:05.948Z [error]: Error executing command: (HTTP code 409) container stopped/paused - container 0c8a02d99cda5a3b4d4f59deb4f05786ae12bb4c89874173c2e40fa21123d516 is not running 
+2025-06-12T14:06:06.767Z [error]: Error executing command: (HTTP code 409) container stopped/paused - container 0c8a02d99cda5a3b4d4f59deb4f05786ae12bb4c89874173c2e40fa21123d516 is not running 
+2025-06-12T14:06:16.107Z [info]: Container started: 0c8a02d99cda5a3b4d4f59deb4f05786ae12bb4c89874173c2e40fa21123d516
+2025-06-12T14:06:17.063Z [info]: Container started: 0c8a02d99cda5a3b4d4f59deb4f05786ae12bb4c89874173c2e40fa21123d516
+2025-06-12T14:06:19.881Z [info]: Container started: 0c8a02d99cda5a3b4d4f59deb4f05786ae12bb4c89874173c2e40fa21123d516
+2025-06-12T14:06:33.987Z [info]: Container started: 0c8a02d99cda5a3b4d4f59deb4f05786ae12bb4c89874173c2e40fa21123d516
+2025-06-12T14:06:34.905Z [info]: Container started: 0c8a02d99cda5a3b4d4f59deb4f05786ae12bb4c89874173c2e40fa21123d516
+2025-06-12T14:09:40.595Z [info]: Server is running on port 3500
+2025-06-12T14:09:42.126Z [info]: Server is running on port 3500
+2025-06-12T14:09:42.818Z [info]: Server is running on port 3500
+2025-06-12T14:09:55.831Z [info]: Pulling image: ubuntu:22.04
+2025-06-12T14:10:02.704Z [info]: Successfully pulled image: ubuntu:22.04
+2025-06-12T14:10:02.927Z [info]: Installing nodejs:18 in container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T14:13:27.754Z [info]: Successfully installed nodejs:18 in container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T14:13:27.754Z [info]: Installing mongodb:6.0 in container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T14:13:37.056Z [info]: Successfully installed mongodb:6.0 in container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T14:13:37.057Z [info]: Container created and started: container-name (f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60)
+2025-06-12T14:14:41.951Z [error]: Error starting container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60: (HTTP code 304) container already started -  
+2025-06-12T14:14:41.952Z [error]: Failed to start container: (HTTP code 304) container already started -  
+2025-06-12T14:20:28.742Z [info]: Server is running on port 3500
+2025-06-12T14:20:30.625Z [info]: Server is running on port 3500
+2025-06-12T14:20:42.032Z [info]: Server is running on port 3500
+2025-06-12T14:20:43.335Z [info]: Server is running on port 3500
+2025-06-12T14:20:43.910Z [info]: Server is running on port 3500
+2025-06-12T14:20:55.804Z [info]: Server is running on port 3500
+2025-06-12T14:20:56.806Z [info]: Server is running on port 3500
+2025-06-12T14:20:57.445Z [info]: Server is running on port 3500
+2025-06-12T14:25:20.898Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T14:28:28.376Z [info]: Server is running on port 3500
+2025-06-12T14:28:31.100Z [info]: Server is running on port 3500
+2025-06-12T14:28:31.811Z [info]: Server is running on port 3500
+2025-06-12T14:28:42.924Z [info]: Server is running on port 3500
+2025-06-12T14:28:44.609Z [info]: Server is running on port 3500
+2025-06-12T14:28:45.426Z [info]: Server is running on port 3500
+2025-06-12T16:45:25.276Z [info]: Server is running on port 3500
+2025-06-12T16:45:25.303Z [info]: New terminal connection: Gi7EsXXDPEmebI5qAAAB
+2025-06-12T16:45:25.312Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:45:25.323Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:45:26.593Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:45:27.575Z [info]: New terminal connection: LB8YuA_PZhPUwqdGAAAD
+2025-06-12T16:45:37.708Z [info]: Terminal connection closed: Gi7EsXXDPEmebI5qAAAB
+2025-06-12T16:45:37.852Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:45:37.860Z [info]: New terminal connection: wQdDU_wCNJDOqWPfAAAF
+2025-06-12T16:45:37.861Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:46:07.860Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:46:13.285Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:46:13.293Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:46:27.588Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:46:28.704Z [info]: Socket wQdDU_wCNJDOqWPfAAAF selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T16:46:35.095Z [info]: Terminal connection closed: wQdDU_wCNJDOqWPfAAAF
+2025-06-12T16:46:35.209Z [info]: New terminal connection: mbNmAqQN_i2mHVfBAAAH
+2025-06-12T16:46:35.262Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:46:35.270Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:46:35.566Z [info]: Socket mbNmAqQN_i2mHVfBAAAH selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T16:47:05.279Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:47:28.586Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:47:35.289Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:48:05.583Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:48:29.581Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:48:35.582Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:48:40.082Z [info]: Terminal connection closed: LB8YuA_PZhPUwqdGAAAD
+2025-06-12T16:48:40.206Z [info]: New terminal connection: _03GVsq0-tW6IFhEAAAJ
+2025-06-12T16:48:40.234Z [error]: Error getting container asd: (HTTP code 404) no such container - No such container: asd 
+2025-06-12T16:48:40.237Z [error]: Error getting container asd: (HTTP code 404) no such container - No such container: asd 
+2025-06-12T16:48:40.238Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:48:40.247Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:48:41.501Z [info]: Terminal connection closed: _03GVsq0-tW6IFhEAAAJ
+2025-06-12T16:48:48.585Z [info]: Socket mbNmAqQN_i2mHVfBAAAH selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T16:48:52.191Z [info]: Terminal connection closed: mbNmAqQN_i2mHVfBAAAH
+2025-06-12T16:48:52.305Z [info]: New terminal connection: VUEy08AIUP4c5oVzAAAL
+2025-06-12T16:48:52.351Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:48:52.360Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:48:52.773Z [info]: Socket VUEy08AIUP4c5oVzAAAL selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T16:48:56.089Z [info]: Executing command in container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60: ls -la
+2025-06-12T16:49:22.366Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:49:52.359Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:50:22.373Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:50:52.377Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:51:09.998Z [info]: Container restarted: f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T16:51:11.161Z [info]: Terminal connection closed: VUEy08AIUP4c5oVzAAAL
+2025-06-12T16:51:11.725Z [info]: New terminal connection: dadoVzjE3YZdCAtTAAAN
+2025-06-12T16:51:11.748Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:51:11.756Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:51:13.334Z [info]: Terminal connection closed: dadoVzjE3YZdCAtTAAAN
+2025-06-12T16:51:13.377Z [info]: New terminal connection: lwKIoZ9j8F4utp4zAAAP
+2025-06-12T16:51:13.388Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:51:13.396Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:51:25.890Z [info]: Container stopped: f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T16:51:34.920Z [info]: Terminal connection closed: lwKIoZ9j8F4utp4zAAAP
+2025-06-12T16:51:34.962Z [info]: New terminal connection: MJPnPdsvDhYsME6_AAAR
+2025-06-12T16:51:34.975Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:51:34.981Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:51:42.048Z [info]: Terminal connection closed: MJPnPdsvDhYsME6_AAAR
+2025-06-12T16:51:42.087Z [info]: New terminal connection: vPf6hydAxA0rlT37AAAT
+2025-06-12T16:51:42.123Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:51:42.131Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:51:45.946Z [info]: Socket vPf6hydAxA0rlT37AAAT selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T16:52:12.129Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:52:42.140Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:53:12.130Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:53:32.542Z [info]: Executing command in container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60: node  -v
+2025-06-12T16:53:36.231Z [info]: Executing command in container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60: node -v
+2025-06-12T16:53:42.013Z [info]: Executing command in container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60: mongoDbB
+2025-06-12T16:53:42.129Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:53:45.186Z [info]: Executing command in container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60: mongodb
+2025-06-12T16:54:12.128Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:54:13.446Z [info]: Executing command in container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60: mongod --version.
+2025-06-12T16:54:20.105Z [info]: Executing command in container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60: ds
+2025-06-12T16:54:21.905Z [info]: Executing command in container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60: sh: 1: ds: not found
+2025-06-12T16:54:24.605Z [info]: Executing command in container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60: sh: 1: ds: not found
+2025-06-12T16:54:30.141Z [info]: Executing command in container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60: node -v
+2025-06-12T16:54:36.733Z [info]: Executing command in container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60: mongo -v
+2025-06-12T16:54:42.129Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:55:12.124Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:55:42.131Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:56:12.125Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:56:42.132Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:57:12.582Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:57:42.590Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T16:58:12.136Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:12:07.066Z [info]: Server is running on port 3500
+2025-06-12T17:12:09.784Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:12:09.794Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:12:09.822Z [info]: New terminal connection: IstpnWd53UP3xBNZAAAB
+2025-06-12T17:12:18.403Z [info]: Socket IstpnWd53UP3xBNZAAAB selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:12:39.783Z [info]: Connected to Docker. Engine version: 28.1.1

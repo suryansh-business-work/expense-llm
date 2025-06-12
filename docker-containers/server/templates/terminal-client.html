@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Docker Terminal</title>
+  <style>
+    body {
+      font-family: 'Courier New', monospace;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    #container-selector {
+      margin-bottom: 20px;
+    }
+    #container-id {
+      padding: 8px;
+      width: 300px;
+      margin-right: 10px;
+    }
+    button {
+      padding: 8px 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    #terminal {
+      background-color: #000;
+      color: #00ff00;
+      padding: 15px;
+      height: 400px;
+      overflow-y: auto;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      white-space: pre-wrap;
+      font-family: 'Courier New', monospace;
+    }
+    #command-form {
+      display: flex;
+      margin-bottom: 20px;
+    }
+    #command-input {
+      flex-grow: 1;
+      padding: 8px;
+      font-family: 'Courier New', monospace;
+    }
+    .status {
+      padding: 10px;
+      background-color: #f8f9fa;
+      border-left: 4px solid #17a2b8;
+      margin-bottom: 15px;
+    }
+    .error {
+      background-color: #f8d7da;
+      border-left: 4px solid #dc3545;
+    }
+    .success {
+      background-color: #d4edda;
+      border-left: 4px solid #28a745;
+    }
+  </style>
+</head>
+<body>
+  <h1>Docker Container Terminal</h1>
+
+  <div class="status" id="connection-status">
+    WebSocket: Disconnected
+  </div>
+
+  <div id="container-selector">
+    <input type="text" id="container-id" placeholder="Enter Container ID" value="{{containerId}}">
+    <button type="button" id="select-container">Select Container</button>
+    <button type="button" id="start-shell">Start Interactive Shell</button>
+  </div>
+
+  <div id="terminal">Welcome to Docker Container Terminal!
+Type commands below to interact with the selected container.</div>
+
+  <form id="command-form">
+    <input type="text" id="command-input" placeholder="Enter command...">
+    <button type="submit">Execute</button>
+  </form>
+
+  <script src="https://cdn.socket.io/4.6.1/socket.io.min.js" integrity="sha384-3mydz5G+O5I90LGPm4zHHYh6ycG2ggACLrJyGhQ2ne3QgliEVs2OlH+zBDo78QrB" crossorigin="anonymous"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Debug function
+      function debugLog(msg, data) {
+        console.log(`[TERMINAL] ${msg}`, data || '');
+      }
+      
+      debugLog('DOM loaded, initializing terminal client');
+      
+      // Get DOM elements
+      const terminal = document.getElementById('terminal');
+      const commandInput = document.getElementById('command-input');
+      const connectionStatus = document.getElementById('connection-status');
+      const selectContainerBtn = document.getElementById('select-container');
+      const startShellBtn = document.getElementById('start-shell');
+      const commandForm = document.getElementById('command-form');
+      
+      let isShellMode = false;
+      
+      // Connect to WebSocket server
+      debugLog('Connecting to WebSocket server');
+      const socket = io('http://localhost:3500', {
+        reconnectionAttempts: 5,
+        timeout: 10000
+      });
+      
+      // Update UI with new terminal output
+      function appendToTerminal(text) {
+        debugLog('Appending to terminal', text);
+        if (typeof text !== 'string') {
+          try {
+            text = JSON.stringify(text);
+          } catch (e) {
+            text = "[Object]";
+          }
+        }
+        terminal.innerHTML += text;
+        terminal.scrollTop = terminal.scrollHeight;
+      }
+      
+      // Update connection status
+      socket.on('connect', () => {
+        debugLog('Connected to server');
+        connectionStatus.innerHTML = 'WebSocket: Connected';
+        connectionStatus.className = 'status success';
+      });
+      
+      socket.on('connect_error', (err) => {
+        debugLog('Connection error', err);
+        connectionStatus.innerHTML = `WebSocket: Connection Error (${err.message})`;
+        connectionStatus.className = 'status error';
+      });
+      
+      socket.on('disconnect', (reason) => {
+        debugLog('Disconnected', reason);
+        connectionStatus.innerHTML = `WebSocket: Disconnected (${reason})`;
+        connectionStatus.className = 'status error';
+      });
+      
+      // Handle container selection
+      selectContainerBtn.addEventListener('click', function() {
+        debugLog('Select container button clicked');
+        const containerId = document.getElementById('container-id').value.trim();
+        if (!containerId) {
+          appendToTerminal('\n\nError: Please enter a container ID');
+          return;
+        }
+        
+        debugLog('Selecting container', containerId);
+        socket.emit('select-container', containerId);
+      });
+      
+      // Handle container selected confirmation
+      socket.on('container-selected', (data) => {
+        debugLog('Container selected', data);
+        if (data.success) {
+          appendToTerminal(`\n\nConnected to container ${data.containerId}`);
+        }
+      });
+      
+      // Handle command submission
+      commandForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const command = commandInput.value.trim();
+        if (!command) return;
+        
+        debugLog('Executing command', command);
+        appendToTerminal(`\n\n$ ${command}\n`);
+        
+        if (isShellMode) {
+          socket.emit('input', command + '\n');
+        } else {
+          socket.emit('execute', command);
+        }
+        
+        commandInput.value = '';
+      });
+      
+      // Handle command output
+      socket.on('output', (data) => {
+        debugLog('Received output', data);
+        appendToTerminal(data);
+      });
+      
+      // Handle command completion
+      socket.on('finished', (data) => {
+        debugLog('Command finished', data);
+        appendToTerminal(`\n\nCommand completed with exit code ${data.exitCode}`);
+      });
+      
+      // Handle interactive shell
+      startShellBtn.addEventListener('click', function() {
+        debugLog('Start shell button clicked');
+        const containerId = document.getElementById('container-id').value.trim();
+        if (!containerId) {
+          appendToTerminal('\n\nError: Please enter a container ID');
+          return;
+        }
+        
+        debugLog('Starting shell for container', containerId);
+        appendToTerminal('\n\nStarting interactive shell...\n');
+        socket.emit('start-shell');
+        isShellMode = true;
+      });
+      
+      // Handle shell started
+      socket.on('shell-started', () => {
+        debugLog('Shell started');
+        appendToTerminal('\nInteractive shell started. Type commands and press Enter.\n');
+      });
+      
+      // Handle shell closed
+      socket.on('shell-closed', () => {
+        debugLog('Shell closed');
+        appendToTerminal('\nInteractive shell closed.\n');
+        isShellMode = false;
+      });
+      
+      // Handle errors
+      socket.on('error', (data) => {
+        debugLog('Error received', data);
+        appendToTerminal(`\n\nError: ${data.message}\n`);
+      });
+
+      // Auto-select container if ID is present
+      window.addEventListener('load', () => {
+        const containerId = document.getElementById('container-id').value.trim();
+        if (containerId) {
+          debugLog('Auto-selecting container', containerId);
+          setTimeout(() => {
+            selectContainerBtn.click();
+          }, 1000);
+        }
+      });
+      
+      // Log that initialization is complete
+      debugLog('Terminal client initialized');
+    });
+  </script>
+</body>
+</html>
