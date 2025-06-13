@@ -4,9 +4,10 @@ import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
 import MainLayout from './components/layout/MainLayout';
 import HomePage from './pages/HomePage';
 import ContainersPage from './pages/ContainersPage';
-import CreateContainerPage from './pages/CreateContainerPage';
 import TerminalPage from './pages/TerminalPage';
 import AnimatePresenceWrapper from './components/layout/AnimatePresenceWrapper';
+import FileExplorer from './components/files/FileExplorer';
+import ContainerForm from './components/containers/ContainerForm';
 
 function App() {
   const [mode, setMode] = useState<'light' | 'dark'>('dark');
@@ -105,8 +106,9 @@ function App() {
           <Route path="/" element={<MainLayout colorMode={colorMode} />}>
             <Route index element={<HomePage />} />
             <Route path="containers" element={<ContainersPage />} />
-            <Route path="create" element={<CreateContainerPage />} />
+            <Route path="create" element={<ContainerForm />} />
             <Route path="terminal/:id" element={<TerminalPage />} />
+            <Route path="file-system/:containerId" element={<FileExplorer />} />
           </Route>
         </Routes>
       </Router>

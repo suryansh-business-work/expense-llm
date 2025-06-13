@@ -3,6 +3,14 @@ import path from 'path';
 import fs from 'fs';
 import { containerController } from '../controllers/container.controller';
 import { terminalController } from '../controllers/terminal.controller';
+import multer from 'multer';
+import * as os from 'os';
+
+// Add the file controller import
+import { fileController } from '../controllers/file.controller';
+
+// Set up multer for file uploads
+const upload = multer({ dest: os.tmpdir() });
 
 export const apiRouter = express.Router();
 
@@ -18,6 +26,7 @@ apiRouter.post('/containers/:id/start', containerController.startContainer.bind(
 apiRouter.post('/containers/:id/stop', containerController.stopContainer.bind(containerController));
 apiRouter.post('/containers/:id/restart', containerController.restartContainer.bind(containerController));
 apiRouter.patch('/containers/:id', containerController.updateContainer.bind(containerController));
+apiRouter.post('/containers/:id/setup-node-server', containerController.setupNodeServer.bind(containerController));
 
 // Terminal routes
 apiRouter.post('/containers/:id/terminal/execute', terminalController.executeCommand.bind(terminalController));
@@ -63,3 +72,16 @@ apiRouter.get('/containers/:id/terminal/client', async (req, res) => {
     }
   }
 });
+
+// File management routes
+apiRouter.get('/containers/:id/files', fileController.listFiles.bind(fileController));
+apiRouter.get('/containers/:id/files/content', fileController.getFileContent.bind(fileController));
+apiRouter.post('/containers/:id/files/content', fileController.writeFileContent.bind(fileController));
+apiRouter.post('/containers/:id/directories', fileController.createDirectory.bind(fileController));
+apiRouter.delete('/containers/:id/files', fileController.deleteFileOrDirectory.bind(fileController));
+apiRouter.post('/containers/:id/files/move', fileController.moveFileOrDirectory.bind(fileController));
+apiRouter.post('/containers/:id/files/copy', fileController.copyFileOrDirectory.bind(fileController));
+apiRouter.get('/containers/:id/files/info', fileController.getFileInfo.bind(fileController));
+apiRouter.get('/containers/:id/files/search', fileController.searchFiles.bind(fileController));
+apiRouter.post('/containers/:id/files/upload', upload.single('file'), fileController.uploadFile.bind(fileController));
+apiRouter.get('/containers/:id/files/download', fileController.downloadFile.bind(fileController));

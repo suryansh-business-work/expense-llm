@@ -14,7 +14,6 @@ import {
 } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { checkDockerStatus } from '../../services/api';
-import { motion, AnimatePresence } from 'framer-motion';
 import ThemeToggle from './ThemeToggle';
 
 const drawerWidth = 240;
@@ -70,18 +69,12 @@ const MainLayout: React.FC<MainLayoutProps> = ({ colorMode }) => {
         justifyContent: 'center',
         p: 2
       }}>
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <CodeIcon sx={{ fontSize: 30, mr: 1 }} />
-            <Typography variant="h6" component="div">
-              Docker Manager
-            </Typography>
-          </Box>
-        </motion.div>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <CodeIcon sx={{ fontSize: 30, mr: 1 }} />
+          <Typography variant="h6" component="div">
+            Docker Manager
+          </Typography>
+        </Box>
       </Box>
       
       <Divider />
@@ -90,41 +83,33 @@ const MainLayout: React.FC<MainLayoutProps> = ({ colorMode }) => {
         {menuItems.map((item, index) => {
           const isActive = location.pathname === item.path;
           return (
-            <motion.div
-              key={item.text}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              whileHover={{ x: 5 }}
-            >
-              <ListItem disablePadding>
-                <ListItemButton 
-                  selected={isActive}
-                  onClick={() => navigateTo(item.path)}
-                  sx={{
-                    borderRight: isActive ? `3px solid ${theme.palette.primary.main}` : 'none',
-                    bgcolor: isActive 
-                      ? theme.palette.mode === 'dark' 
-                        ? 'rgba(88, 166, 255, 0.08)'
-                        : 'rgba(41, 98, 255, 0.08)'
-                      : 'transparent'
+            <ListItem disablePadding key={item.text}>
+              <ListItemButton 
+                selected={isActive}
+                onClick={() => navigateTo(item.path)}
+                sx={{
+                  borderRight: isActive ? `3px solid ${theme.palette.primary.main}` : 'none',
+                  bgcolor: isActive 
+                    ? theme.palette.mode === 'dark' 
+                      ? 'rgba(88, 166, 255, 0.08)'
+                      : 'rgba(41, 98, 255, 0.08)'
+                    : 'transparent'
+                }}
+              >
+                <ListItemIcon sx={{ 
+                  color: isActive ? theme.palette.primary.main : theme.palette.text.secondary
+                }}>
+                  {item.icon}
+                </ListItemIcon>
+                <ListItemText 
+                  primary={item.text} 
+                  primaryTypographyProps={{ 
+                    fontWeight: isActive ? 500 : 400,
+                    color: isActive ? theme.palette.text.primary : theme.palette.text.secondary
                   }}
-                >
-                  <ListItemIcon sx={{ 
-                    color: isActive ? theme.palette.primary.main : theme.palette.text.secondary
-                  }}>
-                    {item.icon}
-                  </ListItemIcon>
-                  <ListItemText 
-                    primary={item.text} 
-                    primaryTypographyProps={{ 
-                      fontWeight: isActive ? 500 : 400,
-                      color: isActive ? theme.palette.text.primary : theme.palette.text.secondary
-                    }}
-                  />
-                </ListItemButton>
-              </ListItem>
-            </motion.div>
+                />
+              </ListItemButton>
+            </ListItem>
           );
         })}
       </List>
@@ -132,20 +117,14 @@ const MainLayout: React.FC<MainLayoutProps> = ({ colorMode }) => {
       <Divider sx={{ mt: 2, mb: 2 }} />
       
       <Box sx={{ px: 2 }}>
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-        >
-          <Chip
-            icon={isDockerConnected ? <CloudIcon fontSize="small" /> : <CloudOffIcon fontSize="small" />}
-            label={isDockerConnected ? "Docker Connected" : "Docker Disconnected"}
-            color={isDockerConnected ? "success" : "error"}
-            variant="outlined"
-            size="small"
-            sx={{ width: '100%' }}
-          />
-        </motion.div>
+        <Chip
+          icon={isDockerConnected ? <CloudIcon fontSize="small" /> : <CloudOffIcon fontSize="small" />}
+          label={isDockerConnected ? "Docker Connected" : "Docker Disconnected"}
+          color={isDockerConnected ? "success" : "error"}
+          variant="outlined"
+          size="small"
+          sx={{ width: '100%' }}
+        />
       </Box>
     </Box>
   );
@@ -172,20 +151,10 @@ const MainLayout: React.FC<MainLayoutProps> = ({ colorMode }) => {
           </IconButton>
           
           <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={location.pathname}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-                transition={{ duration: 0.2 }}
-              >
-                {location.pathname === '/' && 'Dashboard'}
-                {location.pathname === '/containers' && 'Containers'}
-                {location.pathname.startsWith('/terminal/') && 'Terminal'}
-                {location.pathname === '/create' && 'Create Container'}
-              </motion.div>
-            </AnimatePresence>
+            {location.pathname === '/' && 'Dashboard'}
+            {location.pathname === '/containers' && 'Containers'}
+            {location.pathname.startsWith('/terminal/') && 'Terminal'}
+            {location.pathname === '/create' && 'Create Container'}
           </Typography>
           
           <ThemeToggle toggleColorMode={colorMode.toggleColorMode} />
@@ -227,18 +196,9 @@ const MainLayout: React.FC<MainLayoutProps> = ({ colorMode }) => {
         }}
       >
         <Toolbar />
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={location.pathname}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            style={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}
-          >
-            <Outlet />
-          </motion.div>
-        </AnimatePresence>
+        <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+          <Outlet />
+        </Box>
       </Box>
     </Box>
   );

@@ -81,6 +81,13 @@ export class ContainerService {
         await this.installDependencies(containerId, config.dependencies);
       }
       
+      // Run initial setup commands
+      try {
+        await this.runInitialSetup(containerId);
+      } catch (error) {
+        logger.error(`Initial setup failed for container ${containerId}, continuing anyway:`, error);
+      }
+      
       logger.info(`Container created and started: ${containerName} (${containerId})`);
       return containerId;
     } catch (error) {
@@ -419,6 +426,169 @@ export class ContainerService {
         return value * 1024 * 1024 * 1024;
       default: // bytes or no unit
         return value;
+    }
+  }
+
+  /**
+   * Run initial setup commands in a container
+   */
+  private async runInitialSetup(containerId: string): Promise<void> {
+    try {
+      logger.info(`Running initial setup in container ${containerId}`);
+      const container = this.docker.getContainer(containerId);
+      
+      // Update package lists
+      logger.info(`Running apt-get update in container ${containerId}`);
+      const updateExec = await container.exec({
+        Cmd: ['bash', '-c', 'apt-get update'],
+        AttachStdout: true,
+        AttachStderr: true
+      });
+      
+      const updateStream = await updateExec.start({});
+      await new Promise<void>((resolve) => {
+        container.modem.demuxStream(updateStream, process.stdout, process.stderr);
+        updateStream.on('end', () => resolve());
+      });
+      
+      // Install sudo
+      logger.info(`Installing sudo in container ${containerId}`);
+      await this.execCommand(container, 'apt-get install -y sudo');
+      
+      // Install git explicitly
+      logger.info(`Installing git in container ${containerId}`);
+      await this.execCommand(container, 'apt-get install -y git');
+      
+      // Verify git is installed
+      logger.info(`Verifying git installation in container ${containerId}`);
+      try {
+        await this.execCommand(container, 'git --version');
+      } catch (error) {
+        logger.warn(`Git verification failed, retrying installation with different approach`);
+        // Try alternative installation if verification failed
+        await this.execCommand(container, 'apt-get install -y git-core');
+      }
+      
+      // Install nodejs and npm
+      logger.info(`Installing nodejs and npm in container ${containerId}`);
+      await this.execCommand(container, 'apt-get install -y nodejs npm');
+      
+      logger.info(`Initial setup completed successfully in container ${containerId}`);
+    } catch (error) {
+      logger.error(`Error during initial setup in container ${containerId}:`, error);
+      throw error;
+    }
+  }
+
+  /**
+   * Helper method to execute a command in a container
+   */
+  private async execCommand(container: Docker.Container, command: string): Promise<void> {
+    const exec = await container.exec({
+      Cmd: ['bash', '-c', command],
+      AttachStdout: true,
+      AttachStderr: true
+    });
+    
+    const stream = await exec.start({});
+    
+    return new Promise<void>((resolve, reject) => {
+      let errorOutput = '';
+      
+      container.modem.demuxStream(
+        stream,
+        process.stdout,
+        {
+          write: (chunk: Buffer): void => {
+        errorOutput += chunk.toString();
+          }
+        } as NodeJS.WritableStream
+      );
+      
+      stream.on('end', () => {
+        if (errorOutput.includes('E: Unable to locate package') || 
+            errorOutput.includes('error') || 
+            errorOutput.includes('not found')) {
+          reject(new Error(`Command failed: ${command}\n${errorOutput}`));
+        } else {
+          resolve();
+        }
+      });
+      
+      stream.on('error', (err) => {
+        reject(err);
+      });
+    });
+  }
+
+  /**
+   * Clone GitHub repo and start server in container
+   */
+  public async cloneAndRunServer(containerId: string): Promise<void> {
+    try {
+      logger.info(`Setting up NodeJS server in container ${containerId}`);
+      const container = this.docker.getContainer(containerId);
+      
+      // Create directory
+      logger.info(`Creating directory structure in container ${containerId}`);
+      const mkdirExec = await container.exec({
+        Cmd: ['bash', '-c', 'mkdir -p "mcp_server"'],
+        AttachStdout: true,
+        AttachStderr: true
+      });
+      
+      const mkdirStream = await mkdirExec.start({});
+      await new Promise<void>((resolve) => {
+        container.modem.demuxStream(mkdirStream, process.stdout, process.stderr);
+        mkdirStream.on('end', () => resolve());
+      });
+      
+      // Clone repository
+      logger.info(`Cloning repository in container ${containerId}`);
+      const cloneExec = await container.exec({
+        Cmd: ['bash', '-c', 'cd "mcp_server" && git clone https://github.com/suryansh-business-work/simple-mcp-server.git'],
+        AttachStdout: true,
+        AttachStderr: true
+      });
+      
+      const cloneStream = await cloneExec.start({});
+      await new Promise<void>((resolve) => {
+        container.modem.demuxStream(cloneStream, process.stdout, process.stderr);
+        cloneStream.on('end', () => resolve());
+      });
+      
+      // Install npm dependencies
+      logger.info(`Installing npm dependencies in container ${containerId}`);
+      const npmInstallExec = await container.exec({
+        Cmd: ['bash', '-c', 'cd "mcp_server/simple-mcp-server" && npm install'],
+        AttachStdout: true,
+        AttachStderr: true
+      });
+      
+      const npmInstallStream = await npmInstallExec.start({});
+      await new Promise<void>((resolve) => {
+        container.modem.demuxStream(npmInstallStream, process.stdout, process.stderr);
+        npmInstallStream.on('end', () => resolve());
+      });
+      
+      // Start the server
+      logger.info(`Starting Node.js server in container ${containerId}`);
+      const npmStartExec = await container.exec({
+        Cmd: ['bash', '-c', 'cd "mcp_server/simple-mcp-server" && nohup npm start > server.log 2>&1 &'],
+        AttachStdout: true,
+        AttachStderr: true
+      });
+      
+      const npmStartStream = await npmStartExec.start({});
+      await new Promise<void>((resolve) => {
+        container.modem.demuxStream(npmStartStream, process.stdout, process.stderr);
+        npmStartStream.on('end', () => resolve());
+      });
+      
+      logger.info(`Node.js server started successfully in container ${containerId}`);
+    } catch (error) {
+      logger.error(`Error setting up Node.js server in container ${containerId}:`, error);
+      throw error;
     }
   }
 }

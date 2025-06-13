@@ -22,7 +22,8 @@ import {
   TextField,
   Tooltip,
   Typography,
-  useTheme
+  useTheme,
+  Grid
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
@@ -30,6 +31,7 @@ import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Cancel';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 
 // Default configuration based on the provided JSON
 const DEFAULT_CONFIG: ContainerConfig = {
@@ -37,7 +39,8 @@ const DEFAULT_CONFIG: ContainerConfig = {
   baseImage: "ubuntu:22.04",
   ports: [
     "3006:3006/tcp",
-    "27017"
+    "27017:27017/tcp",
+    "1337:1337/tcp",
   ],
   volumes: [
     "./data:/data",
@@ -50,10 +53,30 @@ const DEFAULT_CONFIG: ContainerConfig = {
   memory: "512m",
   cpu: 0.5,
   dependencies: [
+    "sudo",
+    "gnupg",
+    "mongodb-org",
     "nodejs:22",
-    "mongodb:8.0"
+    "mongodb:8.0",
+    "npm",
+    "git",
+    "curl",
+    "lsof",
+    "netstat"
   ],
   restartPolicy: "unless-stopped"
+};
+
+const HINTS = {
+  name: "Optional. If left blank, Docker will auto-generate a name.",
+  baseImage: "Required. The base Docker image to use, e.g. ubuntu:22.04, node:20, python:3.11.",
+  ports: "Format: hostPort:containerPort/protocol (e.g. 8080:80/tcp). You can add multiple.",
+  volumes: "Format: hostPath:containerPath (e.g. ./data:/data). You can add multiple.",
+  env: "Environment variables as key-value pairs (e.g. NODE_ENV=production).",
+  dependencies: "List of packages or images to install (e.g. nodejs:18, mongodb:6.0).",
+  memory: "Memory limit for the container (e.g. 512m, 1g).",
+  cpu: "CPU limit (number of cores, e.g. 0.5, 1, 2).",
+  restartPolicy: "Controls how the container should be restarted if it exits."
 };
 
 const ContainerForm: React.FC = () => {
@@ -61,7 +84,7 @@ const ContainerForm: React.FC = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  
+
   // Initial empty config
   const [config, setConfig] = useState<ContainerConfig>({
     baseImage: 'ubuntu:22.04',
@@ -73,21 +96,20 @@ const ContainerForm: React.FC = () => {
     cpu: 0.5,
     restartPolicy: 'unless-stopped'
   });
-  
+
   // Initialize env keys/values (empty initially)
   const [envKeys, setEnvKeys] = useState<string[]>(['']);
   const [envValues, setEnvValues] = useState<string[]>(['']);
-  
+
   // Load default values function
   const loadDefaultValues = () => {
     setConfig(DEFAULT_CONFIG);
-    
+
     // Extract environment variables for the form
     const keys = Object.keys(DEFAULT_CONFIG.env || {});
     const values = keys.map(key => (DEFAULT_CONFIG.env ?? {})[key]);
-    
+
     if (keys.length === 0) {
-      // If no env vars in default, add one empty field
       setEnvKeys(['']);
       setEnvValues(['']);
     } else {
@@ -95,42 +117,42 @@ const ContainerForm: React.FC = () => {
       setEnvValues(values);
     }
   };
-  
+
   const handleTextChange = (e: any) => {
     const name = e.target.name as string;
     const value = e.target.value as string;
     setConfig(prev => ({ ...prev, [name]: value }));
   };
-  
+
   const handleNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setConfig(prev => ({ ...prev, [name]: parseFloat(value) }));
   };
-  
+
   const handleArrayChange = (index: number, value: string, arrayName: 'ports' | 'volumes' | 'dependencies') => {
     const newArray = [...(config[arrayName] || [])];
     newArray[index] = value;
     setConfig(prev => ({ ...prev, [arrayName]: newArray }));
   };
-  
+
   const addArrayItem = (arrayName: 'ports' | 'volumes' | 'dependencies') => {
     setConfig(prev => ({
       ...prev,
       [arrayName]: [...(prev[arrayName] || []), '']
     }));
   };
-  
+
   const removeArrayItem = (index: number, arrayName: 'ports' | 'volumes' | 'dependencies') => {
     const newArray = [...(config[arrayName] || [])];
     newArray.splice(index, 1);
     setConfig(prev => ({ ...prev, [arrayName]: newArray }));
   };
-  
+
   const handleEnvKeyChange = (index: number, value: string) => {
     const newKeys = [...envKeys];
     newKeys[index] = value;
     setEnvKeys(newKeys);
-    
+
     // Update env object in config
     const newEnv: Record<string, string> = {};
     newKeys.forEach((key, i) => {
@@ -140,12 +162,12 @@ const ContainerForm: React.FC = () => {
     });
     setConfig(prev => ({ ...prev, env: newEnv }));
   };
-  
+
   const handleEnvValueChange = (index: number, value: string) => {
     const newValues = [...envValues];
     newValues[index] = value;
     setEnvValues(newValues);
-    
+
     // Update env object in config
     const newEnv: Record<string, string> = {};
     envKeys.forEach((key, i) => {
@@ -155,12 +177,12 @@ const ContainerForm: React.FC = () => {
     });
     setConfig(prev => ({ ...prev, env: newEnv }));
   };
-  
+
   const addEnvItem = () => {
     setEnvKeys([...envKeys, '']);
     setEnvValues([...envValues, '']);
   };
-  
+
   const removeEnvItem = (index: number) => {
     const newKeys = [...envKeys];
     const newValues = [...envValues];
@@ -168,7 +190,7 @@ const ContainerForm: React.FC = () => {
     newValues.splice(index, 1);
     setEnvKeys(newKeys);
     setEnvValues(newValues);
-    
+
     // Update env object in config
     const newEnv: Record<string, string> = {};
     newKeys.forEach((key, i) => {
@@ -178,12 +200,12 @@ const ContainerForm: React.FC = () => {
     });
     setConfig(prev => ({ ...prev, env: newEnv }));
   };
-  
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    
+
     try {
       // Filter out empty array items
       const formattedConfig: ContainerConfig = {
@@ -192,25 +214,30 @@ const ContainerForm: React.FC = () => {
         volumes: config.volumes?.filter(volume => volume.trim() !== '') || [],
         dependencies: config.dependencies?.filter(dep => dep.trim() !== '') || []
       };
-      
-      const response = await createContainer(formattedConfig);
-      console.log('Container created:', response);
+
+      await createContainer(formattedConfig);
       navigate('/containers');
-    } catch (error) {
-      console.error('Error creating container:', error);
-      setError(`Failed to create container: ${error instanceof Error ? error.message : String(error)}`);
+    } catch (error: any) {
+      // Try to extract server error message
+      let message = "Failed to create container";
+      if (error?.response?.data?.message) {
+        message = error.response.data.message;
+      } else if (error?.message) {
+        message = error.message;
+      }
+      setError(message);
     } finally {
       setLoading(false);
     }
   };
-  
+
   return (
-    <Container maxWidth="lg">
-      <Paper 
-        elevation={3} 
-        sx={{ 
-          p: 4, 
-          mt: 4, 
+    <Container maxWidth="md">
+      <Paper
+        elevation={3}
+        sx={{
+          p: { xs: 2, sm: 4 },
+          mt: 4,
           mb: 4,
           borderRadius: 2,
           bgcolor: theme.palette.background.paper
@@ -221,7 +248,7 @@ const ContainerForm: React.FC = () => {
             Create New Container
           </Typography>
           <Tooltip title="Load default configuration">
-            <Button 
+            <Button
               variant="outlined"
               color="secondary"
               onClick={loadDefaultValues}
@@ -231,27 +258,34 @@ const ContainerForm: React.FC = () => {
             </Button>
           </Tooltip>
         </Box>
-        
+
         {error && (
           <Alert severity="error" sx={{ mb: 3 }}>
             {error}
           </Alert>
         )}
-        
+
         <form onSubmit={handleSubmit}>
           <Stack spacing={3}>
             <FormControl fullWidth>
               <TextField
-                label="Container Name (Optional)"
+                label="Container Name"
                 name="name"
                 value={config.name || ''}
                 onChange={handleTextChange}
                 placeholder="Leave empty for auto-generated name"
                 variant="outlined"
-                helperText="Optional name for your container"
+                helperText={HINTS.name}
+                InputProps={{
+                  endAdornment: (
+                    <Tooltip title={HINTS.name}>
+                      <InfoOutlinedIcon color="info" fontSize="small" />
+                    </Tooltip>
+                  )
+                }}
               />
             </FormControl>
-            
+
             <FormControl fullWidth required>
               <TextField
                 required
@@ -261,14 +295,26 @@ const ContainerForm: React.FC = () => {
                 onChange={handleTextChange}
                 placeholder="e.g. ubuntu:22.04"
                 variant="outlined"
-                helperText="The base Docker image to use"
+                helperText={HINTS.baseImage}
+                InputProps={{
+                  endAdornment: (
+                    <Tooltip title={HINTS.baseImage}>
+                      <InfoOutlinedIcon color="info" fontSize="small" />
+                    </Tooltip>
+                  )
+                }}
               />
             </FormControl>
-            
+
             <Box>
-              <Typography variant="subtitle1" sx={{ mb: 1 }}>
-                Ports (containerPort:hostPort/protocol)
-              </Typography>
+              <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+                <Typography variant="subtitle1" sx={{ mr: 1 }}>
+                  Ports
+                </Typography>
+                <Tooltip title={HINTS.ports}>
+                  <InfoOutlinedIcon color="info" fontSize="small" />
+                </Tooltip>
+              </Box>
               <Stack spacing={2}>
                 {config.ports?.map((port, index) => (
                   <Stack key={index} direction="row" spacing={1} alignItems="center">
@@ -291,8 +337,8 @@ const ContainerForm: React.FC = () => {
                   </Stack>
                 ))}
                 <Box>
-                  <Button 
-                    variant="outlined" 
+                  <Button
+                    variant="outlined"
                     startIcon={<AddIcon />}
                     onClick={() => addArrayItem('ports')}
                     size="small"
@@ -302,11 +348,16 @@ const ContainerForm: React.FC = () => {
                 </Box>
               </Stack>
             </Box>
-            
+
             <Box>
-              <Typography variant="subtitle1" sx={{ mb: 1 }}>
-                Volumes (hostPath:containerPath)
-              </Typography>
+              <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+                <Typography variant="subtitle1" sx={{ mr: 1 }}>
+                  Volumes
+                </Typography>
+                <Tooltip title={HINTS.volumes}>
+                  <InfoOutlinedIcon color="info" fontSize="small" />
+                </Tooltip>
+              </Box>
               <Stack spacing={2}>
                 {config.volumes?.map((volume, index) => (
                   <Stack key={index} direction="row" spacing={1} alignItems="center">
@@ -329,8 +380,8 @@ const ContainerForm: React.FC = () => {
                   </Stack>
                 ))}
                 <Box>
-                  <Button 
-                    variant="outlined" 
+                  <Button
+                    variant="outlined"
                     startIcon={<AddIcon />}
                     onClick={() => addArrayItem('volumes')}
                     size="small"
@@ -340,11 +391,16 @@ const ContainerForm: React.FC = () => {
                 </Box>
               </Stack>
             </Box>
-            
+
             <Box>
-              <Typography variant="subtitle1" sx={{ mb: 1 }}>
-                Environment Variables
-              </Typography>
+              <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+                <Typography variant="subtitle1" sx={{ mr: 1 }}>
+                  Environment Variables
+                </Typography>
+                <Tooltip title={HINTS.env}>
+                  <InfoOutlinedIcon color="info" fontSize="small" />
+                </Tooltip>
+              </Box>
               <Stack spacing={2}>
                 {envKeys.map((key, index) => (
                   <Stack key={index} direction="row" spacing={1} alignItems="center">
@@ -377,8 +433,8 @@ const ContainerForm: React.FC = () => {
                   </Stack>
                 ))}
                 <Box>
-                  <Button 
-                    variant="outlined" 
+                  <Button
+                    variant="outlined"
                     startIcon={<AddIcon />}
                     onClick={addEnvItem}
                     size="small"
@@ -388,11 +444,16 @@ const ContainerForm: React.FC = () => {
                 </Box>
               </Stack>
             </Box>
-            
+
             <Box>
-              <Typography variant="subtitle1" sx={{ mb: 1 }}>
-                Dependencies (type:version)
-              </Typography>
+              <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+                <Typography variant="subtitle1" sx={{ mr: 1 }}>
+                  Dependencies
+                </Typography>
+                <Tooltip title={HINTS.dependencies}>
+                  <InfoOutlinedIcon color="info" fontSize="small" />
+                </Tooltip>
+              </Box>
               <Stack spacing={2}>
                 {config.dependencies?.map((dependency, index) => (
                   <Stack key={index} direction="row" spacing={1} alignItems="center">
@@ -415,8 +476,8 @@ const ContainerForm: React.FC = () => {
                   </Stack>
                 ))}
                 <Box>
-                  <Button 
-                    variant="outlined" 
+                  <Button
+                    variant="outlined"
                     startIcon={<AddIcon />}
                     onClick={() => addArrayItem('dependencies')}
                     size="small"
@@ -426,32 +487,51 @@ const ContainerForm: React.FC = () => {
                 </Box>
               </Stack>
             </Box>
-            
-            <FormControl fullWidth>
-              <TextField
-                label="Memory Limit"
-                name="memory"
-                value={config.memory || ''}
-                onChange={handleTextChange}
-                placeholder="e.g. 512m, 1g"
-                variant="outlined"
-                helperText="Format: 512m, 1g, etc."
-              />
-            </FormControl>
-            
-            <FormControl fullWidth>
-              <TextField
-                type="number"
-                label="CPU Limit"
-                name="cpu"
-                value={config.cpu || ''}
-                onChange={handleNumberChange}
-                inputProps={{ min: "0.1", max: "16", step: "0.1" }}
-                variant="outlined"
-                helperText="Number of CPU cores (0.1 to 16)"
-              />
-            </FormControl>
-            
+
+            <Grid container spacing={2}>
+              <Grid>
+                <FormControl fullWidth>
+                  <TextField
+                    label="Memory Limit"
+                    name="memory"
+                    value={config.memory || ''}
+                    onChange={handleTextChange}
+                    placeholder="e.g. 512m, 1g"
+                    variant="outlined"
+                    helperText={HINTS.memory}
+                    InputProps={{
+                      endAdornment: (
+                        <Tooltip title={HINTS.memory}>
+                          <InfoOutlinedIcon color="info" fontSize="small" />
+                        </Tooltip>
+                      )
+                    }}
+                  />
+                </FormControl>
+              </Grid>
+              <Grid>
+                <FormControl fullWidth>
+                  <TextField
+                    type="number"
+                    label="CPU Limit"
+                    name="cpu"
+                    value={config.cpu || ''}
+                    onChange={handleNumberChange}
+                    inputProps={{ min: "0.1", max: "16", step: "0.1" }}
+                    variant="outlined"
+                    helperText={HINTS.cpu}
+                    InputProps={{
+                      endAdornment: (
+                        <Tooltip title={HINTS.cpu}>
+                          <InfoOutlinedIcon color="info" fontSize="small" />
+                        </Tooltip>
+                      )
+                    }}
+                  />
+                </FormControl>
+              </Grid>
+            </Grid>
+
             <FormControl fullWidth>
               <InputLabel id="restart-policy-label">Restart Policy</InputLabel>
               <Select
@@ -468,15 +548,15 @@ const ContainerForm: React.FC = () => {
                 <MenuItem value="unless-stopped">Unless Stopped</MenuItem>
               </Select>
               <FormHelperText>
-                Controls how the container should be restarted
+                {HINTS.restartPolicy}
               </FormHelperText>
             </FormControl>
-            
+
             <Divider sx={{ my: 2 }} />
-            
+
             <Stack direction="row" spacing={2} justifyContent="flex-end">
-              <Button 
-                variant="contained" 
+              <Button
+                variant="contained"
                 color="primary"
                 type="submit"
                 disabled={loading}
@@ -485,7 +565,7 @@ const ContainerForm: React.FC = () => {
               >
                 {loading ? 'Creating...' : 'Create Container'}
               </Button>
-              <Button 
+              <Button
                 variant="outlined"
                 color="inherit"
                 onClick={() => navigate('/containers')}
@@ -493,7 +573,7 @@ const ContainerForm: React.FC = () => {
               >
                 Cancel
               </Button>
-              <Button 
+              <Button
                 variant="outlined"
                 color="warning"
                 onClick={() => {

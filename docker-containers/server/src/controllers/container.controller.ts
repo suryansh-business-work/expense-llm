@@ -227,6 +227,28 @@ export class ContainerController {
   }
 
   /**
+   * Clone GitHub repo and run Node.js server in a container
+   */
+  public async setupNodeServer(req: Request, res: Response): Promise<void> {
+    try {
+      const { id } = req.params;
+      
+      // Check if container exists
+      await this.checkContainerExists(id);
+      
+      // Clone repo and start server
+      await containerService.cloneAndRunServer(id);
+      
+      res.json({ 
+        message: `Node.js server setup completed in container ${id}`,
+        details: "Repository cloned and server started" 
+      });
+    } catch (error: any) {
+      this.handleError(error, res, 'Failed to set up Node.js server');
+    }
+  }
+
+  /**
    * Check if a container exists
    */
   public async checkContainerExists(containerId: string): Promise<boolean> {

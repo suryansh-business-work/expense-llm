@@ -195,3 +195,2006 @@
 2025-06-12T17:12:09.822Z [info]: New terminal connection: IstpnWd53UP3xBNZAAAB
 2025-06-12T17:12:18.403Z [info]: Socket IstpnWd53UP3xBNZAAAB selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
 2025-06-12T17:12:39.783Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:13:03.348Z [info]: Server is running on port 3500
+2025-06-12T17:13:04.164Z [info]: New terminal connection: KhBjEdsbr4k9zQIDAAAB
+2025-06-12T17:13:07.338Z [info]: Terminal connection closed: KhBjEdsbr4k9zQIDAAAB
+2025-06-12T17:13:07.465Z [info]: New terminal connection: _JzAaKBnNrbdZ-YcAAAD
+2025-06-12T17:13:07.510Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:13:07.519Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:13:07.921Z [info]: Socket _JzAaKBnNrbdZ-YcAAAD selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:13:15.731Z [info]: Terminal connection closed: _JzAaKBnNrbdZ-YcAAAD
+2025-06-12T17:13:15.842Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:13:15.852Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:13:15.874Z [info]: New terminal connection: nl3_r9oX2fbGc6jRAAAF
+2025-06-12T17:13:16.259Z [info]: Socket nl3_r9oX2fbGc6jRAAAF selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:13:29.835Z [info]: Terminal connection closed: nl3_r9oX2fbGc6jRAAAF
+2025-06-12T17:13:29.943Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:13:29.952Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:13:29.977Z [info]: New terminal connection: ClLzemBiKDjm87SXAAAH
+2025-06-12T17:13:30.359Z [info]: Socket ClLzemBiKDjm87SXAAAH selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:13:32.525Z [info]: Terminal connection closed: ClLzemBiKDjm87SXAAAH
+2025-06-12T17:13:32.634Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:13:32.642Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:13:32.662Z [info]: New terminal connection: KXRdIo3qAAVM-R-QAAAJ
+2025-06-12T17:13:33.052Z [info]: Socket KXRdIo3qAAVM-R-QAAAJ selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:14:02.640Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:14:12.076Z [info]: Terminal connection closed: KXRdIo3qAAVM-R-QAAAJ
+2025-06-12T17:14:12.252Z [info]: New terminal connection: lbY-Wvyacb9Feav3AAAL
+2025-06-12T17:14:12.325Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:14:12.332Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:14:42.341Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:15:12.349Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:15:42.341Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:16:12.335Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:16:42.344Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:17:12.331Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:17:15.973Z [info]: Socket lbY-Wvyacb9Feav3AAAL selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:17:42.332Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:18:12.331Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:18:16.697Z [info]: Socket lbY-Wvyacb9Feav3AAAL selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:18:42.336Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:19:12.334Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:19:22.614Z [info]: New terminal connection: SwEND0pvJ0VkRHJ1AAAN
+2025-06-12T17:19:25.875Z [info]: New terminal connection: tM_hOhKNKCQz9HGnAAAP
+2025-06-12T17:19:42.342Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:20:12.331Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:20:29.070Z [info]: Socket tM_hOhKNKCQz9HGnAAAP selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:20:32.686Z [info]: Executing command in container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60: sdla -la
+2025-06-12T17:20:36.445Z [info]: Executing command in container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60: ls -la
+2025-06-12T17:20:42.346Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:21:12.335Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:21:42.331Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:22:12.341Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:22:42.338Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:22:53.484Z [info]: Terminal connection closed: lbY-Wvyacb9Feav3AAAL
+2025-06-12T17:22:53.485Z [info]: Terminal connection closed: tM_hOhKNKCQz9HGnAAAP
+2025-06-12T17:22:53.485Z [info]: Terminal connection closed: SwEND0pvJ0VkRHJ1AAAN
+2025-06-12T17:22:53.701Z [info]: New terminal connection: n9UqZxt_r_1vMC_dAAAR
+2025-06-12T17:22:53.754Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:22:53.761Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:22:54.176Z [info]: Socket n9UqZxt_r_1vMC_dAAAR selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:22:55.919Z [info]: Terminal connection closed: n9UqZxt_r_1vMC_dAAAR
+2025-06-12T17:22:56.065Z [info]: New terminal connection: K8M247u_l6bPvi7RAAAT
+2025-06-12T17:22:56.069Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:22:56.077Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:22:56.490Z [info]: Socket K8M247u_l6bPvi7RAAAT selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:23:14.004Z [info]: Terminal connection closed: K8M247u_l6bPvi7RAAAT
+2025-06-12T17:23:14.264Z [info]: New terminal connection: FHn2j7lv0wiTdDUwAAAV
+2025-06-12T17:23:14.266Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:23:14.274Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:23:14.690Z [info]: Socket FHn2j7lv0wiTdDUwAAAV selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:23:32.390Z [info]: Terminal connection closed: FHn2j7lv0wiTdDUwAAAV
+2025-06-12T17:23:32.479Z [info]: New terminal connection: UWxeGzgZIGuzop0zAAAX
+2025-06-12T17:23:32.483Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:23:32.491Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:23:32.910Z [info]: Socket UWxeGzgZIGuzop0zAAAX selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:24:02.514Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:24:32.496Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:25:02.499Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:25:32.495Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:26:02.507Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:26:24.504Z [info]: Socket UWxeGzgZIGuzop0zAAAX selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:25.012Z [info]: Socket UWxeGzgZIGuzop0zAAAX selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:25.015Z [info]: Socket UWxeGzgZIGuzop0zAAAX selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:25.528Z [info]: Socket UWxeGzgZIGuzop0zAAAX selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:25.530Z [info]: Socket UWxeGzgZIGuzop0zAAAX selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:26.042Z [info]: Socket UWxeGzgZIGuzop0zAAAX selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:26.045Z [info]: Socket UWxeGzgZIGuzop0zAAAX selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:26.555Z [info]: Socket UWxeGzgZIGuzop0zAAAX selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:28.820Z [info]: Terminal connection closed: UWxeGzgZIGuzop0zAAAX
+2025-06-12T17:26:29.058Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:26:29.059Z [info]: New terminal connection: m2XEdjRP6suPRZX5AAAZ
+2025-06-12T17:26:29.065Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:26:29.481Z [info]: Socket m2XEdjRP6suPRZX5AAAZ selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:30.009Z [info]: Socket m2XEdjRP6suPRZX5AAAZ selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:30.013Z [info]: Socket m2XEdjRP6suPRZX5AAAZ selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:30.529Z [info]: Socket m2XEdjRP6suPRZX5AAAZ selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:30.531Z [info]: Socket m2XEdjRP6suPRZX5AAAZ selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:31.046Z [info]: Socket m2XEdjRP6suPRZX5AAAZ selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:43.691Z [info]: Terminal connection closed: m2XEdjRP6suPRZX5AAAZ
+2025-06-12T17:26:43.776Z [info]: New terminal connection: Q8Hv8aOj9EY9Y68XAAAb
+2025-06-12T17:26:43.781Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:26:43.789Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:26:44.209Z [info]: Socket Q8Hv8aOj9EY9Y68XAAAb selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:44.718Z [info]: Socket Q8Hv8aOj9EY9Y68XAAAb selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:44.721Z [info]: Socket Q8Hv8aOj9EY9Y68XAAAb selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:45.236Z [info]: Socket Q8Hv8aOj9EY9Y68XAAAb selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:45.239Z [info]: Socket Q8Hv8aOj9EY9Y68XAAAb selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:45.758Z [info]: Socket Q8Hv8aOj9EY9Y68XAAAb selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:45.760Z [info]: Socket Q8Hv8aOj9EY9Y68XAAAb selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:46.277Z [info]: Socket Q8Hv8aOj9EY9Y68XAAAb selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:46.279Z [info]: Socket Q8Hv8aOj9EY9Y68XAAAb selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:46.792Z [info]: Socket Q8Hv8aOj9EY9Y68XAAAb selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:46.795Z [info]: Socket Q8Hv8aOj9EY9Y68XAAAb selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:47.305Z [info]: Socket Q8Hv8aOj9EY9Y68XAAAb selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:47.308Z [info]: Socket Q8Hv8aOj9EY9Y68XAAAb selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:47.835Z [info]: Socket Q8Hv8aOj9EY9Y68XAAAb selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:47.835Z [info]: Socket Q8Hv8aOj9EY9Y68XAAAb selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:48.359Z [info]: Socket Q8Hv8aOj9EY9Y68XAAAb selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:48.360Z [info]: Socket Q8Hv8aOj9EY9Y68XAAAb selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:48.886Z [info]: Socket Q8Hv8aOj9EY9Y68XAAAb selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:48.890Z [info]: Socket Q8Hv8aOj9EY9Y68XAAAb selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:49.407Z [info]: Socket Q8Hv8aOj9EY9Y68XAAAb selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:49.409Z [info]: Socket Q8Hv8aOj9EY9Y68XAAAb selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:49.924Z [info]: Socket Q8Hv8aOj9EY9Y68XAAAb selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:49.928Z [info]: Socket Q8Hv8aOj9EY9Y68XAAAb selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:50.448Z [info]: Socket Q8Hv8aOj9EY9Y68XAAAb selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:50.451Z [info]: Socket Q8Hv8aOj9EY9Y68XAAAb selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:50.972Z [info]: Socket Q8Hv8aOj9EY9Y68XAAAb selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:50.975Z [info]: Socket Q8Hv8aOj9EY9Y68XAAAb selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:51.497Z [info]: Socket Q8Hv8aOj9EY9Y68XAAAb selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:51.499Z [info]: Socket Q8Hv8aOj9EY9Y68XAAAb selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:52.025Z [info]: Socket Q8Hv8aOj9EY9Y68XAAAb selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:52.027Z [info]: Socket Q8Hv8aOj9EY9Y68XAAAb selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:52.544Z [info]: Socket Q8Hv8aOj9EY9Y68XAAAb selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:52.545Z [info]: Socket Q8Hv8aOj9EY9Y68XAAAb selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:53.066Z [info]: Socket Q8Hv8aOj9EY9Y68XAAAb selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:53.068Z [info]: Socket Q8Hv8aOj9EY9Y68XAAAb selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:53.986Z [info]: Socket Q8Hv8aOj9EY9Y68XAAAb selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:55.534Z [info]: Terminal connection closed: Q8Hv8aOj9EY9Y68XAAAb
+2025-06-12T17:26:55.803Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:26:55.805Z [info]: New terminal connection: H2A5XYTTToAAogLtAAAd
+2025-06-12T17:26:55.812Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:26:56.216Z [info]: Socket H2A5XYTTToAAogLtAAAd selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:26:58.243Z [info]: Executing command in container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60: sd
+2025-06-12T17:27:00.854Z [info]: Executing command in container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60: asdasc
+2025-06-12T17:27:03.059Z [info]: Executing command in container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60: node -v
+2025-06-12T17:27:25.817Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:27:31.257Z [info]: Socket H2A5XYTTToAAogLtAAAd selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:27:31.768Z [info]: Socket H2A5XYTTToAAogLtAAAd selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:27:31.769Z [info]: Socket H2A5XYTTToAAogLtAAAd selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:27:32.281Z [info]: Socket H2A5XYTTToAAogLtAAAd selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:27:32.283Z [info]: Socket H2A5XYTTToAAogLtAAAd selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:27:32.791Z [info]: Socket H2A5XYTTToAAogLtAAAd selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:27:55.824Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:28:15.085Z [info]: Socket H2A5XYTTToAAogLtAAAd selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:28:17.294Z [info]: Terminal connection closed: H2A5XYTTToAAogLtAAAd
+2025-06-12T17:28:17.547Z [info]: New terminal connection: -bzyo0n2xxGQAWbHAAAf
+2025-06-12T17:28:17.550Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:28:17.557Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:28:17.977Z [info]: Socket -bzyo0n2xxGQAWbHAAAf selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:28:47.564Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:29:00.538Z [info]: Socket -bzyo0n2xxGQAWbHAAAf selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:29:02.267Z [info]: Terminal connection closed: -bzyo0n2xxGQAWbHAAAf
+2025-06-12T17:29:02.459Z [info]: New terminal connection: 3x6QRp4I6aX0dclRAAAh
+2025-06-12T17:29:02.513Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:29:02.520Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:29:02.933Z [info]: Socket 3x6QRp4I6aX0dclRAAAh selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:29:32.516Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:30:00.694Z [info]: Socket 3x6QRp4I6aX0dclRAAAh selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:30:01.918Z [info]: Terminal connection closed: 3x6QRp4I6aX0dclRAAAh
+2025-06-12T17:30:02.156Z [info]: New terminal connection: GEv-v07BeUW7o8fNAAAj
+2025-06-12T17:30:02.157Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:30:02.165Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:30:02.577Z [info]: Socket GEv-v07BeUW7o8fNAAAj selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:30:30.028Z [info]: Socket GEv-v07BeUW7o8fNAAAj selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:30:32.170Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:30:51.343Z [info]: Terminal connection closed: GEv-v07BeUW7o8fNAAAj
+2025-06-12T17:30:51.545Z [info]: New terminal connection: gWP0s56dBY4k6qMLAAAl
+2025-06-12T17:30:51.609Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:30:51.617Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:30:52.041Z [info]: Socket gWP0s56dBY4k6qMLAAAl selected container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:30:55.212Z [info]: Executing command in container f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60: ls -la
+2025-06-12T17:31:13.312Z [info]: Stopping container: f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:31:21.616Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:31:23.885Z [info]: Container removed: f2d76a6b5368a55c6ec3c83e9930f4d0a57935e95744b2a3cfc26f30f3346d60
+2025-06-12T17:31:51.630Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:32:21.623Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:32:46.899Z [info]: Image ubuntu:22.04 already exists
+2025-06-12T17:32:47.106Z [info]: Installing nodejs:18 in container 47e1fa71101d7ec36781d8471d7314539d01dd30ebe5ee509e9e1ae4e3cc90f2
+2025-06-12T17:32:51.622Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:33:21.613Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:33:29.530Z [info]: Successfully installed nodejs:18 in container 47e1fa71101d7ec36781d8471d7314539d01dd30ebe5ee509e9e1ae4e3cc90f2
+2025-06-12T17:33:29.530Z [info]: Installing mongodb:6.0 in container 47e1fa71101d7ec36781d8471d7314539d01dd30ebe5ee509e9e1ae4e3cc90f2
+2025-06-12T17:33:36.806Z [info]: Successfully installed mongodb:6.0 in container 47e1fa71101d7ec36781d8471d7314539d01dd30ebe5ee509e9e1ae4e3cc90f2
+2025-06-12T17:33:36.806Z [info]: Container created and started: suryansh-srivastava (47e1fa71101d7ec36781d8471d7314539d01dd30ebe5ee509e9e1ae4e3cc90f2)
+2025-06-12T17:33:43.330Z [info]: Socket gWP0s56dBY4k6qMLAAAl selected container 47e1fa71101d7ec36781d8471d7314539d01dd30ebe5ee509e9e1ae4e3cc90f2
+2025-06-12T17:33:51.630Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:34:21.644Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:34:51.628Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:35:21.626Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:35:51.632Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:36:21.618Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:36:51.619Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:37:21.615Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:37:51.616Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:38:21.616Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:38:51.622Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:39:21.627Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:39:51.638Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:40:21.620Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:40:51.625Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:41:21.626Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:41:51.624Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:42:06.855Z [info]: New terminal connection: Fbcq9lcqgGtGAeA7AAAn
+2025-06-12T17:42:06.857Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:42:06.864Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:42:22.591Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:42:36.860Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:42:52.584Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:43:07.588Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:43:37.592Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:43:44.596Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:44:00.071Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:44:07.591Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:44:21.627Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:44:37.596Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:44:49.468Z [info]: Terminal connection closed: gWP0s56dBY4k6qMLAAAl
+2025-06-12T17:44:49.773Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:44:49.780Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:44:49.790Z [info]: New terminal connection: IPPjLm6Qykcg4N8bAAAp
+2025-06-12T17:45:07.591Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:45:19.785Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:45:30.367Z [info]: Stopping container: 47e1fa71101d7ec36781d8471d7314539d01dd30ebe5ee509e9e1ae4e3cc90f2
+2025-06-12T17:45:37.595Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:45:40.844Z [info]: Container removed: 47e1fa71101d7ec36781d8471d7314539d01dd30ebe5ee509e9e1ae4e3cc90f2
+2025-06-12T17:45:49.792Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:46:04.262Z [info]: Terminal connection closed: IPPjLm6Qykcg4N8bAAAp
+2025-06-12T17:46:04.494Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:46:04.497Z [info]: New terminal connection: _j4gfonnXaR88ZT3AAAr
+2025-06-12T17:46:04.502Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:46:34.509Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:46:38.598Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:47:04.501Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:47:34.505Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:47:39.585Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:48:04.505Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:48:34.501Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:48:37.739Z [info]: Image ubuntu:22.04 already exists
+2025-06-12T17:48:37.922Z [info]: Container created and started: suryansh-srivastava (e8f87307eaa05a53889b75723fafb5b6183edc6cb9375c11381121299f66b840)
+2025-06-12T17:48:40.586Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:48:44.319Z [info]: Stopping container: e8f87307eaa05a53889b75723fafb5b6183edc6cb9375c11381121299f66b840
+2025-06-12T17:48:54.522Z [info]: Container removed: e8f87307eaa05a53889b75723fafb5b6183edc6cb9375c11381121299f66b840
+2025-06-12T17:49:04.509Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:49:34.510Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:49:41.592Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:50:04.510Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:50:34.513Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:50:42.583Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:51:04.505Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:51:34.502Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:51:43.590Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:51:45.159Z [info]: Terminal connection closed: _j4gfonnXaR88ZT3AAAr
+2025-06-12T17:51:45.334Z [info]: New terminal connection: Keyvc1lXDPPGPOkJAAAt
+2025-06-12T17:51:45.390Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:51:45.398Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:52:15.579Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:52:34.482Z [info]: Image ubuntu:22.04 already exists
+2025-06-12T17:52:34.718Z [info]: Installing nodejs:latest in container fb7aa4e5f6f677b635ec4edf047a421d828db4922df5b661644fcedac29d7f54
+2025-06-12T17:52:44.584Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:52:45.403Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:53:15.397Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:53:44.585Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:53:45.400Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:54:15.395Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:54:15.421Z [info]: Successfully installed nodejs:latest in container fb7aa4e5f6f677b635ec4edf047a421d828db4922df5b661644fcedac29d7f54
+2025-06-12T17:54:15.421Z [info]: Installing mongodb:latest in container fb7aa4e5f6f677b635ec4edf047a421d828db4922df5b661644fcedac29d7f54
+2025-06-12T17:54:28.554Z [info]: Successfully installed mongodb:latest in container fb7aa4e5f6f677b635ec4edf047a421d828db4922df5b661644fcedac29d7f54
+2025-06-12T17:54:28.554Z [warn]: No installation script found for dependency: postgres:latest
+2025-06-12T17:54:28.555Z [info]: Container created and started: container-name (fb7aa4e5f6f677b635ec4edf047a421d828db4922df5b661644fcedac29d7f54)
+2025-06-12T17:54:43.798Z [info]: Socket Keyvc1lXDPPGPOkJAAAt selected container fb7aa4e5f6f677b635ec4edf047a421d828db4922df5b661644fcedac29d7f54
+2025-06-12T17:54:44.596Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:54:45.393Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:55:15.595Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:55:44.579Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:55:45.393Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:56:15.404Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:56:44.590Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:56:45.578Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:57:15.395Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:57:44.588Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:57:45.599Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:58:09.781Z [info]: Stopping container: fb7aa4e5f6f677b635ec4edf047a421d828db4922df5b661644fcedac29d7f54
+2025-06-12T17:58:15.399Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:58:20.130Z [info]: Container removed: fb7aa4e5f6f677b635ec4edf047a421d828db4922df5b661644fcedac29d7f54
+2025-06-12T17:58:41.020Z [info]: Image ubuntu:22.04 already exists
+2025-06-12T17:58:41.215Z [info]: Installing nodejs:22 in container 4ec3bb7475b2700ef74c3616215037283af1d80b9ce7d26ed567717ccc243025
+2025-06-12T17:58:44.583Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:58:45.409Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:59:15.406Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:59:44.585Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T17:59:45.397Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:00:15.401Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:00:37.992Z [info]: Successfully installed nodejs:22 in container 4ec3bb7475b2700ef74c3616215037283af1d80b9ce7d26ed567717ccc243025
+2025-06-12T18:00:37.993Z [info]: Installing mongodb:6.0 in container 4ec3bb7475b2700ef74c3616215037283af1d80b9ce7d26ed567717ccc243025
+2025-06-12T18:00:44.592Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:00:45.397Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:00:46.399Z [info]: Successfully installed mongodb:6.0 in container 4ec3bb7475b2700ef74c3616215037283af1d80b9ce7d26ed567717ccc243025
+2025-06-12T18:00:46.399Z [info]: Container created and started: container-name (4ec3bb7475b2700ef74c3616215037283af1d80b9ce7d26ed567717ccc243025)
+2025-06-12T18:00:50.878Z [info]: Socket Keyvc1lXDPPGPOkJAAAt selected container 4ec3bb7475b2700ef74c3616215037283af1d80b9ce7d26ed567717ccc243025
+2025-06-12T18:01:15.608Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:01:44.589Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:01:45.600Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:02:44.581Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:02:44.588Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:03:44.587Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:03:44.593Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:04:36.538Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:04:44.585Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:05:06.868Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:05:36.866Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:05:44.581Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:05:48.983Z [info]: Stopping container: 4ec3bb7475b2700ef74c3616215037283af1d80b9ce7d26ed567717ccc243025
+2025-06-12T18:05:59.444Z [info]: Container removed: 4ec3bb7475b2700ef74c3616215037283af1d80b9ce7d26ed567717ccc243025
+2025-06-12T18:06:06.879Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:06:37.581Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:06:44.582Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:07:00.152Z [info]: Image ubuntu:22.04 already exists
+2025-06-12T18:07:00.339Z [info]: Installing nodejs:22 in container 3a1ab4b6128484470f94589846bfd74ead57b51fd53017632d44c74cffa6629b
+2025-06-12T18:07:06.870Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:07:29.116Z [info]: Terminal connection closed: Fbcq9lcqgGtGAeA7AAAn
+2025-06-12T18:07:29.379Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:07:29.381Z [info]: New terminal connection: uZ5Nbptk_mX3x8XnAAAv
+2025-06-12T18:07:29.388Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:07:43.912Z [info]: Socket uZ5Nbptk_mX3x8XnAAAv selected container 3a1ab4b6128484470f94589846bfd74ead57b51fd53017632d44c74cffa6629b
+2025-06-12T18:07:44.585Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:07:53.688Z [info]: Stopping container: 3a1ab4b6128484470f94589846bfd74ead57b51fd53017632d44c74cffa6629b
+2025-06-12T18:07:59.397Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:08:03.718Z [info]: Successfully installed nodejs:22 in container 3a1ab4b6128484470f94589846bfd74ead57b51fd53017632d44c74cffa6629b
+2025-06-12T18:08:03.718Z [info]: Installing mongodb:8.0 in container 3a1ab4b6128484470f94589846bfd74ead57b51fd53017632d44c74cffa6629b
+2025-06-12T18:08:04.003Z [error]: Error installing dependency mongodb:8.0: (HTTP code 409) container stopped/paused - container 3a1ab4b6128484470f94589846bfd74ead57b51fd53017632d44c74cffa6629b is not running 
+2025-06-12T18:08:04.003Z [error]: Error creating container: (HTTP code 409) container stopped/paused - container 3a1ab4b6128484470f94589846bfd74ead57b51fd53017632d44c74cffa6629b is not running 
+2025-06-12T18:08:04.004Z [error]: Error creating container: (HTTP code 409) container stopped/paused - container 3a1ab4b6128484470f94589846bfd74ead57b51fd53017632d44c74cffa6629b is not running 
+2025-06-12T18:08:04.021Z [info]: Container removed: 3a1ab4b6128484470f94589846bfd74ead57b51fd53017632d44c74cffa6629b
+2025-06-12T18:08:16.908Z [info]: Terminal connection closed: uZ5Nbptk_mX3x8XnAAAv
+2025-06-12T18:08:17.188Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:08:17.195Z [info]: New terminal connection: SlTqGTVuYHM5Fx0EAAAx
+2025-06-12T18:08:17.195Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:08:44.593Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:08:47.203Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:09:17.206Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:09:44.581Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:09:47.190Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:10:17.193Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:10:34.168Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:10:44.757Z [info]: Image ubuntu:22.04 already exists
+2025-06-12T18:10:44.962Z [info]: Installing nodejs:22 in container 53cd05eb18abf4f95dced4ce80a0944ac87f944e76d9ea8d9f89ddca765027be
+2025-06-12T18:10:45.583Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:10:47.191Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:11:15.596Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:11:17.196Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:11:47.191Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:11:48.988Z [info]: Successfully installed nodejs:22 in container 53cd05eb18abf4f95dced4ce80a0944ac87f944e76d9ea8d9f89ddca765027be
+2025-06-12T18:11:48.988Z [info]: Installing mongodb:8.0 in container 53cd05eb18abf4f95dced4ce80a0944ac87f944e76d9ea8d9f89ddca765027be
+2025-06-12T18:11:58.042Z [info]: Successfully installed mongodb:8.0 in container 53cd05eb18abf4f95dced4ce80a0944ac87f944e76d9ea8d9f89ddca765027be
+2025-06-12T18:11:58.042Z [info]: Container created and started: container-name (53cd05eb18abf4f95dced4ce80a0944ac87f944e76d9ea8d9f89ddca765027be)
+2025-06-12T18:12:03.499Z [info]: Socket SlTqGTVuYHM5Fx0EAAAx selected container 53cd05eb18abf4f95dced4ce80a0944ac87f944e76d9ea8d9f89ddca765027be
+2025-06-12T18:12:16.592Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:12:17.193Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:12:47.605Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:13:17.588Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:13:17.594Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:13:47.580Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:14:18.583Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:14:44.591Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:15:19.586Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:15:44.587Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:15:45.402Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:16:15.399Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:16:44.589Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:16:45.402Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:17:15.395Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:17:44.597Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:17:45.397Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:18:15.582Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:18:44.579Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:18:45.591Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:19:15.596Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:19:17.483Z [info]: Terminal connection closed: SlTqGTVuYHM5Fx0EAAAx
+2025-06-12T18:19:17.488Z [info]: Terminal connection closed: Keyvc1lXDPPGPOkJAAAt
+2025-06-12T18:23:48.555Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:23:48.563Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:23:48.628Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:23:48.635Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:24:17.111Z [error]: Error getting container 4ec3bb7475b2700ef74c3616215037283af1d80b9ce7d26ed567717ccc243025: (HTTP code 404) no such container - No such container: 4ec3bb7475b2700ef74c3616215037283af1d80b9ce7d26ed567717ccc243025 
+2025-06-12T18:24:17.114Z [error]: Error getting container 4ec3bb7475b2700ef74c3616215037283af1d80b9ce7d26ed567717ccc243025: (HTTP code 404) no such container - No such container: 4ec3bb7475b2700ef74c3616215037283af1d80b9ce7d26ed567717ccc243025 
+2025-06-12T18:24:17.116Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:24:17.126Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:24:19.581Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:24:24.162Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:24:24.170Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:24:49.580Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:24:54.168Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:25:01.880Z [info]: New terminal connection: 5jvzmz5hzke_yTVUAAA0
+2025-06-12T18:25:01.881Z [info]: New terminal connection: 6wj5kAKcqr32EX97AAA1
+2025-06-12T18:25:19.582Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:25:24.174Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:25:49.591Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:25:54.586Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:26:19.598Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:26:24.589Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:26:49.586Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:26:54.597Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:27:19.578Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:27:24.592Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:27:49.590Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:28:19.583Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:28:44.596Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:29:44.585Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:29:44.592Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:30:17.784Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:30:24.186Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:30:44.584Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:30:54.192Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:31:24.176Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:31:44.597Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:31:54.587Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:32:24.594Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:32:44.585Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:33:44.602Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:33:44.608Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:34:44.591Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:34:44.598Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:34:54.181Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:35:24.168Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:35:44.596Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:35:54.180Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-12T18:36:00.214Z [info]: Terminal connection closed: 6wj5kAKcqr32EX97AAA1
+2025-06-12T18:36:00.215Z [info]: Terminal connection closed: 5jvzmz5hzke_yTVUAAA0
+2025-06-13T03:49:30.563Z [info]: Server is running on port 3500
+2025-06-13T03:49:45.524Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T03:49:45.536Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T03:49:57.858Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T03:49:57.865Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T03:50:27.871Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T03:50:57.869Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T03:51:27.873Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T03:51:57.864Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T03:52:27.871Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T03:52:57.874Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T03:53:27.876Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T03:53:57.870Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T03:54:27.862Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T03:54:57.869Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T03:55:27.879Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T03:55:57.872Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T03:56:27.871Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T03:56:57.874Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T03:57:27.872Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T03:57:57.881Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T03:58:27.869Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T03:58:57.870Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T03:59:27.877Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T03:59:57.875Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:00:27.877Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:00:57.881Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:01:27.875Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:01:57.873Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:02:27.873Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:02:57.878Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:03:27.877Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:03:57.875Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:04:27.883Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:04:57.884Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:05:27.878Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:05:57.868Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:06:27.872Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:06:57.867Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:07:27.874Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:07:57.890Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:08:27.880Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:08:57.867Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:09:19.928Z [info]: New terminal connection: j2bEVV1QpIuVjrOzAAAB
+2025-06-13T04:09:20.387Z [info]: Socket j2bEVV1QpIuVjrOzAAAB selected container 53cd05eb18abf4f95dced4ce80a0944ac87f944e76d9ea8d9f89ddca765027be
+2025-06-13T04:09:27.875Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:09:57.859Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:10:27.878Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:10:57.864Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:11:27.877Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:11:57.861Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:12:27.881Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:12:57.901Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:13:27.896Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:14:35.906Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:15:35.890Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:16:24.555Z [info]: Server is running on port 3500
+2025-06-13T04:16:24.904Z [info]: New terminal connection: 4w_GXCHP2gYbW_EqAAAB
+2025-06-13T04:16:26.316Z [info]: Server is running on port 3500
+2025-06-13T04:16:27.008Z [info]: Server is running on port 3500
+2025-06-13T04:16:27.162Z [info]: New terminal connection: 2FPgk2Z-jnP3fTBLAAAB
+2025-06-13T04:16:35.909Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:16:54.820Z [info]: Server is running on port 3500
+2025-06-13T04:16:55.830Z [info]: Server is running on port 3500
+2025-06-13T04:16:55.896Z [info]: New terminal connection: jZbAeZOcBb5MV3aRAAAB
+2025-06-13T04:16:56.711Z [info]: Server is running on port 3500
+2025-06-13T04:16:56.886Z [info]: New terminal connection: E_TslIEtUh7wOB6sAAAB
+2025-06-13T04:17:10.431Z [info]: Server is running on port 3500
+2025-06-13T04:17:11.890Z [info]: New terminal connection: T5MajEyLVmEgk__dAAAB
+2025-06-13T04:17:15.268Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:17:27.133Z [info]: Stopping container: 53cd05eb18abf4f95dced4ce80a0944ac87f944e76d9ea8d9f89ddca765027be
+2025-06-13T04:17:27.872Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:17:37.702Z [info]: Container removed: 53cd05eb18abf4f95dced4ce80a0944ac87f944e76d9ea8d9f89ddca765027be
+2025-06-13T04:17:55.236Z [info]: Image ubuntu:22.04 already exists
+2025-06-13T04:17:55.430Z [info]: Installing nodejs:22 in container 2e043c2463bf4704a847b5ac6c1f075b9395f4ce3395669efe481f436fb01fcf
+2025-06-13T04:17:57.858Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:18:27.866Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:18:57.860Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:19:27.858Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:19:55.292Z [info]: Successfully installed nodejs:22 in container 2e043c2463bf4704a847b5ac6c1f075b9395f4ce3395669efe481f436fb01fcf
+2025-06-13T04:19:55.293Z [info]: Installing mongodb:8.0 in container 2e043c2463bf4704a847b5ac6c1f075b9395f4ce3395669efe481f436fb01fcf
+2025-06-13T04:19:57.872Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:20:02.523Z [info]: Successfully installed mongodb:8.0 in container 2e043c2463bf4704a847b5ac6c1f075b9395f4ce3395669efe481f436fb01fcf
+2025-06-13T04:20:02.523Z [info]: Running initial setup in container 2e043c2463bf4704a847b5ac6c1f075b9395f4ce3395669efe481f436fb01fcf
+2025-06-13T04:20:02.524Z [info]: Running apt-get update in container 2e043c2463bf4704a847b5ac6c1f075b9395f4ce3395669efe481f436fb01fcf
+2025-06-13T04:20:04.284Z [info]: Installing sudo in container 2e043c2463bf4704a847b5ac6c1f075b9395f4ce3395669efe481f436fb01fcf
+2025-06-13T04:20:07.530Z [info]: Initial setup completed successfully in container 2e043c2463bf4704a847b5ac6c1f075b9395f4ce3395669efe481f436fb01fcf
+2025-06-13T04:20:07.530Z [info]: Container created and started: suryansh-container-name (2e043c2463bf4704a847b5ac6c1f075b9395f4ce3395669efe481f436fb01fcf)
+2025-06-13T04:20:12.272Z [info]: Socket T5MajEyLVmEgk__dAAAB selected container 2e043c2463bf4704a847b5ac6c1f075b9395f4ce3395669efe481f436fb01fcf
+2025-06-13T04:20:27.861Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:20:57.896Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:21:27.870Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:21:57.869Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:22:27.869Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:22:57.869Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:23:27.874Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:23:57.870Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:24:27.869Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:24:57.861Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:25:27.870Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:25:57.868Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:26:27.873Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:26:57.860Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:27:27.866Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:27:57.871Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:28:27.870Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:28:57.862Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:29:27.872Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:29:57.869Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:30:27.875Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:30:57.864Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:31:27.869Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:31:57.871Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:32:27.871Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:32:57.870Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:33:27.860Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:33:57.869Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:34:27.869Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:34:57.869Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:35:27.869Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:35:57.870Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:36:27.875Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:36:57.865Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:37:27.866Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:37:57.860Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:38:27.869Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:38:57.871Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:39:27.872Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:39:57.870Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:40:27.872Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:40:57.863Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:41:27.868Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:41:57.866Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:42:27.869Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:42:57.862Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:43:27.869Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:43:57.869Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:44:27.877Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:44:57.868Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:45:27.869Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:45:57.868Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:46:27.870Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:46:57.874Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:47:27.867Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:47:57.870Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:48:27.868Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:48:57.869Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:49:27.884Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:49:57.877Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:50:27.867Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:50:57.862Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:51:01.441Z [info]: Stopping container: 2e043c2463bf4704a847b5ac6c1f075b9395f4ce3395669efe481f436fb01fcf
+2025-06-13T04:51:11.979Z [info]: Container removed: 2e043c2463bf4704a847b5ac6c1f075b9395f4ce3395669efe481f436fb01fcf
+2025-06-13T04:51:17.014Z [info]: Server is running on port 3500
+2025-06-13T04:51:17.827Z [info]: New terminal connection: BHHpYWs2Z0gXfuc4AAAB
+2025-06-13T04:51:19.020Z [info]: Server is running on port 3500
+2025-06-13T04:51:19.589Z [info]: New terminal connection: GEZZSx9P_6x7XxAUAAAB
+2025-06-13T04:51:27.518Z [info]: Server is running on port 3500
+2025-06-13T04:51:27.876Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:51:28.484Z [info]: New terminal connection: 3jSI40BZtZYUCJvmAAAB
+2025-06-13T04:51:46.781Z [info]: Image ubuntu:22.04 already exists
+2025-06-13T04:51:46.942Z [info]: Installing nodejs:22 in container bc81a55404c4f33747284d7314efce29d24326472a92f2ee17f8d9b4633504c0
+2025-06-13T04:51:57.863Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:52:27.868Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:52:30.911Z [info]: Successfully installed nodejs:22 in container bc81a55404c4f33747284d7314efce29d24326472a92f2ee17f8d9b4633504c0
+2025-06-13T04:52:30.911Z [info]: Installing mongodb:8.0 in container bc81a55404c4f33747284d7314efce29d24326472a92f2ee17f8d9b4633504c0
+2025-06-13T04:52:38.297Z [info]: Successfully installed mongodb:8.0 in container bc81a55404c4f33747284d7314efce29d24326472a92f2ee17f8d9b4633504c0
+2025-06-13T04:52:38.297Z [info]: Running initial setup in container bc81a55404c4f33747284d7314efce29d24326472a92f2ee17f8d9b4633504c0
+2025-06-13T04:52:38.298Z [info]: Running apt-get update in container bc81a55404c4f33747284d7314efce29d24326472a92f2ee17f8d9b4633504c0
+2025-06-13T04:52:40.104Z [info]: Installing sudo and git in container bc81a55404c4f33747284d7314efce29d24326472a92f2ee17f8d9b4633504c0
+2025-06-13T04:52:47.156Z [info]: Initial setup completed successfully in container bc81a55404c4f33747284d7314efce29d24326472a92f2ee17f8d9b4633504c0
+2025-06-13T04:52:47.156Z [info]: Container created and started: container-name (bc81a55404c4f33747284d7314efce29d24326472a92f2ee17f8d9b4633504c0)
+2025-06-13T04:52:57.870Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:53:02.636Z [info]: Socket 3jSI40BZtZYUCJvmAAAB selected container bc81a55404c4f33747284d7314efce29d24326472a92f2ee17f8d9b4633504c0
+2025-06-13T04:53:27.891Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:53:57.870Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:54:27.871Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:54:57.876Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:55:27.864Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:55:57.893Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:56:27.862Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:56:57.908Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:57:27.901Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:58:35.897Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T04:59:35.902Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:00:35.902Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:01:35.897Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:02:35.890Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:03:35.902Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:04:35.910Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:05:35.910Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:06:35.901Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:07:35.899Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:08:35.911Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:09:30.112Z [info]: Server is running on port 3500
+2025-06-13T05:09:30.888Z [info]: New terminal connection: cmzJb7lPv0TJGzBTAAAB
+2025-06-13T05:09:35.912Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:10:35.913Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:11:35.903Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:11:39.481Z [info]: Server is running on port 3500
+2025-06-13T05:11:39.906Z [info]: New terminal connection: nwZKqCOyn-0bPEoQAAAB
+2025-06-13T05:11:40.589Z [info]: Server is running on port 3500
+2025-06-13T05:11:41.897Z [info]: New terminal connection: 2S2nx1bgn9etuodNAAAB
+2025-06-13T05:11:56.928Z [info]: Server is running on port 3500
+2025-06-13T05:11:57.898Z [info]: New terminal connection: 9v2j-zszPer4cTmuAAAB
+2025-06-13T05:12:14.992Z [info]: Server is running on port 3500
+2025-06-13T05:12:15.894Z [info]: New terminal connection: b0_5ctNhWgUW6L4DAAAB
+2025-06-13T05:12:20.719Z [info]: Server is running on port 3500
+2025-06-13T05:12:21.902Z [info]: New terminal connection: 4qRJ7n_CxIJ-YNQcAAAB
+2025-06-13T05:12:35.908Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:13:35.893Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:14:35.904Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:15:35.902Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:16:35.910Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:17:35.893Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:18:35.888Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:19:35.891Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:20:35.910Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:21:35.902Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:22:35.898Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:23:35.905Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:24:12.294Z [info]: Server is running on port 3500
+2025-06-13T05:24:13.898Z [info]: New terminal connection: i0J1S5_itDRRDcu_AAAB
+2025-06-13T05:24:35.919Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:24:50.591Z [info]: Server is running on port 3500
+2025-06-13T05:24:51.910Z [info]: New terminal connection: l4_0CkFHWzf2kRb9AAAB
+2025-06-13T05:24:57.907Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:25:05.845Z [info]: Stopping container: bc81a55404c4f33747284d7314efce29d24326472a92f2ee17f8d9b4633504c0
+2025-06-13T05:25:16.466Z [info]: Container removed: bc81a55404c4f33747284d7314efce29d24326472a92f2ee17f8d9b4633504c0
+2025-06-13T05:25:23.726Z [info]: Image ubuntu:22.04 already exists
+2025-06-13T05:25:23.943Z [info]: Installing nodejs:22 in container b1f4ca376798adf6a503b1cdaf8fde2de54dba945409e995bae5b629ce81323c
+2025-06-13T05:25:27.863Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:25:57.860Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:26:00.676Z [info]: Successfully installed nodejs:22 in container b1f4ca376798adf6a503b1cdaf8fde2de54dba945409e995bae5b629ce81323c
+2025-06-13T05:26:00.676Z [info]: Installing mongodb:8.0 in container b1f4ca376798adf6a503b1cdaf8fde2de54dba945409e995bae5b629ce81323c
+2025-06-13T05:26:08.144Z [info]: Successfully installed mongodb:8.0 in container b1f4ca376798adf6a503b1cdaf8fde2de54dba945409e995bae5b629ce81323c
+2025-06-13T05:26:08.144Z [info]: Running initial setup in container b1f4ca376798adf6a503b1cdaf8fde2de54dba945409e995bae5b629ce81323c
+2025-06-13T05:26:08.144Z [info]: Running apt-get update in container b1f4ca376798adf6a503b1cdaf8fde2de54dba945409e995bae5b629ce81323c
+2025-06-13T05:26:09.936Z [info]: Installing sudo and git in container b1f4ca376798adf6a503b1cdaf8fde2de54dba945409e995bae5b629ce81323c
+2025-06-13T05:26:11.340Z [info]: Initial setup completed successfully in container b1f4ca376798adf6a503b1cdaf8fde2de54dba945409e995bae5b629ce81323c
+2025-06-13T05:26:11.341Z [info]: Container created and started: container-name (b1f4ca376798adf6a503b1cdaf8fde2de54dba945409e995bae5b629ce81323c)
+2025-06-13T05:26:27.316Z [info]: Terminal connection closed: l4_0CkFHWzf2kRb9AAAB
+2025-06-13T05:26:27.624Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:26:27.631Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:26:27.744Z [info]: New terminal connection: RaRJtLTJyxvFMYryAAAD
+2025-06-13T05:26:39.130Z [error]: Error starting container b1f4ca376798adf6a503b1cdaf8fde2de54dba945409e995bae5b629ce81323c: (HTTP code 304) container already started -  
+2025-06-13T05:26:39.130Z [error]: Failed to start container: (HTTP code 304) container already started -  
+2025-06-13T05:26:56.152Z [info]: Setting up NodeJS server in container b1f4ca376798adf6a503b1cdaf8fde2de54dba945409e995bae5b629ce81323c
+2025-06-13T05:26:56.152Z [info]: Creating directory structure in container b1f4ca376798adf6a503b1cdaf8fde2de54dba945409e995bae5b629ce81323c
+2025-06-13T05:26:56.217Z [info]: Cloning repository in container b1f4ca376798adf6a503b1cdaf8fde2de54dba945409e995bae5b629ce81323c
+2025-06-13T05:26:56.234Z [info]: Installing npm dependencies in container b1f4ca376798adf6a503b1cdaf8fde2de54dba945409e995bae5b629ce81323c
+2025-06-13T05:26:56.251Z [info]: Starting Node.js server in container b1f4ca376798adf6a503b1cdaf8fde2de54dba945409e995bae5b629ce81323c
+2025-06-13T05:26:56.268Z [info]: Node.js server started successfully in container b1f4ca376798adf6a503b1cdaf8fde2de54dba945409e995bae5b629ce81323c
+2025-06-13T05:26:57.641Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:27:10.166Z [info]: Socket RaRJtLTJyxvFMYryAAAD selected container b1f4ca376798adf6a503b1cdaf8fde2de54dba945409e995bae5b629ce81323c
+2025-06-13T05:27:27.634Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:27:57.888Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:28:27.889Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:28:31.948Z [info]: Socket RaRJtLTJyxvFMYryAAAD selected container b1f4ca376798adf6a503b1cdaf8fde2de54dba945409e995bae5b629ce81323c
+2025-06-13T05:28:44.116Z [info]: Terminal connection closed: RaRJtLTJyxvFMYryAAAD
+2025-06-13T05:28:44.372Z [info]: New terminal connection: siMllCOk74PUNdsDAAAF
+2025-06-13T05:28:44.373Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:28:44.381Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:28:44.797Z [info]: Socket siMllCOk74PUNdsDAAAF selected container b1f4ca376798adf6a503b1cdaf8fde2de54dba945409e995bae5b629ce81323c
+2025-06-13T05:29:14.387Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:29:44.380Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:30:14.386Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:30:44.382Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:31:06.697Z [info]: Server is running on port 3500
+2025-06-13T05:31:06.872Z [info]: New terminal connection: tUbOCNjAqZNhH4geAAAB
+2025-06-13T05:31:14.394Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:31:44.376Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:31:46.227Z [info]: Container stopped: b1f4ca376798adf6a503b1cdaf8fde2de54dba945409e995bae5b629ce81323c
+2025-06-13T05:32:12.464Z [info]: Server is running on port 3500
+2025-06-13T05:32:12.490Z [info]: New terminal connection: ckqWnUPP_p1V2MiuAAAB
+2025-06-13T05:32:14.809Z [info]: Server is running on port 3500
+2025-06-13T05:32:14.906Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:32:15.270Z [info]: New terminal connection: dsCQFbCZMX0C8dJRAAAB
+2025-06-13T05:32:16.462Z [info]: Server is running on port 3500
+2025-06-13T05:32:16.649Z [info]: New terminal connection: 9seThL43Hz2yJhciAAAB
+2025-06-13T05:32:40.984Z [info]: Image ubuntu:22.04 already exists
+2025-06-13T05:32:40.998Z [error]: Error creating container: (HTTP code 409) unexpected - Conflict. The container name "/container-name" is already in use by container "b1f4ca376798adf6a503b1cdaf8fde2de54dba945409e995bae5b629ce81323c". You have to remove (or rename) that container to be able to reuse that name. 
+2025-06-13T05:32:40.999Z [error]: Error creating container: (HTTP code 409) unexpected - Conflict. The container name "/container-name" is already in use by container "b1f4ca376798adf6a503b1cdaf8fde2de54dba945409e995bae5b629ce81323c". You have to remove (or rename) that container to be able to reuse that name. 
+2025-06-13T05:32:44.387Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:32:55.052Z [info]: Terminal connection closed: 9seThL43Hz2yJhciAAAB
+2025-06-13T05:32:55.197Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:32:55.205Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:32:55.304Z [info]: New terminal connection: Jp23pfb3th282DVIAAAD
+2025-06-13T05:33:17.649Z [info]: Image ubuntu:22.04 already exists
+2025-06-13T05:33:17.858Z [info]: Installing nodejs:22 in container cbb7e10c072ba3c4fd20144e4a4942282c4cec84288321586f1ce5715e499a37
+2025-06-13T05:33:25.205Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:33:55.211Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:34:11.774Z [info]: Successfully installed nodejs:22 in container cbb7e10c072ba3c4fd20144e4a4942282c4cec84288321586f1ce5715e499a37
+2025-06-13T05:34:11.774Z [info]: Installing mongodb:8.0 in container cbb7e10c072ba3c4fd20144e4a4942282c4cec84288321586f1ce5715e499a37
+2025-06-13T05:34:19.021Z [info]: Successfully installed mongodb:8.0 in container cbb7e10c072ba3c4fd20144e4a4942282c4cec84288321586f1ce5715e499a37
+2025-06-13T05:34:19.022Z [info]: Running initial setup in container cbb7e10c072ba3c4fd20144e4a4942282c4cec84288321586f1ce5715e499a37
+2025-06-13T05:34:19.022Z [info]: Running apt-get update in container cbb7e10c072ba3c4fd20144e4a4942282c4cec84288321586f1ce5715e499a37
+2025-06-13T05:34:20.767Z [info]: Installing sudo, git, and npm in container cbb7e10c072ba3c4fd20144e4a4942282c4cec84288321586f1ce5715e499a37
+2025-06-13T05:34:22.226Z [info]: Initial setup completed successfully in container cbb7e10c072ba3c4fd20144e4a4942282c4cec84288321586f1ce5715e499a37
+2025-06-13T05:34:22.227Z [info]: Container created and started: container-name (cbb7e10c072ba3c4fd20144e4a4942282c4cec84288321586f1ce5715e499a37)
+2025-06-13T05:34:25.210Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:34:29.441Z [info]: Socket Jp23pfb3th282DVIAAAD selected container cbb7e10c072ba3c4fd20144e4a4942282c4cec84288321586f1ce5715e499a37
+2025-06-13T05:34:55.240Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:35:25.210Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:35:29.359Z [error]: Error getting container b1f4ca376798adf6a503b1cdaf8fde2de54dba945409e995bae5b629ce81323c: (HTTP code 404) no such container - No such container: b1f4ca376798adf6a503b1cdaf8fde2de54dba945409e995bae5b629ce81323c 
+2025-06-13T05:35:29.359Z [error]: Failed to set up Node.js server: (HTTP code 404) no such container - No such container: b1f4ca376798adf6a503b1cdaf8fde2de54dba945409e995bae5b629ce81323c 
+2025-06-13T05:35:55.205Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:36:02.434Z [info]: Server is running on port 3500
+2025-06-13T05:36:03.187Z [info]: New terminal connection: O6CD4QWwUf16R1qnAAAB
+2025-06-13T05:36:06.411Z [info]: Server is running on port 3500
+2025-06-13T05:36:06.652Z [info]: New terminal connection: FT-NzZRwEkHZ-0BAAAAB
+2025-06-13T05:36:07.270Z [info]: Server is running on port 3500
+2025-06-13T05:36:08.800Z [info]: New terminal connection: mke27eIGRynMWU0FAAAB
+2025-06-13T05:36:16.401Z [info]: Server is running on port 3500
+2025-06-13T05:36:16.762Z [info]: New terminal connection: 7E3Ji_BJ_ioAnII4AAAB
+2025-06-13T05:36:23.893Z [info]: Stopping container: cbb7e10c072ba3c4fd20144e4a4942282c4cec84288321586f1ce5715e499a37
+2025-06-13T05:36:25.203Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:36:34.458Z [info]: Container removed: cbb7e10c072ba3c4fd20144e4a4942282c4cec84288321586f1ce5715e499a37
+2025-06-13T05:36:36.579Z [info]: Image ubuntu:22.04 already exists
+2025-06-13T05:36:36.780Z [info]: Installing nodejs:22 in container 36eb128b5578c259115eb920cb3bde00e6405484c880abd265e9ff1b2aa6e2b8
+2025-06-13T05:36:55.212Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:37:25.215Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:37:55.210Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:38:03.090Z [info]: Successfully installed nodejs:22 in container 36eb128b5578c259115eb920cb3bde00e6405484c880abd265e9ff1b2aa6e2b8
+2025-06-13T05:38:03.091Z [info]: Installing mongodb:8.0 in container 36eb128b5578c259115eb920cb3bde00e6405484c880abd265e9ff1b2aa6e2b8
+2025-06-13T05:38:11.673Z [info]: Successfully installed mongodb:8.0 in container 36eb128b5578c259115eb920cb3bde00e6405484c880abd265e9ff1b2aa6e2b8
+2025-06-13T05:38:11.673Z [info]: Running initial setup in container 36eb128b5578c259115eb920cb3bde00e6405484c880abd265e9ff1b2aa6e2b8
+2025-06-13T05:38:11.674Z [info]: Running apt-get update in container 36eb128b5578c259115eb920cb3bde00e6405484c880abd265e9ff1b2aa6e2b8
+2025-06-13T05:38:14.073Z [info]: Installing sudo in container 36eb128b5578c259115eb920cb3bde00e6405484c880abd265e9ff1b2aa6e2b8
+2025-06-13T05:38:19.081Z [info]: Installing git in container 36eb128b5578c259115eb920cb3bde00e6405484c880abd265e9ff1b2aa6e2b8
+2025-06-13T05:38:25.209Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:38:28.410Z [info]: Verifying git installation in container 36eb128b5578c259115eb920cb3bde00e6405484c880abd265e9ff1b2aa6e2b8
+2025-06-13T05:38:28.475Z [info]: Installing nodejs and npm in container 36eb128b5578c259115eb920cb3bde00e6405484c880abd265e9ff1b2aa6e2b8
+2025-06-13T05:38:29.843Z [info]: Initial setup completed successfully in container 36eb128b5578c259115eb920cb3bde00e6405484c880abd265e9ff1b2aa6e2b8
+2025-06-13T05:38:29.843Z [info]: Container created and started: container-name (36eb128b5578c259115eb920cb3bde00e6405484c880abd265e9ff1b2aa6e2b8)
+2025-06-13T05:38:53.436Z [info]: Socket 7E3Ji_BJ_ioAnII4AAAB selected container 36eb128b5578c259115eb920cb3bde00e6405484c880abd265e9ff1b2aa6e2b8
+2025-06-13T05:38:55.211Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:39:11.164Z [info]: Setting up NodeJS server in container 36eb128b5578c259115eb920cb3bde00e6405484c880abd265e9ff1b2aa6e2b8
+2025-06-13T05:39:11.165Z [info]: Creating directory structure in container 36eb128b5578c259115eb920cb3bde00e6405484c880abd265e9ff1b2aa6e2b8
+2025-06-13T05:39:11.217Z [info]: Cloning repository in container 36eb128b5578c259115eb920cb3bde00e6405484c880abd265e9ff1b2aa6e2b8
+2025-06-13T05:39:12.265Z [info]: Installing npm dependencies in container 36eb128b5578c259115eb920cb3bde00e6405484c880abd265e9ff1b2aa6e2b8
+2025-06-13T05:39:12.777Z [info]: Starting Node.js server in container 36eb128b5578c259115eb920cb3bde00e6405484c880abd265e9ff1b2aa6e2b8
+2025-06-13T05:39:14.835Z [info]: Node.js server started successfully in container 36eb128b5578c259115eb920cb3bde00e6405484c880abd265e9ff1b2aa6e2b8
+2025-06-13T05:39:25.221Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:39:55.207Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:39:56.388Z [info]: Socket 7E3Ji_BJ_ioAnII4AAAB selected container 36eb128b5578c259115eb920cb3bde00e6405484c880abd265e9ff1b2aa6e2b8
+2025-06-13T05:40:11.399Z [info]: Terminal connection closed: 7E3Ji_BJ_ioAnII4AAAB
+2025-06-13T05:40:11.537Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:40:11.541Z [info]: New terminal connection: zEGxpZ-39Eb-_2DAAAAD
+2025-06-13T05:40:11.545Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:40:11.948Z [info]: Socket zEGxpZ-39Eb-_2DAAAAD selected container 36eb128b5578c259115eb920cb3bde00e6405484c880abd265e9ff1b2aa6e2b8
+2025-06-13T05:40:41.545Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:41:11.899Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:41:41.557Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:41:54.261Z [info]: New terminal connection: ojgilYuJiCQK_swUAAAF
+2025-06-13T05:41:58.714Z [info]: Stopping container: 36eb128b5578c259115eb920cb3bde00e6405484c880abd265e9ff1b2aa6e2b8
+2025-06-13T05:42:09.285Z [info]: Container removed: 36eb128b5578c259115eb920cb3bde00e6405484c880abd265e9ff1b2aa6e2b8
+2025-06-13T05:42:11.899Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:42:21.303Z [info]: Image ubuntu:22.04 already exists
+2025-06-13T05:42:21.506Z [info]: Installing nodejs:22 in container 66cfb328dce956ef318c358bb1cabdd49cb44e82d7dd20ff9701646f691518a8
+2025-06-13T05:42:24.897Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:42:41.544Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:42:54.903Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:42:55.969Z [info]: Successfully installed nodejs:22 in container 66cfb328dce956ef318c358bb1cabdd49cb44e82d7dd20ff9701646f691518a8
+2025-06-13T05:42:55.969Z [info]: Installing mongodb:8.0 in container 66cfb328dce956ef318c358bb1cabdd49cb44e82d7dd20ff9701646f691518a8
+2025-06-13T05:43:03.161Z [info]: Successfully installed mongodb:8.0 in container 66cfb328dce956ef318c358bb1cabdd49cb44e82d7dd20ff9701646f691518a8
+2025-06-13T05:43:03.161Z [warn]: No installation script found for dependency: git
+2025-06-13T05:43:03.162Z [warn]: No installation script found for dependency: netstat
+2025-06-13T05:43:03.162Z [info]: Running initial setup in container 66cfb328dce956ef318c358bb1cabdd49cb44e82d7dd20ff9701646f691518a8
+2025-06-13T05:43:03.162Z [info]: Running apt-get update in container 66cfb328dce956ef318c358bb1cabdd49cb44e82d7dd20ff9701646f691518a8
+2025-06-13T05:43:04.935Z [info]: Installing sudo in container 66cfb328dce956ef318c358bb1cabdd49cb44e82d7dd20ff9701646f691518a8
+2025-06-13T05:43:08.184Z [info]: Installing git in container 66cfb328dce956ef318c358bb1cabdd49cb44e82d7dd20ff9701646f691518a8
+2025-06-13T05:43:11.543Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:43:16.244Z [info]: Verifying git installation in container 66cfb328dce956ef318c358bb1cabdd49cb44e82d7dd20ff9701646f691518a8
+2025-06-13T05:43:16.283Z [info]: Installing nodejs and npm in container 66cfb328dce956ef318c358bb1cabdd49cb44e82d7dd20ff9701646f691518a8
+2025-06-13T05:43:17.641Z [info]: Initial setup completed successfully in container 66cfb328dce956ef318c358bb1cabdd49cb44e82d7dd20ff9701646f691518a8
+2025-06-13T05:43:17.641Z [info]: Container created and started: container-name (66cfb328dce956ef318c358bb1cabdd49cb44e82d7dd20ff9701646f691518a8)
+2025-06-13T05:43:24.908Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:43:35.292Z [info]: Socket zEGxpZ-39Eb-_2DAAAAD selected container 66cfb328dce956ef318c358bb1cabdd49cb44e82d7dd20ff9701646f691518a8
+2025-06-13T05:43:41.548Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:43:52.269Z [error]: Error getting container 36eb128b5578c259115eb920cb3bde00e6405484c880abd265e9ff1b2aa6e2b8: (HTTP code 404) no such container - No such container: 36eb128b5578c259115eb920cb3bde00e6405484c880abd265e9ff1b2aa6e2b8 
+2025-06-13T05:43:52.269Z [error]: Failed to set up Node.js server: (HTTP code 404) no such container - No such container: 36eb128b5578c259115eb920cb3bde00e6405484c880abd265e9ff1b2aa6e2b8 
+2025-06-13T05:43:54.930Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:44:04.198Z [info]: Setting up NodeJS server in container 66cfb328dce956ef318c358bb1cabdd49cb44e82d7dd20ff9701646f691518a8
+2025-06-13T05:44:04.198Z [info]: Creating directory structure in container 66cfb328dce956ef318c358bb1cabdd49cb44e82d7dd20ff9701646f691518a8
+2025-06-13T05:44:04.251Z [info]: Cloning repository in container 66cfb328dce956ef318c358bb1cabdd49cb44e82d7dd20ff9701646f691518a8
+2025-06-13T05:44:05.250Z [info]: Installing npm dependencies in container 66cfb328dce956ef318c358bb1cabdd49cb44e82d7dd20ff9701646f691518a8
+2025-06-13T05:44:05.866Z [info]: Starting Node.js server in container 66cfb328dce956ef318c358bb1cabdd49cb44e82d7dd20ff9701646f691518a8
+2025-06-13T05:44:07.920Z [info]: Node.js server started successfully in container 66cfb328dce956ef318c358bb1cabdd49cb44e82d7dd20ff9701646f691518a8
+2025-06-13T05:44:11.546Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:44:24.893Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:44:41.550Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:44:54.886Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:45:11.560Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:45:35.894Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:45:41.556Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:46:11.895Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:46:35.894Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:46:41.896Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:47:11.895Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:47:35.891Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:48:16.095Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:48:18.306Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:48:24.892Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:48:41.887Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:48:54.902Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:49:08.774Z [info]: Container stopped: 66cfb328dce956ef318c358bb1cabdd49cb44e82d7dd20ff9701646f691518a8
+2025-06-13T05:49:11.889Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:49:24.270Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:49:41.895Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:49:48.273Z [info]: Image ubuntu:22.04 already exists
+2025-06-13T05:49:48.466Z [info]: Installing nodejs:22 in container 4548a2456dc32c3d38229af982d2c285abc3d648e080c051cd9a152a83cef8d8
+2025-06-13T05:49:54.262Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:50:11.894Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:50:24.272Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:50:28.725Z [info]: Successfully installed nodejs:22 in container 4548a2456dc32c3d38229af982d2c285abc3d648e080c051cd9a152a83cef8d8
+2025-06-13T05:50:28.725Z [info]: Installing mongodb:8.0 in container 4548a2456dc32c3d38229af982d2c285abc3d648e080c051cd9a152a83cef8d8
+2025-06-13T05:50:37.196Z [info]: Successfully installed mongodb:8.0 in container 4548a2456dc32c3d38229af982d2c285abc3d648e080c051cd9a152a83cef8d8
+2025-06-13T05:50:37.196Z [warn]: No installation script found for dependency: git
+2025-06-13T05:50:37.196Z [warn]: No installation script found for dependency: netstat
+2025-06-13T05:50:37.196Z [info]: Running initial setup in container 4548a2456dc32c3d38229af982d2c285abc3d648e080c051cd9a152a83cef8d8
+2025-06-13T05:50:37.197Z [info]: Running apt-get update in container 4548a2456dc32c3d38229af982d2c285abc3d648e080c051cd9a152a83cef8d8
+2025-06-13T05:50:39.501Z [info]: Installing sudo in container 4548a2456dc32c3d38229af982d2c285abc3d648e080c051cd9a152a83cef8d8
+2025-06-13T05:50:44.559Z [info]: Installing git in container 4548a2456dc32c3d38229af982d2c285abc3d648e080c051cd9a152a83cef8d8
+2025-06-13T05:50:53.631Z [info]: Verifying git installation in container 4548a2456dc32c3d38229af982d2c285abc3d648e080c051cd9a152a83cef8d8
+2025-06-13T05:50:53.679Z [info]: Installing nodejs and npm in container 4548a2456dc32c3d38229af982d2c285abc3d648e080c051cd9a152a83cef8d8
+2025-06-13T05:50:54.264Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:50:55.008Z [info]: Initial setup completed successfully in container 4548a2456dc32c3d38229af982d2c285abc3d648e080c051cd9a152a83cef8d8
+2025-06-13T05:50:55.008Z [info]: Container created and started: container-name (4548a2456dc32c3d38229af982d2c285abc3d648e080c051cd9a152a83cef8d8)
+2025-06-13T05:51:13.107Z [info]: Setting up NodeJS server in container 4548a2456dc32c3d38229af982d2c285abc3d648e080c051cd9a152a83cef8d8
+2025-06-13T05:51:13.108Z [info]: Creating directory structure in container 4548a2456dc32c3d38229af982d2c285abc3d648e080c051cd9a152a83cef8d8
+2025-06-13T05:51:13.153Z [info]: Cloning repository in container 4548a2456dc32c3d38229af982d2c285abc3d648e080c051cd9a152a83cef8d8
+2025-06-13T05:51:14.102Z [info]: Installing npm dependencies in container 4548a2456dc32c3d38229af982d2c285abc3d648e080c051cd9a152a83cef8d8
+2025-06-13T05:51:14.606Z [info]: Starting Node.js server in container 4548a2456dc32c3d38229af982d2c285abc3d648e080c051cd9a152a83cef8d8
+2025-06-13T05:51:16.649Z [info]: Node.js server started successfully in container 4548a2456dc32c3d38229af982d2c285abc3d648e080c051cd9a152a83cef8d8
+2025-06-13T05:51:16.905Z [info]: Socket ojgilYuJiCQK_swUAAAF selected container 4548a2456dc32c3d38229af982d2c285abc3d648e080c051cd9a152a83cef8d8
+2025-06-13T05:51:24.274Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:51:35.891Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:51:54.890Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:52:01.067Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:52:10.046Z [info]: Terminal connection closed: zEGxpZ-39Eb-_2DAAAAD
+2025-06-13T05:52:10.182Z [error]: Error getting container 66cfb328dce956ef318c358bb1cabdd49cb44e82d7dd20ff9701646f691518a8: (HTTP code 404) no such container - No such container: 66cfb328dce956ef318c358bb1cabdd49cb44e82d7dd20ff9701646f691518a8 
+2025-06-13T05:52:10.186Z [error]: Error getting container 66cfb328dce956ef318c358bb1cabdd49cb44e82d7dd20ff9701646f691518a8: (HTTP code 404) no such container - No such container: 66cfb328dce956ef318c358bb1cabdd49cb44e82d7dd20ff9701646f691518a8 
+2025-06-13T05:52:10.187Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:52:10.190Z [info]: New terminal connection: WJyK6KUtXQFuMAxCAAAH
+2025-06-13T05:52:10.195Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:52:13.500Z [info]: Terminal connection closed: WJyK6KUtXQFuMAxCAAAH
+2025-06-13T05:52:24.266Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:52:54.277Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:53:24.272Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:53:54.277Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:54:24.267Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:54:54.271Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:55:24.272Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:55:54.902Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:56:24.901Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:56:54.280Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:57:24.260Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:57:31.235Z [info]: Terminal connection closed: ojgilYuJiCQK_swUAAAF
+2025-06-13T05:57:31.469Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:57:31.476Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:57:31.480Z [info]: New terminal connection: m17yAhs8tL5bV_SbAAAJ
+2025-06-13T05:57:31.885Z [info]: Socket m17yAhs8tL5bV_SbAAAJ selected container 4548a2456dc32c3d38229af982d2c285abc3d648e080c051cd9a152a83cef8d8
+2025-06-13T05:58:01.887Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:58:31.899Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:59:01.483Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T05:59:31.894Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:00:01.482Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:00:31.908Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:01:01.910Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:01:35.907Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:02:35.889Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:03:35.901Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:04:01.899Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:04:31.906Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:05:35.897Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:06:35.914Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:07:35.889Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:08:35.903Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:09:26.363Z [info]: Server is running on port 3500
+2025-06-13T06:09:26.911Z [info]: New terminal connection: 78za5m_HN0qt52BdAAAB
+2025-06-13T06:09:35.899Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:09:36.514Z [info]: Server is running on port 3500
+2025-06-13T06:09:36.911Z [info]: New terminal connection: kw8XRgobP3o0296jAAAB
+2025-06-13T06:09:40.871Z [info]: Server is running on port 3500
+2025-06-13T06:09:41.530Z [info]: Server is running on port 3500
+2025-06-13T06:09:41.906Z [info]: New terminal connection: ivK3iC7Mrrup5VakAAAB
+2025-06-13T06:10:35.904Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:11:32.266Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:11:33.020Z [info]: Terminal connection closed: ivK3iC7Mrrup5VakAAAB
+2025-06-13T06:11:33.225Z [info]: New terminal connection: pypixF1JqnGDo3QxAAAD
+2025-06-13T06:11:33.291Z [error]: Error getting container 4548a2456dc32c3d38229af982d2c285abc3d648e080c051cd9a152a83cef8d8: (HTTP code 404) no such container - No such container: 4548a2456dc32c3d38229af982d2c285abc3d648e080c051cd9a152a83cef8d8 
+2025-06-13T06:11:33.296Z [error]: Error getting container 4548a2456dc32c3d38229af982d2c285abc3d648e080c051cd9a152a83cef8d8: (HTTP code 404) no such container - No such container: 4548a2456dc32c3d38229af982d2c285abc3d648e080c051cd9a152a83cef8d8 
+2025-06-13T06:11:33.297Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:11:33.306Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:11:47.526Z [info]: Image ubuntu:22.04 already exists
+2025-06-13T06:11:47.708Z [info]: Installing nodejs:22 in container 4153d5ada586f06c1dda94733cc533bc9e406369d06aae49b1fcbcff8b00729d
+2025-06-13T06:12:03.309Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:12:28.623Z [info]: Successfully installed nodejs:22 in container 4153d5ada586f06c1dda94733cc533bc9e406369d06aae49b1fcbcff8b00729d
+2025-06-13T06:12:28.624Z [info]: Installing mongodb:8.0 in container 4153d5ada586f06c1dda94733cc533bc9e406369d06aae49b1fcbcff8b00729d
+2025-06-13T06:12:33.317Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:12:35.943Z [info]: Successfully installed mongodb:8.0 in container 4153d5ada586f06c1dda94733cc533bc9e406369d06aae49b1fcbcff8b00729d
+2025-06-13T06:12:35.943Z [warn]: No installation script found for dependency: npm
+2025-06-13T06:12:35.943Z [warn]: No installation script found for dependency: git
+2025-06-13T06:12:35.943Z [warn]: No installation script found for dependency: curl
+2025-06-13T06:12:35.943Z [warn]: No installation script found for dependency: lsof
+2025-06-13T06:12:35.944Z [info]: Running initial setup in container 4153d5ada586f06c1dda94733cc533bc9e406369d06aae49b1fcbcff8b00729d
+2025-06-13T06:12:35.944Z [info]: Running apt-get update in container 4153d5ada586f06c1dda94733cc533bc9e406369d06aae49b1fcbcff8b00729d
+2025-06-13T06:12:37.821Z [info]: Installing sudo in container 4153d5ada586f06c1dda94733cc533bc9e406369d06aae49b1fcbcff8b00729d
+2025-06-13T06:12:40.972Z [info]: Installing git in container 4153d5ada586f06c1dda94733cc533bc9e406369d06aae49b1fcbcff8b00729d
+2025-06-13T06:12:47.843Z [info]: Verifying git installation in container 4153d5ada586f06c1dda94733cc533bc9e406369d06aae49b1fcbcff8b00729d
+2025-06-13T06:12:47.881Z [info]: Installing nodejs and npm in container 4153d5ada586f06c1dda94733cc533bc9e406369d06aae49b1fcbcff8b00729d
+2025-06-13T06:12:49.234Z [info]: Initial setup completed successfully in container 4153d5ada586f06c1dda94733cc533bc9e406369d06aae49b1fcbcff8b00729d
+2025-06-13T06:12:49.234Z [info]: Container created and started: container-name (4153d5ada586f06c1dda94733cc533bc9e406369d06aae49b1fcbcff8b00729d)
+2025-06-13T06:13:03.325Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:13:12.996Z [info]: Socket pypixF1JqnGDo3QxAAAD selected container 4153d5ada586f06c1dda94733cc533bc9e406369d06aae49b1fcbcff8b00729d
+2025-06-13T06:13:25.278Z [info]: Setting up NodeJS server in container 4153d5ada586f06c1dda94733cc533bc9e406369d06aae49b1fcbcff8b00729d
+2025-06-13T06:13:25.278Z [info]: Creating directory structure in container 4153d5ada586f06c1dda94733cc533bc9e406369d06aae49b1fcbcff8b00729d
+2025-06-13T06:13:25.345Z [info]: Cloning repository in container 4153d5ada586f06c1dda94733cc533bc9e406369d06aae49b1fcbcff8b00729d
+2025-06-13T06:13:26.625Z [info]: Installing npm dependencies in container 4153d5ada586f06c1dda94733cc533bc9e406369d06aae49b1fcbcff8b00729d
+2025-06-13T06:13:27.726Z [info]: Starting Node.js server in container 4153d5ada586f06c1dda94733cc533bc9e406369d06aae49b1fcbcff8b00729d
+2025-06-13T06:13:27.835Z [info]: Node.js server started successfully in container 4153d5ada586f06c1dda94733cc533bc9e406369d06aae49b1fcbcff8b00729d
+2025-06-13T06:13:33.304Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:14:03.311Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:14:33.897Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:14:46.453Z [info]: Setting up NodeJS server in container 4153d5ada586f06c1dda94733cc533bc9e406369d06aae49b1fcbcff8b00729d
+2025-06-13T06:14:46.453Z [info]: Creating directory structure in container 4153d5ada586f06c1dda94733cc533bc9e406369d06aae49b1fcbcff8b00729d
+2025-06-13T06:14:46.498Z [info]: Cloning repository in container 4153d5ada586f06c1dda94733cc533bc9e406369d06aae49b1fcbcff8b00729d
+2025-06-13T06:14:46.514Z [info]: Installing npm dependencies in container 4153d5ada586f06c1dda94733cc533bc9e406369d06aae49b1fcbcff8b00729d
+2025-06-13T06:14:47.293Z [info]: Starting Node.js server in container 4153d5ada586f06c1dda94733cc533bc9e406369d06aae49b1fcbcff8b00729d
+2025-06-13T06:14:47.412Z [info]: Node.js server started successfully in container 4153d5ada586f06c1dda94733cc533bc9e406369d06aae49b1fcbcff8b00729d
+2025-06-13T06:15:03.315Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:15:33.311Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:15:43.574Z [info]: Setting up NodeJS server in container 4153d5ada586f06c1dda94733cc533bc9e406369d06aae49b1fcbcff8b00729d
+2025-06-13T06:15:43.575Z [info]: Creating directory structure in container 4153d5ada586f06c1dda94733cc533bc9e406369d06aae49b1fcbcff8b00729d
+2025-06-13T06:15:43.622Z [info]: Cloning repository in container 4153d5ada586f06c1dda94733cc533bc9e406369d06aae49b1fcbcff8b00729d
+2025-06-13T06:15:44.947Z [info]: Installing npm dependencies in container 4153d5ada586f06c1dda94733cc533bc9e406369d06aae49b1fcbcff8b00729d
+2025-06-13T06:15:45.806Z [info]: Starting Node.js server in container 4153d5ada586f06c1dda94733cc533bc9e406369d06aae49b1fcbcff8b00729d
+2025-06-13T06:15:47.856Z [info]: Node.js server started successfully in container 4153d5ada586f06c1dda94733cc533bc9e406369d06aae49b1fcbcff8b00729d
+2025-06-13T06:16:03.307Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:16:33.304Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:17:03.898Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:17:33.305Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:18:03.311Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:18:33.902Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:18:35.551Z [info]: Container stopped: 4153d5ada586f06c1dda94733cc533bc9e406369d06aae49b1fcbcff8b00729d
+2025-06-13T06:19:03.893Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:19:33.908Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:20:23.788Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:20:26.172Z [info]: Terminal connection closed: pypixF1JqnGDo3QxAAAD
+2025-06-13T06:20:26.393Z [info]: New terminal connection: QaWDxiDCHJCLqvk0AAAF
+2025-06-13T06:20:26.487Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:20:26.494Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:20:56.902Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:21:06.053Z [info]: Terminal connection closed: QaWDxiDCHJCLqvk0AAAF
+2025-06-13T06:21:06.276Z [info]: New terminal connection: xp9cPimsszpC7L00AAAH
+2025-06-13T06:21:06.393Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:21:06.402Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:21:10.952Z [info]: Image ubuntu:22.04 already exists
+2025-06-13T06:21:10.966Z [error]: Error creating container: (HTTP code 409) unexpected - Conflict. The container name "/container-name" is already in use by container "4153d5ada586f06c1dda94733cc533bc9e406369d06aae49b1fcbcff8b00729d". You have to remove (or rename) that container to be able to reuse that name. 
+2025-06-13T06:21:10.966Z [error]: Error creating container: (HTTP code 409) unexpected - Conflict. The container name "/container-name" is already in use by container "4153d5ada586f06c1dda94733cc533bc9e406369d06aae49b1fcbcff8b00729d". You have to remove (or rename) that container to be able to reuse that name. 
+2025-06-13T06:21:15.868Z [info]: Image ubuntu:22.04 already exists
+2025-06-13T06:21:15.882Z [error]: Error creating container: (HTTP code 409) unexpected - Conflict. The container name "/container-name" is already in use by container "4153d5ada586f06c1dda94733cc533bc9e406369d06aae49b1fcbcff8b00729d". You have to remove (or rename) that container to be able to reuse that name. 
+2025-06-13T06:21:15.883Z [error]: Error creating container: (HTTP code 409) unexpected - Conflict. The container name "/container-name" is already in use by container "4153d5ada586f06c1dda94733cc533bc9e406369d06aae49b1fcbcff8b00729d". You have to remove (or rename) that container to be able to reuse that name. 
+2025-06-13T06:21:32.791Z [info]: Image ubuntu:22.04 already exists
+2025-06-13T06:21:32.991Z [warn]: No installation script found for dependency: sudo
+2025-06-13T06:21:32.991Z [warn]: No installation script found for dependency: gnupg
+2025-06-13T06:21:32.991Z [warn]: No installation script found for dependency: mongodb-org
+2025-06-13T06:21:32.991Z [info]: Installing nodejs:22 in container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T06:21:36.400Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:22:06.409Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:22:09.397Z [info]: Successfully installed nodejs:22 in container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T06:22:09.397Z [info]: Installing mongodb:8.0 in container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T06:22:16.593Z [info]: Successfully installed mongodb:8.0 in container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T06:22:16.593Z [warn]: No installation script found for dependency: npm
+2025-06-13T06:22:16.593Z [warn]: No installation script found for dependency: git
+2025-06-13T06:22:16.593Z [warn]: No installation script found for dependency: curl
+2025-06-13T06:22:16.594Z [warn]: No installation script found for dependency: lsof
+2025-06-13T06:22:16.594Z [warn]: No installation script found for dependency: netstat
+2025-06-13T06:22:16.594Z [info]: Running initial setup in container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T06:22:16.594Z [info]: Running apt-get update in container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T06:22:18.398Z [info]: Installing sudo in container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T06:22:21.702Z [info]: Installing git in container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T06:22:28.614Z [info]: Verifying git installation in container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T06:22:28.668Z [info]: Installing nodejs and npm in container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T06:22:30.067Z [info]: Initial setup completed successfully in container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T06:22:30.067Z [info]: Container created and started: container-name (7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3)
+2025-06-13T06:22:36.405Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:22:57.168Z [info]: Socket xp9cPimsszpC7L00AAAH selected container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T06:23:06.411Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:23:07.263Z [error]: Error getting container 4153d5ada586f06c1dda94733cc533bc9e406369d06aae49b1fcbcff8b00729d: (HTTP code 404) no such container - No such container: 4153d5ada586f06c1dda94733cc533bc9e406369d06aae49b1fcbcff8b00729d 
+2025-06-13T06:23:07.263Z [error]: Failed to set up Node.js server: (HTTP code 404) no such container - No such container: 4153d5ada586f06c1dda94733cc533bc9e406369d06aae49b1fcbcff8b00729d 
+2025-06-13T06:23:13.623Z [info]: Setting up NodeJS server in container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T06:23:13.623Z [info]: Creating directory structure in container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T06:23:13.662Z [info]: Cloning repository in container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T06:23:15.101Z [info]: Installing npm dependencies in container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T06:23:16.140Z [info]: Starting Node.js server in container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T06:23:18.176Z [info]: Node.js server started successfully in container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T06:23:36.404Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:24:06.910Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:24:36.403Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:25:06.403Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:26:01.467Z [info]: Server is running on port 3500
+2025-06-13T06:26:06.422Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:27:47.719Z [info]: Server is running on port 3500
+2025-06-13T06:28:06.410Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:28:36.398Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:29:06.399Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:29:36.398Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:30:06.397Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:30:36.397Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:31:06.397Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:31:35.738Z [info]: New terminal connection: Q2pR_TTDwblU248DAAAB
+2025-06-13T06:31:36.149Z [info]: Socket Q2pR_TTDwblU248DAAAB selected container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T06:31:36.888Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:31:41.092Z [info]: New terminal connection: w1ZU6GpUq8h00yAzAAAD
+2025-06-13T06:31:41.160Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:31:41.168Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:31:42.889Z [info]: Socket w1ZU6GpUq8h00yAzAAAD selected container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T06:31:57.203Z [info]: Terminal connection closed: Q2pR_TTDwblU248DAAAB
+2025-06-13T06:31:57.703Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:31:57.704Z [info]: New terminal connection: e7LozJ-7sF54Jd8zAAAF
+2025-06-13T06:31:57.712Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:32:11.906Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:32:27.710Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:32:41.903Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:32:57.714Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:33:11.908Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:33:27.715Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:33:41.903Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:33:57.708Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:34:11.891Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:34:27.718Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:34:41.902Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:34:57.644Z [info]: Terminal connection closed: w1ZU6GpUq8h00yAzAAAD
+2025-06-13T06:34:57.880Z [info]: New terminal connection: 2iNiqUxntYW8ewI-AAAH
+2025-06-13T06:34:57.950Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:34:57.958Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:34:57.966Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:35:27.904Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:35:27.961Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:35:58.889Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:36:28.901Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:36:35.893Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:36:57.965Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:37:27.963Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:37:35.903Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:37:57.958Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:38:27.970Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:38:35.897Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:38:57.969Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:39:27.958Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:39:35.904Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:39:57.958Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:40:27.954Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:40:35.902Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:40:57.962Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:41:27.970Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:41:35.913Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:41:57.976Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:42:27.968Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:42:35.906Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:42:57.964Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:43:27.963Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:43:35.902Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:43:57.964Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:44:27.960Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:44:35.888Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:44:57.970Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:45:27.964Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:45:35.909Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:45:57.971Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:46:27.962Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:46:35.901Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:46:57.963Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:47:27.967Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:47:35.894Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:47:57.963Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:48:27.964Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:48:35.898Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:48:54.751Z [error]: Error getting container undefined: (HTTP code 404) no such container - No such container: undefined 
+2025-06-13T06:48:54.751Z [error]: Failed to list files: (HTTP code 404) no such container - No such container: undefined 
+2025-06-13T06:48:54.938Z [error]: Error getting container undefined: (HTTP code 404) no such container - No such container: undefined 
+2025-06-13T06:48:54.939Z [error]: Failed to list files: (HTTP code 404) no such container - No such container: undefined 
+2025-06-13T06:48:57.966Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:48:58.719Z [info]: Terminal connection closed: 2iNiqUxntYW8ewI-AAAH
+2025-06-13T06:48:58.939Z [info]: New terminal connection: 627RYDliHx9o7kWJAAAJ
+2025-06-13T06:48:59.025Z [error]: Error getting container undefined: (HTTP code 404) no such container - No such container: undefined 
+2025-06-13T06:48:59.026Z [error]: Failed to list files: (HTTP code 404) no such container - No such container: undefined 
+2025-06-13T06:48:59.030Z [error]: Error getting container undefined: (HTTP code 404) no such container - No such container: undefined 
+2025-06-13T06:48:59.030Z [error]: Failed to list files: (HTTP code 404) no such container - No such container: undefined 
+2025-06-13T06:48:59.031Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:48:59.038Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:49:29.057Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:49:35.903Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:49:59.042Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:50:17.504Z [info]: Terminal connection closed: 627RYDliHx9o7kWJAAAJ
+2025-06-13T06:50:17.739Z [info]: New terminal connection: 4T-f9onsCv-6-3J5AAAL
+2025-06-13T06:50:17.835Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:50:17.842Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:50:31.533Z [info]: Terminal connection closed: 4T-f9onsCv-6-3J5AAAL
+2025-06-13T06:50:31.738Z [info]: New terminal connection: muWBH-TqLnZ6Z1_WAAAN
+2025-06-13T06:50:31.832Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:50:31.841Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:50:35.907Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:50:38.733Z [info]: Setting up NodeJS server in container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T06:50:38.733Z [info]: Creating directory structure in container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T06:50:38.781Z [info]: Cloning repository in container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T06:50:38.810Z [info]: Installing npm dependencies in container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T06:50:38.825Z [info]: Starting Node.js server in container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T06:50:38.841Z [info]: Node.js server started successfully in container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T06:50:50.996Z [info]: Terminal connection closed: muWBH-TqLnZ6Z1_WAAAN
+2025-06-13T06:50:51.075Z [info]: New terminal connection: u3_sRTUbJz_tiGL8AAAP
+2025-06-13T06:50:51.162Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:50:51.169Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:51:21.175Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:51:35.903Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:51:48.386Z [info]: Socket u3_sRTUbJz_tiGL8AAAP selected container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T06:51:51.187Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:52:06.443Z [info]: Setting up NodeJS server in container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T06:52:06.443Z [info]: Creating directory structure in container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T06:52:06.496Z [info]: Cloning repository in container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T06:52:08.044Z [info]: Installing npm dependencies in container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T06:52:08.910Z [info]: Starting Node.js server in container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T06:52:09.053Z [info]: Node.js server started successfully in container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T06:52:13.238Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:52:20.587Z [error]: Error uploading file to container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3: (HTTP code 500) server error - unexpected EOF 
+2025-06-13T06:52:20.587Z [error]: Error writing to file /mcp_server/simple-mcp-server/index.js in container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3: (HTTP code 500) server error - unexpected EOF 
+2025-06-13T06:52:20.588Z [error]: Failed to write file content: (HTTP code 500) server error - unexpected EOF 
+2025-06-13T06:52:21.700Z [error]: Error uploading file to container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3: (HTTP code 500) server error - unexpected EOF 
+2025-06-13T06:52:21.700Z [error]: Error writing to file /mcp_server/simple-mcp-server/index.js in container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3: (HTTP code 500) server error - unexpected EOF 
+2025-06-13T06:52:21.700Z [error]: Failed to write file content: (HTTP code 500) server error - unexpected EOF 
+2025-06-13T06:52:21.897Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:52:27.726Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:52:51.899Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:52:55.831Z [error]: Error uploading file to container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3: (HTTP code 500) server error - unexpected EOF 
+2025-06-13T06:52:55.832Z [error]: Error writing to file /mcp_server/simple-mcp-server/index.js in container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3: (HTTP code 500) server error - unexpected EOF 
+2025-06-13T06:52:55.832Z [error]: Failed to write file content: (HTTP code 500) server error - unexpected EOF 
+2025-06-13T06:52:57.717Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:53:21.900Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:53:27.724Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:53:51.897Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:53:57.722Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:54:27.714Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:54:35.908Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:54:57.712Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:55:27.720Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:55:35.905Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:55:57.727Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:56:27.707Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:56:35.908Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:56:57.726Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:57:27.719Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:57:35.900Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:57:57.722Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:58:27.717Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:58:35.890Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:58:57.730Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:59:11.245Z [info]: Socket e7LozJ-7sF54Jd8zAAAF selected container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T06:59:27.713Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:59:35.898Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T06:59:57.898Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:00:27.908Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:00:35.895Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:00:51.895Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:00:57.717Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:01:21.905Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:01:27.733Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:01:44.823Z [info]: Socket e7LozJ-7sF54Jd8zAAAF selected container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T07:01:57.716Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:02:03.619Z [error]: Error uploading file to container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3: (HTTP code 500) server error - unexpected EOF 
+2025-06-13T07:02:03.619Z [error]: Error writing to file /mcp_server/simple-mcp-server/index.js in container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3: (HTTP code 500) server error - unexpected EOF 
+2025-06-13T07:02:03.619Z [error]: Failed to write file content: (HTTP code 500) server error - unexpected EOF 
+2025-06-13T07:02:27.728Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:02:35.893Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:02:57.726Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:03:02.412Z [error]: Error uploading file to container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3: (HTTP code 500) server error - unexpected EOF 
+2025-06-13T07:03:02.412Z [error]: Error writing to file /mcp_server/simple-mcp-server/index.js in container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3: (HTTP code 500) server error - unexpected EOF 
+2025-06-13T07:03:02.412Z [error]: Failed to write file content: (HTTP code 500) server error - unexpected EOF 
+2025-06-13T07:03:03.319Z [error]: Error uploading file to container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3: (HTTP code 500) server error - unexpected EOF 
+2025-06-13T07:03:03.319Z [error]: Error writing to file /mcp_server/simple-mcp-server/index.js in container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3: (HTTP code 500) server error - unexpected EOF 
+2025-06-13T07:03:03.319Z [error]: Failed to write file content: (HTTP code 500) server error - unexpected EOF 
+2025-06-13T07:03:03.537Z [error]: Error uploading file to container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3: (HTTP code 500) server error - unexpected EOF 
+2025-06-13T07:03:03.537Z [error]: Error writing to file /mcp_server/simple-mcp-server/index.js in container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3: (HTTP code 500) server error - unexpected EOF 
+2025-06-13T07:03:03.537Z [error]: Failed to write file content: (HTTP code 500) server error - unexpected EOF 
+2025-06-13T07:03:03.781Z [error]: Error uploading file to container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3: (HTTP code 500) server error - unexpected EOF 
+2025-06-13T07:03:03.782Z [error]: Error writing to file /mcp_server/simple-mcp-server/index.js in container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3: (HTTP code 500) server error - unexpected EOF 
+2025-06-13T07:03:03.782Z [error]: Failed to write file content: (HTTP code 500) server error - unexpected EOF 
+2025-06-13T07:03:03.962Z [error]: Error uploading file to container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3: (HTTP code 500) server error - unexpected EOF 
+2025-06-13T07:03:03.962Z [error]: Error writing to file /mcp_server/simple-mcp-server/index.js in container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3: (HTTP code 500) server error - unexpected EOF 
+2025-06-13T07:03:03.962Z [error]: Failed to write file content: (HTTP code 500) server error - unexpected EOF 
+2025-06-13T07:03:04.151Z [error]: Error uploading file to container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3: (HTTP code 500) server error - unexpected EOF 
+2025-06-13T07:03:04.151Z [error]: Error writing to file /mcp_server/simple-mcp-server/index.js in container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3: (HTTP code 500) server error - unexpected EOF 
+2025-06-13T07:03:04.151Z [error]: Failed to write file content: (HTTP code 500) server error - unexpected EOF 
+2025-06-13T07:03:04.354Z [error]: Error uploading file to container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3: (HTTP code 500) server error - unexpected EOF 
+2025-06-13T07:03:04.354Z [error]: Error writing to file /mcp_server/simple-mcp-server/index.js in container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3: (HTTP code 500) server error - unexpected EOF 
+2025-06-13T07:03:04.354Z [error]: Failed to write file content: (HTTP code 500) server error - unexpected EOF 
+2025-06-13T07:03:04.549Z [error]: Error uploading file to container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3: (HTTP code 500) server error - unexpected EOF 
+2025-06-13T07:03:04.549Z [error]: Error writing to file /mcp_server/simple-mcp-server/index.js in container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3: (HTTP code 500) server error - unexpected EOF 
+2025-06-13T07:03:04.549Z [error]: Failed to write file content: (HTTP code 500) server error - unexpected EOF 
+2025-06-13T07:03:17.626Z [error]: Error uploading file to container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3: (HTTP code 500) server error - unexpected EOF 
+2025-06-13T07:03:17.627Z [error]: Failed to upload file: (HTTP code 500) server error - unexpected EOF 
+2025-06-13T07:03:27.720Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:03:35.899Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:03:57.710Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:04:27.897Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:04:35.892Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:04:54.302Z [info]: Server is running on port 3500
+2025-06-13T07:04:54.892Z [info]: New terminal connection: qTpM-3rUyDR-oDZYAAAB
+2025-06-13T07:04:55.886Z [info]: New terminal connection: him91TrtwOGHYSywAAAD
+2025-06-13T07:04:57.021Z [info]: Server is running on port 3500
+2025-06-13T07:04:58.012Z [info]: Server is running on port 3500
+2025-06-13T07:04:58.172Z [info]: New terminal connection: QWLWjT005Ue89BeZAAAC
+2025-06-13T07:04:58.173Z [info]: New terminal connection: POwQ9LJvbcogcJjdAAAD
+2025-06-13T07:04:58.177Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:05:10.248Z [info]: Server is running on port 3500
+2025-06-13T07:05:11.600Z [info]: Server is running on port 3500
+2025-06-13T07:05:11.891Z [info]: New terminal connection: kZGIFnqG6Ub0hlGoAAAC
+2025-06-13T07:05:11.894Z [info]: New terminal connection: HYjuWpJkI7WS0rDaAAAD
+2025-06-13T07:05:13.277Z [info]: Server is running on port 3500
+2025-06-13T07:05:13.901Z [info]: New terminal connection: q3OlC2w_i_JH6jiFAAAC
+2025-06-13T07:05:13.904Z [info]: New terminal connection: 39HiWTFawz0mplfEAAAD
+2025-06-13T07:05:28.522Z [info]: Server is running on port 3500
+2025-06-13T07:05:29.902Z [info]: New terminal connection: ik_78hk9PEp1ELA6AAAB
+2025-06-13T07:05:31.899Z [info]: New terminal connection: o0BBCUQuglimrxKKAAAD
+2025-06-13T07:05:35.898Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:05:35.907Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:05:55.663Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:05:56.642Z [info]: Terminal connection closed: o0BBCUQuglimrxKKAAAD
+2025-06-13T07:05:56.791Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:05:56.797Z [info]: New terminal connection: dV03OK1CjpP3efj8AAAF
+2025-06-13T07:05:56.800Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:05:57.210Z [info]: Socket dV03OK1CjpP3efj8AAAF selected container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T07:06:05.209Z [info]: Upload request received for container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3 to path /mcp_server
+2025-06-13T07:06:05.213Z [info]: Creating destination directory /mcp_server if it doesn't exist
+2025-06-13T07:06:05.259Z [info]: Copying file C:\Users\Suryansh\AppData\Local\Temp\9ea224ac19320b9d1fa77e06483800a9 to container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3 at /mcp_server/links.txt
+2025-06-13T07:06:05.265Z [info]: File uploaded to container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3: /mcp_server/links.txt
+2025-06-13T07:06:05.266Z [info]: File uploaded successfully to container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T07:06:07.358Z [info]: Terminal connection closed: dV03OK1CjpP3efj8AAAF
+2025-06-13T07:06:07.530Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:06:07.538Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:06:07.539Z [info]: New terminal connection: 0ofODuM-xzEBYLLsAAAH
+2025-06-13T07:06:22.306Z [info]: Terminal connection closed: 0ofODuM-xzEBYLLsAAAH
+2025-06-13T07:06:22.480Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:06:22.486Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:06:22.490Z [info]: New terminal connection: VR1KjoGTom0PKkD-AAAJ
+2025-06-13T07:06:24.022Z [info]: Terminal connection closed: VR1KjoGTom0PKkD-AAAJ
+2025-06-13T07:06:24.189Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:06:24.197Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:06:24.199Z [info]: New terminal connection: Hj3UNTmx5uHwDIfRAAAL
+2025-06-13T07:06:25.626Z [info]: Terminal connection closed: Hj3UNTmx5uHwDIfRAAAL
+2025-06-13T07:06:25.704Z [info]: New terminal connection: xPnBfhwOrkF2zVhEAAAN
+2025-06-13T07:06:25.790Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:06:25.797Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:06:26.907Z [info]: Terminal connection closed: xPnBfhwOrkF2zVhEAAAN
+2025-06-13T07:06:27.076Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:06:27.085Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:06:27.092Z [info]: New terminal connection: zJ9MVmQz6UQgCuOsAAAP
+2025-06-13T07:06:36.896Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:06:38.987Z [info]: File uploaded to container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3: /mcp_server/simple-mcp-server/index.js
+2025-06-13T07:06:44.059Z [info]: Terminal connection closed: zJ9MVmQz6UQgCuOsAAAP
+2025-06-13T07:06:44.146Z [info]: New terminal connection: BnZ4cAsfFwBJhLWdAAAR
+2025-06-13T07:06:44.239Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:06:44.246Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:07:14.249Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:07:20.574Z [info]: Socket BnZ4cAsfFwBJhLWdAAAR selected container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T07:07:35.893Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:07:44.913Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:08:14.261Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:08:35.895Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:08:44.246Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:09:14.893Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:09:35.890Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:09:44.888Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:10:14.257Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:10:35.888Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:10:44.258Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:11:14.244Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:11:35.900Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:11:37.628Z [info]: New terminal connection: 132wZ2ccY4m5R8ARAAAT
+2025-06-13T07:11:38.117Z [info]: Socket 132wZ2ccY4m5R8ARAAAT selected container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T07:11:44.898Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:12:07.705Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:12:14.895Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:12:17.126Z [info]: File uploaded to container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3: /mcp_server/simple-mcp-server/index.js
+2025-06-13T07:12:35.890Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:12:37.718Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:12:44.895Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:12:49.492Z [info]: File uploaded to container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3: /mcp_server/simple-mcp-server/index.js
+2025-06-13T07:13:07.710Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:13:07.978Z [info]: File uploaded to container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3: /mcp_server/simple-mcp-server/index.js
+2025-06-13T07:13:14.913Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:13:35.896Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:13:37.897Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:13:44.256Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:14:07.898Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:14:14.246Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:14:35.907Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:14:37.898Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:14:44.255Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:15:14.250Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:15:35.897Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:15:35.903Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:15:44.260Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:16:14.253Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:16:35.908Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:16:35.916Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:16:44.257Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:17:14.254Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:17:35.891Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:17:35.897Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:17:44.261Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:18:14.256Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:18:35.888Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:18:35.894Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:18:44.252Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:19:14.267Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:19:35.889Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:19:35.898Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:19:44.252Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:20:14.254Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:20:35.892Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:20:35.898Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:20:44.265Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:21:14.256Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:21:35.894Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:21:35.901Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:21:44.245Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:22:14.263Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:22:35.902Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:22:35.909Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:22:44.255Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:23:14.245Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:23:35.902Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:23:35.908Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:23:44.253Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:24:14.254Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:24:35.905Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:24:35.912Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:24:44.257Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:25:14.246Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:25:35.896Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:25:35.902Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:25:44.257Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:26:14.252Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:26:35.907Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:26:35.914Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:26:44.258Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:27:14.261Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:27:35.899Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:27:35.905Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:27:44.263Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:28:14.263Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:28:35.898Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:28:35.905Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:28:44.252Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:29:14.252Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:29:35.897Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:29:35.904Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:29:44.264Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:30:14.253Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:30:35.900Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:30:35.908Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:30:44.246Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:31:14.264Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:31:35.890Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:31:35.897Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:31:44.254Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:32:14.245Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:32:35.894Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:32:35.900Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:32:44.265Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:33:14.268Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:33:35.894Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:33:35.900Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:33:44.260Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:34:14.250Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:34:35.889Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:34:35.896Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:34:44.252Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:35:14.252Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:35:35.894Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:35:35.900Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:35:44.253Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:36:14.257Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:36:35.904Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:36:35.910Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:36:44.253Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:37:14.256Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:37:35.897Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:37:35.904Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:37:44.246Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:38:14.256Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:38:35.905Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:38:35.912Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:38:44.259Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:39:14.253Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:39:35.901Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:39:35.908Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:39:44.246Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:40:14.246Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:40:35.891Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:40:35.898Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:40:44.256Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:41:14.252Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:41:35.893Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:41:35.899Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:41:44.245Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:42:14.264Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:42:35.893Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:42:35.901Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:42:44.252Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:43:14.252Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:43:35.898Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:43:35.905Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:43:44.250Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:44:14.259Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:44:34.661Z [info]: Container restarted: 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T07:44:35.906Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:44:35.912Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:44:44.892Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:45:14.904Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:45:35.904Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:45:35.911Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:46:35.899Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:46:35.907Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:46:35.915Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:47:35.902Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:47:35.910Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:47:35.918Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:48:35.904Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:48:35.912Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:48:35.920Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:49:35.905Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:49:35.912Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:49:35.919Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:50:35.901Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:50:35.908Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:50:35.916Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:51:35.908Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:51:35.916Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:51:35.923Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:52:35.902Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:52:35.910Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:52:35.920Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:53:35.900Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:53:35.909Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:53:35.917Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:54:35.897Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:54:35.904Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:54:35.911Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:55:35.899Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:55:35.906Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:55:35.913Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:56:35.917Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:56:35.924Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:56:35.931Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:57:35.900Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:57:35.907Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:57:35.914Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:57:52.589Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:58:14.251Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:58:35.894Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:58:35.901Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:58:44.897Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:59:14.909Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:59:35.895Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T07:59:35.901Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:00:35.904Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:00:35.912Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:00:35.919Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:01:35.895Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:01:35.902Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:01:35.909Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:02:35.907Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:02:35.914Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:02:35.920Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:03:35.904Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:03:35.911Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:03:35.918Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:04:35.896Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:04:35.902Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:04:35.909Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:05:35.891Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:05:35.898Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:05:35.904Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:06:17.878Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:06:19.987Z [info]: Terminal connection closed: ik_78hk9PEp1ELA6AAAB
+2025-06-13T08:06:35.908Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:06:35.915Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:07:35.899Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:07:35.906Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:08:35.906Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:08:35.914Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:09:35.903Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:09:35.915Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:10:35.899Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:10:35.906Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:11:35.889Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:11:35.896Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:12:35.905Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:12:35.912Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:13:35.894Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:13:35.901Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:14:35.904Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:14:35.913Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:15:35.904Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:15:35.911Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:16:35.901Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:16:35.908Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:17:35.902Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:17:35.909Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:18:35.893Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:18:35.900Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:19:35.902Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:19:35.910Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:20:35.905Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:20:35.912Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:21:35.895Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:21:35.902Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:22:35.911Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:22:35.918Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:23:35.895Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:23:35.902Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:24:35.899Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:24:35.905Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:25:35.907Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:25:35.913Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:26:35.900Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:26:35.907Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:27:35.903Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:27:35.910Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:28:34.644Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:28:34.652Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:29:34.628Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:29:34.636Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:30:34.631Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:30:34.639Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:31:34.634Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:31:34.640Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:32:34.633Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:32:34.639Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:33:34.645Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:33:34.651Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:34:34.642Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:34:34.649Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:35:34.633Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:35:34.640Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:36:34.627Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:36:34.633Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:37:34.631Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:37:34.637Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:38:34.640Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:38:34.647Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:39:34.630Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:39:34.638Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:40:34.633Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:40:34.639Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:41:34.635Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:41:34.641Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:42:34.635Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:42:34.642Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:43:34.627Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:43:34.634Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:44:34.637Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:44:34.644Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:45:34.627Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:45:34.635Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:46:34.629Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:46:34.635Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:47:34.637Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:47:34.643Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:48:34.640Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:48:34.646Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:49:34.635Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:49:34.642Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:50:34.634Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:50:34.640Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:51:34.640Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:51:34.647Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:52:34.638Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:52:34.645Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:53:34.638Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:53:34.645Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:54:34.634Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:54:34.640Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:55:34.641Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:55:34.648Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:56:34.633Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:56:34.641Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:57:34.633Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:57:34.639Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:58:34.638Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:58:34.645Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:59:34.636Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T08:59:34.642Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:00:34.636Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:00:34.643Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:01:34.631Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:01:34.638Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:02:34.630Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:02:34.638Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:03:34.645Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:03:34.652Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:04:34.634Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:04:34.642Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:05:34.638Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:05:34.644Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:06:34.641Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:06:34.648Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:07:34.645Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:07:34.652Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:08:34.643Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:08:34.649Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:09:34.638Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:09:34.645Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:10:34.640Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:10:34.647Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:11:34.646Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:11:34.654Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:12:34.641Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:12:34.648Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:13:34.636Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:13:34.644Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:14:34.641Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:14:34.649Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:15:34.633Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:15:34.641Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:16:34.638Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:16:34.646Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:17:34.641Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:17:34.648Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:18:34.636Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:18:34.643Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:19:34.639Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:19:34.646Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:20:34.638Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:20:34.646Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:21:34.633Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:21:34.640Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:22:34.636Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:22:34.643Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T09:23:05.649Z [info]: Terminal connection closed: 132wZ2ccY4m5R8ARAAAT
+2025-06-13T09:23:05.656Z [info]: Terminal connection closed: BnZ4cAsfFwBJhLWdAAAR
+2025-06-13T18:26:12.163Z [info]: Server is running on port 3500
+2025-06-13T18:26:14.958Z [info]: New terminal connection: UldKgQCZl2SXWRRQAAAB
+2025-06-13T18:26:14.962Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:26:14.970Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:26:44.981Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:27:14.977Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:27:44.974Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:28:14.958Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:28:44.970Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:29:14.971Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:29:44.973Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:30:14.963Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:30:44.975Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:31:14.972Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:31:44.971Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:32:14.971Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:32:44.968Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:33:14.971Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:33:44.964Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:33:59.217Z [info]: Socket UldKgQCZl2SXWRRQAAAB selected container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T18:34:03.231Z [info]: Terminal connection closed: UldKgQCZl2SXWRRQAAAB
+2025-06-13T18:34:03.383Z [info]: New terminal connection: tqVo7L7ExsY2wnDsAAAD
+2025-06-13T18:34:03.441Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:34:03.449Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:34:06.486Z [info]: Socket tqVo7L7ExsY2wnDsAAAD selected container 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T18:34:12.173Z [info]: Terminal connection closed: tqVo7L7ExsY2wnDsAAAD
+2025-06-13T18:34:12.402Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:34:12.404Z [info]: New terminal connection: M2niYETzXyAed-mMAAAF
+2025-06-13T18:34:12.413Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:34:24.712Z [info]: Terminal connection closed: M2niYETzXyAed-mMAAAF
+2025-06-13T18:34:24.776Z [info]: New terminal connection: dAQ7-KJ5g9UmRQeGAAAH
+2025-06-13T18:34:24.813Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:34:24.820Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:34:54.835Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:35:24.827Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:35:54.831Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:36:24.829Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:36:54.824Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:37:24.830Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:37:54.838Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:38:24.836Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:38:54.830Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:39:24.823Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:39:54.828Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:40:24.831Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:40:54.827Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:41:24.822Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:41:54.820Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:42:24.836Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:42:54.821Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:43:24.836Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:43:54.824Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:44:24.823Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:44:54.827Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:45:24.822Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:45:54.831Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:46:24.817Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:46:35.115Z [info]: Terminal connection closed: dAQ7-KJ5g9UmRQeGAAAH
+2025-06-13T18:46:35.292Z [info]: New terminal connection: agGHAnWTQKli9w2DAAAJ
+2025-06-13T18:46:35.346Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:46:35.353Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:47:05.352Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:47:31.331Z [info]: Terminal connection closed: agGHAnWTQKli9w2DAAAJ
+2025-06-13T18:47:31.480Z [info]: New terminal connection: eV-DBHqlCmLvwsFqAAAL
+2025-06-13T18:47:31.531Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:47:31.538Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:48:01.555Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:48:31.543Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:49:01.550Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:49:31.542Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:50:01.539Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:50:31.546Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:51:01.539Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:51:31.548Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:52:01.539Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:52:31.542Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:53:01.538Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:53:31.543Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:54:01.540Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:54:31.541Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:54:48.856Z [info]: Terminal connection closed: eV-DBHqlCmLvwsFqAAAL
+2025-06-13T18:54:49.000Z [info]: New terminal connection: Zv8Ys1VM4z_-GzbhAAAN
+2025-06-13T18:54:49.052Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:54:49.059Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:55:19.068Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:55:21.844Z [info]: Terminal connection closed: Zv8Ys1VM4z_-GzbhAAAN
+2025-06-13T18:55:21.999Z [info]: New terminal connection: 6lqvBoEO88Ff0QQ0AAAP
+2025-06-13T18:55:22.051Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:55:22.060Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:55:33.247Z [info]: Terminal connection closed: 6lqvBoEO88Ff0QQ0AAAP
+2025-06-13T18:55:33.298Z [info]: New terminal connection: 7Il0xA2OniA1-wpnAAAR
+2025-06-13T18:55:33.336Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:55:33.344Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:55:49.944Z [info]: Terminal connection closed: 7Il0xA2OniA1-wpnAAAR
+2025-06-13T18:55:50.095Z [info]: New terminal connection: kOHJINsvKdvxF0A4AAAT
+2025-06-13T18:55:50.146Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:55:50.154Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:56:05.221Z [info]: Terminal connection closed: kOHJINsvKdvxF0A4AAAT
+2025-06-13T18:56:05.373Z [info]: New terminal connection: gv6Szyb3Byi7gYjzAAAV
+2025-06-13T18:56:05.425Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:56:05.434Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:56:23.663Z [info]: Terminal connection closed: gv6Szyb3Byi7gYjzAAAV
+2025-06-13T18:56:23.748Z [info]: New terminal connection: UQZ8hHElW2CT5JL-AAAX
+2025-06-13T18:56:23.754Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:56:23.762Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:56:53.765Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:57:23.773Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:57:53.767Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:58:23.765Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:58:53.774Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:59:23.779Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T18:59:53.759Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:00:14.726Z [info]: Terminal connection closed: UQZ8hHElW2CT5JL-AAAX
+2025-06-13T19:00:14.916Z [info]: New terminal connection: s9Iem0BPewQmn6kJAAAZ
+2025-06-13T19:00:14.988Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:00:14.996Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:00:16.480Z [info]: Terminal connection closed: s9Iem0BPewQmn6kJAAAZ
+2025-06-13T19:00:16.695Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:00:16.698Z [info]: New terminal connection: yMTPwEu4wdKKGnM8AAAb
+2025-06-13T19:00:16.706Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:00:46.717Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:01:16.719Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:01:35.309Z [info]: Terminal connection closed: yMTPwEu4wdKKGnM8AAAb
+2025-06-13T19:01:35.387Z [info]: New terminal connection: qP08nMlwiCjGxuQ5AAAd
+2025-06-13T19:01:35.443Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:01:35.451Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:01:59.869Z [info]: Terminal connection closed: qP08nMlwiCjGxuQ5AAAd
+2025-06-13T19:01:59.998Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:02:00.000Z [info]: New terminal connection: eHHn7vzhk1cAdlx1AAAf
+2025-06-13T19:02:00.008Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:02:30.012Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:02:30.788Z [info]: Terminal connection closed: eHHn7vzhk1cAdlx1AAAf
+2025-06-13T19:02:30.968Z [info]: New terminal connection: B44p6FJEqxg61PWjAAAh
+2025-06-13T19:02:31.041Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:02:31.049Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:03:01.056Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:03:31.052Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:03:49.540Z [info]: Terminal connection closed: B44p6FJEqxg61PWjAAAh
+2025-06-13T19:03:49.716Z [info]: New terminal connection: QeeWXvWUZ3Gal1-AAAAj
+2025-06-13T19:03:49.792Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:03:49.800Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:04:19.813Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:04:49.822Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:05:02.147Z [info]: Terminal connection closed: QeeWXvWUZ3Gal1-AAAAj
+2025-06-13T19:05:02.338Z [info]: New terminal connection: hwST-W0oUI4RM3TXAAAl
+2025-06-13T19:05:02.411Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:05:02.418Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:05:32.429Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:05:52.918Z [info]: Terminal connection closed: hwST-W0oUI4RM3TXAAAl
+2025-06-13T19:05:53.092Z [info]: New terminal connection: zIj2l6fzcQ1CzcuhAAAn
+2025-06-13T19:05:53.160Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:05:53.171Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:05:55.650Z [info]: Terminal connection closed: zIj2l6fzcQ1CzcuhAAAn
+2025-06-13T19:05:55.813Z [info]: New terminal connection: IudJliW2lTMekz1XAAAp
+2025-06-13T19:05:55.886Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:05:55.893Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:06:25.912Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:06:55.901Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:07:25.912Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:07:55.905Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:08:25.906Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:08:55.901Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:09:25.907Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:09:30.285Z [info]: Terminal connection closed: IudJliW2lTMekz1XAAAp
+2025-06-13T19:09:30.475Z [info]: New terminal connection: XdYEEQnLYAlpc5mQAAAr
+2025-06-13T19:09:30.556Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:09:30.565Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:09:31.341Z [info]: Terminal connection closed: XdYEEQnLYAlpc5mQAAAr
+2025-06-13T19:09:31.506Z [info]: New terminal connection: SmAy84wHV6m1hh9nAAAt
+2025-06-13T19:09:31.571Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:09:31.579Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:09:41.689Z [info]: Terminal connection closed: SmAy84wHV6m1hh9nAAAt
+2025-06-13T19:09:41.767Z [info]: New terminal connection: mxxWJkrotuWPaKgjAAAv
+2025-06-13T19:09:41.833Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:09:41.842Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:09:57.022Z [info]: Image ubuntu:22.04 already exists
+2025-06-13T19:09:57.236Z [error]: Error creating container: (HTTP code 500) server error - failed to set up container networking: driver failed programming external connectivity on endpoint container-name2 (8aac3c1eea0935ec1ca35c84a06c90f3e2c0a4f3a71fbc1a3f68757b1a421a63): Bind for 0.0.0.0:1337 failed: port is already allocated 
+2025-06-13T19:09:57.237Z [error]: Error creating container: (HTTP code 500) server error - failed to set up container networking: driver failed programming external connectivity on endpoint container-name2 (8aac3c1eea0935ec1ca35c84a06c90f3e2c0a4f3a71fbc1a3f68757b1a421a63): Bind for 0.0.0.0:1337 failed: port is already allocated 
+2025-06-13T19:10:11.860Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:10:13.328Z [info]: Image ubuntu:22.04 already exists
+2025-06-13T19:10:13.341Z [error]: Error creating container: (HTTP code 409) unexpected - Conflict. The container name "/container-name2" is already in use by container "079713452a8bddec65a1462dd7c9f208b898ae63f32703189ec6ef523d80bffb". You have to remove (or rename) that container to be able to reuse that name. 
+2025-06-13T19:10:13.341Z [error]: Error creating container: (HTTP code 409) unexpected - Conflict. The container name "/container-name2" is already in use by container "079713452a8bddec65a1462dd7c9f208b898ae63f32703189ec6ef523d80bffb". You have to remove (or rename) that container to be able to reuse that name. 
+2025-06-13T19:10:22.060Z [info]: Image ubuntu:22.04 already exists
+2025-06-13T19:10:22.073Z [error]: Error creating container: (HTTP code 409) unexpected - Conflict. The container name "/container-name2" is already in use by container "079713452a8bddec65a1462dd7c9f208b898ae63f32703189ec6ef523d80bffb". You have to remove (or rename) that container to be able to reuse that name. 
+2025-06-13T19:10:22.073Z [error]: Error creating container: (HTTP code 409) unexpected - Conflict. The container name "/container-name2" is already in use by container "079713452a8bddec65a1462dd7c9f208b898ae63f32703189ec6ef523d80bffb". You have to remove (or rename) that container to be able to reuse that name. 
+2025-06-13T19:10:41.850Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:11:11.847Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:11:24.135Z [info]: Terminal connection closed: mxxWJkrotuWPaKgjAAAv
+2025-06-13T19:11:24.324Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:11:24.332Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:11:24.335Z [info]: New terminal connection: vhNM25PWB0u6bXGsAAAx
+2025-06-13T19:11:54.348Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:12:24.330Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:12:54.340Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:13:24.327Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:13:26.466Z [info]: Terminal connection closed: vhNM25PWB0u6bXGsAAAx
+2025-06-13T19:13:26.663Z [info]: New terminal connection: zGB5KKb_X5yeRgp2AAAz
+2025-06-13T19:13:26.789Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:13:26.796Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:13:29.903Z [info]: Stopping container: 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T19:13:40.674Z [info]: Container removed: 7221c187e29c7af9f6fd9a4216bc2ce3924bffe3835fac9171148d6cadbd8cf3
+2025-06-13T19:13:56.810Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:14:16.747Z [info]: Image ubuntu:22.04 already exists
+2025-06-13T19:14:16.944Z [warn]: No installation script found for dependency: sudo
+2025-06-13T19:14:16.944Z [warn]: No installation script found for dependency: gnupg
+2025-06-13T19:14:16.944Z [warn]: No installation script found for dependency: mongodb-org
+2025-06-13T19:14:16.944Z [info]: Installing nodejs:22 in container d39b97cba2657920862a121bf7190bcb229a700ff8487e6787ba2b58e143a16b
+2025-06-13T19:14:26.806Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:14:56.794Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:15:03.601Z [info]: Successfully installed nodejs:22 in container d39b97cba2657920862a121bf7190bcb229a700ff8487e6787ba2b58e143a16b
+2025-06-13T19:15:03.602Z [info]: Installing mongodb:8.0 in container d39b97cba2657920862a121bf7190bcb229a700ff8487e6787ba2b58e143a16b
+2025-06-13T19:15:14.144Z [info]: Successfully installed mongodb:8.0 in container d39b97cba2657920862a121bf7190bcb229a700ff8487e6787ba2b58e143a16b
+2025-06-13T19:15:14.145Z [warn]: No installation script found for dependency: npm
+2025-06-13T19:15:14.145Z [warn]: No installation script found for dependency: git
+2025-06-13T19:15:14.145Z [warn]: No installation script found for dependency: curl
+2025-06-13T19:15:14.145Z [warn]: No installation script found for dependency: lsof
+2025-06-13T19:15:14.145Z [warn]: No installation script found for dependency: netstat
+2025-06-13T19:15:14.145Z [info]: Running initial setup in container d39b97cba2657920862a121bf7190bcb229a700ff8487e6787ba2b58e143a16b
+2025-06-13T19:15:14.145Z [info]: Running apt-get update in container d39b97cba2657920862a121bf7190bcb229a700ff8487e6787ba2b58e143a16b
+2025-06-13T19:15:15.953Z [info]: Installing sudo in container d39b97cba2657920862a121bf7190bcb229a700ff8487e6787ba2b58e143a16b
+2025-06-13T19:15:19.289Z [info]: Installing git in container d39b97cba2657920862a121bf7190bcb229a700ff8487e6787ba2b58e143a16b
+2025-06-13T19:15:25.795Z [info]: Verifying git installation in container d39b97cba2657920862a121bf7190bcb229a700ff8487e6787ba2b58e143a16b
+2025-06-13T19:15:25.846Z [info]: Installing nodejs and npm in container d39b97cba2657920862a121bf7190bcb229a700ff8487e6787ba2b58e143a16b
+2025-06-13T19:15:26.794Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:15:27.173Z [info]: Initial setup completed successfully in container d39b97cba2657920862a121bf7190bcb229a700ff8487e6787ba2b58e143a16b
+2025-06-13T19:15:27.173Z [info]: Container created and started: container-name (d39b97cba2657920862a121bf7190bcb229a700ff8487e6787ba2b58e143a16b)
+2025-06-13T19:15:56.827Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:16:17.285Z [info]: Terminal connection closed: zGB5KKb_X5yeRgp2AAAz
+2025-06-13T19:16:17.466Z [info]: New terminal connection: o4EO-tLwOK-vs_HyAAA1
+2025-06-13T19:16:17.589Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:16:17.597Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:16:37.029Z [info]: Image ubuntu:22.04 already exists
+2025-06-13T19:16:37.233Z [error]: Error creating container: (HTTP code 500) server error - failed to set up container networking: driver failed programming external connectivity on endpoint container-named (6a803fd40686456c2709120e20c5453f8ee12f142e8ad3d083d4de724918d0cc): Bind for 0.0.0.0:27017 failed: port is already allocated 
+2025-06-13T19:16:37.233Z [error]: Error creating container: (HTTP code 500) server error - failed to set up container networking: driver failed programming external connectivity on endpoint container-named (6a803fd40686456c2709120e20c5453f8ee12f142e8ad3d083d4de724918d0cc): Bind for 0.0.0.0:27017 failed: port is already allocated 
+2025-06-13T19:16:46.005Z [info]: Image ubuntu:22.04 already exists
+2025-06-13T19:16:46.020Z [error]: Error creating container: (HTTP code 409) unexpected - Conflict. The container name "/container-named" is already in use by container "18ba074c2f8fd1faf017a6963533d9e2f54f08cf4fc5b109fee51a66db39bf32". You have to remove (or rename) that container to be able to reuse that name. 
+2025-06-13T19:16:46.021Z [error]: Error creating container: (HTTP code 409) unexpected - Conflict. The container name "/container-named" is already in use by container "18ba074c2f8fd1faf017a6963533d9e2f54f08cf4fc5b109fee51a66db39bf32". You have to remove (or rename) that container to be able to reuse that name. 
+2025-06-13T19:16:47.607Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:17:17.598Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:17:47.604Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:18:17.601Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:18:24.660Z [info]: Terminal connection closed: o4EO-tLwOK-vs_HyAAA1
+2025-06-13T19:18:24.848Z [info]: New terminal connection: xPUlhnO5bzWiszY9AAA3
+2025-06-13T19:18:24.983Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:18:24.991Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:18:27.920Z [info]: Image ubuntu:22.04 already exists
+2025-06-13T19:18:27.935Z [error]: Error creating container: (HTTP code 409) unexpected - Conflict. The container name "/container-name" is already in use by container "d39b97cba2657920862a121bf7190bcb229a700ff8487e6787ba2b58e143a16b". You have to remove (or rename) that container to be able to reuse that name. 
+2025-06-13T19:18:27.936Z [error]: Error creating container: (HTTP code 409) unexpected - Conflict. The container name "/container-name" is already in use by container "d39b97cba2657920862a121bf7190bcb229a700ff8487e6787ba2b58e143a16b". You have to remove (or rename) that container to be able to reuse that name. 
+2025-06-13T19:18:35.429Z [info]: Image ubuntu:22.04 already exists
+2025-06-13T19:18:35.635Z [error]: Error creating container: (HTTP code 500) server error - failed to set up container networking: driver failed programming external connectivity on endpoint container-names (1f7cf67a27d7fcd502994235ab174b07c8dd06f58814017e7b154a02f5b1967e): Bind for 0.0.0.0:1337 failed: port is already allocated 
+2025-06-13T19:18:35.636Z [error]: Error creating container: (HTTP code 500) server error - failed to set up container networking: driver failed programming external connectivity on endpoint container-names (1f7cf67a27d7fcd502994235ab174b07c8dd06f58814017e7b154a02f5b1967e): Bind for 0.0.0.0:1337 failed: port is already allocated 
+2025-06-13T19:18:48.531Z [info]: Image ubuntu:22.04 already exists
+2025-06-13T19:18:48.544Z [error]: Error creating container: (HTTP code 409) unexpected - Conflict. The container name "/container-names" is already in use by container "718b162957c7e1f2ee1454134fd2699d65099cfb9d42e6ac50a35f86fdec3b17". You have to remove (or rename) that container to be able to reuse that name. 
+2025-06-13T19:18:48.544Z [error]: Error creating container: (HTTP code 409) unexpected - Conflict. The container name "/container-names" is already in use by container "718b162957c7e1f2ee1454134fd2699d65099cfb9d42e6ac50a35f86fdec3b17". You have to remove (or rename) that container to be able to reuse that name. 
+2025-06-13T19:18:54.990Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:19:00.718Z [info]: Image ubuntu:22.04 already exists
+2025-06-13T19:19:00.933Z [error]: Error creating container: (HTTP code 500) server error - failed to set up container networking: driver failed programming external connectivity on endpoint container-namess (44f98a05889fb65819f5ed97d0c1bb78acfc0e3b7216d40131a8c70a771aacdc): Bind for 0.0.0.0:3006 failed: port is already allocated 
+2025-06-13T19:19:00.933Z [error]: Error creating container: (HTTP code 500) server error - failed to set up container networking: driver failed programming external connectivity on endpoint container-namess (44f98a05889fb65819f5ed97d0c1bb78acfc0e3b7216d40131a8c70a771aacdc): Bind for 0.0.0.0:3006 failed: port is already allocated 
+2025-06-13T19:19:09.412Z [info]: Image ubuntu:22.04 already exists
+2025-06-13T19:19:09.426Z [error]: Error creating container: (HTTP code 409) unexpected - Conflict. The container name "/container-namess" is already in use by container "d4ec6c8f995a9c25123f460906d0dcbd717c704589176f516a2c54dcefdf6094". You have to remove (or rename) that container to be able to reuse that name. 
+2025-06-13T19:19:09.426Z [error]: Error creating container: (HTTP code 409) unexpected - Conflict. The container name "/container-namess" is already in use by container "d4ec6c8f995a9c25123f460906d0dcbd717c704589176f516a2c54dcefdf6094". You have to remove (or rename) that container to be able to reuse that name. 
+2025-06-13T19:19:19.342Z [info]: Image ubuntu:22.04 already exists
+2025-06-13T19:19:19.563Z [error]: Error creating container: (HTTP code 500) server error - failed to set up container networking: driver failed programming external connectivity on endpoint container-namessa (db9652c4f0601fc4a74f916a7d1d74de83e4eec40b9d55b31de63a77ee574f72): Bind for 0.0.0.0:27017 failed: port is already allocated 
+2025-06-13T19:19:19.564Z [error]: Error creating container: (HTTP code 500) server error - failed to set up container networking: driver failed programming external connectivity on endpoint container-namessa (db9652c4f0601fc4a74f916a7d1d74de83e4eec40b9d55b31de63a77ee574f72): Bind for 0.0.0.0:27017 failed: port is already allocated 
+2025-06-13T19:19:24.998Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:19:25.054Z [info]: Image ubuntu:22.04 already exists
+2025-06-13T19:19:25.068Z [error]: Error creating container: (HTTP code 409) unexpected - Conflict. The container name "/container-namessa" is already in use by container "872ac06030c79e36bdd65af254d240f573297cda01fac570a22c138a0a6a3abf". You have to remove (or rename) that container to be able to reuse that name. 
+2025-06-13T19:19:25.069Z [error]: Error creating container: (HTTP code 409) unexpected - Conflict. The container name "/container-namessa" is already in use by container "872ac06030c79e36bdd65af254d240f573297cda01fac570a22c138a0a6a3abf". You have to remove (or rename) that container to be able to reuse that name. 
+2025-06-13T19:19:38.782Z [info]: Image ubuntu:22.04 already exists
+2025-06-13T19:19:38.988Z [warn]: No installation script found for dependency: sudo
+2025-06-13T19:19:38.988Z [warn]: No installation script found for dependency: gnupg
+2025-06-13T19:19:38.988Z [warn]: No installation script found for dependency: mongodb-org
+2025-06-13T19:19:38.989Z [info]: Installing nodejs:22 in container 4356dba68142a8d0b41ae0da5a3dbe1314415ba679460e30a1ce146bc6e68487
+2025-06-13T19:19:46.055Z [info]: Successfully installed nodejs:22 in container 4356dba68142a8d0b41ae0da5a3dbe1314415ba679460e30a1ce146bc6e68487
+2025-06-13T19:19:46.055Z [info]: Installing mongodb:8.0 in container 4356dba68142a8d0b41ae0da5a3dbe1314415ba679460e30a1ce146bc6e68487
+2025-06-13T19:19:46.756Z [error]: Error installing dependency mongodb:8.0: (HTTP code 409) container stopped/paused - container 4356dba68142a8d0b41ae0da5a3dbe1314415ba679460e30a1ce146bc6e68487 is not running 
+2025-06-13T19:19:46.757Z [error]: Error creating container: (HTTP code 409) container stopped/paused - container 4356dba68142a8d0b41ae0da5a3dbe1314415ba679460e30a1ce146bc6e68487 is not running 
+2025-06-13T19:19:46.757Z [error]: Error creating container: (HTTP code 409) container stopped/paused - container 4356dba68142a8d0b41ae0da5a3dbe1314415ba679460e30a1ce146bc6e68487 is not running 
+2025-06-13T19:19:54.990Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:19:55.773Z [info]: Image ubuntu:22.04 already exists
+2025-06-13T19:19:55.952Z [warn]: No installation script found for dependency: sudo
+2025-06-13T19:19:55.952Z [warn]: No installation script found for dependency: gnupg
+2025-06-13T19:19:55.952Z [warn]: No installation script found for dependency: mongodb-org
+2025-06-13T19:19:55.952Z [info]: Installing nodejs:22 in container fe7b08e99df47f28f065dabd1dea730324204c0238eae12028606137cbfd5fdd
+2025-06-13T19:20:24.992Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:20:30.182Z [info]: Successfully installed nodejs:22 in container fe7b08e99df47f28f065dabd1dea730324204c0238eae12028606137cbfd5fdd
+2025-06-13T19:20:30.183Z [info]: Installing mongodb:8.0 in container fe7b08e99df47f28f065dabd1dea730324204c0238eae12028606137cbfd5fdd
+2025-06-13T19:20:37.736Z [info]: Successfully installed mongodb:8.0 in container fe7b08e99df47f28f065dabd1dea730324204c0238eae12028606137cbfd5fdd
+2025-06-13T19:20:37.737Z [warn]: No installation script found for dependency: npm
+2025-06-13T19:20:37.738Z [warn]: No installation script found for dependency: git
+2025-06-13T19:20:37.738Z [warn]: No installation script found for dependency: curl
+2025-06-13T19:20:37.739Z [warn]: No installation script found for dependency: lsof
+2025-06-13T19:20:37.739Z [warn]: No installation script found for dependency: netstat
+2025-06-13T19:20:37.739Z [info]: Running initial setup in container fe7b08e99df47f28f065dabd1dea730324204c0238eae12028606137cbfd5fdd
+2025-06-13T19:20:37.740Z [info]: Running apt-get update in container fe7b08e99df47f28f065dabd1dea730324204c0238eae12028606137cbfd5fdd
+2025-06-13T19:20:39.479Z [info]: Installing sudo in container fe7b08e99df47f28f065dabd1dea730324204c0238eae12028606137cbfd5fdd
+2025-06-13T19:20:44.388Z [info]: Installing git in container fe7b08e99df47f28f065dabd1dea730324204c0238eae12028606137cbfd5fdd
+2025-06-13T19:20:51.290Z [info]: Verifying git installation in container fe7b08e99df47f28f065dabd1dea730324204c0238eae12028606137cbfd5fdd
+2025-06-13T19:20:51.337Z [info]: Installing nodejs and npm in container fe7b08e99df47f28f065dabd1dea730324204c0238eae12028606137cbfd5fdd
+2025-06-13T19:20:52.671Z [info]: Initial setup completed successfully in container fe7b08e99df47f28f065dabd1dea730324204c0238eae12028606137cbfd5fdd
+2025-06-13T19:20:52.672Z [info]: Container created and started: container-name (fe7b08e99df47f28f065dabd1dea730324204c0238eae12028606137cbfd5fdd)
+2025-06-13T19:20:55.002Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:21:25.020Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:21:43.041Z [info]: Socket xPUlhnO5bzWiszY9AAA3 selected container fe7b08e99df47f28f065dabd1dea730324204c0238eae12028606137cbfd5fdd
+2025-06-13T19:21:54.995Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:22:24.996Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:22:25.664Z [info]: Terminal connection closed: xPUlhnO5bzWiszY9AAA3
+2025-06-13T19:22:25.832Z [info]: New terminal connection: qqdJZ4ThG809w8RXAAA5
+2025-06-13T19:22:25.909Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:22:25.918Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:22:55.979Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:23:25.974Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:23:55.969Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:24:25.978Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:24:55.973Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:25:25.972Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:25:55.978Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:26:25.972Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:27:12.857Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:27:25.976Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:27:55.978Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:28:33.971Z [info]: Connected to Docker. Engine version: 28.1.1
+2025-06-13T19:29:33.971Z [info]: Connected to Docker. Engine version: 28.1.1
