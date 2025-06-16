@@ -1,0 +1,12 @@
+---
+[2025-06-15T10:18:53.847Z] Error: Tool not found
+    at Object.executeTool (C:\Users\Suryansh\Desktop\expense-llm\simple-mcp-server\toolService.js:99:41)
+    at C:\Users\Suryansh\Desktop\expense-llm\simple-mcp-server\toolRoutes.js:43:30
+    at Layer.handleRequest (C:\Users\Suryansh\Desktop\expense-llm\simple-mcp-server\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Suryansh\Desktop\expense-llm\simple-mcp-server\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Suryansh\Desktop\expense-llm\simple-mcp-server\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Suryansh\Desktop\expense-llm\simple-mcp-server\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Suryansh\Desktop\expense-llm\simple-mcp-server\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Suryansh\Desktop\expense-llm\simple-mcp-server\node_modules\router\index.js:295:15
+    at param (C:\Users\Suryansh\Desktop\expense-llm\simple-mcp-server\node_modules\router\index.js:600:14)
+    at param (C:\Users\Suryansh\Desktop\expense-llm\simple-mcp-server\node_modules\router\index.js:610:14)

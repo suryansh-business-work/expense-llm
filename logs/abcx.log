@@ -1,0 +1,12 @@
+---
+[2025-06-13T21:28:56.593Z] TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type string or an instance of Buffer or URL. Received undefined
+    at Object.readFileSync (node:fs:440:14)
+    at main (C:\Users\Suryansh\Desktop\expense-llm\simple-mcp-server\tools\abcx\index.js:6:13)
+    at Object.executeTool (C:\Users\Suryansh\Desktop\expense-llm\simple-mcp-server\toolService.js:111:20)
+    at C:\Users\Suryansh\Desktop\expense-llm\simple-mcp-server\toolRoutes.js:43:30
+    at Layer.handleRequest (C:\Users\Suryansh\Desktop\expense-llm\simple-mcp-server\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\Suryansh\Desktop\expense-llm\simple-mcp-server\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\Users\Suryansh\Desktop\expense-llm\simple-mcp-server\node_modules\router\lib\route.js:117:3)
+    at handle (C:\Users\Suryansh\Desktop\expense-llm\simple-mcp-server\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\Users\Suryansh\Desktop\expense-llm\simple-mcp-server\node_modules\router\lib\layer.js:152:17)
+    at C:\Users\Suryansh\Desktop\expense-llm\simple-mcp-server\node_modules\router\index.js:295:15
