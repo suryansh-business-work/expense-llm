@@ -189,6 +189,17 @@ const HeaderUserMenu = () => {
           >
             Organizations
           </Button>
+          <Button
+            size="small"
+            onClick={() => {
+              handleCloseMenu();
+              navigate("/manage-credentials");
+            }}
+            sx={{ justifyContent: "flex-start", textTransform: "none", pl: 0 }}
+            fullWidth
+          >
+            Manage Credentials
+          </Button>
           {user?.role === "admin" && (
             <Button
               size="small"

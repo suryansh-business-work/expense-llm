@@ -1,25 +1,32 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
+  Drawer,
+  Box,
+  Typography,
+  IconButton,
+  Divider,
   Button,
   TextField,
   CircularProgress,
-  Checkbox,
   FormControlLabel,
   Select,
   MenuItem,
   FormControl,
   InputLabel,
   Switch,
-  Typography,
-  Box,
-  Divider,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  useTheme,
+  Fade,
+  Tooltip,
 } from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import CloseIcon from '@mui/icons-material/Close';
+import BusinessIcon from '@mui/icons-material/Business';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const CATEGORY_OPTIONS = [
   { id: 1, name: 'Technology' },
@@ -106,6 +113,8 @@ const CreateAndUpdateOrganization: React.FC<CreateAndUpdateOrganizationProps> = 
   onClose,
   organization,
 }) => {
+  const theme = useTheme();
+
   const initialValues: OrganizationFormData = {
     organizationId: organization?.organizationId,
     organizationName: organization?.organizationName || '',
@@ -163,9 +172,8 @@ const CreateAndUpdateOrganization: React.FC<CreateAndUpdateOrganizationProps> = 
       });
 
       const data = await response.json();
-
-      if (data.success) {
-        onClose(true); // Pass true to indicate refresh needed
+      if (data?.data) {
+        onClose(true);
       } else {
         console.error('Error:', data.message);
       }
@@ -176,12 +184,93 @@ const CreateAndUpdateOrganization: React.FC<CreateAndUpdateOrganizationProps> = 
     }
   };
 
+  const accordionSx = {
+    backgroundColor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : '#f7f8fa',
+    mb: 2,
+    boxShadow: 'none',
+    '&:before': { display: 'none' },
+    borderRadius: 2,
+    border: `1px solid ${theme.palette.divider}`,
+    transition: 'background 0.3s',
+  };
+
   return (
-    <Dialog open={open} onClose={() => onClose(false)} maxWidth="md" fullWidth>
-      <DialogTitle>
-        {organization ? 'Update Organization' : 'Create Organization'}
-      </DialogTitle>
-      <DialogContent>
+    <Drawer
+      anchor="right"
+      open={open}
+      onClose={() => onClose(false)}
+      style={{ zIndex: 1300 }}
+      slotProps={{
+        paper: {
+          sx: {
+            width: { xs: '100%', sm: 600 },
+            maxWidth: '100vw',
+            p: 0,
+            borderTopLeftRadius: 8,
+            borderBottomLeftRadius: 8,
+            boxShadow: 8,
+            background: theme.palette.background.default,
+          },
+        },
+      }}
+    >
+      {/* Header */}
+      <Box sx={{ display: 'flex', alignItems: 'center', p: 2, pb: 1 }}>
+        <Typography variant="h6" sx={{ flex: 1, fontWeight: 700, letterSpacing: 0.5 }}>
+          {organization ? 'Update Organization' : 'Create Organization'}
+        </Typography>
+        <Tooltip title="Close">
+          <IconButton onClick={() => onClose(false)} size="large">
+            <CloseIcon />
+          </IconButton>
+        </Tooltip>
+      </Box>
+      <Divider />
+
+      {/* Context Section */}
+      <Fade in timeout={600}>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: { xs: 'column', sm: 'row' },
+            alignItems: { xs: 'flex-start', sm: 'center' },
+            gap: 3,
+            p: 3,
+            pb: 1,
+            mb: 2,
+            background: theme.palette.mode === 'dark' ? theme.palette.grey[900] : '#f7f8fa',
+            borderBottom: `1px solid ${theme.palette.divider}`,
+            borderRadius: 0,
+          }}
+        >
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[800] : '#f0f2f5',
+              borderRadius: 2,
+              width: 64,
+              height: 64,
+              minWidth: 64,
+              minHeight: 64,
+              boxShadow: 1,
+            }}
+          >
+            <BusinessIcon color="primary" sx={{ fontSize: 40 }} />
+          </Box>
+          <Box>
+            <Typography variant="h6" sx={{ mb: 0.5, fontWeight: 600 }}>
+              Welcome to Organization Creation
+            </Typography>
+            <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.7 }}>
+              Create your organization to unlock the full power of our secure, in-house server management platform.<br />
+            </Typography>
+          </Box>
+        </Box>
+      </Fade>
+
+      <Box sx={{ p: 3, pt: 1, overflowY: 'auto' }}>
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -190,51 +279,50 @@ const CreateAndUpdateOrganization: React.FC<CreateAndUpdateOrganizationProps> = 
         >
           {({ errors, touched, isSubmitting, values, setFieldValue }) => (
             <Form>
-              <div className="container-fluid">
+              <AnimatePresence>
                 {/* Organization Details Section */}
-                <Box mb={3}>
-                  <Typography variant="h6" gutterBottom>
-                    Organization Details
-                  </Typography>
-                  <Divider sx={{ mb: 2 }} />
-                  <div className="row mb-3">
-                    <div className="col-12">
+                <motion.div
+                  key="org-details"
+                  initial={{ opacity: 0, y: 24 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 24 }}
+                  transition={{ duration: 0.3 }}
+                  style={{ marginBottom: theme.spacing(2) }} // <-- Add gap after accordion
+                >
+                  <Accordion defaultExpanded sx={accordionSx}>
+                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                      <Typography variant="h5" fontSize={16} fontWeight={600}>
+                        Organization Details
+                      </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
                       <Field
                         as={TextField}
                         name="organizationName"
-                        label="Organization Name"
+                        label="Organization Name *"
                         fullWidth
                         error={touched.organizationName && !!errors.organizationName}
                         helperText={touched.organizationName && errors.organizationName}
+                        sx={{ mb: 2 }}
+                        autoFocus
                       />
-                    </div>
-                  </div>
-                  <div className="row mb-3">
-                    <div className="col-12">
                       <Field
                         as={TextField}
                         name="organizationEmail"
-                        label="Email"
+                        label="Email *"
                         fullWidth
                         error={touched.organizationEmail && !!errors.organizationEmail}
                         helperText={touched.organizationEmail && errors.organizationEmail}
+                        sx={{ mb: 2 }}
                       />
-                    </div>
-                  </div>
-                  <div className="row mb-3">
-                    <div className="col-12">
                       <Field
                         as={TextField}
                         name="organizationLogo"
                         label="Organization Logo"
                         fullWidth
+                        sx={{ mb: 2 }}
                       />
-                    </div>
-                  </div>
-                  {/* MUI Dropdown for Category */}
-                  <div className="row mb-3">
-                    <div className="col-12">
-                      <FormControl fullWidth>
+                      <FormControl fullWidth sx={{ mb: 2 }}>
                         <InputLabel>Organization Category</InputLabel>
                         <Select
                           name="organizationCategory"
@@ -258,50 +346,47 @@ const CreateAndUpdateOrganization: React.FC<CreateAndUpdateOrganizationProps> = 
                           ))}
                         </Select>
                       </FormControl>
-                    </div>
-                  </div>
-                </Box>
+                    </AccordionDetails>
+                  </Accordion>
+                </motion.div>
 
                 {/* Organization Information Section */}
-                <Box mb={3}>
-                  <Typography variant="h6" gutterBottom>
-                    Organization Information
-                  </Typography>
-                  <Divider sx={{ mb: 2 }} />
-                  <div className="row mb-3">
-                    <div className="col-12">
-                      <div className="row">
-                        <div className="col-md-4 mb-2">
-                          <Field
-                            as={TextField}
-                            name="organizationInformation.about"
-                            label="About"
-                            fullWidth
-                          />
-                        </div>
-                        <div className="col-md-4 mb-2">
-                          <Field
-                            as={TextField}
-                            name="organizationInformation.foundedYear"
-                            label="Founded Year"
-                            fullWidth
-                          />
-                        </div>
-                        <div className="col-md-4 mb-2">
-                          <Field
-                            as={TextField}
-                            name="organizationInformation.ceo"
-                            label="CEO"
-                            fullWidth
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  {/* Employee Count Dropdown */}
-                  <div className="row mb-3">
-                    <div className="col-12">
-                      <FormControl fullWidth>
+                <motion.div
+                  key="org-info"
+                  initial={{ opacity: 0, y: 24 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 24 }}
+                  transition={{ duration: 0.35, delay: 0.05 }}
+                  style={{ marginBottom: theme.spacing(2) }} // <-- Add gap after accordion
+                >
+                  <Accordion sx={accordionSx}>
+                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                      <Typography variant="h5" fontSize={16} fontWeight={600}>
+                        Organization Information <Typography component="span" variant="body2" color="text.secondary">(Optional)</Typography>
+                      </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr 1fr' }, gap: 2 }}>
+                        <Field
+                          as={TextField}
+                          name="organizationInformation.about"
+                          label="About"
+                          fullWidth
+                        />
+                        <Field
+                          as={TextField}
+                          name="organizationInformation.foundedYear"
+                          label="Founded Year"
+                          fullWidth
+                        />
+                        <Field
+                          as={TextField}
+                          name="organizationInformation.ceo"
+                          label="CEO"
+                          fullWidth
+                        />
+                      </Box>
+                      <FormControl fullWidth sx={{ mt: 2 }}>
                         <InputLabel>Employee Count</InputLabel>
                         <Select
                           name="organizationEmployeeCount"
@@ -318,85 +403,98 @@ const CreateAndUpdateOrganization: React.FC<CreateAndUpdateOrganizationProps> = 
                           ))}
                         </Select>
                       </FormControl>
-                    </div>
-                  </div>
-                  {/* Phone */}
-                  <div className="row mb-3">
-                    <div className="col-12">
                       <Field
                         as={TextField}
                         name="organizationPhone"
                         label="Phone"
                         fullWidth
+                        sx={{ mt: 2 }}
                       />
-                    </div>
-                  </div>
-                </Box>
+                    </AccordionDetails>
+                  </Accordion>
+                </motion.div>
 
                 {/* Address Section */}
-                <Box mb={3}>
-                  <Typography variant="h6" gutterBottom>
-                    Address
-                  </Typography>
-                  <Divider sx={{ mb: 2 }} />
-                  <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr 1fr' }, gap: 2 }}>
-                    <Field
-                      as={TextField}
-                      name="organizationAddress.line1"
-                      label="Line 1"
-                      fullWidth
-                    />
-                    <Field
-                      as={TextField}
-                      name="organizationAddress.line2"
-                      label="Line 2"
-                      fullWidth
-                    />
-                    <Field
-                      as={TextField}
-                      name="organizationAddress.city"
-                      label="City"
-                      fullWidth
-                    />
-                    <Field
-                      as={TextField}
-                      name="organizationAddress.state"
-                      label="State"
-                      fullWidth
-                    />
-                    <Field
-                      as={TextField}
-                      name="organizationAddress.country"
-                      label="Country"
-                      fullWidth
-                    />
-                    <Field
-                      as={TextField}
-                      name="organizationAddress.zip"
-                      label="ZIP"
-                      fullWidth
-                    />
-                  </Box>
-                </Box>
+                <motion.div
+                  key="org-address"
+                  initial={{ opacity: 0, y: 24 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 24 }}
+                  transition={{ duration: 0.35, delay: 0.1 }}
+                  style={{ marginBottom: theme.spacing(2) }} // <-- Add gap after accordion
+                >
+                  <Accordion sx={accordionSx}>
+                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                      <Typography variant="h5" fontSize={16} fontWeight={600}>
+                        Address <Typography component="span" variant="body2" color="text.secondary">(Optional)</Typography>
+                      </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr 1fr' }, gap: 2 }}>
+                        <Field
+                          as={TextField}
+                          name="organizationAddress.line1"
+                          label="Line 1"
+                          fullWidth
+                        />
+                        <Field
+                          as={TextField}
+                          name="organizationAddress.line2"
+                          label="Line 2"
+                          fullWidth
+                        />
+                        <Field
+                          as={TextField}
+                          name="organizationAddress.city"
+                          label="City"
+                          fullWidth
+                        />
+                        <Field
+                          as={TextField}
+                          name="organizationAddress.state"
+                          label="State"
+                          fullWidth
+                        />
+                        <Field
+                          as={TextField}
+                          name="organizationAddress.country"
+                          label="Country"
+                          fullWidth
+                        />
+                        <Field
+                          as={TextField}
+                          name="organizationAddress.zip"
+                          label="ZIP"
+                          fullWidth
+                        />
+                      </Box>
+                    </AccordionDetails>
+                  </Accordion>
+                </motion.div>
 
                 {/* Other fields Section */}
-                <Box mb={3}>
-                  <Typography variant="h6" gutterBottom>
-                    Other Details
-                  </Typography>
-                  <Divider sx={{ mb: 2 }} />
-                  <div className="row mb-3">
-                    <div className="col-12">
+                <motion.div
+                  key="org-other"
+                  initial={{ opacity: 0, y: 24 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 24 }}
+                  transition={{ duration: 0.35, delay: 0.15 }}
+                  style={{ marginBottom: theme.spacing(2) }} // <-- Add gap after accordion
+                >
+                  <Accordion sx={accordionSx}>
+                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                      <Typography variant="h5" fontSize={16} fontWeight={600}>
+                        Other Details <Typography component="span" variant="body2" color="text.secondary">(Optional)</Typography>
+                      </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
                       <Field
                         as={TextField}
                         name="organizationWebsite"
                         label="Website"
                         fullWidth
+                        sx={{ mb: 2 }}
                       />
-                    </div>
-                  </div>
-                  <div className="row mb-3">
-                    <div className="col-12">
                       <FormControlLabel
                         control={
                           <Switch
@@ -420,10 +518,6 @@ const CreateAndUpdateOrganization: React.FC<CreateAndUpdateOrganizationProps> = 
                         }
                         sx={{ alignItems: 'flex-start', mb: 1 }}
                       />
-                    </div>
-                  </div>
-                  <div className="row mb-3">
-                    <div className="col-12">
                       <FormControlLabel
                         control={
                           <Switch
@@ -447,11 +541,7 @@ const CreateAndUpdateOrganization: React.FC<CreateAndUpdateOrganizationProps> = 
                         }
                         sx={{ alignItems: 'flex-start', mb: 1 }}
                       />
-                    </div>
-                  </div>
-                  <div className="row mb-3">
-                    <div className="col-12">
-                      <Typography variant="subtitle1" gutterBottom>
+                      <Typography variant="subtitle1" gutterBottom sx={{ mt: 2 }}>
                         Registration Details
                       </Typography>
                       <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr 1fr' }, gap: 2 }}>
@@ -476,12 +566,12 @@ const CreateAndUpdateOrganization: React.FC<CreateAndUpdateOrganizationProps> = 
                           fullWidth
                         />
                       </Box>
-                    </div>
-                  </div>
-                </Box>
-              </div>
-              <DialogActions>
-                <Button onClick={() => onClose(false)} disabled={isSubmitting}>
+                    </AccordionDetails>
+                  </Accordion>
+                </motion.div>
+              </AnimatePresence>
+              <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 2, mt: 3 }}>
+                <Button onClick={() => onClose(false)} disabled={isSubmitting} variant="outlined">
                   Cancel
                 </Button>
                 <Button
@@ -495,12 +585,12 @@ const CreateAndUpdateOrganization: React.FC<CreateAndUpdateOrganizationProps> = 
                 >
                   {organization ? 'Update' : 'Create'}
                 </Button>
-              </DialogActions>
+              </Box>
             </Form>
           )}
         </Formik>
-      </DialogContent>
-    </Dialog>
+      </Box>
+    </Drawer>
   );
 };
 

@@ -25,6 +25,7 @@ import {
   useTheme,
   alpha,
   InputAdornment,
+  CircularProgress,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import InfoIcon from "@mui/icons-material/Info";
@@ -43,18 +44,17 @@ import { useForm, Controller } from "react-hook-form";
 import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { motion, AnimatePresence } from "framer-motion";
+import CreateAndUpdateOrganization from "../organization/CreateAndUpdateOrganization";
+import AddIcon from "@mui/icons-material/Add";
+import ListItemIcon from "@mui/material/ListItemIcon";
 
 const API_BASE = "http://localhost:3000/v1/api/mcp-server";
+const ORGANIZATION_API_BASE = "http://localhost:3000/v1/api/organization";
 
 // Animated MUI components
 const MotionDialog = motion(Dialog);
 const MotionBox = motion(Box);
 const MotionFormControl = motion(FormControl);
-
-const companies = [
-  { companyId: "1", companyName: "Acme Corp" },
-  { companyId: "2", companyName: "Globex Inc" },
-];
 
 const toolLanguages = [
   { langId: "1", langName: "Node JS", langSlug: "node_js", disabled: false, icon: <CodeIcon /> },
@@ -108,14 +108,14 @@ const fadeIn = {
 
 const slideUp = {
   hidden: { y: 20, opacity: 0 },
-  visible: { 
-    y: 0, 
-    opacity: 1, 
-    transition: { 
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
       duration: 0.5,
       staggerChildren: 0.08,
       ease: "easeOut"
-    } 
+    }
   }
 };
 
@@ -154,8 +154,8 @@ const getToggleButtonStyle = (selected: boolean, theme: any) => ({
     color: selected ? theme.palette.primary.dark : theme.palette.primary.main,
     borderColor: selected ? theme.palette.primary.main : theme.palette.primary.light,
     transform: "translateY(-1px)",
-    boxShadow: selected 
-      ? `0 2px 5px 0 ${alpha(theme.palette.primary.main, 0.2)}` 
+    boxShadow: selected
+      ? `0 2px 5px 0 ${alpha(theme.palette.primary.main, 0.2)}`
       : theme.shadows[1],
   },
   "&:active": {
@@ -180,26 +180,32 @@ const McpCreateAndUpdateDialog: React.FC<McpCreateAndUpdateDialogProps> = ({
   const showSnackbar = useDynamicSnackbar();
   const { invalidateServers } = useMcpServers();
 
+  const [organizations, setOrganizations] = React.useState<{ organizationId: string; organizationName: string }[]>([]);
+  const [orgLoading, setOrgLoading] = React.useState(false);
+  const [openCreateOrg, setOpenCreateOrg] = React.useState(false);
+  const [newlyCreatedOrgId, setNewlyCreatedOrgId] = React.useState<string | null>(null);
+
   // Default values to prevent UI jumping
   const defaultToolLang = "1"; // Node JS
   const defaultContainerConfig = "c1"; // Server Config 1
-  const defaultCompany = "1"; // First company
 
+  // Use useForm as before, but remove defaultCompany from here
   const {
     control,
     handleSubmit,
     watch,
     reset,
     trigger,
+    setValue,
     formState: { errors, isValid, dirtyFields, isDirty },
   } = useForm<FormValues>({
     resolver: joiResolver(schema),
-    mode: "onChange", // Enable real-time validation
+    mode: "onChange",
     defaultValues: {
-      company: defaultCompany,
+      company: "", // Will set after organizations load
       serverName: "",
       toolLang: defaultToolLang,
-      toolTemplate: toolTemplates[0].templateId, // Default to first template
+      toolTemplate: toolTemplates[0].templateId,
       containerConfig: defaultContainerConfig,
     },
   });
@@ -214,19 +220,51 @@ const McpCreateAndUpdateDialog: React.FC<McpCreateAndUpdateDialogProps> = ({
   useEffect(() => {
     if (open) {
       reset({
-        company: defaultCompany,
+        company: organizations[0]?.organizationId || "",
         serverName: editServer?.mcpServerName || "",
         toolLang: defaultToolLang,
         toolTemplate: toolTemplates[0].templateId,
         containerConfig: defaultContainerConfig,
       });
-      
-      // Trigger validation after setting default values
       setTimeout(() => {
         trigger();
       }, 100);
     }
-  }, [editServer, open, reset, trigger]);
+    // eslint-disable-next-line
+  }, [editServer, open, reset, organizations]);
+
+  // Fetch organizations from API
+  const fetchOrganizations = async (selectOrgId?: string) => {
+    setOrgLoading(true);
+    const token = localStorage.getItem("token");
+    try {
+      const response = await axios.get(`${ORGANIZATION_API_BASE}/list`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const orgs = response.data.data || [];
+      setOrganizations(orgs);
+
+      // Auto-select logic
+      if (orgs.length > 0) {
+        if (selectOrgId) {
+          setValue("company", selectOrgId, { shouldValidate: true });
+        } else if (!watch("company")) {
+          setValue("company", orgs[0].organizationId, { shouldValidate: true });
+        }
+      }
+    } catch {
+      setOrganizations([]);
+    }
+    setOrgLoading(false);
+  };
+
+  // On open or after org creation, fetch orgs and handle auto-select
+  React.useEffect(() => {
+    fetchOrganizations(newlyCreatedOrgId || undefined);
+    // Reset the flag after using it
+    if (newlyCreatedOrgId) setNewlyCreatedOrgId(null);
+    // eslint-disable-next-line
+  }, [open, openCreateOrg]);
 
   const onSubmit = async (data: FormValues) => {
     const token = localStorage.getItem("token");
@@ -259,7 +297,7 @@ const McpCreateAndUpdateDialog: React.FC<McpCreateAndUpdateDialogProps> = ({
     } catch (err: any) {
       showSnackbar(
         `Failed to ${editServer ? "update" : "create"} MCP Server: ` +
-          (err.response?.data?.message || err.message),
+        (err.response?.data?.message || err.message),
         "error"
       );
     }
@@ -299,9 +337,9 @@ const McpCreateAndUpdateDialog: React.FC<McpCreateAndUpdateDialogProps> = ({
       maxWidth={false}
       fullWidth
       PaperProps={{
-        sx: { 
-          borderRadius: 3, 
-          p: 0.5, 
+        sx: {
+          borderRadius: 3,
+          p: 0.5,
           background: theme.palette.background.default,
           width: "700px",
           maxWidth: "100%",
@@ -313,11 +351,11 @@ const McpCreateAndUpdateDialog: React.FC<McpCreateAndUpdateDialogProps> = ({
       animate="visible"
       variants={fadeIn}
     >
-      <DialogTitle sx={{ 
-        fontWeight: 700, 
-        pb: 1, 
-        display: "flex", 
-        alignItems: "center", 
+      <DialogTitle sx={{
+        fontWeight: 700,
+        pb: 1,
+        display: "flex",
+        alignItems: "center",
         gap: 1,
         borderBottom: `1px solid ${alpha(theme.palette.divider, 0.6)}`
       }}>
@@ -332,38 +370,98 @@ const McpCreateAndUpdateDialog: React.FC<McpCreateAndUpdateDialogProps> = ({
           animate="visible"
         >
           <Stack spacing={3}>
-            {/* 1. Select your company */}
+            {/* 1. Select Organization */}
             <MotionFormControl
               variants={itemAnimation}
               fullWidth
               required
               error={!!errors.company}
-              sx={{ 
+              sx={{
                 transition: "all 0.2s",
+                minHeight: 100, // Reserve space for loader/validation
               }}
             >
-              <InputLabel id="company-label">Select your company</InputLabel>
-              <Controller
-                name="company"
-                control={control}
-                render={({ field }) => (
-                  <Select
-                    {...field}
-                    labelId="company-label"
-                    label="Select your company"
-                    startAdornment={<BusinessIcon sx={{ mr: 1 }} />}
-                    sx={{ mb: 0.8 }}
-                  >
-                    {companies.map((c) => (
-                      <MenuItem key={c.companyId} value={c.companyId}>
-                        {c.companyName}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                )}
-              />
-              <ErrorMessage error={errors.company} />
+              <Box sx={{ display: "flex", alignItems: "center", mb: 0.5 }}>
+                <InputLabel id="company-label" sx={{ flex: 1 }}>
+                  Select Organization
+                </InputLabel>
+              </Box>
+              {orgLoading ? (
+                <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: 56 }}>
+                  <CircularProgress size={22} sx={{ mr: 1 }} />
+                  <Typography variant="body2" color="text.secondary">
+                    Loading organizations...
+                  </Typography>
+                </Box>
+              ) : (
+                <Box sx={{ minHeight: 56 }}>
+                  <Controller
+                    name="company"
+                    control={control}
+                    render={({ field }) => (
+                      <Select
+                        {...field}
+                        labelId="company-label"
+                        label="Select Organization"
+                        fullWidth
+                        startAdornment={<BusinessIcon sx={{ mr: 1 }} />}
+                        sx={{ mb: 0.8 }}
+                        disabled={orgLoading}
+                        MenuProps={{
+                          PaperProps: {
+                            sx: { maxHeight: 320 }
+                          }
+                        }}
+                      >
+                        {organizations.length === 0 && (
+                          <MenuItem value="">
+                            <Typography variant="body2">No organizations found</Typography>
+                          </MenuItem>
+                        )}
+                        {organizations.map((org) => (
+                          <MenuItem key={org.organizationId} value={org.organizationId}>
+                            {org.organizationName}
+                          </MenuItem>
+                        ))}
+                        <MenuItem
+                          value="__create__"
+                          onClick={e => {
+                            e.stopPropagation();
+                            setOpenCreateOrg(true);
+                            // Prevent select from closing
+                          }}
+                          sx={{
+                            borderTop: "1px solid",
+                            borderColor: theme.palette.divider,
+                            mt: 1,
+                            color: theme.palette.primary.main,
+                            fontWeight: 600,
+                          }}
+                        >
+                          <ListItemIcon>
+                            <AddIcon color="primary" />
+                          </ListItemIcon>
+                          Create Organization
+                        </MenuItem>
+                      </Select>
+                    )}
+                  />
+                  <ErrorMessage error={errors.company} />
+                </Box>
+              )}
             </MotionFormControl>
+            <CreateAndUpdateOrganization
+              open={openCreateOrg}
+              onClose={(refresh?: boolean, createdOrg?: { organizationId: string }) => {
+                setOpenCreateOrg(false);
+                if (refresh && createdOrg?.organizationId) {
+                  setNewlyCreatedOrgId(createdOrg.organizationId);
+                } else if (refresh) {
+                  fetchOrganizations();
+                }
+              }}
+              organization={null}
+            />
 
             {/* 2. Server name */}
             <MotionFormControl
@@ -371,7 +469,7 @@ const McpCreateAndUpdateDialog: React.FC<McpCreateAndUpdateDialogProps> = ({
               fullWidth
               required
               error={!!errors.serverName}
-              sx={{ 
+              sx={{
                 transition: "all 0.2s",
               }}
             >
@@ -442,12 +540,12 @@ const McpCreateAndUpdateDialog: React.FC<McpCreateAndUpdateDialogProps> = ({
               variants={itemAnimation}
               sx={{ mb: 1 }}
             >
-              <FormLabel sx={{ 
-                fontWeight: 600, 
+              <FormLabel sx={{
+                fontWeight: 600,
                 mb: 1.5,
-                display: "flex", 
-                alignItems: "center", 
-                gap: 1 
+                display: "flex",
+                alignItems: "center",
+                gap: 1
               }}>
                 <TerminalIcon sx={{ mr: 1 }} />
                 Tool Language
@@ -461,8 +559,8 @@ const McpCreateAndUpdateDialog: React.FC<McpCreateAndUpdateDialogProps> = ({
                       value={field.value}
                       exclusive
                       onChange={(_, v) => handleToggleChange(field, v)}
-                      sx={{ 
-                        width: "100%", 
+                      sx={{
+                        width: "100%",
                         display: "flex",
                         flexWrap: "nowrap",
                         overflow: "auto",
@@ -490,8 +588,8 @@ const McpCreateAndUpdateDialog: React.FC<McpCreateAndUpdateDialogProps> = ({
                           sx={getToggleButtonStyle(field.value === lang.langId, theme)}
                         >
                           {lang.icon}
-                          <Box component="span" sx={{ 
-                            ml: 1, 
+                          <Box component="span" sx={{
+                            ml: 1,
                             whiteSpace: "nowrap",
                             overflow: "hidden",
                             textOverflow: "ellipsis",
@@ -499,15 +597,15 @@ const McpCreateAndUpdateDialog: React.FC<McpCreateAndUpdateDialogProps> = ({
                             {lang.langName}
                           </Box>
                           {lang.disabled && (
-                            <Chip 
-                              label="Coming Soon" 
-                              size="small" 
-                              color="warning" 
-                              sx={{ 
+                            <Chip
+                              label="Coming Soon"
+                              size="small"
+                              color="warning"
+                              sx={{
                                 ml: 1,
                                 height: 20,
                                 fontSize: '0.65rem',
-                              }} 
+                              }}
                             />
                           )}
                         </ToggleButton>
@@ -525,12 +623,12 @@ const McpCreateAndUpdateDialog: React.FC<McpCreateAndUpdateDialogProps> = ({
               variants={itemAnimation}
               sx={{ mb: 1 }}
             >
-              <FormLabel sx={{ 
-                fontWeight: 600, 
+              <FormLabel sx={{
+                fontWeight: 600,
                 mb: 1.5,
-                display: "flex", 
-                alignItems: "center", 
-                gap: 1 
+                display: "flex",
+                alignItems: "center",
+                gap: 1
               }}>
                 <BuildIcon sx={{ mr: 1 }} />
                 Tool Template
@@ -552,8 +650,8 @@ const McpCreateAndUpdateDialog: React.FC<McpCreateAndUpdateDialogProps> = ({
                           value={field.value}
                           exclusive
                           onChange={(_, v) => handleToggleChange(field, v)}
-                          sx={{ 
-                            width: "100%", 
+                          sx={{
+                            width: "100%",
                             display: "flex",
                             flexWrap: "nowrap",
                             overflow: "auto",
@@ -584,7 +682,7 @@ const McpCreateAndUpdateDialog: React.FC<McpCreateAndUpdateDialogProps> = ({
                                 sx={getToggleButtonStyle(field.value === tpl.templateId, theme)}
                               >
                                 {tpl.icon}
-                                <Box component="span" sx={{ 
+                                <Box component="span" sx={{
                                   ml: 1,
                                   whiteSpace: "nowrap",
                                   overflow: "hidden",
@@ -609,12 +707,12 @@ const McpCreateAndUpdateDialog: React.FC<McpCreateAndUpdateDialogProps> = ({
               variants={itemAnimation}
               sx={{ mb: 1 }}
             >
-              <FormLabel sx={{ 
-                fontWeight: 600, 
+              <FormLabel sx={{
+                fontWeight: 600,
                 mb: 1.5,
-                display: "flex", 
-                alignItems: "center", 
-                gap: 1 
+                display: "flex",
+                alignItems: "center",
+                gap: 1
               }}>
                 <StorageIcon sx={{ mr: 1 }} />
                 Container Config
@@ -628,8 +726,8 @@ const McpCreateAndUpdateDialog: React.FC<McpCreateAndUpdateDialogProps> = ({
                       value={field.value}
                       exclusive
                       onChange={(_, v) => handleToggleChange(field, v)}
-                      sx={{ 
-                        width: "100%", 
+                      sx={{
+                        width: "100%",
                         display: "flex",
                         flexWrap: "nowrap",
                         overflow: "auto",
@@ -657,7 +755,7 @@ const McpCreateAndUpdateDialog: React.FC<McpCreateAndUpdateDialogProps> = ({
                           sx={getToggleButtonStyle(field.value === cfg.serverContainerConfigId, theme)}
                         >
                           {cfg.icon}
-                          <Box component="span" sx={{ 
+                          <Box component="span" sx={{
                             ml: 1,
                             whiteSpace: "nowrap",
                             overflow: "hidden",
@@ -666,15 +764,15 @@ const McpCreateAndUpdateDialog: React.FC<McpCreateAndUpdateDialogProps> = ({
                             {cfg.profileName}
                           </Box>
                           {cfg.disabled && (
-                            <Chip 
-                              label="Coming Soon" 
-                              size="small" 
-                              color="warning" 
-                              sx={{ 
+                            <Chip
+                              label="Coming Soon"
+                              size="small"
+                              color="warning"
+                              sx={{
                                 ml: 1,
                                 height: 20,
                                 fontSize: '0.65rem',
-                              }} 
+                              }}
                             />
                           )}
                         </ToggleButton>
@@ -712,9 +810,9 @@ const McpCreateAndUpdateDialog: React.FC<McpCreateAndUpdateDialogProps> = ({
               overflow: "hidden"
             }}
           >
-            <AccordionSummary 
+            <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
-              sx={{ 
+              sx={{
                 transition: "all 0.2s",
                 "&:hover": {
                   backgroundColor: alpha(theme.palette.secondary.main, 0.05)
@@ -735,14 +833,14 @@ const McpCreateAndUpdateDialog: React.FC<McpCreateAndUpdateDialogProps> = ({
         </motion.div>
       </DialogContent>
 
-      <DialogActions sx={{ 
-        px: 3, 
+      <DialogActions sx={{
+        px: 3,
         py: 2,
         borderTop: `1px solid ${alpha(theme.palette.divider, 0.6)}`
       }}>
         <Button
           onClick={onClose}
-          sx={{ 
+          sx={{
             fontWeight: 500,
             transition: "all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1.0)",
             "&:hover": {
@@ -757,7 +855,7 @@ const McpCreateAndUpdateDialog: React.FC<McpCreateAndUpdateDialogProps> = ({
           variant="contained"
           onClick={handleSubmit(onSubmit)}
           disabled={!isValid || (editServer && !isDirty)}
-          sx={{ 
+          sx={{
             fontWeight: 500,
             transition: "all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1.0)",
             "&:hover": {

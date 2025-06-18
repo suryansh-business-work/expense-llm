@@ -277,12 +277,11 @@ const Bots = () => {
               <Button
                 variant="text"
                 color="secondary"
-                disabled
                 sx={{ mt: 1, textTransform: "none", fontWeight: 500, display: "flex", alignItems: "center", gap: 1 }}
-                onClick={() => navigate("/lab/mcp-servers/marketplace")}
+                onClick={() => navigate("/lab/agentic-ai")}
                 startIcon={<PsychologyIcon />}
               >
-                Agentic AI (Coming soon)
+                Agentic AI
               </Button>
             </Card>
           </nav>

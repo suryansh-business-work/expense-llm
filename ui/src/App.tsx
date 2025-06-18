@@ -11,6 +11,8 @@ import McpServerDetailsPage from './pages/mcp-servers/McpServerDetailsPage';
 import ToolLaboratory from './pages/mcp-servers/tool-management/tool-laboratory/ToolLaboratory';
 import DockerManagement from './pages/admin/DockerManagement';
 import Organizations from './pages/organization/Organizations';
+import AgenticAi from './pages/agentic-ai/AgenticAi';
+import ManageCredentials from './components/ManageCredentials';
 
 const Chat = lazy(() => import('./pages/chat/Chat'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
@@ -84,6 +86,8 @@ const App = () => {
           <Route path="lab/mcp-server/your-server/:mcpServerId/tool/:toolId" element={<ToolLaboratory />} />
           <Route path="/organizations" element={<Organizations />} />
           <Route path="profile" element={<Profile />} />
+          <Route path="lab/agentic-ai" element={<AgenticAi />} />
+          <Route path="/manage-credentials" element={<ManageCredentials />} />
         </Route>
         <Route
           path="/admin"
