@@ -42,6 +42,9 @@ import propertyRoutes from './design-system/property/property.routes';
 import dockerContainerRoutes from './code-run/docker/container.routes';
 import isolateVmRoutes from './code-run/isolate-vm/isolate-vm.routes';
 
+// Organization routes
+import organizationRoutes from './organization-api/organization.routes';
+
 // Express App Initialization
 const app = express();
 
@@ -102,6 +105,10 @@ app.use('/design-system', propertyRoutes);
 // Code Run routes
 app.use('/v1/api/code-run', dockerContainerRoutes);
 app.use('/v1/api', isolateVmRoutes);
+
+// Organization routes
+app.use('/v1/api/organization', organizationRoutes);
+
 
 // ===============
 // Utility Routes

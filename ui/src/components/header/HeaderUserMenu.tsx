@@ -178,6 +178,17 @@ const HeaderUserMenu = () => {
           >
             Settings
           </Button>
+          <Button
+            size="small"
+            onClick={() => {
+              handleCloseMenu();
+              navigate("/organizations");
+            }}
+            sx={{ justifyContent: "flex-start", textTransform: "none", pl: 0 }}
+            fullWidth
+          >
+            Organizations
+          </Button>
           {user?.role === "admin" && (
             <Button
               size="small"

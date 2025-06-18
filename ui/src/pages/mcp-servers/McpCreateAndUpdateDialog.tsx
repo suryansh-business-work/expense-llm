@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import {
   Dialog,
   DialogTitle,
@@ -12,17 +12,87 @@ import {
   ToggleButton,
   Tooltip,
   IconButton,
-  Popover,
-  Paper,
   Chip,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+  FormLabel,
+  Stack,
+  useTheme,
+  alpha,
+  InputAdornment,
 } from "@mui/material";
-import InfoIcon from '@mui/icons-material/Info';
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import InfoIcon from "@mui/icons-material/Info";
+import StorageIcon from "@mui/icons-material/Storage";
+import BusinessIcon from "@mui/icons-material/Business";
+import CodeIcon from "@mui/icons-material/Code";
+import SettingsIcon from "@mui/icons-material/Settings";
+import BuildIcon from "@mui/icons-material/Build";
+import TerminalIcon from "@mui/icons-material/Terminal";
+import ErrorIcon from "@mui/icons-material/Error";
 import axios from "axios";
 import { useUserContext } from "../../providers/UserProvider";
 import { useDynamicSnackbar } from "../../hooks/useDynamicSnackbar";
 import { useMcpServers } from "./context/McpServerContext";
+import { useForm, Controller } from "react-hook-form";
+import Joi from "joi";
+import { joiResolver } from "@hookform/resolvers/joi";
+import { motion, AnimatePresence } from "framer-motion";
 
 const API_BASE = "http://localhost:3000/v1/api/mcp-server";
+
+// Animated MUI components
+const MotionDialog = motion(Dialog);
+const MotionBox = motion(Box);
+const MotionFormControl = motion(FormControl);
+
+const companies = [
+  { companyId: "1", companyName: "Acme Corp" },
+  { companyId: "2", companyName: "Globex Inc" },
+];
+
+const toolLanguages = [
+  { langId: "1", langName: "Node JS", langSlug: "node_js", disabled: false, icon: <CodeIcon /> },
+  { langId: "2", langName: "Python", langSlug: "python", disabled: true, icon: <TerminalIcon /> },
+];
+
+const toolTemplates = [
+  { templateLangSlug: "node_js", templateName: "Node Template 1", templateId: "t1", icon: <BuildIcon /> }
+];
+
+const serverContainerConfigs = [
+  { serverContainerConfigId: "c1", profileName: "Config 1", icon: <StorageIcon /> },
+  { serverContainerConfigId: "c2", profileName: "custom", disabled: true, icon: <SettingsIcon /> },
+];
+
+// Joi validation schema
+const schema = Joi.object({
+  company: Joi.string().required().label("Company"),
+  serverName: Joi.string()
+    .regex(/^[a-z_]+$/)
+    .required()
+    .label("MCP Server Name")
+    .messages({
+      "string.pattern.base":
+        "Only lowercase letters and underscores allowed. No spaces, numbers, or special characters.",
+    }),
+  toolLang: Joi.string().required().label("Tool Language"),
+  toolTemplate: Joi.string().required().label("Tool Template"),
+  containerConfig: Joi.string().required().label("Container Config"),
+});
+
+interface FormValues {
+  company: string;
+  serverName: string;
+  toolLang: string;
+  toolTemplate: string;
+  containerConfig: string;
+}
 
 interface McpCreateAndUpdateDialogProps {
   open: boolean;
@@ -30,284 +100,680 @@ interface McpCreateAndUpdateDialogProps {
   editServer: any | null;
 }
 
+// Animation variants
+const fadeIn = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.3 } }
+};
+
+const slideUp = {
+  hidden: { y: 20, opacity: 0 },
+  visible: { 
+    y: 0, 
+    opacity: 1, 
+    transition: { 
+      duration: 0.5,
+      staggerChildren: 0.08,
+      ease: "easeOut"
+    } 
+  }
+};
+
+const itemAnimation = {
+  hidden: { opacity: 0, y: 15 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.25, ease: "easeOut" } }
+};
+
+const errorAnimation = {
+  hidden: { opacity: 0, height: 0 },
+  visible: { opacity: 1, height: "auto", transition: { duration: 0.2 } },
+  exit: { opacity: 0, height: 0, transition: { duration: 0.2 } }
+};
+
+// Improved toggle button styling with lighter selection style
+const getToggleButtonStyle = (selected: boolean, theme: any) => ({
+  borderRadius: 3,
+  border: selected
+    ? `1px solid ${theme.palette.primary.main}`
+    : `1px solid ${theme.palette.divider}`,
+  backgroundColor: selected
+    ? alpha(theme.palette.primary.main, 0.12) // Lighter blue background
+    : theme.palette.background.paper,
+  color: selected ? theme.palette.primary.main : theme.palette.text.primary,
+  fontWeight: selected ? 600 : 400,
+  boxShadow: selected ? `0 0 0 1px ${alpha(theme.palette.primary.main, 0.2)}` : "none",
+  transition: "all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1.0)",
+  minWidth: 140,
+  height: 44,
+  padding: "6px 16px",
+  margin: "2px",
+  "&:hover": {
+    backgroundColor: selected
+      ? alpha(theme.palette.primary.main, 0.18) // Slightly darker on hover, still light
+      : alpha(theme.palette.primary.light, 0.08),
+    color: selected ? theme.palette.primary.dark : theme.palette.primary.main,
+    borderColor: selected ? theme.palette.primary.main : theme.palette.primary.light,
+    transform: "translateY(-1px)",
+    boxShadow: selected 
+      ? `0 2px 5px 0 ${alpha(theme.palette.primary.main, 0.2)}` 
+      : theme.shadows[1],
+  },
+  "&:active": {
+    transform: "translateY(0px)",
+    boxShadow: "none",
+  },
+  "& .MuiBox-root": {
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    maxWidth: "150px",
+  }
+});
+
 const McpCreateAndUpdateDialog: React.FC<McpCreateAndUpdateDialogProps> = ({
   open,
   onClose,
   editServer,
 }) => {
+  const theme = useTheme();
   const { user } = useUserContext();
   const showSnackbar = useDynamicSnackbar();
   const { invalidateServers } = useMcpServers();
-  const [form, setForm] = useState({
-    name: "",
-    language: "javascript"
+
+  // Default values to prevent UI jumping
+  const defaultToolLang = "1"; // Node JS
+  const defaultContainerConfig = "c1"; // Server Config 1
+  const defaultCompany = "1"; // First company
+
+  const {
+    control,
+    handleSubmit,
+    watch,
+    reset,
+    trigger,
+    formState: { errors, isValid, dirtyFields, isDirty },
+  } = useForm<FormValues>({
+    resolver: joiResolver(schema),
+    mode: "onChange", // Enable real-time validation
+    defaultValues: {
+      company: defaultCompany,
+      serverName: "",
+      toolLang: defaultToolLang,
+      toolTemplate: toolTemplates[0].templateId, // Default to first template
+      containerConfig: defaultContainerConfig,
+    },
   });
-  const [loading, setLoading] = useState(false);
 
-  // For info popover
-  const [infoAnchorEl, setInfoAnchorEl] = useState<HTMLButtonElement | null>(null);
-  const infoOpen = Boolean(infoAnchorEl);
+  const containerConfig = watch("containerConfig");
+  const toolLang = watch("toolLang");
+  const serverName = watch("serverName");
 
-  // Reset form when dialog opens/closes or editServer changes
+  // Real-time server name validation
+  const isServerNameValid = serverName && /^[a-z_]+$/.test(serverName);
+
   useEffect(() => {
     if (open) {
-      setForm({
-        name: editServer?.mcpServerName || "",
-        language: "javascript" // Always default to JavaScript
+      reset({
+        company: defaultCompany,
+        serverName: editServer?.mcpServerName || "",
+        toolLang: defaultToolLang,
+        toolTemplate: toolTemplates[0].templateId,
+        containerConfig: defaultContainerConfig,
       });
+      
+      // Trigger validation after setting default values
+      setTimeout(() => {
+        trigger();
+      }, 100);
     }
-  }, [editServer, open]);
+  }, [editServer, open, reset, trigger]);
 
-  const handleLanguageChange = (
-    _event: React.MouseEvent<HTMLElement>,
-    newLanguage: string | null,
-  ) => {
-    if (newLanguage !== null) {
-      setForm({ ...form, language: newLanguage });
-    }
-  };
-
-  const handleInfoClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setInfoAnchorEl(event.currentTarget);
-  };
-
-  const handleInfoClose = () => {
-    setInfoAnchorEl(null);
-  };
-
-  const handleSubmit = async () => {
-    if (!form.name) {
-      showSnackbar("Server name is required", "error");
-      return;
-    }
+  const onSubmit = async (data: FormValues) => {
     const token = localStorage.getItem("token");
     if (!user?.userId || !token) {
       showSnackbar("User not authenticated", "error");
       return;
     }
-
-    setLoading(true);
     try {
       if (editServer) {
-        // UPDATE logic
         await axios.patch(
           `${API_BASE}/update/${editServer.mcpServerId}`,
-          {
-            mcpServerName: form.name,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-          }
+          { mcpServerName: data.serverName },
+          { headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" } }
         );
         showSnackbar("MCP Server updated successfully!", "success");
       } else {
-        // CREATE logic
         await axios.post(
           `${API_BASE}/create`,
           {
             userId: user.userId,
             mcpServerCreatorId: user.userId,
-            mcpServerName: form.name,
+            mcpServerName: data.serverName,
           },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-          }
+          { headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" } }
         );
         showSnackbar("MCP Server created successfully!", "success");
       }
-
-      // Important: This order matters for state updates
-      invalidateServers(); // Refresh the list
-      onClose(); // Close the dialog
+      invalidateServers();
+      onClose();
     } catch (err: any) {
       showSnackbar(
-        `Failed to ${editServer ? 'update' : 'create'} MCP Server: ` +
-        (err.response?.data?.message || err.message),
+        `Failed to ${editServer ? "update" : "create"} MCP Server: ` +
+          (err.response?.data?.message || err.message),
         "error"
       );
-    } finally {
-      setLoading(false);
     }
   };
 
+  // Prevent deselecting all in ToggleButtonGroup
+  const handleToggleChange = (field: any, value: string) => {
+    if (value) field.onChange(value);
+  };
+
+  // Error message component
+  const ErrorMessage = ({ error }: { error?: any }) => (
+    <AnimatePresence>
+      {error && (
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          variants={errorAnimation}
+          style={{ overflow: "hidden" }}
+        >
+          <Box sx={{ display: "flex", alignItems: "center", gap: 0.5, mt: 0.5 }}>
+            <ErrorIcon fontSize="small" color="error" />
+            <Typography color="error.main" variant="caption" fontWeight={500}>
+              {error.message}
+            </Typography>
+          </Box>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+
   return (
-    <Dialog
+    <MotionDialog
       open={open}
-      onClose={() => {
-        if (!loading) onClose();
-      }}
-      maxWidth="sm"
+      onClose={() => onClose()}
+      maxWidth={false}
       fullWidth
+      PaperProps={{
+        sx: { 
+          borderRadius: 3, 
+          p: 0.5, 
+          background: theme.palette.background.default,
+          width: "700px",
+          maxWidth: "100%",
+          overflow: "hidden",
+          boxShadow: theme.shadows[10],
+        }
+      }}
+      initial="hidden"
+      animate="visible"
+      variants={fadeIn}
     >
-      <DialogTitle sx={{ fontWeight: 600, pb: 1 }}>
-        {editServer ? "UPDATE MCP SERVER" : "CREATE MCP SERVER"}
+      <DialogTitle sx={{ 
+        fontWeight: 700, 
+        pb: 1, 
+        display: "flex", 
+        alignItems: "center", 
+        gap: 1,
+        borderBottom: `1px solid ${alpha(theme.palette.divider, 0.6)}`
+      }}>
+        <BusinessIcon sx={{ color: theme.palette.primary.main, mr: 1 }} />
+        {editServer ? "Update MCP Server" : "Create MCP Server"}
       </DialogTitle>
       <DialogContent sx={{ pt: 2 }}>
-        <TextField
-          label="Server Name"
-          fullWidth
-          margin="normal"
-          value={form.name}
-          onChange={e => setForm({ ...form, name: e.target.value })}
-          disabled={loading}
-          autoFocus
-        />
+        <MotionBox
+          p={3}
+          variants={slideUp}
+          initial="hidden"
+          animate="visible"
+        >
+          <Stack spacing={3}>
+            {/* 1. Select your company */}
+            <MotionFormControl
+              variants={itemAnimation}
+              fullWidth
+              required
+              error={!!errors.company}
+              sx={{ 
+                transition: "all 0.2s",
+              }}
+            >
+              <InputLabel id="company-label">Select your company</InputLabel>
+              <Controller
+                name="company"
+                control={control}
+                render={({ field }) => (
+                  <Select
+                    {...field}
+                    labelId="company-label"
+                    label="Select your company"
+                    startAdornment={<BusinessIcon sx={{ mr: 1 }} />}
+                    sx={{ mb: 0.8 }}
+                  >
+                    {companies.map((c) => (
+                      <MenuItem key={c.companyId} value={c.companyId}>
+                        {c.companyName}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                )}
+              />
+              <ErrorMessage error={errors.company} />
+            </MotionFormControl>
 
-        {/* Language Selection */}
-        <Box sx={{ mt: 4, mb: 2 }}>
-          <Typography
-            variant="body1"
-            fontWeight="500"
+            {/* 2. Server name */}
+            <MotionFormControl
+              variants={itemAnimation}
+              fullWidth
+              required
+              error={!!errors.serverName}
+              sx={{ 
+                transition: "all 0.2s",
+              }}
+            >
+              <Controller
+                name="serverName"
+                control={control}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    label="MCP Server Name"
+                    autoFocus
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <CodeIcon fontSize="small" />
+                        </InputAdornment>
+                      ),
+                      endAdornment: (
+                        <Tooltip title="Only lowercase letters and underscores allowed. No spaces, numbers, or special characters.">
+                          <IconButton size="small">
+                            <InfoIcon fontSize="small" />
+                          </IconButton>
+                        </Tooltip>
+                      ),
+                    }}
+                    error={!!errors.serverName && dirtyFields.serverName}
+                    helperText={
+                      (dirtyFields.serverName && errors.serverName)
+                        ? errors.serverName.message
+                        : "Only lowercase letters and underscores allowed."
+                    }
+                    FormHelperTextProps={{
+                      sx: {
+                        color: (dirtyFields.serverName && errors.serverName) ? "error.main" : "text.secondary",
+                        display: "flex",
+                        alignItems: "center",
+                        mt: 0.5
+                      }
+                    }}
+                    inputProps={{ maxLength: 32 }}
+                    required
+                    sx={{
+                      "& .MuiOutlinedInput-root": {
+                        transition: "all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1.0)",
+                      },
+                      "& .MuiOutlinedInput-notchedOutline": {
+                        borderColor: (dirtyFields.serverName && !isServerNameValid && serverName)
+                          ? theme.palette.error.main
+                          : undefined
+                      }
+                    }}
+                  />
+                )}
+              />
+              {dirtyFields.serverName && !isServerNameValid && serverName && (
+                <Box sx={{ display: "flex", alignItems: "center", gap: 0.5, mt: 0.5 }}>
+                  <ErrorIcon fontSize="small" color="error" />
+                  <Typography color="error.main" variant="caption" fontWeight={500}>
+                    MCP Server Name: Only lowercase letters and underscores allowed
+                  </Typography>
+                </Box>
+              )}
+            </MotionFormControl>
+
+            {/* 3. Tool Language */}
+            <Box
+              component={motion.div}
+              variants={itemAnimation}
+              sx={{ mb: 1 }}
+            >
+              <FormLabel sx={{ 
+                fontWeight: 600, 
+                mb: 1.5,
+                display: "flex", 
+                alignItems: "center", 
+                gap: 1 
+              }}>
+                <TerminalIcon sx={{ mr: 1 }} />
+                Tool Language
+              </FormLabel>
+              <Controller
+                name="toolLang"
+                control={control}
+                render={({ field }) => (
+                  <>
+                    <ToggleButtonGroup
+                      value={field.value}
+                      exclusive
+                      onChange={(_, v) => handleToggleChange(field, v)}
+                      sx={{ 
+                        width: "100%", 
+                        display: "flex",
+                        flexWrap: "nowrap",
+                        overflow: "auto",
+                        justifyContent: "flex-start",
+                        mt: 0.5,
+                        mb: 1,
+                        "&::-webkit-scrollbar": {
+                          height: 6,
+                          background: alpha(theme.palette.background.default, 0.7),
+                        },
+                        "&::-webkit-scrollbar-thumb": {
+                          background: alpha(theme.palette.primary.main, 0.2),
+                          borderRadius: 3,
+                          "&:hover": {
+                            background: alpha(theme.palette.primary.main, 0.3),
+                          }
+                        }
+                      }}
+                    >
+                      {toolLanguages.map((lang) => (
+                        <ToggleButton
+                          key={lang.langId}
+                          value={lang.langId}
+                          disabled={lang.disabled}
+                          sx={getToggleButtonStyle(field.value === lang.langId, theme)}
+                        >
+                          {lang.icon}
+                          <Box component="span" sx={{ 
+                            ml: 1, 
+                            whiteSpace: "nowrap",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                          }}>
+                            {lang.langName}
+                          </Box>
+                          {lang.disabled && (
+                            <Chip 
+                              label="Coming Soon" 
+                              size="small" 
+                              color="warning" 
+                              sx={{ 
+                                ml: 1,
+                                height: 20,
+                                fontSize: '0.65rem',
+                              }} 
+                            />
+                          )}
+                        </ToggleButton>
+                      ))}
+                    </ToggleButtonGroup>
+                    <ErrorMessage error={errors.toolLang} />
+                  </>
+                )}
+              />
+            </Box>
+
+            {/* 4. Tool Template */}
+            <Box
+              component={motion.div}
+              variants={itemAnimation}
+              sx={{ mb: 1 }}
+            >
+              <FormLabel sx={{ 
+                fontWeight: 600, 
+                mb: 1.5,
+                display: "flex", 
+                alignItems: "center", 
+                gap: 1 
+              }}>
+                <BuildIcon sx={{ mr: 1 }} />
+                Tool Template
+              </FormLabel>
+              <Controller
+                name="toolTemplate"
+                control={control}
+                render={({ field }) => (
+                  <>
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={toolLang}
+                        initial={{ opacity: 0, y: 5 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -5 }}
+                        transition={{ duration: 0.25, ease: "easeOut" }}
+                      >
+                        <ToggleButtonGroup
+                          value={field.value}
+                          exclusive
+                          onChange={(_, v) => handleToggleChange(field, v)}
+                          sx={{ 
+                            width: "100%", 
+                            display: "flex",
+                            flexWrap: "nowrap",
+                            overflow: "auto",
+                            justifyContent: "flex-start",
+                            mt: 0.5,
+                            mb: 1,
+                            "&::-webkit-scrollbar": {
+                              height: 6,
+                              background: alpha(theme.palette.background.default, 0.7),
+                            },
+                            "&::-webkit-scrollbar-thumb": {
+                              background: alpha(theme.palette.primary.main, 0.2),
+                              borderRadius: 3,
+                              "&:hover": {
+                                background: alpha(theme.palette.primary.main, 0.3),
+                              }
+                            }
+                          }}
+                        >
+                          {toolTemplates
+                            .filter((tpl) =>
+                              toolLanguages.find((l) => l.langId === toolLang)?.langSlug === tpl.templateLangSlug
+                            )
+                            .map((tpl) => (
+                              <ToggleButton
+                                key={tpl.templateId}
+                                value={tpl.templateId}
+                                sx={getToggleButtonStyle(field.value === tpl.templateId, theme)}
+                              >
+                                {tpl.icon}
+                                <Box component="span" sx={{ 
+                                  ml: 1,
+                                  whiteSpace: "nowrap",
+                                  overflow: "hidden",
+                                  textOverflow: "ellipsis",
+                                }}>
+                                  {tpl.templateName}
+                                </Box>
+                              </ToggleButton>
+                            ))}
+                        </ToggleButtonGroup>
+                      </motion.div>
+                    </AnimatePresence>
+                    <ErrorMessage error={errors.toolTemplate} />
+                  </>
+                )}
+              />
+            </Box>
+
+            {/* 5. Container Config */}
+            <Box
+              component={motion.div}
+              variants={itemAnimation}
+              sx={{ mb: 1 }}
+            >
+              <FormLabel sx={{ 
+                fontWeight: 600, 
+                mb: 1.5,
+                display: "flex", 
+                alignItems: "center", 
+                gap: 1 
+              }}>
+                <StorageIcon sx={{ mr: 1 }} />
+                Container Config
+              </FormLabel>
+              <Controller
+                name="containerConfig"
+                control={control}
+                render={({ field }) => (
+                  <>
+                    <ToggleButtonGroup
+                      value={field.value}
+                      exclusive
+                      onChange={(_, v) => handleToggleChange(field, v)}
+                      sx={{ 
+                        width: "100%", 
+                        display: "flex",
+                        flexWrap: "nowrap",
+                        overflow: "auto",
+                        justifyContent: "flex-start",
+                        mt: 0.5,
+                        mb: 1,
+                        "&::-webkit-scrollbar": {
+                          height: 6,
+                          background: alpha(theme.palette.background.default, 0.7),
+                        },
+                        "&::-webkit-scrollbar-thumb": {
+                          background: alpha(theme.palette.primary.main, 0.2),
+                          borderRadius: 3,
+                          "&:hover": {
+                            background: alpha(theme.palette.primary.main, 0.3),
+                          }
+                        }
+                      }}
+                    >
+                      {serverContainerConfigs.map((cfg) => (
+                        <ToggleButton
+                          key={cfg.serverContainerConfigId}
+                          value={cfg.serverContainerConfigId}
+                          disabled={cfg.disabled}
+                          sx={getToggleButtonStyle(field.value === cfg.serverContainerConfigId, theme)}
+                        >
+                          {cfg.icon}
+                          <Box component="span" sx={{ 
+                            ml: 1,
+                            whiteSpace: "nowrap",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                          }}>
+                            {cfg.profileName}
+                          </Box>
+                          {cfg.disabled && (
+                            <Chip 
+                              label="Coming Soon" 
+                              size="small" 
+                              color="warning" 
+                              sx={{ 
+                                ml: 1,
+                                height: 20,
+                                fontSize: '0.65rem',
+                              }} 
+                            />
+                          )}
+                        </ToggleButton>
+                      ))}
+                    </ToggleButtonGroup>
+                    <ErrorMessage error={errors.containerConfig} />
+                  </>
+                )}
+              />
+            </Box>
+          </Stack>
+        </MotionBox>
+
+        {/* Advanced Settings Accordion */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.4 }}
+        >
+          <Accordion
+            expanded={containerConfig === "c2"}
+            disabled={containerConfig !== "c2"}
             sx={{
-              mb: 2,
-              display: 'flex',
-              alignItems: 'center'
+              mt: 2,
+              borderRadius: 2,
+              background: containerConfig === "c2"
+                ? alpha(theme.palette.secondary.main, 0.06)
+                : theme.palette.background.paper,
+              boxShadow: containerConfig === "c2" ? theme.shadows[1] : "none",
+              border: containerConfig === "c2"
+                ? `1px solid ${alpha(theme.palette.secondary.main, 0.5)}`
+                : `1px solid ${theme.palette.divider}`,
+              transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+              opacity: containerConfig === "c2" ? 1 : 0.7,
+              overflow: "hidden"
             }}
           >
-            Tool Language
-            <IconButton
-              size="small"
-              color="primary"
-              onClick={handleInfoClick}
-              sx={{ ml: 0.5 }}
+            <AccordionSummary 
+              expandIcon={<ExpandMoreIcon />}
+              sx={{ 
+                transition: "all 0.2s",
+                "&:hover": {
+                  backgroundColor: alpha(theme.palette.secondary.main, 0.05)
+                }
+              }}
             >
-              <InfoIcon fontSize="small" />
-            </IconButton>
-          </Typography>
-
-          <ToggleButtonGroup
-            value={form.language}
-            exclusive
-            onChange={handleLanguageChange}
-            aria-label="tool language"
-            fullWidth
-          >
-            <ToggleButton value="javascript" aria-label="Vanilla JavaScript">
-              <Box sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: '100%'
-              }}>
-                <div className="mb-3"><i className="fa-brands fa-square-js" style={{ fontSize: '48px' }}></i></div>
-                <Typography variant="body2" fontWeight={600}>Vanilla JavaScript</Typography>
-              </Box>
-            </ToggleButton>
-
-            <Tooltip title="Coming soon!" placement="top">
-              <span style={{ width: '100%', margin: '0 4px' }}>
-                <ToggleButton
-                  value="node"
-                  aria-label="Node.js"
-                  disabled
-                  sx={{ width: '100%' }}
-                >
-                  <Box sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: '100%',
-                    position: 'relative',
-                    pt: 1
-                  }}>
-                    <div className="mb-3"><i className="fa-brands fa-node" style={{ fontSize: '48px' }}></i></div>
-                    <Typography className="mb-2" variant="body2" fontWeight={600}>NODE.JS</Typography>
-                    <Chip
-                      label="COMING SOON"
-                      size="small"
-                      color="primary"
-                      variant="outlined"
-                    />
-                  </Box>
-                </ToggleButton>
-              </span>
-            </Tooltip>
-
-            <Tooltip title="Coming soon!" placement="top">
-              <span style={{ width: '100%' }}>
-                <ToggleButton
-                  value="python"
-                  aria-label="Python"
-                  disabled
-                  sx={{ width: '100%' }}
-                >
-                  <Box sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: '100%',
-                    position: 'relative',
-                    pt: 1
-                  }}>
-                    <div className="mb-3"><i className="fa-brands fa-python" style={{ fontSize: '48px' }}></i></div>
-                    <Typography className="mb-2" variant="body2" fontWeight={600}>PYTHON</Typography>
-                    <Chip
-                      label="COMING SOON"
-                      size="small"
-                      color="primary"
-                      variant="outlined"
-                    />
-                  </Box>
-                </ToggleButton>
-              </span>
-            </Tooltip>
-          </ToggleButtonGroup>
-        </Box>
+              <Typography variant="h6" sx={{ fontWeight: 700, color: theme.palette.secondary.main }}>
+                <SettingsIcon sx={{ mr: 1 }} />
+                Advanced Settings
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography variant="body2" color="text.secondary">
+                Custom advanced options go here.
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+        </motion.div>
       </DialogContent>
 
-      {/* Info Popover */}
-      <Popover
-        open={infoOpen}
-        anchorEl={infoAnchorEl}
-        onClose={handleInfoClose}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'center',
-        }}
-      >
-        <Paper sx={{ p: 2.5, maxWidth: 320 }}>
-          <Typography variant="subtitle2" fontWeight="bold" gutterBottom>
-            VANILLA JAVASCRIPT
-          </Typography>
-          <Typography variant="body2">
-            Best for 3rd party API integration and basic functionality.
-            Run JavaScript code directly in the browser environment with access to standard
-            Web APIs and custom integrations.
-          </Typography>
-        </Paper>
-      </Popover>
-
-      <DialogActions sx={{ px: 3, py: 2 }}>
+      <DialogActions sx={{ 
+        px: 3, 
+        py: 2,
+        borderTop: `1px solid ${alpha(theme.palette.divider, 0.6)}`
+      }}>
         <Button
           onClick={onClose}
-          disabled={loading}
-          sx={{ fontWeight: 500 }}
+          sx={{ 
+            fontWeight: 500,
+            transition: "all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1.0)",
+            "&:hover": {
+              transform: "translateY(-1px)",
+              boxShadow: theme.shadows[1]
+            }
+          }}
         >
           CANCEL
         </Button>
         <Button
           variant="contained"
-          onClick={handleSubmit}
-          disabled={loading}
-          sx={{ fontWeight: 500 }}
+          onClick={handleSubmit(onSubmit)}
+          disabled={!isValid || (editServer && !isDirty)}
+          sx={{ 
+            fontWeight: 500,
+            transition: "all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1.0)",
+            "&:hover": {
+              transform: !isValid ? "none" : "translateY(-1px)",
+              boxShadow: !isValid ? "none" : theme.shadows[3]
+            },
+            "&.Mui-disabled": {
+              backgroundColor: alpha(theme.palette.primary.main, 0.4),
+              color: "white",
+            }
+          }}
         >
           {editServer ? "UPDATE" : "CREATE"}
         </Button>
       </DialogActions>
-    </Dialog>
+    </MotionDialog>
   );
 };
 

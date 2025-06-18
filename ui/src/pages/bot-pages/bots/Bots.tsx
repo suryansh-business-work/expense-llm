@@ -17,6 +17,7 @@ import Divider from "@mui/material/Divider";
 import DescriptionWithReadMore from "./DescriptionWithReadMore";
 import CreateOrUpdateBotDialog from "./CreateOrUpdateBotDialog";
 import StorageIcon from '@mui/icons-material/Storage';
+import PsychologyIcon from '@mui/icons-material/Psychology';
 
 // Map type value to icon class (Font Awesome 5+ CSS classes)
 const typeIconMap: Record<string, string> = {
@@ -272,6 +273,16 @@ const Bots = () => {
                 startIcon={<StorageIcon />}
               >
                 MCP Servers
+              </Button>
+              <Button
+                variant="text"
+                color="secondary"
+                disabled
+                sx={{ mt: 1, textTransform: "none", fontWeight: 500, display: "flex", alignItems: "center", gap: 1 }}
+                onClick={() => navigate("/lab/mcp-servers/marketplace")}
+                startIcon={<PsychologyIcon />}
+              >
+                Agentic AI (Coming soon)
               </Button>
             </Card>
           </nav>
