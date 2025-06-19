@@ -39,7 +39,7 @@ import { themeRoutes } from './design-system/theme/theme.routes';
 import propertyRoutes from './design-system/property/property.routes';
 
 // Code Run routes
-import dockerContainerRoutes from './code-run/docker/container.routes';
+import { dockerContainerRoutes } from './code-run/docker/routes/container.routes';
 import isolateVmRoutes from './code-run/isolate-vm/isolate-vm.routes';
 
 // Organization routes

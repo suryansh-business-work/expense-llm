@@ -24,7 +24,6 @@ import StorageIcon from "@mui/icons-material/Storage";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import SearchIcon from "@mui/icons-material/Search";
 import BuildIcon from "@mui/icons-material/Build";
 import SortIcon from "@mui/icons-material/Sort";
@@ -35,6 +34,7 @@ import { useMcpServers } from "./context/McpServerContext";
 import { useUserContext } from "../../providers/UserProvider";
 import { useNavigate } from "react-router-dom";
 import McpCreateAndUpdateDialog from "./McpCreateAndUpdateDialog";
+import DockerStatus from "./docker-containers/DockerStatus";
 
 const YourMcpServer = () => {
   const { servers, loading, invalidateServers } = useMcpServers();
@@ -153,11 +153,12 @@ const YourMcpServer = () => {
                 variant="outlined"
                 size="small"
               />
+              <DockerStatus />
             </Box>
           </Box>
-          <Tooltip title="Create your own MCP servers and publish them to the marketplace for others to use." arrow>
+          {/* <Tooltip title="Create your own MCP servers and publish them to the marketplace for others to use." arrow>
             <InfoOutlinedIcon sx={{ color: "#1976d2", fontSize: 20, ml: 0.5, cursor: "pointer" }} />
-          </Tooltip>
+          </Tooltip> */}
         </Box>
 
         <Box
