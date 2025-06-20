@@ -35,6 +35,7 @@ import { useUserContext } from "../../providers/UserProvider";
 import { useNavigate } from "react-router-dom";
 import McpCreateAndUpdateDialog from "./McpCreateAndUpdateDialog";
 import DockerStatus from "./docker-containers/DockerStatus";
+import { NewMcpCreateAndUpdateDialog } from "./NewMcpCreateAndUpdateDialog/NewMcpCreateAndUpdateDialog";
 
 const YourMcpServer = () => {
   const { servers, loading, invalidateServers } = useMcpServers();
@@ -470,15 +471,15 @@ const YourMcpServer = () => {
       </div>
 
       {/* Create/Update Dialog */}
-      <McpCreateAndUpdateDialog
+      {/* <McpCreateAndUpdateDialog
         open={openDialog}
         onClose={() => {
           setOpenDialog(false);
           setEditServer(null);
         }}
         editServer={editServer}
-      />
-
+      /> */}
+      {<NewMcpCreateAndUpdateDialog open={openDialog} onClose={() => setOpenDialog(false)} />}
       {/* Delete Dialog */}
       <McpDeleteDialog
         open={!!deleteServerId}

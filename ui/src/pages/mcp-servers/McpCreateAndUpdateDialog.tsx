@@ -47,6 +47,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import CreateAndUpdateOrganization from "../organization/CreateAndUpdateOrganization";
 import AddIcon from "@mui/icons-material/Add";
 import ListItemIcon from "@mui/material/ListItemIcon";
+import { createContainer } from "./docker-container/default-config.nodejs";
+import { AdvanceContainerConfig } from "./AdvanceContainerConfig";
 
 const API_BASE = "http://localhost:3000/v1/api/mcp-server";
 const ORGANIZATION_API_BASE = "http://localhost:3000/v1/api/organization";
@@ -58,16 +60,17 @@ const MotionFormControl = motion(FormControl);
 
 const toolLanguages = [
   { langId: "1", langName: "Node JS", langSlug: "node_js", disabled: false, icon: <CodeIcon /> },
-  { langId: "2", langName: "Python", langSlug: "python", disabled: true, icon: <TerminalIcon /> },
+  { langId: "2", langName: "Python", langSlug: "python", disabled: false, icon: <TerminalIcon /> },
 ];
 
 const toolTemplates = [
-  { templateLangSlug: "node_js", templateName: "Node Template 1", templateId: "t1", icon: <BuildIcon /> }
+  { templateLangSlug: "node_js", templateName: "Node Template 1", templateId: "t1", icon: <BuildIcon /> },
+  { templateLangSlug: "python", templateName: "Python Template 1", templateId: "t2", icon: <BuildIcon /> }
 ];
 
-const serverContainerConfigs = [
+const serverContainerConfigs: any = [
   { serverContainerConfigId: "c1", profileName: "Config 1", icon: <StorageIcon /> },
-  { serverContainerConfigId: "c2", profileName: "custom", disabled: true, icon: <SettingsIcon /> },
+  { serverContainerConfigId: "c2", profileName: "custom", icon: <SettingsIcon /> },
 ];
 
 // Joi validation schema
@@ -281,16 +284,21 @@ const McpCreateAndUpdateDialog: React.FC<McpCreateAndUpdateDialogProps> = ({
         );
         showSnackbar("MCP Server updated successfully!", "success");
       } else {
-        await axios.post(
-          `${API_BASE}/create`,
-          {
-            userId: user.userId,
-            mcpServerCreatorId: user.userId,
-            mcpServerName: data.serverName,
-          },
-          { headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" } }
-        );
-        showSnackbar("MCP Server created successfully!", "success");
+        await createContainer(data.serverName).then(async (res) => {
+          await axios.post(
+            `${API_BASE}/create`,
+            {
+              userId: user.userId,
+              mcpServerCreatorId: user.userId,
+              mcpServerName: data.serverName,
+            },
+            { headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" } }
+          );
+          showSnackbar("MCP Server created successfully!", "success");
+        }).catch((err) => {
+          showSnackbar(`Failed to create Docker container: ${err.message}`, "error");
+        });
+
       }
       invalidateServers();
       onClose();
@@ -338,10 +346,8 @@ const McpCreateAndUpdateDialog: React.FC<McpCreateAndUpdateDialogProps> = ({
       fullWidth
       PaperProps={{
         sx: {
-          borderRadius: 3,
-          p: 0.5,
           background: theme.palette.background.default,
-          width: "700px",
+          width: "1000px",
           maxWidth: "100%",
           overflow: "hidden",
           boxShadow: theme.shadows[10],
@@ -747,7 +753,7 @@ const McpCreateAndUpdateDialog: React.FC<McpCreateAndUpdateDialogProps> = ({
                         }
                       }}
                     >
-                      {serverContainerConfigs.map((cfg) => (
+                      {serverContainerConfigs.map((cfg: any) => (
                         <ToggleButton
                           key={cfg.serverContainerConfigId}
                           value={cfg.serverContainerConfigId}
@@ -819,15 +825,13 @@ const McpCreateAndUpdateDialog: React.FC<McpCreateAndUpdateDialogProps> = ({
                 }
               }}
             >
-              <Typography variant="h6" sx={{ fontWeight: 700, color: theme.palette.secondary.main }}>
+              <Typography variant="h6" sx={{ fontWeight: 700, color: theme.palette.secondary.main, alignItems: "center", display: "flex" }}>
                 <SettingsIcon sx={{ mr: 1 }} />
                 Advanced Settings
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography variant="body2" color="text.secondary">
-                Custom advanced options go here.
-              </Typography>
+              <AdvanceContainerConfig />
             </AccordionDetails>
           </Accordion>
         </motion.div>
